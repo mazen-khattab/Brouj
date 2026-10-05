@@ -1,0 +1,56 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Brouj.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Brouj.Application": "1.0.0",
+          "Brouj.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Brouj.Infrastructure.dll": {}
+        }
+      },
+      "Brouj.Application/1.0.0": {
+        "dependencies": {
+          "Brouj.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Brouj.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Brouj.Domain/1.0.0": {
+        "runtime": {
+          "Brouj.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Brouj.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Brouj.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Brouj.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

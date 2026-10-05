@@ -1,0 +1,15 @@
+F:\Mazen\Projects\Brouj\src\Brouj.Application\bin\Debug\net10.0\Brouj.Application.deps.json
+F:\Mazen\Projects\Brouj\src\Brouj.Application\bin\Debug\net10.0\Brouj.Application.dll
+F:\Mazen\Projects\Brouj\src\Brouj.Application\bin\Debug\net10.0\Brouj.Application.pdb
+F:\Mazen\Projects\Brouj\src\Brouj.Application\bin\Debug\net10.0\Brouj.Domain.dll
+F:\Mazen\Projects\Brouj\src\Brouj.Application\bin\Debug\net10.0\Brouj.Domain.pdb
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\Brouj.Application.csproj.AssemblyReference.cache
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\Brouj.Application.GeneratedMSBuildEditorConfig.editorconfig
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\Brouj.Application.AssemblyInfoInputs.cache
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\Brouj.Application.AssemblyInfo.cs
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\Brouj.Application.csproj.CoreCompileInputs.cache
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\Brouj.Ap.76DC66F1.Up2Date
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\Brouj.Application.dll
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\refint\Brouj.Application.dll
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\Brouj.Application.pdb
+F:\Mazen\Projects\Brouj\src\Brouj.Application\obj\Debug\net10.0\ref\Brouj.Application.dll

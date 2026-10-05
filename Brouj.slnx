@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/docs/">
+    <Project Path="docs/Brouj.Docs/Brouj.Docs.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Brouj.API/Brouj.API.csproj" />
+    <Project Path="src/Brouj.Application/Brouj.Application.csproj" />
+    <Project Path="src/Brouj.Domain/Brouj.Domain.csproj" />
+    <Project Path="src/Brouj.Infrastructure/Brouj.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Brouj.API.IntegrationTests/Brouj.API.IntegrationTests.csproj" />
+    <Project Path="tests/Brouj.Application.UnitTests/Brouj.Application.UnitTests.csproj" />
+    <Project Path="tests/Brouj.Domain.UnitTests/Brouj.Domain.UnitTests.csproj" />
+    <Project Path="tests/Brouj.Infrastructure.IntegrationTests/Brouj.Infrastructure.IntegrationTests.csproj" />
+  </Folder>
+</Solution>
