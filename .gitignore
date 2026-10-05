@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Make sure .vs, bin, obj, and test results are ignored across the entire new project structure (src/, tests/, etc.)
+**/.vs/
+**/[Bb]in/
+**/[Oo]bj/
+**/[Tt]est[Rr]esults/
