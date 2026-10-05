@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Brouj.Docs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+981832d087351ebef2be1c5c1faeeac9929ae2bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("Brouj.Docs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Brouj.Docs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
