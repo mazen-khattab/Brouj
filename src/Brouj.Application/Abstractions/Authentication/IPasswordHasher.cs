@@ -1,0 +1,12 @@
+namespace Brouj.Application.Abstractions.Authentication;
+
+public interface IPasswordHasher
+{
+    string Hash(string password);
+
+    bool Verify(
+        string password,
+        string passwordHash);
+
+    bool NeedsRehash(string passwordHash);
+}
