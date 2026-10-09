@@ -1,0 +1,26 @@
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class ProjectAmenityConfiguration : IEntityTypeConfiguration<ProjectAmenity>
+{
+    public void Configure(EntityTypeBuilder<ProjectAmenity> builder)
+    {
+        builder.ToTable("ProjectAmenities");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ProjectId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Value).HasColumnType("nvarchar(32)").HasMaxLength(32).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Project)
+            .WithMany(entity => entity.ProjectAmenities)
+            .HasForeignKey(entity => entity.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}

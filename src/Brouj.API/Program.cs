@@ -1,4 +1,7 @@
 
+using Brouj.Application;
+using Brouj.Infrastructure;
+
 namespace Brouj.API
 {
     public class Program
@@ -12,6 +15,10 @@ namespace Brouj.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            builder.Services.AddInfrastructure(connectionString);
+            builder.Services.AddApplication();
 
             var app = builder.Build();
 

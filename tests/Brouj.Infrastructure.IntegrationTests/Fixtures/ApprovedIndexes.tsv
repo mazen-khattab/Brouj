@@ -1,0 +1,48 @@
+Entity	Name	Columns	Unique	Filter
+ActivityLog	IX_ActivityLogs_CreatedAt	CreatedAt	false	
+ActivityLog	IX_ActivityLogs_UserId_CreatedAt	UserId,CreatedAt	false	
+ActivityLog	IX_ActivityLogs_EntityType_EntityId_CreatedAt	EntityType,EntityId,CreatedAt	false	
+ActivityLog	IX_ActivityLogs_Action_CreatedAt	Action,CreatedAt	false	
+Area	UQ_Areas_CityId_Name	CityId,Name	true	
+AreaAmenity	IX_AreaAmenities_AreaId	AreaId	false	
+BaseProject	IX_BaseProjects_ProjectType	ProjectType	false	
+BaseProject	IX_BaseProjects_AreaId	AreaId	false	
+BaseUnit	UQ_BaseUnits_ProjectId_Number	ProjectId,Number	true	
+City	UQ_Cities_Name	Name	true	
+Customer	IX_Customers_FName_LName	FName,LName	false	
+Customer	UQ_Customers_Email	Email	true	[DeletedAt] IS NULL
+Customer	UQ_Customers_Phone	Phone	true	[DeletedAt] IS NULL
+Customer	UQ_Customers_IdentityNumber	IdentityNumber	true	[DeletedAt] IS NULL
+CustomerRefreshToken	IX_CustomerRefreshTokens_Token	Token	false	
+CustomerRefreshToken	IX_CustomerRefreshTokens_CustomerId_IsActive	CustomerId,IsActive	false	
+ItemTemplate	IX_ItemTemplates_IsActive	IsActive	false	
+ItemTemplate	UQ_ItemTemplates_Code	Code	true	
+Order	IX_Orders_Status	Status	false	
+Order	UQ_Orders_ReservationId	ReservationId	true	
+Order	UQ_Orders_Number	Number	true	
+PlanStageItem	IX_PlanStageItems_StageId_Status	StageId,Status	false	
+PlanStageItem	UQ_PlanStageItems_StageId_SortOrder	StageId,SortOrder	true	
+ProjectAmenity	IX_ProjectAmenities_ProjectId	ProjectId	false	
+ProjectImage	IX_ProjectImages_ProjectId	ProjectId	false	
+Reservation	IX_Reservations_CustomerId_UnitId_Status	CustomerId,UnitId,Status	false	
+Reservation	IX_Reservations_UnitId_Status	UnitId,Status	false	
+Reservation	IX_Reservations_Status	Status	false	
+Reservation	UQ_Reservations_Number	Number	true	
+Reservation	UQ_Reservations_CustomerId_UnitId_Processing	CustomerId,UnitId	true	[Status] = 'processing'
+StageItemImage	UQ_StageItemImages_ItemId_SortOrder	ItemId,SortOrder	true	
+StageTemplate	IX_StageTemplates_IsActive	IsActive	false	
+StageTemplate	UQ_StageTemplates_Code	Code	true	
+StageTemplateItem	UQ_StageTemplateItems_StageTemplateId_ItemTemplateId	StageTemplateId,ItemTemplateId	true	
+StageTemplateItem	UQ_StageTemplateItems_StageTemplateId_SortOrder	StageTemplateId,SortOrder	true	
+StageTemplateItem	IX_StageTemplateItems_ItemTemplateId	ItemTemplateId	false	
+TermsAndConditions	IX_TermsAndConditions_IsActive_EffectiveDate	IsActive,EffectiveDate	false	
+TermsAndConditions	UQ_TermsAndConditions_VersionNumber	VersionNumber	true	[IsActive] = 1
+TimePlan	UQ_TimePlans_ProjectId	ProjectId	true	
+TimePlanStage	UQ_TimePlanStages_TimePlanId_SortOrder	TimePlanId,SortOrder	true	
+UnitAmenity	IX_UnitAmenities_UnitId	UnitId	false	
+UnitImage	IX_UnitImages_UnitId	UnitId	false	
+User	IX_Users_Name	Name	false	
+User	UQ_Users_Email	Email	true	[DeletedAt] IS NULL
+User	UQ_Users_Phone	Phone	true	[DeletedAt] IS NULL
+UserRefreshToken	IX_UserRefreshTokens_Token	Token	false	
+UserRefreshToken	IX_UserRefreshTokens_UserId_IsActive	UserId,IsActive	false
