@@ -8,7 +8,8 @@ public sealed class BaseProject
     public string Name { get; set; } = string.Empty;
     public Guid AreaId { get; set; }
     public string? Description { get; set; }
-    public string? Location { get; set; }
+    public decimal? Latitude { get; set; }
+    public decimal? Longitude { get; set; }
     public decimal Size { get; set; }
     public ProjectType ProjectType { get; set; }
     public decimal Price { get; set; }

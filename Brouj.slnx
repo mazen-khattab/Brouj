@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/Brouj.PasswordBenchmarks/Brouj.PasswordBenchmarks.csproj" />
+  </Folder>
   <Folder Name="/docs/">
     <Project Path="docs/Brouj.Docs/Brouj.Docs.csproj" />
   </Folder>

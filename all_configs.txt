@@ -1,0 +1,835 @@
+using Brouj.Domain.Entities;
+using Brouj.Infrastructure.Persistence.Converters;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class ActivityLogConfiguration : IEntityTypeConfiguration<ActivityLog>
+{
+    public void Configure(EntityTypeBuilder<ActivityLog> builder)
+    {
+        builder.ToTable("ActivityLogs");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.EntityType).HasColumnType("nvarchar(128)").HasMaxLength(128).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.EntityId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.UserId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Action).HasConversion(new ActivityActionConverter()).HasColumnType("varchar(16)").HasMaxLength(16).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.NewData).HasColumnType("nvarchar(max)").IsRequired(false);
+        builder.Property(entity => entity.OldData).HasColumnType("nvarchar(max)").IsRequired(false);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+
+        builder.HasOne(entity => entity.User)
+            .WithMany(entity => entity.ActivityLogs)
+            .HasForeignKey(entity => entity.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(entity => entity.CreatedAt)
+            .HasDatabaseName("IX_ActivityLogs_CreatedAt");
+
+        builder.HasIndex(entity => new { entity.UserId, entity.CreatedAt })
+            .HasDatabaseName("IX_ActivityLogs_UserId_CreatedAt");
+
+        builder.HasIndex(entity => new { entity.EntityType, entity.EntityId, entity.CreatedAt })
+            .HasDatabaseName("IX_ActivityLogs_EntityType_EntityId_CreatedAt");
+
+        builder.HasIndex(entity => new { entity.Action, entity.CreatedAt })
+            .HasDatabaseName("IX_ActivityLogs_Action_CreatedAt");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class AreaAmenityConfiguration : IEntityTypeConfiguration<AreaAmenity>
+{
+    public void Configure(EntityTypeBuilder<AreaAmenity> builder)
+    {
+        builder.ToTable("AreaAmenities");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.AreaId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Value).HasColumnType("nvarchar(32)").HasMaxLength(32).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Area)
+            .WithMany(entity => entity.AreaAmenities)
+            .HasForeignKey(entity => entity.AreaId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class AreaConfiguration : IEntityTypeConfiguration<Area>
+{
+    public void Configure(EntityTypeBuilder<Area> builder)
+    {
+        builder.ToTable("Areas");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.CityId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.City)
+            .WithMany(entity => entity.Areas)
+            .HasForeignKey(entity => entity.CityId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(entity => new { entity.CityId, entity.Name })
+            .IsUnique()
+            .HasDatabaseName("UQ_Areas_CityId_Name");
+    }
+}
+using Brouj.Domain.Entities;
+using Brouj.Infrastructure.Persistence.Converters;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class BaseProjectConfiguration : IEntityTypeConfiguration<BaseProject>
+{
+    public void Configure(EntityTypeBuilder<BaseProject> builder)
+    {
+        builder.ToTable("BaseProjects");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.AreaId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Description).HasColumnType("nvarchar(max)").IsRequired(false);
+        builder.Property(entity => entity.Latitude).HasColumnType("decimal(10,7)").HasPrecision(10, 7).IsRequired(false);
+        builder.Property(entity => entity.Longitude).HasColumnType("decimal(10,7)").HasPrecision(10, 7).IsRequired(false);
+        builder.Property(entity => entity.Size).HasColumnType("decimal(18,4)").HasPrecision(18, 4).IsRequired(true);
+        builder.Property(entity => entity.ProjectType).HasConversion(new ProjectTypeConverter()).HasColumnType("varchar(16)").HasMaxLength(16).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.Price).HasColumnType("decimal(19,4)").HasPrecision(19, 4).IsRequired(true);
+        builder.Property(entity => entity.FloorCount).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.PlannedUnitCount).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.GaragePrice).HasColumnType("decimal(19,4)").HasPrecision(19, 4).IsRequired(false);
+        builder.Property(entity => entity.IsGarage).HasColumnType("bit").IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Area)
+            .WithMany(entity => entity.BaseProjects)
+            .HasForeignKey(entity => entity.AreaId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(entity => entity.ProjectType)
+            .HasDatabaseName("IX_BaseProjects_ProjectType");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class BaseUnitConfiguration : IEntityTypeConfiguration<BaseUnit>
+{
+    public void Configure(EntityTypeBuilder<BaseUnit> builder)
+    {
+        builder.ToTable("BaseUnits");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ProjectId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Number).HasColumnType("nvarchar(64)").HasMaxLength(64).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.MeterPrice).HasColumnType("decimal(19,4)").HasPrecision(19, 4).IsRequired(true);
+        builder.Property(entity => entity.FloorNumber).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.Size).HasColumnType("decimal(18,4)").HasPrecision(18, 4).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Project)
+            .WithMany(entity => entity.BaseUnits)
+            .HasForeignKey(entity => entity.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(entity => new { entity.ProjectId, entity.Number })
+            .IsUnique()
+            .HasDatabaseName("UQ_BaseUnits_ProjectId_Number");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class CityConfiguration : IEntityTypeConfiguration<City>
+{
+    public void Configure(EntityTypeBuilder<City> builder)
+    {
+        builder.ToTable("Cities");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasIndex(entity => entity.Name)
+            .IsUnique()
+            .HasDatabaseName("UQ_Cities_Name");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+{
+    public void Configure(EntityTypeBuilder<Customer> builder)
+    {
+        builder.ToTable("Customers");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.FName).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.LName).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Phone).HasColumnType("varchar(32)").HasMaxLength(32).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.IdentityNumber).HasColumnType("varchar(64)").HasMaxLength(64).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.Email).HasColumnType("varchar(254)").HasMaxLength(254).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.HashPassword).HasColumnType("varchar(256)").HasMaxLength(256).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.DeletedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+
+        builder.HasIndex(entity => new { entity.FName, entity.LName })
+            .HasDatabaseName("IX_Customers_FName_LName");
+
+        builder.HasIndex(entity => entity.Email)
+            .IsUnique()
+            .HasDatabaseName("UQ_Customers_Email")
+            .HasFilter("[DeletedAt] IS NULL");
+
+        builder.HasIndex(entity => entity.Phone)
+            .IsUnique()
+            .HasDatabaseName("UQ_Customers_Phone")
+            .HasFilter("[DeletedAt] IS NULL");
+
+        builder.HasIndex(entity => entity.IdentityNumber)
+            .IsUnique()
+            .HasDatabaseName("UQ_Customers_IdentityNumber")
+            .HasFilter("[DeletedAt] IS NULL");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class CustomerRefreshTokenConfiguration : IEntityTypeConfiguration<CustomerRefreshToken>
+{
+    public void Configure(EntityTypeBuilder<CustomerRefreshToken> builder)
+    {
+        builder.ToTable("CustomerRefreshTokens");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.CustomerId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Token).HasColumnType("varchar(450)").HasMaxLength(450).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.IsActive).HasColumnType("bit").IsRequired(true);
+        builder.Property(entity => entity.ExpDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+
+        builder.HasOne(entity => entity.Customer)
+            .WithMany(entity => entity.CustomerRefreshTokens)
+            .HasForeignKey(entity => entity.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(entity => entity.Token)
+            .HasDatabaseName("IX_CustomerRefreshTokens_Token");
+
+        builder.HasIndex(entity => new { entity.CustomerId, entity.IsActive })
+            .HasDatabaseName("IX_CustomerRefreshTokens_CustomerId_IsActive");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class InitiativeProjectConfiguration : IEntityTypeConfiguration<InitiativeProject>
+{
+    public void Configure(EntityTypeBuilder<InitiativeProject> builder)
+    {
+        builder.ToTable("InitiativeProjects");
+        builder.HasKey(entity => entity.ProjectId);
+
+        builder.Property(entity => entity.ProjectId).HasColumnType("uniqueidentifier").IsRequired(true).ValueGeneratedNever();
+        builder.Property(entity => entity.NeighborPrice).HasColumnType("decimal(19,4)").HasPrecision(19, 4).IsRequired(true);
+        builder.Property(entity => entity.DrawDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Project)
+            .WithOne(entity => entity.InitiativeProject)
+            .HasForeignKey<InitiativeProject>(entity => entity.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class InitiativeUnitConfiguration : IEntityTypeConfiguration<InitiativeUnit>
+{
+    public void Configure(EntityTypeBuilder<InitiativeUnit> builder)
+    {
+        builder.ToTable("InitiativeUnits");
+        builder.HasKey(entity => entity.UnitId);
+
+        builder.Property(entity => entity.UnitId).HasColumnType("uniqueidentifier").IsRequired(true).ValueGeneratedNever();
+        builder.Property(entity => entity.NeighborMeterPrice).HasColumnType("decimal(19,4)").HasPrecision(19, 4).IsRequired(true);
+        builder.Property(entity => entity.Percentage).HasColumnType("decimal(9,6)").HasPrecision(9, 6).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Unit)
+            .WithOne(entity => entity.InitiativeUnit)
+            .HasForeignKey<InitiativeUnit>(entity => entity.UnitId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class ItemTemplateConfiguration : IEntityTypeConfiguration<ItemTemplate>
+{
+    public void Configure(EntityTypeBuilder<ItemTemplate> builder)
+    {
+        builder.ToTable("ItemTemplates");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Code).HasColumnType("nvarchar(64)").HasMaxLength(64).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.IsActive).HasColumnType("bit").IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasIndex(entity => entity.IsActive)
+            .HasDatabaseName("IX_ItemTemplates_IsActive");
+
+        builder.HasIndex(entity => entity.Code)
+            .IsUnique()
+            .HasDatabaseName("UQ_ItemTemplates_Code");
+    }
+}
+using Brouj.Domain.Entities;
+using Brouj.Infrastructure.Persistence.Converters;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
+{
+    public void Configure(EntityTypeBuilder<Order> builder)
+    {
+        builder.ToTable("Orders");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ReservationId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Status).HasConversion(new OrderStatusConverter()).HasColumnType("varchar(16)").HasMaxLength(16).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.Number).HasColumnType("nvarchar(64)").HasMaxLength(64).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.TotalPrice).HasColumnType("decimal(19,4)").HasPrecision(19, 4).IsRequired(true);
+        builder.Property(entity => entity.CompletedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Reservation)
+            .WithOne(entity => entity.Order)
+            .HasForeignKey<Order>(entity => entity.ReservationId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(entity => entity.Status)
+            .HasDatabaseName("IX_Orders_Status");
+
+        builder.HasIndex(entity => entity.ReservationId)
+            .IsUnique()
+            .HasDatabaseName("UQ_Orders_ReservationId");
+
+        builder.HasIndex(entity => entity.Number)
+            .IsUnique()
+            .HasDatabaseName("UQ_Orders_Number");
+    }
+}
+using Brouj.Domain.Entities;
+using Brouj.Infrastructure.Persistence.Converters;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class PlanStageItemConfiguration : IEntityTypeConfiguration<PlanStageItem>
+{
+    public void Configure(EntityTypeBuilder<PlanStageItem> builder)
+    {
+        builder.ToTable("PlanStageItems");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.StageId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Status).HasConversion(new PlanStageItemStatusConverter()).HasColumnType("varchar(16)").HasMaxLength(16).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.SortOrder).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.ConfirmedDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+        builder.Property(entity => entity.DueDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Stage)
+            .WithMany(entity => entity.PlanStageItems)
+            .HasForeignKey(entity => entity.StageId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(entity => new { entity.StageId, entity.Status })
+            .HasDatabaseName("IX_PlanStageItems_StageId_Status");
+
+        builder.HasIndex(entity => new { entity.StageId, entity.SortOrder })
+            .IsUnique()
+            .HasDatabaseName("UQ_PlanStageItems_StageId_SortOrder");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class ProjectAmenityConfiguration : IEntityTypeConfiguration<ProjectAmenity>
+{
+    public void Configure(EntityTypeBuilder<ProjectAmenity> builder)
+    {
+        builder.ToTable("ProjectAmenities");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ProjectId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Value).HasColumnType("nvarchar(32)").HasMaxLength(32).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Project)
+            .WithMany(entity => entity.ProjectAmenities)
+            .HasForeignKey(entity => entity.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class ProjectImageConfiguration : IEntityTypeConfiguration<ProjectImage>
+{
+    public void Configure(EntityTypeBuilder<ProjectImage> builder)
+    {
+        builder.ToTable("ProjectImages");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ProjectId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ImagePath).HasColumnType("nvarchar(2048)").HasMaxLength(2048).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.AltText).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(false);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Project)
+            .WithMany(entity => entity.ProjectImages)
+            .HasForeignKey(entity => entity.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
+using Brouj.Domain.Entities;
+using Brouj.Infrastructure.Persistence.Converters;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
+{
+    public void Configure(EntityTypeBuilder<Reservation> builder)
+    {
+        builder.ToTable("Reservations");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.UnitId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.CustomerId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ReservationDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.Number).HasColumnType("nvarchar(64)").HasMaxLength(64).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Status).HasConversion(new ReservationStatusConverter()).HasColumnType("varchar(16)").HasMaxLength(16).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.CancelledAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Unit)
+            .WithMany(entity => entity.Reservations)
+            .HasForeignKey(entity => entity.UnitId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(entity => entity.Customer)
+            .WithMany(entity => entity.Reservations)
+            .HasForeignKey(entity => entity.CustomerId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(entity => new { entity.CustomerId, entity.UnitId, entity.Status })
+            .HasDatabaseName("IX_Reservations_CustomerId_UnitId_Status");
+
+        builder.HasIndex(entity => new { entity.UnitId, entity.Status })
+            .HasDatabaseName("IX_Reservations_UnitId_Status");
+
+        builder.HasIndex(entity => entity.Status)
+            .HasDatabaseName("IX_Reservations_Status");
+
+        builder.HasIndex(entity => entity.Number)
+            .IsUnique()
+            .HasDatabaseName("UQ_Reservations_Number");
+
+        builder.HasIndex(entity => new { entity.CustomerId, entity.UnitId })
+            .IsUnique()
+            .HasDatabaseName("UQ_Reservations_CustomerId_UnitId_Processing")
+            .HasFilter("[Status] = 'processing'");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class StageItemImageConfiguration : IEntityTypeConfiguration<StageItemImage>
+{
+    public void Configure(EntityTypeBuilder<StageItemImage> builder)
+    {
+        builder.ToTable("StageItemImages");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ItemId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ImagePath).HasColumnType("nvarchar(2048)").HasMaxLength(2048).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Description).HasColumnType("nvarchar(max)").IsRequired(false);
+        builder.Property(entity => entity.SortOrder).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Item)
+            .WithMany(entity => entity.StageItemImages)
+            .HasForeignKey(entity => entity.ItemId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(entity => new { entity.ItemId, entity.SortOrder })
+            .IsUnique()
+            .HasDatabaseName("UQ_StageItemImages_ItemId_SortOrder");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class StageTemplateConfiguration : IEntityTypeConfiguration<StageTemplate>
+{
+    public void Configure(EntityTypeBuilder<StageTemplate> builder)
+    {
+        builder.ToTable("StageTemplates");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Code).HasColumnType("nvarchar(64)").HasMaxLength(64).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.IsActive).HasColumnType("bit").IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasIndex(entity => entity.IsActive)
+            .HasDatabaseName("IX_StageTemplates_IsActive");
+
+        builder.HasIndex(entity => entity.Code)
+            .IsUnique()
+            .HasDatabaseName("UQ_StageTemplates_Code");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class StageTemplateItemConfiguration : IEntityTypeConfiguration<StageTemplateItem>
+{
+    public void Configure(EntityTypeBuilder<StageTemplateItem> builder)
+    {
+        builder.ToTable("StageTemplateItems");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.StageTemplateId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ItemTemplateId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.SortOrder).HasColumnType("int").IsRequired(true);
+
+        builder.HasOne(entity => entity.StageTemplate)
+            .WithMany(entity => entity.StageTemplateItems)
+            .HasForeignKey(entity => entity.StageTemplateId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(entity => entity.ItemTemplate)
+            .WithMany(entity => entity.StageTemplateItems)
+            .HasForeignKey(entity => entity.ItemTemplateId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(entity => new { entity.StageTemplateId, entity.ItemTemplateId })
+            .IsUnique()
+            .HasDatabaseName("UQ_StageTemplateItems_StageTemplateId_ItemTemplateId");
+
+        builder.HasIndex(entity => new { entity.StageTemplateId, entity.SortOrder })
+            .IsUnique()
+            .HasDatabaseName("UQ_StageTemplateItems_StageTemplateId_SortOrder");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class TermsAndConditionsConfiguration : IEntityTypeConfiguration<TermsAndConditions>
+{
+    public void Configure(EntityTypeBuilder<TermsAndConditions> builder)
+    {
+        builder.ToTable("TermsAndConditions");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Title).HasColumnType("nvarchar(300)").HasMaxLength(300).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Content).HasColumnType("nvarchar(max)").IsRequired(true);
+        builder.Property(entity => entity.VersionNumber).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.IsActive).HasColumnType("bit").IsRequired(true);
+        builder.Property(entity => entity.EffectiveDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasIndex(entity => new { entity.IsActive, entity.EffectiveDate })
+            .HasDatabaseName("IX_TermsAndConditions_IsActive_EffectiveDate");
+
+        builder.HasIndex(entity => entity.VersionNumber)
+            .IsUnique()
+            .HasDatabaseName("UQ_TermsAndConditions_VersionNumber")
+            .HasFilter("[IsActive] = 1");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class TimePlanConfiguration : IEntityTypeConfiguration<TimePlan>
+{
+    public void Configure(EntityTypeBuilder<TimePlan> builder)
+    {
+        builder.ToTable("TimePlans");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ProjectId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.DeliveryDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Project)
+            .WithOne(entity => entity.TimePlan)
+            .HasForeignKey<TimePlan>(entity => entity.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(entity => entity.ProjectId)
+            .IsUnique()
+            .HasDatabaseName("UQ_TimePlans_ProjectId");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class TimePlanStageConfiguration : IEntityTypeConfiguration<TimePlanStage>
+{
+    public void Configure(EntityTypeBuilder<TimePlanStage> builder)
+    {
+        builder.ToTable("TimePlanStages");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.TimePlanId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.SortOrder).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.DeliveryDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.TimePlan)
+            .WithMany(entity => entity.TimePlanStages)
+            .HasForeignKey(entity => entity.TimePlanId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(entity => new { entity.TimePlanId, entity.SortOrder })
+            .IsUnique()
+            .HasDatabaseName("UQ_TimePlanStages_TimePlanId_SortOrder");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class UnitAmenityConfiguration : IEntityTypeConfiguration<UnitAmenity>
+{
+    public void Configure(EntityTypeBuilder<UnitAmenity> builder)
+    {
+        builder.ToTable("UnitAmenities");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.UnitId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Value).HasColumnType("nvarchar(32)").HasMaxLength(32).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Unit)
+            .WithMany(entity => entity.UnitAmenities)
+            .HasForeignKey(entity => entity.UnitId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class UnitImageConfiguration : IEntityTypeConfiguration<UnitImage>
+{
+    public void Configure(EntityTypeBuilder<UnitImage> builder)
+    {
+        builder.ToTable("UnitImages");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.UnitId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.ImagePath).HasColumnType("nvarchar(2048)").HasMaxLength(2048).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.AltText).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(false);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+
+        builder.HasOne(entity => entity.Unit)
+            .WithMany(entity => entity.UnitImages)
+            .HasForeignKey(entity => entity.UnitId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
+using Brouj.Domain.Entities;
+using Brouj.Infrastructure.Persistence.Converters;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class UserConfiguration : IEntityTypeConfiguration<User>
+{
+    public void Configure(EntityTypeBuilder<User> builder)
+    {
+        builder.ToTable("Users");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Name).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Email).HasColumnType("varchar(254)").HasMaxLength(254).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.Phone).HasColumnType("varchar(32)").HasMaxLength(32).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.Role).HasConversion(new UserRoleConverter()).HasColumnType("varchar(16)").HasMaxLength(16).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.HashPassword).HasColumnType("varchar(256)").HasMaxLength(256).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.DeletedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+        builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+
+        builder.HasIndex(entity => entity.Name)
+            .HasDatabaseName("IX_Users_Name");
+
+        builder.HasIndex(entity => entity.Email)
+            .IsUnique()
+            .HasDatabaseName("UQ_Users_Email")
+            .HasFilter("[DeletedAt] IS NULL");
+
+        builder.HasIndex(entity => entity.Phone)
+            .IsUnique()
+            .HasDatabaseName("UQ_Users_Phone")
+            .HasFilter("[DeletedAt] IS NULL");
+    }
+}
+using Brouj.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Brouj.Infrastructure.Persistence.Configurations;
+
+public sealed class UserRefreshTokenConfiguration : IEntityTypeConfiguration<UserRefreshToken>
+{
+    public void Configure(EntityTypeBuilder<UserRefreshToken> builder)
+    {
+        builder.ToTable("UserRefreshTokens");
+        builder.HasKey(entity => entity.Id);
+
+        builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.UserId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.Token).HasColumnType("varchar(450)").HasMaxLength(450).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.IsActive).HasColumnType("bit").IsRequired(true);
+        builder.Property(entity => entity.ExpDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+        builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
+
+        builder.HasOne(entity => entity.User)
+            .WithMany(entity => entity.UserRefreshTokens)
+            .HasForeignKey(entity => entity.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(entity => entity.Token)
+            .HasDatabaseName("IX_UserRefreshTokens_Token");
+
+        builder.HasIndex(entity => new { entity.UserId, entity.IsActive })
+            .HasDatabaseName("IX_UserRefreshTokens_UserId_IsActive");
+    }
+}
