@@ -24,9 +24,12 @@ public sealed class UserRefreshTokenConfiguration : IEntityTypeConfiguration<Use
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(entity => entity.Token)
+            .IsUnique()
             .HasDatabaseName("IX_UserRefreshTokens_Token");
 
-        builder.HasIndex(entity => new { entity.UserId, entity.IsActive })
-            .HasDatabaseName("IX_UserRefreshTokens_UserId_IsActive");
+        builder.HasIndex(entity => entity.UserId)
+            .IsUnique()
+            .HasFilter("[IsActive] = 1")
+            .HasDatabaseName("UX_UserRefreshTokens_Active");
     }
 }

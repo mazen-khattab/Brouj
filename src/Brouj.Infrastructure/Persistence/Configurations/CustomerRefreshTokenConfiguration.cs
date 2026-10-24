@@ -24,9 +24,12 @@ public sealed class CustomerRefreshTokenConfiguration : IEntityTypeConfiguration
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(entity => entity.Token)
+            .IsUnique()
             .HasDatabaseName("IX_CustomerRefreshTokens_Token");
 
-        builder.HasIndex(entity => new { entity.CustomerId, entity.IsActive })
-            .HasDatabaseName("IX_CustomerRefreshTokens_CustomerId_IsActive");
+        builder.HasIndex(entity => entity.CustomerId)
+            .IsUnique()
+            .HasFilter("[IsActive] = 1")
+            .HasDatabaseName("IX_CustomerRefreshTokens_Active");
     }
 }

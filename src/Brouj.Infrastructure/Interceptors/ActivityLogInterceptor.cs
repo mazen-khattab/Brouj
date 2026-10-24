@@ -14,18 +14,13 @@ public sealed class ActivityLogInterceptor(ICurrentUser currentUser, TimeProvide
 {
     private readonly ConditionalWeakTable<DbContext, List<ActivityLog>> _pendingLogs = new();
 
-    public override InterceptionResult<int> SavingChanges(
-        DbContextEventData eventData,
-        InterceptionResult<int> result)
+    public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
         PrepareLogs(eventData.Context);
         return result;
     }
 
-    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
-        DbContextEventData eventData,
-        InterceptionResult<int> result,
-        CancellationToken cancellationToken = default)
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
         PrepareLogs(eventData.Context);
@@ -38,10 +33,7 @@ public sealed class ActivityLogInterceptor(ICurrentUser currentUser, TimeProvide
         return result;
     }
 
-    public override ValueTask<int> SavedChangesAsync(
-        SaveChangesCompletedEventData eventData,
-        int result,
-        CancellationToken cancellationToken = default)
+    public override ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result, CancellationToken cancellationToken = default)
     {
         ForgetPendingLogs(eventData.Context);
         return ValueTask.FromResult(result);
@@ -50,20 +42,15 @@ public sealed class ActivityLogInterceptor(ICurrentUser currentUser, TimeProvide
     public override void SaveChangesFailed(DbContextErrorEventData eventData) =>
         DiscardPendingLogs(eventData.Context);
 
-    public override Task SaveChangesFailedAsync(
-        DbContextErrorEventData eventData,
-        CancellationToken cancellationToken = default)
+    public override Task SaveChangesFailedAsync(DbContextErrorEventData eventData, CancellationToken cancellationToken = default)
     {
         DiscardPendingLogs(eventData.Context);
         return Task.CompletedTask;
     }
 
-    public override void SaveChangesCanceled(DbContextEventData eventData) =>
-        DiscardPendingLogs(eventData.Context);
+    public override void SaveChangesCanceled(DbContextEventData eventData) => DiscardPendingLogs(eventData.Context);
 
-    public override Task SaveChangesCanceledAsync(
-        DbContextEventData eventData,
-        CancellationToken cancellationToken = default)
+    public override Task SaveChangesCanceledAsync(DbContextEventData eventData, CancellationToken cancellationToken = default)
     {
         DiscardPendingLogs(eventData.Context);
         return Task.CompletedTask;

@@ -61,7 +61,11 @@ public sealed class RelationshipTests
             {
                 var columns = fk.Properties.Select(property => property.Name).ToArray();
                 Assert.True(entity.GetKeys().Any(key => StartsWith(key.Properties, columns)) ||
-                    indexes.Any(index => index.GetFilter() is null && StartsWith(index.Properties, columns)),
+                    indexes.Any(index => StartsWith(index.Properties, columns) &&
+                        (index.GetFilter() is null ||
+                         // The owner approved active-session filtered indexes in place of FK convention indexes.
+                         (entity.ClrType == typeof(CustomerRefreshToken) || entity.ClrType == typeof(UserRefreshToken)) &&
+                         index.IsUnique && index.GetFilter() == "[IsActive] = 1")),
                     $"Uncovered FK: {entity.ClrType.Name}.{string.Join(",", columns)}");
 
                 var standalone = indexes.SingleOrDefault(index =>

@@ -13,8 +13,8 @@ Customer	IX_Customers_FName_LName	FName,LName	false
 Customer	UQ_Customers_Email	Email	true	[DeletedAt] IS NULL
 Customer	UQ_Customers_Phone	Phone	true	[DeletedAt] IS NULL
 Customer	UQ_Customers_IdentityNumber	IdentityNumber	true	[DeletedAt] IS NULL
-CustomerRefreshToken	IX_CustomerRefreshTokens_Token	Token	false	
-CustomerRefreshToken	IX_CustomerRefreshTokens_CustomerId_IsActive	CustomerId,IsActive	false	
+CustomerRefreshToken	IX_CustomerRefreshTokens_Token	Token	true
+CustomerRefreshToken	IX_CustomerRefreshTokens_Active	CustomerId	true	[IsActive] = 1
 ItemTemplate	IX_ItemTemplates_IsActive	IsActive	false	
 ItemTemplate	UQ_ItemTemplates_Code	Code	true	
 Order	IX_Orders_Status	Status	false	
@@ -44,5 +44,5 @@ UnitImage	IX_UnitImages_UnitId	UnitId	false
 User	IX_Users_Name	Name	false	
 User	UQ_Users_Email	Email	true	[DeletedAt] IS NULL
 User	UQ_Users_Phone	Phone	true	[DeletedAt] IS NULL
-UserRefreshToken	IX_UserRefreshTokens_Token	Token	false	
-UserRefreshToken	IX_UserRefreshTokens_UserId_IsActive	UserId,IsActive	false
+UserRefreshToken	IX_UserRefreshTokens_Token	Token	true
+UserRefreshToken	UX_UserRefreshTokens_Active	UserId	true	[IsActive] = 1

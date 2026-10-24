@@ -3,6 +3,7 @@ using Brouj.Infrastructure.Interceptors;
 using Brouj.Infrastructure.Persistence;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Testcontainers.MsSql;
 
 namespace Brouj.Infrastructure.IntegrationTests.SqlServer;
@@ -65,11 +66,15 @@ public sealed class SqlServerFixture : IAsyncLifetime
 
 internal sealed class TestDatabase(string connectionString) : IAsyncDisposable
 {
-    public ApplicationDbContext CreateContext(TestActor? actor = null, TimeProvider? clock = null)
+    public ApplicationDbContext CreateContext(TestActor? actor = null, TimeProvider? clock = null,
+        bool enableRetry = false, params IInterceptor[] interceptors)
     {
         var timeProvider = clock ?? TimeProvider.System;
         return new ApplicationDbContext(
-            new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(connectionString).Options,
+            new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(connectionString, sql =>
+            {
+                if (enableRetry) sql.EnableRetryOnFailure();
+            }).AddInterceptors(interceptors).Options,
             new AuditableEntityInterceptor(timeProvider),
             new ActivityLogInterceptor(actor ?? new TestActor(), timeProvider));
     }
