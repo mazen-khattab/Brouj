@@ -73,8 +73,10 @@ public static class DependencyInjection
         {
             o.HeaderName = "X-CSRF-TOKEN";
             o.Cookie.Name = "__Host-brouj-csrf";
-            o.Cookie.HttpOnly = true; o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            o.Cookie.SameSite = SameSiteMode.Strict; o.Cookie.Path = "/";
+            o.Cookie.HttpOnly = true; 
+            o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            o.Cookie.SameSite = SameSiteMode.Strict; 
+            o.Cookie.Path = "/";
         });
         services.AddOptions<AntiforgeryOptions>().Configure<IOptions<AppCookieOptions>>((csrf, cookies) =>
             csrf.Cookie.SameSite = AuthenticationCookies.ValidatedOptions(cookies.Value).SameSite);

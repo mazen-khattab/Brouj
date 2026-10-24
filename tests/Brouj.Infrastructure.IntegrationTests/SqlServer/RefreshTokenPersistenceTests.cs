@@ -1,4 +1,5 @@
 using Brouj.Application.Abstractions.Authentication;
+using Brouj.Application.Common.Models;
 using Brouj.Infrastructure.Authentication;
 using Brouj.Infrastructure.IntegrationTests.Fixtures;
 using Brouj.Infrastructure.IntegrationTests.Services;
