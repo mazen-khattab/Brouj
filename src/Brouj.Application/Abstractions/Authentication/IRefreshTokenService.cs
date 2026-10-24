@@ -9,8 +9,11 @@ public interface IRefreshTokenService
 {
     /// <summary>Starts the customer's sole active session, revoking any previous refresh credential.</summary>
     Task<RefreshTokenResult?> CreateCustomerAsync(Guid customerId, CancellationToken cancellationToken);
+
     /// <summary>Starts the staff member's sole active session after a verified login.</summary>
-    Task<RefreshTokenResult> CreateUserAsync(Guid userId, CancellationToken cancellationToken);
+    // A rejected or inactive actor produces the same generic failure as customer session creation.
+    Task<RefreshTokenResult?> CreateUserAsync(Guid userId, CancellationToken cancellationToken);
+
     /// <summary>Consumes a customer credential once, preserving the original session deadline.</summary>
     Task<RefreshTokenResult?> RotateCustomerAsync(string token, CancellationToken cancellationToken);
     /// <summary>Consumes a staff credential once, preserving the original session deadline.</summary>
