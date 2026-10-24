@@ -37,8 +37,19 @@ public static class DependencyInjection
         services.AddDbContextFactory<ApplicationDbContext>(options => options
             .UseSqlServer(connectionString, sql => sql.EnableRetryOnFailure())
             // Provider errors can contain duplicate credential digests or other protected values.
-            // Retain safe operational diagnostics without logging SQL error exception bodies.
-            .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.SaveChangesFailed, RelationalEventId.CommandError)),
+            // Reads, bulk writes and retries can repeat the same sensitive provider exception.
+            // Keep routine diagnostics, but block exception-bearing persistence failure events.
+            .ConfigureWarnings(warnings => warnings.Ignore(
+                CoreEventId.SaveChangesFailed,
+                CoreEventId.QueryIterationFailed,
+                CoreEventId.ExecutionStrategyRetrying,
+                CoreEventId.OptimisticConcurrencyException,
+                RelationalEventId.CommandError,
+                RelationalEventId.ConnectionError,
+                RelationalEventId.TransactionError,
+                RelationalEventId.NonQueryOperationFailed,
+                RelationalEventId.BatchExecutorFailedToRollbackToSavepoint,
+                RelationalEventId.BatchExecutorFailedToReleaseSavepoint)),
             ServiceLifetime.Scoped);
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
         services.AddScoped<IApplicationTransactionManager, ApplicationTransactionManager>();
@@ -87,6 +98,9 @@ public static class DependencyInjection
                 bearer.MapInboundClaims = false;
                 bearer.IncludeErrorDetails = false;
                 bearer.SaveToken = false;
+                // Sanitize failures before JwtBearer logs them; share the direct service's size limit.
+                bearer.TokenHandlers.Clear();
+                bearer.TokenHandlers.Add(new RedactingJwtTokenHandler());
                 bearer.TokenValidationParameters = JwtTokenService.ValidationParameters(jwt.Value, clock);
                 bearer.Events = new JwtBearerEvents
                 {

@@ -10,6 +10,44 @@ namespace Brouj.Infrastructure.IntegrationTests.Services;
 public sealed class CacheTests
 {
     [Fact]
+    public async Task Filters_pages_and_languages_remain_distinct_across_instances_and_invalidation()
+    {
+        var provider = new RecordingCache();
+        var actor = TestActor.Customer();
+        var first = Service(provider, actor);
+        var second = Service(provider, actor);
+        var variants = new Dictionary<string, CachedProject>
+        {
+            ["projects:list:city:cairo:page:1:language:ar"] = new("first-page-arabic"),
+            ["projects:list:city:cairo:page:2:language:ar"] = new("second-page-arabic"),
+            ["projects:list:city:cairo:page:1:language:en"] = new("first-page-english"),
+            ["projects:list:city:giza:page:1:language:ar"] = new("other-filter")
+        };
+
+        foreach (var variant in variants)
+        {
+            await first.SetAsync(variant.Key, variant.Value, null, CancellationToken.None);
+        }
+
+        foreach (var variant in variants)
+        {
+            Assert.Equal(variant.Value, await second.GetAsync<CachedProject>(variant.Key, CancellationToken.None));
+        }
+
+        // Invalidation applies to one complete key in this actor's scope. Other variants remain
+        // available, while the anonymous scope can never read these private entries.
+        var removedKey = variants.Keys.First();
+        await second.RemoveAsync(removedKey, CancellationToken.None);
+        Assert.Null(await first.GetAsync<CachedProject>(removedKey, CancellationToken.None));
+
+        foreach (var variant in variants.Where(variant => variant.Key != removedKey))
+        {
+            Assert.Equal(variant.Value, await first.GetAsync<CachedProject>(variant.Key, CancellationToken.None));
+            Assert.Null(await Service(provider, new TestActor()).GetAsync<CachedProject>(variant.Key, CancellationToken.None));
+        }
+    }
+
+    [Fact]
     public async Task Cache_round_trip_default_ttl_invalidation_and_deterministic_scoping()
     {
         var provider = new RecordingCache();

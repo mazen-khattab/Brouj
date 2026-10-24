@@ -11,6 +11,9 @@ public sealed class RefreshTokenInputTests
     [InlineData("")]
     [InlineData("not-a-token")]
     [InlineData("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=")]
+    [InlineData("' OR 1=1; DROP TABLE [Customers]; --")]
+    [InlineData("' OR 1=1; DROP TABLE [Users]; --")]
+    [InlineData("synthetic-token\r\nforged-log-entry")]
     public async Task Invalid_credentials_are_rejected_without_opening_a_database(string raw)
     {
         var service = new RefreshTokenService(new ForbiddenFactory(), AuthenticationTests.Service(), new FixedClock(AuthenticationTests.Now));

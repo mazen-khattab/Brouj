@@ -43,6 +43,9 @@ public sealed class FileStorageTests : IDisposable
     [InlineData("file.png", "application/octet-stream", 15)]
     [InlineData("file.png", "image/png", 5242881)]
     [InlineData("file.png", "image/png", 0)]
+    [InlineData("file.png\r\nforged-log-entry", "image/png", 15)]
+    [InlineData("file.png\0", "image/png", 15)]
+    [InlineData("file.svg", "image/svg+xml", 15)]
     public async Task Invalid_metadata_is_rejected_before_creating_files(string name, string mime, long length)
     {
         await Assert.ThrowsAsync<ArgumentException>(() => Service().SaveAsync(new MemoryStream(Png), name, mime, length, default));
@@ -91,6 +94,10 @@ public sealed class FileStorageTests : IDisposable
     [InlineData("/file.png")]
     [InlineData("client.png")]
     [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.exe")]
+    [InlineData("..\\file.png")]
+    [InlineData("%2e%2e%2ffile.png")]
+    [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.png:alternate")]
+    [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.png/../file.png")]
     public async Task Delete_cannot_address_arbitrary_paths(string path) =>
         await Assert.ThrowsAsync<ArgumentException>(() => Service().DeleteAsync(path, default));
 
@@ -100,6 +107,62 @@ public sealed class FileStorageTests : IDisposable
         Assert.Throws<InvalidOperationException>(() => Service("uploads"));
         Assert.Throws<InvalidOperationException>(() => Service(Path.Combine(AppContext.BaseDirectory, "uploads")));
         Assert.Throws<InvalidOperationException>(() => Service(Path.Combine(_root, "wwwroot", "uploads")));
+    }
+
+    [Fact]
+    public async Task Non_seekable_upload_cannot_exceed_the_service_limit_by_underreporting_its_length()
+    {
+        const int maximumBytes = 5 * 1024 * 1024;
+        var bytes = new byte[maximumBytes + 1];
+        Png.CopyTo(bytes, 0);
+        using var input = new NonSeekableStream(bytes);
+
+        // The declared size is allowed; the service must still reject the actual extra byte.
+        await Assert.ThrowsAsync<ArgumentException>(() => Service().SaveAsync(
+            input,
+            "synthetic.png",
+            "image/png",
+            maximumBytes,
+            CancellationToken.None));
+
+        Assert.Empty(Directory.GetFiles(_root));
+        Assert.True(input.CanRead);
+    }
+
+    [Fact]
+    public async Task Configured_smaller_size_limit_also_bounds_streamed_bytes()
+    {
+        var service = new FileStorageService(
+            Options.Create(new LocalFileStorageOptions { RootPath = _root }),
+            Options.Create(new FileStorageOptions { MaxFileSizeBytes = 13 }));
+        using var input = new NonSeekableStream(Png);
+
+        await Assert.ThrowsAsync<ArgumentException>(() => service.SaveAsync(
+            input,
+            "synthetic.png",
+            "image/png",
+            13,
+            CancellationToken.None));
+
+        Assert.Empty(Directory.GetFiles(_root));
+    }
+
+    [Fact]
+    public async Task Cancellation_after_the_header_is_written_removes_the_partial_upload()
+    {
+        using var cancellation = new CancellationTokenSource();
+        using var input = new CancelAfterHeaderStream(Png, cancellation);
+
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => Service().SaveAsync(
+            input,
+            "synthetic.png",
+            "image/png",
+            Png.Length,
+            cancellation.Token));
+
+        Assert.True(cancellation.IsCancellationRequested);
+        Assert.Empty(Directory.GetFiles(_root));
+        Assert.True(input.CanRead);
     }
 
     public void Dispose()
@@ -115,5 +178,36 @@ public sealed class FileStorageTests : IDisposable
         public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default) =>
             Position >= _failAt ? throw new IOException("Synthetic read failure.") :
                 base.ReadAsync(buffer[..Math.Min(12, buffer.Length)], cancellationToken);
+    }
+
+    private sealed class NonSeekableStream(byte[] bytes) : MemoryStream(bytes)
+    {
+        public override bool CanSeek => false;
+
+        public override long Length => throw new NotSupportedException();
+
+        public override long Position
+        {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
+    }
+
+    private sealed class CancelAfterHeaderStream(
+        byte[] bytes,
+        CancellationTokenSource cancellation) : MemoryStream(bytes)
+    {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default)
+        {
+            if (Position >= 12)
+            {
+                cancellation.Cancel();
+            }
+
+            // Force the first read to supply only the signature header, then cancel the next read.
+            return base.ReadAsync(buffer[..Math.Min(12, buffer.Length)], cancellationToken);
+        }
     }
 }

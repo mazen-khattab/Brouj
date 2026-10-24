@@ -12,13 +12,21 @@ namespace Brouj.Infrastructure.Authentication;
 /// <summary>Issues minimal HS256 access tokens and validates their cryptographic and actor contracts.</summary>
 public sealed class JwtTokenService : IJwtTokenService
 {
+    internal const int MaximumTokenBytes = 8192;
+
     private readonly JwtOptions _options;
     private readonly TimeProvider _clock;
     private readonly SymmetricSecurityKey _key;
-    private readonly JwtSecurityTokenHandler _handler = new() { MapInboundClaims = false, MaximumTokenSizeInBytes = 8192 };
+    private readonly JwtSecurityTokenHandler _handler = new()
+    {
+        MapInboundClaims = false,
+        MaximumTokenSizeInBytes = MaximumTokenBytes
+    };
 
     /// <summary>Fails closed when a signing secret or the approved token lifetimes are missing.</summary>
-    public JwtTokenService(IOptions<JwtOptions> options, TimeProvider clock)
+    public JwtTokenService(
+        IOptions<JwtOptions> options,
+        TimeProvider clock)
     {
         _options = options.Value;
         _clock = clock;
@@ -26,16 +34,33 @@ public sealed class JwtTokenService : IJwtTokenService
     }
 
     /// <summary>Issues a 15-minute customer JWT containing identity, actor type, and standard metadata.</summary>
-    public string GenerateCustomerAccessToken(Guid customerId) => Generate(customerId, "customer", null);
+    public string GenerateCustomerAccessToken(Guid customerId)
+    {
+        return Generate(customerId, "customer", null);
+    }
+
     /// <summary>Issues a 15-minute staff JWT with the applicable approved role.</summary>
-    public string GenerateUserAccessToken(Guid userId, UserRole role) => Generate(userId, "user", TokenClaims.RoleName(role));
+    public string GenerateUserAccessToken(
+        Guid userId,
+        UserRole role)
+    {
+        return Generate(userId, "user", TokenClaims.RoleName(role));
+    }
+
     /// <summary>Generates 32 cryptographically random bytes encoded as an opaque Base64url credential.</summary>
-    public string GenerateRefreshToken() => Base64UrlEncoder.Encode(RandomNumberGenerator.GetBytes(32));
+    public string GenerateRefreshToken()
+    {
+        return Base64UrlEncoder.Encode(RandomNumberGenerator.GetBytes(32));
+    }
 
     /// <summary>Validates HS256, issuer, audience, expiry/skew, required metadata, and the actor/role contract.</summary>
     public ClaimsPrincipal ValidateAccessToken(string token)
     {
-        if (string.IsNullOrWhiteSpace(token) || token.Length > 8192) throw new SecurityTokenException("Invalid access token.");
+        if (string.IsNullOrWhiteSpace(token) || token.Length > MaximumTokenBytes)
+        {
+            throw new SecurityTokenException("Invalid access token.");
+        }
+
         try
         {
             var principal = _handler.ValidateToken(token, ValidationParameters(_options, _clock), out _);
@@ -50,7 +75,9 @@ public sealed class JwtTokenService : IJwtTokenService
         }
     }
 
-    internal static void ValidateClaims(ClaimsPrincipal principal, TimeProvider clock)
+    internal static void ValidateClaims(
+        ClaimsPrincipal principal,
+        TimeProvider clock)
     {
         if (!TokenClaims.TryActor(principal, out _, out _, out _) || !TokenClaims.ValidMetadata(principal, clock.GetUtcNow()))
         {
@@ -58,7 +85,9 @@ public sealed class JwtTokenService : IJwtTokenService
         }
     }
 
-    internal static TokenValidationParameters ValidationParameters(JwtOptions options, TimeProvider clock) => new()
+    internal static TokenValidationParameters ValidationParameters(
+        JwtOptions options,
+        TimeProvider clock) => new()
     {
         ValidateIssuerSigningKey = true, 
         IssuerSigningKey = SigningKey(options), 
@@ -69,11 +98,17 @@ public sealed class JwtTokenService : IJwtTokenService
         ValidIssuer = options.Issuer,
         ValidateAudience = true, 
         ValidAudience = options.Audience,
+        // The configured audience is exact; a trailing slash must not select a different audience.
+        IgnoreTrailingSlashWhenValidatingAudience = false,
         RequireExpirationTime = true, 
         ValidateLifetime = true, 
         ClockSkew = TimeSpan.FromSeconds(30),
         NameClaimType = "sub", 
         RoleClaimType = TokenClaims.Role,
+        // Failed validation results must not retain credentials or log their token identifiers.
+        IncludeTokenOnFailedValidation = false,
+        LogTokenId = false,
+        SaveSigninToken = false,
         // Share the same clock with issuance and tests, preserving the approved 30-second skew.
         LifetimeValidator = (notBefore, expires, _, _) => expires.HasValue &&
             (!notBefore.HasValue || notBefore.Value <= clock.GetUtcNow().UtcDateTime.AddSeconds(30)) &&
@@ -95,7 +130,7 @@ public sealed class JwtTokenService : IJwtTokenService
         {
             bytes = Convert.FromBase64String(options.SigningKey);
         }
-        catch (FormatException)
+        catch (Exception exception) when (exception is FormatException or ArgumentNullException)
         {
             throw new InvalidOperationException("JWT signing key must be Base64-encoded random bytes.");
         }
@@ -108,7 +143,10 @@ public sealed class JwtTokenService : IJwtTokenService
         return new SymmetricSecurityKey(bytes);
     }
 
-    private string Generate(Guid id, string actorType, string? role)
+    private string Generate(
+        Guid id,
+        string actorType,
+        string? role)
     {
         if (id == Guid.Empty)
         {
@@ -118,7 +156,8 @@ public sealed class JwtTokenService : IJwtTokenService
         var now = _clock.GetUtcNow().UtcDateTime;
         var claims = new List<Claim>
         {
-            new("sub", id.ToString("D")), new(TokenClaims.ActorType, actorType),
+            new("sub", id.ToString("D")),
+            new(TokenClaims.ActorType, actorType),
             new("jti", Guid.NewGuid().ToString("N"))
         };
 
@@ -129,8 +168,12 @@ public sealed class JwtTokenService : IJwtTokenService
 
         var descriptor = new SecurityTokenDescriptor
         {
-            Issuer = _options.Issuer, Audience = _options.Audience, Subject = new ClaimsIdentity(claims),
-            IssuedAt = now, NotBefore = now, Expires = now.AddMinutes(15),
+            Issuer = _options.Issuer,
+            Audience = _options.Audience,
+            Subject = new ClaimsIdentity(claims),
+            IssuedAt = now,
+            NotBefore = now,
+            Expires = now.AddMinutes(15),
             SigningCredentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256)
         };
 
