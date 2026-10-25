@@ -97,6 +97,12 @@ Do not over-DRY.
 
 Do not create abstractions only to remove tiny harmless duplication.
 
+## Strict C# Code Formatting Rules
+
+- **Method Signatures:** Keep method signatures and parameters on a single line unless the line length exceeds 120 characters. Do not wrap parameters onto multiple lines unnecessarily.
+- **Mandatory Braces:** Always use curly braces `{ }` for all `if`, `else`, `foreach`, and `while` statements, even if they contain only a single line of code. Never use inline execution (e.g., `if (condition) throw new Exception();` is strictly forbidden).
+- **Vertical Whitespace:** Add blank empty lines to separate logical blocks of code. Always leave a blank line before and after validation checks, and separate variable initialization from execution logic to let the code breathe.
+
 ---
 
 # 4. Database Rules

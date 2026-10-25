@@ -80,6 +80,7 @@ public static class DependencyInjection
         services.AddScoped<IFileStorageService, FileStorageService>();
         services.AddScoped<ICacheService, DistributedCacheService>();
         services.AddScoped<AuthenticationCookies>();
+        services.AddScoped<IAuthenticationSession, AuthenticationSession>();
         services.AddAntiforgery(o =>
         {
             o.HeaderName = "X-CSRF-TOKEN";

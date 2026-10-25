@@ -112,16 +112,22 @@ public sealed class ConstraintTests(SqlServerFixture fixture)
         Assert.Equal(2, await context.Customers.AsNoTracking().CountAsync());
     }
 
-    [SqlServerFact]
-    public async Task Only_active_terms_versions_are_unique()
+    [SqlServerTheory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Terms_version_numbers_are_unique_regardless_of_active_state(bool active)
     {
         await using var database = await fixture.CreateDatabaseAsync();
         await using var context = database.CreateContext();
         await TestGraph.SeedAsync(context, reservations: false);
-        var inactive = new TermsAndConditions { Title = "inactive", Content = "terms", VersionNumber = 1, EffectiveDate = DateTimeOffset.UtcNow, IsActive = false };
-        context.TermsAndConditions.Add(inactive);
-        await context.SaveChangesAsync();
-        inactive.IsActive = true;
+        var duplicate = new TermsAndConditions
+        {
+            Title = "duplicate", Content = "terms", VersionNumber = 1,
+            EffectiveDate = DateTimeOffset.UtcNow, IsActive = active
+        };
+
+        context.TermsAndConditions.Add(duplicate);
+
         var error = await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync());
         Assert.IsType<SqlException>(error.InnerException);
     }
