@@ -147,8 +147,14 @@ public static class DependencyInjection
 
     private static bool ValidJwt(JwtOptions options)
     {
-        try { _ = JwtTokenService.SigningKey(options); return true; }
-        catch (InvalidOperationException) { return false; }
+        try
+        {
+            _ = JwtTokenService.SigningKey(options); return true;
+        }
+        catch (InvalidOperationException)
+        {
+            return false;
+        }
     }
 
     private static bool ValidCookies(AppCookieOptions options)

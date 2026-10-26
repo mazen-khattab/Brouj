@@ -1,0 +1,11 @@
+using Brouj.Application.Features.TimePlans.DTOs;
+
+namespace Brouj.API.Requests;
+
+/// <summary>Explicit HTTP body; route identifiers and access requirements are bound separately.</summary>
+public sealed class CreateTimePlanRequest
+{
+    public TimePlanInput Input { get; init; } = new();
+
+    public IReadOnlyList<StageDraftInput> Stages { get; init; } = [];
+}
