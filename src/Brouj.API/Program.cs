@@ -4,12 +4,15 @@ using Brouj.API.Configuration;
 using Brouj.API.Extensions;
 using Brouj.API.Middleware;
 using Microsoft.Extensions.Options;
+using Brouj.Application.Abstractions.Persistence;
+using Brouj.Application.Abstractions.Authentication;
+using Brouj.Infrastructure.Seeder;
 
 namespace Brouj.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,25 @@ namespace Brouj.API
             builder.Services.AddApiServices(builder.Configuration);
 
             var app = builder.Build();
+
+            #region DataSeeding
+            try
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var DbContext = scope.ServiceProvider.GetRequiredService<IApplicationDbContext>();
+                    var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
+                    var httpContextAccessor = scope.ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+
+                    await UsersSeeding.SeedingAsync(DbContext, passwordHasher, httpContextAccessor);
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = app.Services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An Error Occurs When Applying The Migrations");
+            }
+            #endregion
 
             // Forward only scheme/client IP from explicitly configured proxies, before HTTPS or rate limiting.
             app.UseForwardedHeaders();
@@ -61,7 +83,12 @@ namespace Brouj.API
             // CSRF validation needs the authenticated identity and must run before authorization.
             // Keep these calls adjacent so unsafe requests cannot bypass cookie protection.
             app.UseAuthentication();
-            app.UseBroujCookieProtection();
+
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseBroujCookieProtection();
+            }
+
             app.UseAuthorization();
 
             app.MapControllers();
