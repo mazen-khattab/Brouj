@@ -1,6 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
-using System.Security.Cryptography;
+using Brouj.API.IntegrationTests.Support;
 using Brouj.Application.Abstractions.Authentication;
 using Brouj.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -40,7 +40,10 @@ public sealed class AuthenticationPipelineTests(ApiFactory factory) : IClassFixt
     {
         using var client = factory.CreateHttpsClient();
         using var request = new HttpRequestMessage(HttpMethod.Post, "/__tests/pipeline/identity");
-        if (authenticated) request.Headers.Add("Cookie", CustomerCredential().Cookie);
+        if (authenticated)
+        {
+            request.Headers.Add("Cookie", CustomerCredential().Cookie);
+        }
 
         using var response = await client.SendAsync(request);
 
@@ -115,18 +118,7 @@ public sealed class ApiFactory : WebApplicationFactory<Program>
     {
         // Program reads its connection string before Build. Host configuration reaches the entry
         // point early enough for that read; late web-host configuration would miss it.
-        builder.ConfigureHostConfiguration(configuration => configuration.AddInMemoryCollection(
-            new Dictionary<string, string?>
-            {
-                [HostDefaults.EnvironmentKey] = Environments.Production,
-                // No test endpoint queries SQL; this supplies the existing persistence registration only.
-                ["ConnectionStrings:DefaultConnection"] = "Server=localhost;Database=BroujApiPipelineTests;Integrated Security=True;TrustServerCertificate=True;",
-                ["Jwt:Issuer"] = "brouj-pipeline-tests",
-                ["Jwt:Audience"] = "brouj-pipeline-test-client",
-                ["Jwt:SigningKey"] = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32)),
-                ["FileStorage:RootPath"] = Path.Combine(Path.GetTempPath(), "BroujApiPipelineTests", Guid.NewGuid().ToString("N")),
-                ["Caching:Provider"] = "Memory"
-            }));
+        builder.ConfigureHostConfiguration(configuration => configuration.AddInMemoryCollection(ApiTestConfiguration.Create()));
         return base.CreateHost(builder);
     }
 
