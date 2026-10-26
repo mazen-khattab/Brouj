@@ -1,6 +1,6 @@
 using Brouj.Application.Common.Errors;
-using Brouj.Application.Features.Projects;
-using Brouj.Application.Features.Reservations;
+using Brouj.Application.Features.Projects.Errors;
+using Brouj.Application.Features.Reservations.Errors;
 
 namespace Brouj.Application.UnitTests.Common;
 

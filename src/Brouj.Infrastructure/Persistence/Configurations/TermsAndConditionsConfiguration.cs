@@ -25,7 +25,6 @@ public sealed class TermsAndConditionsConfiguration : IEntityTypeConfiguration<T
 
         builder.HasIndex(entity => entity.VersionNumber)
             .IsUnique()
-            .HasDatabaseName("UQ_TermsAndConditions_VersionNumber")
-            .HasFilter("[IsActive] = 1");
+            .HasDatabaseName("UQ_TermsAndConditions_VersionNumber");
     }
 }

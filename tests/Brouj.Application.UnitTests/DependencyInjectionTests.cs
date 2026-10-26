@@ -21,7 +21,10 @@ public sealed class DependencyInjectionTests
         Assert.Equal(
             [
                 typeof(LoggingBehavior<,>),
+                typeof(FeatureFailureBehavior<,>),
+                typeof(AuthorizationBehavior<,>),
                 typeof(ValidationBehavior<,>),
+                typeof(CommittedEffectsBehavior<,>),
                 typeof(TransactionBehavior<,>)
             ],
             behaviorImplementations);
