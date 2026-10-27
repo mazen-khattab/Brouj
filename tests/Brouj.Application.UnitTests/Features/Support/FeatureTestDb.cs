@@ -73,6 +73,14 @@ internal sealed class FeatureTestDb : IApplicationDbContext
 
     public CancellationToken LastCancellationToken { get; private set; }
 
+    // Decision tests do not emulate a distributed SQL lock; real locking is covered by Testcontainers.
+    public Task LockUnitForOrderAsync(Guid unitId, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        return Task.CompletedTask;
+    }
+
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();

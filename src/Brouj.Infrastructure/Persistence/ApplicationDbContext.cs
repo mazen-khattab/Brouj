@@ -48,6 +48,22 @@ public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<UserRefreshToken> UserRefreshTokens => Set<UserRefreshToken>();
 
+    public async Task LockUnitForOrderAsync(Guid unitId, CancellationToken cancellationToken)
+    {
+
+        if (Database.CurrentTransaction is null)
+        {
+            throw new InvalidOperationException("Order eligibility requires an active database transaction.");
+        }
+
+        // Every order creator and initiative completion locks the same stable parent row first.
+        // UPDLOCK serializes contenders; HOLDLOCK retains protection until commit or rollback.
+        // Project only the key, and parameterize the value rather than interpolating SQL text.
+        await BaseUnits.FromSqlInterpolated(
+                $"SELECT * FROM [BaseUnits] WITH (UPDLOCK, HOLDLOCK) WHERE [Id] = {unitId}")
+            .AsNoTracking().Select(unit => unit.Id).SingleOrDefaultAsync(cancellationToken);
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.AddInterceptors(_auditableInterceptor, _activityLogInterceptor);

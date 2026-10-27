@@ -4,7 +4,10 @@ namespace Brouj.Application.Features.Reservations.Errors;
 
 public static class ReservationErrors
 {
-    public static Error Conflict(string message) => Error.Conflict(FeatureErrorCode.ReservationConflict, message);
+    public static Error Conflict(string message) 
+        => Error.Conflict(
+            FeatureErrorCode.ReservationConflict, 
+            message);
 
     public static readonly Error NotFound =
         Error.NotFound(

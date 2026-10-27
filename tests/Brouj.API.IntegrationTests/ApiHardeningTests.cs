@@ -263,6 +263,8 @@ public sealed class ApiHardeningTests
     {
         using var factory = new Part8ApiFactory(false);
         using var client = factory.CreateHttpsClient();
+        // Count request writes separately from the host's startup seeding save.
+        var initialSaveCount = factory.Database.SaveCount;
         var id = Guid.NewGuid();
         factory.Database.BaseProjects.Add(new Brouj.Domain.Entities.BaseProject { Id = id });
         using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/v1/admin/projects/{id}/images")
@@ -274,7 +276,7 @@ public sealed class ApiHardeningTests
         using var response = await client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        Assert.Equal(0, factory.Database.SaveCount);
+        Assert.Equal(initialSaveCount, factory.Database.SaveCount);
     }
 
     [Fact]

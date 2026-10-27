@@ -18,10 +18,20 @@ public sealed class CreateOrderFromReservationCommandHandler : IRequestHandler<C
         _db = db;
     }
 
-    public async Task<Result<Guid>> Handle(
-        CreateOrderFromReservationCommand request,
-        CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(CreateOrderFromReservationCommand request, CancellationToken cancellationToken)
     {
+        var unitId = await _db.Reservations.AsNoTracking()
+            .Where(reservation => reservation.Id == request.ReservationId)
+            .Select(reservation => (Guid?)reservation.UnitId).SingleOrDefaultAsync(cancellationToken);
+
+        if (unitId is null)
+        {
+            return Result<Guid>.Failure(OrderErrors.Conflict("The selected reservation does not exist."));
+        }
+
+        // Read mutable reservation/order state only after obtaining the cross-instance unit lock.
+        await _db.LockUnitForOrderAsync(unitId.Value, cancellationToken);
+
         var reservation = await _db.Reservations.SingleOrDefaultAsync(
             reservation => reservation.Id == request.ReservationId, cancellationToken);
 
@@ -44,7 +54,11 @@ public sealed class CreateOrderFromReservationCommandHandler : IRequestHandler<C
             .Select(unit => new { unit.Size, unit.MeterPrice, unit.Project.ProjectType })
             .SingleAsync(cancellationToken);
 
-        if (await _db.Orders.AsNoTracking().AnyAsync(order => order.Reservation.UnitId == reservation.UnitId && order.Status != OrderStatus.Pending, cancellationToken))
+        // Regular units permit one order of any status. Initiative units can have multiple Pending orders.
+        var isRegular = unit.ProjectType == ProjectType.Regular;
+
+        if (await _db.Orders.AsNoTracking().AnyAsync(order => order.Reservation.UnitId == reservation.UnitId &&
+            (isRegular || order.Status != OrderStatus.Pending), cancellationToken))
         {
             return Result<Guid>.Failure(OrderErrors.Conflict("The unit is unavailable."));
         }

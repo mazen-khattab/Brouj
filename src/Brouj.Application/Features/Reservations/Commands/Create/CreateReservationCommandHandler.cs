@@ -32,14 +32,24 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
             return Result<Guid>.Failure(ReservationErrors.Conflict("The selected unit does not exist."));
         }
 
-        if (await _db.Reservations.AsNoTracking().AnyAsync(reservation => reservation.CustomerId == _currentUser.CustomerId!.Value && reservation.UnitId == unit.Id && reservation.Status == ReservationStatus.Processing, cancellationToken))
+        var hasProcessingReservation = await _db.Reservations
+            .AsNoTracking()
+            .AnyAsync(reservation => 
+                reservation.CustomerId == _currentUser.CustomerId!.Value && 
+                reservation.UnitId == unit.Id && 
+                reservation.Status == ReservationStatus.Processing, cancellationToken);
+
+        if (hasProcessingReservation)
         {
             return Result<Guid>.Failure(ReservationErrors.AlreadyActive);
         }
 
         // The approved availability rule applies to all units: every non-Pending order blocks a new reservation.
+        var isUnitSoldOut = await _db.Orders
+            .AsNoTracking()
+            .AnyAsync(order => order.Reservation.UnitId == unit.Id && order.Status != OrderStatus.Pending, cancellationToken);
 
-        if (await _db.Orders.AsNoTracking().AnyAsync(order => order.Reservation.UnitId == unit.Id && order.Status != OrderStatus.Pending, cancellationToken))
+        if (isUnitSoldOut)
         {
             return Result<Guid>.Failure(ReservationErrors.Conflict("The unit is unavailable."));
         }

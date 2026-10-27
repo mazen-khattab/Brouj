@@ -19,16 +19,26 @@ public sealed class ApplicationHttpTests
     {
         using var factory = new Part8ApiFactory(false);
         using var client = factory.CreateHttpsClient();
+        // Host startup seeding saves independently of the HTTP operation under test.
+        var initialSaveCount = factory.Database.SaveCount;
         var unit = new BaseUnit { Id = Guid.NewGuid(), Number = "A1", Project = new BaseProject { Name = "Project" } };
         var own = new Reservation
         {
-            Id = Guid.NewGuid(), Unit = unit, UnitId = unit.Id, CustomerId = factory.CustomerId,
-            Status = ReservationStatus.Processing, Number = "OWN"
+            Id = Guid.NewGuid(),
+            Unit = unit,
+            UnitId = unit.Id,
+            CustomerId = factory.CustomerId,
+            Status = ReservationStatus.Processing,
+            Number = "OWN"
         };
         var foreign = new Reservation
         {
-            Id = Guid.NewGuid(), Unit = unit, UnitId = unit.Id, CustomerId = factory.OtherCustomerId,
-            Status = ReservationStatus.Processing, Number = "FOREIGN"
+            Id = Guid.NewGuid(),
+            Unit = unit,
+            UnitId = unit.Id,
+            CustomerId = factory.OtherCustomerId,
+            Status = ReservationStatus.Processing,
+            Number = "FOREIGN"
         };
         factory.Database.Reservations.AddRange(own, foreign);
         factory.Database.Orders.AddRange(
@@ -44,7 +54,7 @@ public sealed class ApplicationHttpTests
         using var deniedWrite = await client.SendAsync(cancel);
         Assert.Equal(HttpStatusCode.NotFound, deniedWrite.StatusCode);
         Assert.Equal(ReservationStatus.Processing, foreign.Status);
-        Assert.Equal(0, factory.Database.SaveCount);
+        Assert.Equal(initialSaveCount, factory.Database.SaveCount);
 
         foreach (var resource in new[] { "reservations", "orders" })
         {
@@ -64,9 +74,12 @@ public sealed class ApplicationHttpTests
     {
         using var factory = new Part8ApiFactory(false);
         using var client = factory.CreateHttpsClient();
+        var initialSaveCount = factory.Database.SaveCount;
         var reservation = new Reservation
         {
-            Id = Guid.NewGuid(), CustomerId = factory.CustomerId, Status = ReservationStatus.Cancelled
+            Id = Guid.NewGuid(),
+            CustomerId = factory.CustomerId,
+            Status = ReservationStatus.Cancelled
         };
         factory.Database.Reservations.Add(reservation);
         using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/v1/reservations/{reservation.Id}/cancel");
@@ -75,7 +88,7 @@ public sealed class ApplicationHttpTests
         using var response = await client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
-        Assert.Equal(0, factory.Database.SaveCount);
+        Assert.Equal(initialSaveCount, factory.Database.SaveCount);
     }
 
     [Theory]

@@ -29,6 +29,8 @@ public static class DependencyInjection
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
 
+        // Persistence can also be resolved outside an ASP.NET host (workers and integration tests).
+        services.AddLogging();
         services.TryAddSingleton(TimeProvider.System);
         services.AddHttpContextAccessor();
         services.TryAddScoped<ICurrentUser, CurrentUser>();
@@ -85,9 +87,9 @@ public static class DependencyInjection
         {
             o.HeaderName = "X-CSRF-TOKEN";
             o.Cookie.Name = "__Host-brouj-csrf";
-            o.Cookie.HttpOnly = true; 
+            o.Cookie.HttpOnly = true;
             o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            o.Cookie.SameSite = SameSiteMode.Strict; 
+            o.Cookie.SameSite = SameSiteMode.Strict;
             o.Cookie.Path = "/";
         });
         services.AddOptions<AntiforgeryOptions>().Configure<IOptions<AppCookieOptions>>((csrf, cookies) =>
