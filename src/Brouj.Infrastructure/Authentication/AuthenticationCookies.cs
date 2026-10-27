@@ -36,8 +36,7 @@ public sealed class AuthenticationCookies(IOptions<AppCookieOptions> options, IA
     public string GetCsrfToken(HttpContext context)
     {
         context.Response.Headers.CacheControl = "no-store";
-        return antiforgery.GetAndStoreTokens(context).RequestToken
-            ?? throw new InvalidOperationException("Antiforgery token generation failed.");
+        return antiforgery.GetAndStoreTokens(context).RequestToken ?? throw new InvalidOperationException("Antiforgery token generation failed.");
     }
 
     internal static CookieOptions ValidatedOptions(AppCookieOptions options)
