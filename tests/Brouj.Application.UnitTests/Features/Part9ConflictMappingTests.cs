@@ -6,6 +6,7 @@ using Brouj.Application.Features.Orders.Commands.CompleteInitiative;
 using Brouj.Application.Features.Orders.Commands.CreateFromReservation;
 using Brouj.Application.Features.Projects.Commands.Create;
 using Brouj.Application.Features.Reservations.Commands.Create;
+using Brouj.Application.Features.Reservations.Commands.Cancel;
 using Brouj.Application.Features.TimePlans.Commands.AddStageFromTemplate;
 using Brouj.Application.Features.TimePlans.Commands.Create;
 using Brouj.Application.Features.TimePlans.Commands.Delete;
@@ -19,6 +20,7 @@ public sealed class Part9ConflictMappingTests
     public static TheoryData<object, FeatureErrorCode> Commands => new()
     {
         { new CreateReservationCommand(), FeatureErrorCode.ReservationConflict },
+        { new CancelReservationCommand(), FeatureErrorCode.ReservationConflict },
         { new CreateOrderFromReservationCommand(), FeatureErrorCode.OrderConflict },
         { new CompleteInitiativeOrderCommand(), FeatureErrorCode.OrderConflict },
         { new CreateProjectCommand(), FeatureErrorCode.ProjectConflict },

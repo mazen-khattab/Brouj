@@ -10,6 +10,8 @@ internal static class ApiTestConfiguration
         var values = new Dictionary<string, string?>
         {
             [HostDefaults.EnvironmentKey] = Environments.Production,
+            // Never let local developer user-secrets opt the test host into database provisioning.
+            ["InitialAdmin:Enabled"] = "false",
             ["ConnectionStrings:DefaultConnection"] =
                 "Server=localhost;Database=UnusedPart8Tests;Integrated Security=True;TrustServerCertificate=True;",
             ["Jwt:Issuer"] = "brouj-api-tests",

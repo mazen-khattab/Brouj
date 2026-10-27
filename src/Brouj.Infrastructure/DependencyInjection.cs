@@ -8,6 +8,7 @@ using Brouj.Infrastructure.Caching;
 using Brouj.Infrastructure.Storage;
 using Brouj.Infrastructure.Interceptors;
 using Brouj.Infrastructure.Persistence;
+using Brouj.Infrastructure.Seeder;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
@@ -64,6 +65,10 @@ public static class DependencyInjection
     /// for development; External preserves a host-registered IDistributedCache such as Redis.</remarks>
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddOptions<InitialAdminOptions>().Bind(configuration.GetSection(InitialAdminOptions.SectionName))
+            .Validate(InitialAdminOptions.IsValid, "Enabled InitialAdmin settings are incomplete or invalid.")
+            .ValidateOnStart();
+        services.AddScoped<UsersSeeding>();
         services.AddOptions<JwtOptions>().Bind(configuration.GetSection("Jwt"))
             .Validate(o => ValidJwt(o), "Invalid JWT signing configuration.").ValidateOnStart();
         services.AddOptions<FileStorageOptions>().Bind(configuration.GetSection("FileStorage"));

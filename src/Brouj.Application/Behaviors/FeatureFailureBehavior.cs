@@ -7,6 +7,7 @@ using Brouj.Application.Features.Orders.Errors;
 using Brouj.Application.Features.Projects.Commands.Create;
 using Brouj.Application.Features.Projects.Errors;
 using Brouj.Application.Features.Reservations.Commands.Create;
+using Brouj.Application.Features.Reservations.Commands.Cancel;
 using Brouj.Application.Features.Reservations.Errors;
 using Brouj.Application.Features.TimePlans.Commands.AddStageFromTemplate;
 using Brouj.Application.Features.TimePlans.Commands.Create;
@@ -44,7 +45,8 @@ public sealed class FeatureFailureBehavior<TRequest, TResponse> : IPipelineBehav
                 CreateReservationCommand when exception.Conflict == PersistenceConflict.ActiveReservation =>
                     ReservationErrors.AlreadyActive,
 
-                CreateReservationCommand when exception.Conflict == PersistenceConflict.ConcurrentWrite =>
+                CreateReservationCommand or CancelReservationCommand
+                    when exception.Conflict == PersistenceConflict.ConcurrentWrite =>
                     ReservationErrors.Conflict("The reservation changed concurrently. Please try again."),
 
                 CreateOrderFromReservationCommand when exception.Conflict == PersistenceConflict.ReservationOrder =>
