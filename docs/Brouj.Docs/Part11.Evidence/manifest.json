@@ -1,0 +1,202 @@
+[
+  {
+    "File": "environment.json",
+    "Bytes": 1873,
+    "Sha256": "e998502f09f6a3c9efda3ef11f236cbec87c75a576c546df7fa1f07029847009"
+  },
+  {
+    "File": "completion.json",
+    "Bytes": 205,
+    "Sha256": "725b78a4c9aab6c20ff7888e417cba0a119ce71b50c109f186377e3b718c98a8"
+  },
+  {
+    "File": "phases.json",
+    "Bytes": 115176,
+    "Sha256": "5dba01353a0e2b72cf13da146227703de6d88d6b51af4b472f809461a8737636"
+  },
+  {
+    "File": "api-resources.jsonl",
+    "Bytes": 391016,
+    "Sha256": "56b8e03d61239f13d7ed3eac65d45abd2cbbef28dc7489f006aac0d196dacb5f"
+  },
+  {
+    "File": "generator-sql-resources.jsonl",
+    "Bytes": 623038,
+    "Sha256": "eba1b61c19ddd8cc877c766953a011747cdb722f2e3594c56315948c2a7ff60b"
+  },
+  {
+    "File": "soak-before.json",
+    "Bytes": 337,
+    "Sha256": "a7090f8d96c9512b1f5eaf08f87683b41f7aceba15b51a7daa617adb2732f8ed"
+  },
+  {
+    "File": "soak-after.json",
+    "Bytes": 337,
+    "Sha256": "18846883db8fb63ed60e3287d70eb344170b442b493dce45d24b281a68f92e71"
+  },
+  {
+    "File": "summary.json",
+    "Bytes": 112408,
+    "Sha256": "21df2c7b224808a945825d320fc0ce19f01ff9b9acf360a1465b9d521be617d4"
+  },
+  {
+    "File": "phases.csv",
+    "Bytes": 5967,
+    "Sha256": "712299f66191a820c99b9e25f6158e589257d4a27c121962bbf8a914eb5b139d"
+  },
+  {
+    "File": "plans/hot-01.sqlplan",
+    "Bytes": 3679,
+    "Sha256": "f2e343036e30e2e1bb03418960f52d7bad69ee7c44d03223cb1a74462e15b0d3"
+  },
+  {
+    "File": "plans/hot-02.sqlplan",
+    "Bytes": 13501,
+    "Sha256": "cb7e28eb79a5e1894dd36e8a91a2a75ed2e899f102bd7d6f59e22c7b3d40107e"
+  },
+  {
+    "File": "plans/hot-03.sqlplan",
+    "Bytes": 27810,
+    "Sha256": "ddd763e35a8a153e6a7b55ae74bace5947a347a1f78e44b93940fcfbdf616fae"
+  },
+  {
+    "File": "plans/hot-04.sqlplan",
+    "Bytes": 4813,
+    "Sha256": "fa02004542e9e55a7df51a81c7e60c39063e017ddc6fb1ad40e03f1d99bfb623"
+  },
+  {
+    "File": "plans/hot-05.sqlplan",
+    "Bytes": 28155,
+    "Sha256": "7d044026c248ec9bda35e4bb4910110ac2db55294d49b7160e53f8ddac9c02c0"
+  },
+  {
+    "File": "plans/hot-06.sqlplan",
+    "Bytes": 8238,
+    "Sha256": "d1594a72e2a14c32a58bfed6ee18bd103c2651044c3b67af0ebaeebfd497cd69"
+  },
+  {
+    "File": "plans/hot-07.sqlplan",
+    "Bytes": 3688,
+    "Sha256": "0af8d002af4de9b884a737cda61f7e85762110422fe5379380d039125606f2e5"
+  },
+  {
+    "File": "plans/hot-08.sqlplan",
+    "Bytes": 10337,
+    "Sha256": "a32f6a7256398b08d23e2b12b5bf8ff02a4a9e427185473db983eb8a4068c6db"
+  },
+  {
+    "File": "plans/hot-09.sqlplan",
+    "Bytes": 13398,
+    "Sha256": "698aa67d6f6de2fa7747ebaf769cecba8294e4b82232e697d9bb0a26d1264d9f"
+  },
+  {
+    "File": "plans/hot-10.sqlplan",
+    "Bytes": 8620,
+    "Sha256": "81fbebb9c77959ac2087280ab381c08cfe273e4e330d52092c41cd0485598bd7"
+  },
+  {
+    "File": "plans/hot-11.sqlplan",
+    "Bytes": 8428,
+    "Sha256": "5a2928911b55f9edbdf9e214e60910e774a291fa8c6a2603ba820616f6144619"
+  },
+  {
+    "File": "plans/hot-12.sqlplan",
+    "Bytes": 23869,
+    "Sha256": "6c12f1c6a459f3c17164db0dc06d77393ca67e2cede474fd0242b87644110b0c"
+  },
+  {
+    "File": "plans/hot-13.sqlplan",
+    "Bytes": 28362,
+    "Sha256": "6dbd495e434faae3bd74bc93eedd8b771c09ecf83009311fd7cbaaa04a901621"
+  },
+  {
+    "File": "plans/hot-14.sqlplan",
+    "Bytes": 4748,
+    "Sha256": "9b1eb1193cdbc50408a796d90379e1e2f3ddc68096c1b966676f90e51da0aa10"
+  },
+  {
+    "File": "plans/hot-15.sqlplan",
+    "Bytes": 3655,
+    "Sha256": "ab123efe1b8e1f3a4dd70c730caf1d019262fb27d7b02148d23275dc5397d837"
+  },
+  {
+    "File": "plans/hot-16.sqlplan",
+    "Bytes": 7192,
+    "Sha256": "84386ae75b73d4e848371c82e980bad7c2d4a002223f51cbb509562af4030ba8"
+  },
+  {
+    "File": "plans/hot-17.sqlplan",
+    "Bytes": 14024,
+    "Sha256": "db5aa06b05c58b6a5a5f7860a587d17cbb590e1640da574af98ca456e3d31801"
+  },
+  {
+    "File": "plans/hot-18.sqlplan",
+    "Bytes": 6997,
+    "Sha256": "da34b0efaff7ae3d82840ec15dee50991eae40b1bc9d38c9ab3004828d80bd2c"
+  },
+  {
+    "File": "plans/hot-19.sqlplan",
+    "Bytes": 6371,
+    "Sha256": "f52a03378a7f2a0cf5226add0e3724c9d4bf387af58d31e148a2fb1af34d6095"
+  },
+  {
+    "File": "plans/hot-20.sqlplan",
+    "Bytes": 10240,
+    "Sha256": "7e113c7d156a32d7dea5072b8d2079a6f247a3d38b9da12542c5c6203727d211"
+  },
+  {
+    "File": "plans/hot-21.sqlplan",
+    "Bytes": 4709,
+    "Sha256": "2d3a0bcf312ed8543480c6e5b096442dd5b8a7f70affbd8b14bfeaf73c3ef738"
+  },
+  {
+    "File": "plans/hot-22.sqlplan",
+    "Bytes": 3646,
+    "Sha256": "90cdf46436c95e1c003aee224ce76d9c7dbe44b79b93b33da7b9c43a6b7d8ce4"
+  },
+  {
+    "File": "plans/hot-23.sqlplan",
+    "Bytes": 26824,
+    "Sha256": "89e89d0c8cd6fbacd501626e2f32f83a03ad4b41e76e3aeec4c9e7813c3fa96d"
+  },
+  {
+    "File": "plans/hot-24.sqlplan",
+    "Bytes": 7612,
+    "Sha256": "11630e78e46569dcc1b2b050aadbfc1479a94a03ef7ed39c6b67a2fc094a8d89"
+  },
+  {
+    "File": "plans/hot-25.sqlplan",
+    "Bytes": 9252,
+    "Sha256": "4208d6a4baedc50d030ae623a957eeb9ce2d751007247a03a814ce69dd2dd005"
+  },
+  {
+    "File": "plans/hot-26.sqlplan",
+    "Bytes": 4969,
+    "Sha256": "2425d95f152fd18205aa0cc5e03ccb4c4de7fe5eabdc4c713fb7a60dcf435125"
+  },
+  {
+    "File": "plans/hot-27.sqlplan",
+    "Bytes": 7515,
+    "Sha256": "48e529328d4c3808504f51eb859ea7b9906bd65db6b6856cf2745e249b2f3437"
+  },
+  {
+    "File": "plans/hot-28.sqlplan",
+    "Bytes": 22799,
+    "Sha256": "0cdba5dbf0b832d4887bed98beb25611d811379f4fc3e45d1723279c1968fb67"
+  },
+  {
+    "File": "plans/hot-29.sqlplan",
+    "Bytes": 47905,
+    "Sha256": "e57585d15476d99c039ec6ca106544a1ecee315e729538930e11961ccdfa747d"
+  },
+  {
+    "File": "plans/hot-30.sqlplan",
+    "Bytes": 96528,
+    "Sha256": "373b209505fac1dd61602beb7438450a24b0003acab2c1fac53c8f1f220597a9"
+  },
+  {
+    "File": "plans/inventory.json",
+    "Bytes": 20696,
+    "Sha256": "8b2a0e6bf207e9160d618f58bc279f49395950a49f51224583a21a14daa76620"
+  }
+]

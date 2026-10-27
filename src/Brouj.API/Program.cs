@@ -24,6 +24,12 @@ namespace Brouj.API
             builder.Services.AddBroujCookieAuthentication();
             builder.Services.AddApiServices(builder.Configuration);
 
+            // Disabled by default. The benchmark runner opts in to sanitized resource measurements.
+            if (builder.Configuration.GetValue<bool>("PerformanceDiagnostics:Enabled"))
+            {
+                builder.Services.AddHostedService<Diagnostics.PerformanceDiagnosticsService>();
+            }
+
             var app = builder.Build();
 
             // Provisioning is opt-in through private configuration and finishes before accepting traffic.

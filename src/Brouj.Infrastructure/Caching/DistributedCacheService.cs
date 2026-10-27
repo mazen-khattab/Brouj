@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Diagnostics.Metrics;
 using Brouj.Application.Abstractions.Authentication;
 using Brouj.Application.Abstractions.Caching;
 using Brouj.Application.Common.Settings;
@@ -17,24 +18,43 @@ public sealed class DistributedCacheService(IDistributedCache cache, ICurrentUse
 {
     private const int MaximumPayloadBytes = 1024 * 1024;
     private static readonly JsonSerializerOptions Json = new() { MaxDepth = 16 };
+    private static readonly Meter Metrics = new("Brouj.Cache");
+    private static readonly Counter<long> Hits = Metrics.CreateCounter<long>("brouj.cache.hits");
+    private static readonly Counter<long> Misses = Metrics.CreateCounter<long>("brouj.cache.misses");
 
     /// <inheritdoc />
     public async Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken)
     {
         var scopedKey = ScopedKey(key);
         var bytes = await cache.GetAsync(scopedKey, cancellationToken);
-        if (bytes is null) return default;
-        if (bytes.Length > MaximumPayloadBytes) { await cache.RemoveAsync(scopedKey, cancellationToken); return default; }
+        if (bytes is null)
+        {
+            Misses.Add(1);
+            return default;
+        }
+
+        if (bytes.Length > MaximumPayloadBytes)
+        {
+            await cache.RemoveAsync(scopedKey, cancellationToken);
+            Misses.Add(1);
+            return default;
+        }
+
         try
         {
             using var document = JsonDocument.Parse(bytes, new JsonDocumentOptions { MaxDepth = 16 });
             EnsureNonSensitive(document.RootElement);
-            return JsonSerializer.Deserialize<T>(bytes, Json);
+            var value = JsonSerializer.Deserialize<T>(bytes, Json);
+
+            // Counters have no cache-key/actor tags and are inert without a metrics listener.
+            Hits.Add(1);
+            return value;
         }
         catch (Exception exception) when (exception is JsonException or ArgumentException)
         {
             // Corrupt or disallowed entries are a cache miss; the authoritative source remains the database.
             await cache.RemoveAsync(scopedKey, cancellationToken);
+            Misses.Add(1);
             return default;
         }
     }

@@ -1,0 +1,55 @@
+{
+  "StartedUtc": "2026-10-27T16:52:36.12143+00:00",
+  "ApiInstances": 1,
+  "ApiPid": 32104,
+  "Os": "Microsoft Windows 10.0.26200",
+  "Framework": ".NET 10.0.12",
+  "Architecture": "X64",
+  "LogicalProcessors": 8,
+  "Cpu": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
+  "AvailableMemoryBytes": 14925369344,
+  "ServerGc": false,
+  "SqlVersion": "Microsoft SQL Server 2022 (RTM-CU27-GDR) (KB5126934) - 16.0.4305.5 (X64) \n\tOct  2 2026 17:28:11 \n\tCopyright (C) 2022 Microsoft Corporation\n\tDeveloper Edition (64-bit) on Linux (Ubuntu 22.04.5 LTS) \u003CX64\u003E",
+  "SqlImage": "mcr.microsoft.com/mssql/server:2022-latest",
+  "ContainerId": "b7a30a53c7dfdcf1f1b5c8d1aab479a1cc5c50aa074dc153bbd28b8dcc4ce362",
+  "SqlMaxPoolSize": 100,
+  "Cache": "DistributedMemoryCache; no feature handler uses it",
+  "Network": "Windows generator -\u003E loopback HTTPS Kestrel -\u003E Docker Desktop Linux SQL Server mapped TCP port",
+  "Data": {
+    "Cities": 10,
+    "Areas": 100,
+    "Projects": 1000,
+    "Units": 100000,
+    "Customers": 10000,
+    "ActiveCustomers": 128,
+    "Staff": 1,
+    "InitialReservations": 20000,
+    "ProjectImages": 1000,
+    "UnitImages": 100000,
+    "ProjectAmenities": 1000,
+    "UnitAmenities": 100000
+  },
+  "ReadWriteRatio": "95:5",
+  "PublicCustomerAdminWriteWeights": [
+    80,
+    10,
+    5,
+    5
+  ],
+  "MaximumInFlight": 256,
+  "MaximumQueued": 256,
+  "HttpTimeoutSeconds": 5,
+  "RateLimitsPerSecond": {
+    "PublicReads": 20000,
+    "Authentication": 1000,
+    "ReservationWrites": 1000,
+    "AdminWrites": 100,
+    "FileUploads": 10
+  },
+  "Acceptance": {
+    "P95Ms": 200,
+    "P99Ms": 500,
+    "UnexpectedErrorRateBelow": 0.01
+  },
+  "FixtureSessions": "Trusted service issues JWTs every 10 minutes; normal validation/current-actor checks and real CSRF bootstrap retained"
+}

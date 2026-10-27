@@ -1,0 +1,3968 @@
+{
+  "Environment": {
+    "StartedUtc": "2026-10-27T16:52:36.12143+00:00",
+    "ApiInstances": 1,
+    "ApiPid": 32104,
+    "Os": "Microsoft Windows 10.0.26200",
+    "Framework": ".NET 10.0.12",
+    "Architecture": "X64",
+    "LogicalProcessors": 8,
+    "Cpu": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
+    "AvailableMemoryBytes": 14925369344,
+    "ServerGc": false,
+    "SqlVersion": "Microsoft SQL Server 2022 (RTM-CU27-GDR) (KB5126934) - 16.0.4305.5 (X64) \n\tOct  2 2026 17:28:11 \n\tCopyright (C) 2022 Microsoft Corporation\n\tDeveloper Edition (64-bit) on Linux (Ubuntu 22.04.5 LTS) <X64>",
+    "SqlImage": "mcr.microsoft.com/mssql/server:2022-latest",
+    "ContainerId": "b7a30a53c7dfdcf1f1b5c8d1aab479a1cc5c50aa074dc153bbd28b8dcc4ce362",
+    "SqlMaxPoolSize": 100,
+    "Cache": "DistributedMemoryCache; no feature handler uses it",
+    "Network": "Windows generator -> loopback HTTPS Kestrel -> Docker Desktop Linux SQL Server mapped TCP port",
+    "Data": {
+      "Cities": 10,
+      "Areas": 100,
+      "Projects": 1000,
+      "Units": 100000,
+      "Customers": 10000,
+      "ActiveCustomers": 128,
+      "Staff": 1,
+      "InitialReservations": 20000,
+      "ProjectImages": 1000,
+      "UnitImages": 100000,
+      "ProjectAmenities": 1000,
+      "UnitAmenities": 100000
+    },
+    "ReadWriteRatio": "95:5",
+    "PublicCustomerAdminWriteWeights": [
+      80,
+      10,
+      5,
+      5
+    ],
+    "MaximumInFlight": 256,
+    "MaximumQueued": 256,
+    "HttpTimeoutSeconds": 5,
+    "RateLimitsPerSecond": {
+      "PublicReads": 20000,
+      "Authentication": 1000,
+      "ReservationWrites": 1000,
+      "AdminWrites": 100,
+      "FileUploads": 10
+    },
+    "Acceptance": {
+      "P95Ms": 200,
+      "P99Ms": 500,
+      "UnexpectedErrorRateBelow": 0.01
+    },
+    "FixtureSessions": "Trusted service issues JWTs every 10 minutes; normal validation/current-actor checks and real CSRF bootstrap retained"
+  },
+  "Completion": {
+    "CompletedUtc": "2026-10-27T18:18:53.3676704+00:00",
+    "SmokeOnly": false,
+    "StableRateSelected": 400,
+    "AllRequiredTypesExecuted": true,
+    "PhaseCount": 32,
+    "TargetProven": false,
+    "MaxStableMeasuredRps": 399.8544710992559
+  },
+  "TotalOffered": 4501250,
+  "TotalCompleted": 1471693,
+  "TotalSuccessful": 1447714,
+  "TotalUnexpected": 23979,
+  "TotalRejects": 0,
+  "TotalDropped": 3029557,
+  "CacheHits": 0,
+  "CacheMisses": 0,
+  "ApiSamples": 517,
+  "SqlGeneratorSamples": 517,
+  "MaximumApiSampleGapSeconds": 10.09,
+  "ResourceRows": [
+    {
+      "Phase": "Warmup",
+      "Samples": 3,
+      "CpuPercentMean": 10.836015894435809,
+      "CpuPercentMax": 12.938809477775132,
+      "WorkingSetMiB": {
+        "First": 186.171875,
+        "Last": 212.1953125,
+        "Maximum": 212.1953125
+      },
+      "PrivateMiB": {
+        "First": 94.5859375,
+        "Last": 102.18359375,
+        "Maximum": 102.18359375
+      },
+      "ManagedMiB": {
+        "First": 14.497726440429688,
+        "Last": 14.753730773925781,
+        "Maximum": 36.08668518066406
+      },
+      "HeapMiB": {
+        "First": 16.16320037841797,
+        "Last": 16.34014892578125,
+        "Maximum": 16.40270233154297
+      },
+      "Gen0Delta": 8,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 166.49220275878906,
+      "GcPausePercentMax": 1.77,
+      "ThreadPoolThreadsMax": 17,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 1635,
+      "DatabaseP50WindowMaxMs": 4,
+      "DatabaseP95WindowMaxMs": 53,
+      "DatabaseP99WindowMaxMs": 246,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 17,
+      "FreeConnectionsMax": 17,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 3.5478020641762886,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 10.02,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 150,
+          "Milliseconds": 99
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 56,
+          "Milliseconds": 56
+        }
+      ]
+    },
+    {
+      "Phase": "Calibration-25",
+      "Samples": 2,
+      "CpuPercentMean": 2.2663803768027475,
+      "CpuPercentMax": 2.6565535643758014,
+      "WorkingSetMiB": {
+        "First": 205.1484375,
+        "Last": 178.41796875,
+        "Maximum": 205.1484375
+      },
+      "PrivateMiB": {
+        "First": 93.1171875,
+        "Last": 66.12109375,
+        "Maximum": 93.1171875
+      },
+      "ManagedMiB": {
+        "First": 14.281143188476562,
+        "Last": 15.575599670410156,
+        "Maximum": 15.575599670410156
+      },
+      "HeapMiB": {
+        "First": 16.167098999023438,
+        "Last": 16.27112579345703,
+        "Maximum": 16.27112579345703
+      },
+      "Gen0Delta": 23,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 83.19950103759766,
+      "GcPausePercentMax": 0.56,
+      "ThreadPoolThreadsMax": 13,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 1198,
+      "DatabaseP50WindowMaxMs": 3,
+      "DatabaseP95WindowMaxMs": 5,
+      "DatabaseP99WindowMaxMs": 21,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 17,
+      "FreeConnectionsMax": 17,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 1.0375098576681285,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 14.32,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 79,
+          "Milliseconds": 1
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 13,
+          "Milliseconds": 16
+        }
+      ]
+    },
+    {
+      "Phase": "Calibration-50",
+      "Samples": 2,
+      "CpuPercentMean": 3.0095913604284057,
+      "CpuPercentMax": 3.7310501595463617,
+      "WorkingSetMiB": {
+        "First": 179.5859375,
+        "Last": 187.5234375,
+        "Maximum": 187.5234375
+      },
+      "PrivateMiB": {
+        "First": 66.74609375,
+        "Last": 74.8984375,
+        "Maximum": 74.8984375
+      },
+      "ManagedMiB": {
+        "First": 13.148605346679688,
+        "Last": 16.686126708984375,
+        "Maximum": 16.686126708984375
+      },
+      "HeapMiB": {
+        "First": 16.397613525390625,
+        "Last": 16.2579345703125,
+        "Maximum": 16.397613525390625
+      },
+      "Gen0Delta": 24,
+      "Gen1Delta": 1,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 165.2354507446289,
+      "GcPausePercentMax": 0.51,
+      "ThreadPoolThreadsMax": 9,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 2237,
+      "DatabaseP50WindowMaxMs": 2,
+      "DatabaseP95WindowMaxMs": 5,
+      "DatabaseP99WindowMaxMs": 22,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 17,
+      "FreeConnectionsMax": 17,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 1.20816927489987,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 23.38,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 110,
+          "Milliseconds": 9
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 25,
+          "Milliseconds": 48
+        }
+      ]
+    },
+    {
+      "Phase": "Calibration-100",
+      "Samples": 2,
+      "CpuPercentMean": 4.115175493925624,
+      "CpuPercentMax": 4.162835700827195,
+      "WorkingSetMiB": {
+        "First": 184.86328125,
+        "Last": 186.140625,
+        "Maximum": 186.140625
+      },
+      "PrivateMiB": {
+        "First": 70.03125,
+        "Last": 71.328125,
+        "Maximum": 71.328125
+      },
+      "ManagedMiB": {
+        "First": 15.601760864257812,
+        "Last": 17.608421325683594,
+        "Maximum": 17.608421325683594
+      },
+      "HeapMiB": {
+        "First": 18.600135803222656,
+        "Last": 16.79388427734375,
+        "Maximum": 18.600135803222656
+      },
+      "Gen0Delta": 50,
+      "Gen1Delta": 1,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 329.62723541259766,
+      "GcPausePercentMax": 0.61,
+      "ThreadPoolThreadsMax": 9,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 4500,
+      "DatabaseP50WindowMaxMs": 2,
+      "DatabaseP95WindowMaxMs": 6,
+      "DatabaseP99WindowMaxMs": 27,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 17,
+      "FreeConnectionsMax": 17,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 1.8307643638394557,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 72.61,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 319,
+          "Milliseconds": 249
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 50,
+          "Milliseconds": 99
+        }
+      ]
+    },
+    {
+      "Phase": "Calibration-200",
+      "Samples": 2,
+      "CpuPercentMean": 8.81335444150959,
+      "CpuPercentMax": 9.502433974554762,
+      "WorkingSetMiB": {
+        "First": 191.98046875,
+        "Last": 196.47265625,
+        "Maximum": 196.47265625
+      },
+      "PrivateMiB": {
+        "First": 77.2734375,
+        "Last": 81.77734375,
+        "Maximum": 81.77734375
+      },
+      "ManagedMiB": {
+        "First": 31.851089477539062,
+        "Last": 19.493873596191406,
+        "Maximum": 31.851089477539062
+      },
+      "HeapMiB": {
+        "First": 18.281654357910156,
+        "Last": 18.2515869140625,
+        "Maximum": 18.281654357910156
+      },
+      "Gen0Delta": 68,
+      "Gen1Delta": 1,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 658.8180084228516,
+      "GcPausePercentMax": 0.87,
+      "ThreadPoolThreadsMax": 10,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 8967,
+      "DatabaseP50WindowMaxMs": 3,
+      "DatabaseP95WindowMaxMs": 7,
+      "DatabaseP99WindowMaxMs": 41,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 17,
+      "FreeConnectionsMax": 17,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 2.0703574954759008,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 172.97,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 805,
+          "Milliseconds": 853
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 128,
+          "Milliseconds": 673
+        }
+      ]
+    },
+    {
+      "Phase": "Calibration-400",
+      "Samples": 2,
+      "CpuPercentMean": 16.73559443005159,
+      "CpuPercentMax": 17.332601489384324,
+      "WorkingSetMiB": {
+        "First": 197.6171875,
+        "Last": 196.29296875,
+        "Maximum": 197.6171875
+      },
+      "PrivateMiB": {
+        "First": 83.0390625,
+        "Last": 81.84765625,
+        "Maximum": 83.0390625
+      },
+      "ManagedMiB": {
+        "First": 23.462196350097656,
+        "Last": 28.23918914794922,
+        "Maximum": 28.23918914794922
+      },
+      "HeapMiB": {
+        "First": 22.992698669433594,
+        "Last": 21.372955322265625,
+        "Maximum": 22.992698669433594
+      },
+      "Gen0Delta": 67,
+      "Gen1Delta": 36,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 1317.569839477539,
+      "GcPausePercentMax": 1.17,
+      "ThreadPoolThreadsMax": 10,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 17880,
+      "DatabaseP50WindowMaxMs": 4,
+      "DatabaseP95WindowMaxMs": 16,
+      "DatabaseP99WindowMaxMs": 70,
+      "ActiveConnectionsMax": 10,
+      "PooledConnectionsMax": 26,
+      "FreeConnectionsMax": 20,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 3.8213821241411963,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 211.56,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 2262,
+          "Milliseconds": 5413
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 237,
+          "Milliseconds": 1440
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-Cities",
+      "Samples": 3,
+      "CpuPercentMean": 4.079488948551081,
+      "CpuPercentMax": 6.922597716854996,
+      "WorkingSetMiB": {
+        "First": 194.140625,
+        "Last": 181.75,
+        "Maximum": 194.140625
+      },
+      "PrivateMiB": {
+        "First": 79.42578125,
+        "Last": 66.84765625,
+        "Maximum": 79.42578125
+      },
+      "ManagedMiB": {
+        "First": 25.570640563964844,
+        "Last": 15.379592895507812,
+        "Maximum": 26.427886962890625
+      },
+      "HeapMiB": {
+        "First": 22.18854522705078,
+        "Last": 23.134658813476562,
+        "Maximum": 23.134658813476562
+      },
+      "Gen0Delta": 41,
+      "Gen1Delta": 2,
+      "Gen2Delta": 1,
+      "AllocatedMiBDelta": 136.11117553710938,
+      "GcPausePercentMax": 1.15,
+      "ThreadPoolThreadsMax": 10,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 5498,
+      "DatabaseP50WindowMaxMs": 3,
+      "DatabaseP95WindowMaxMs": 11,
+      "DatabaseP99WindowMaxMs": 61,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 2.464899965344915,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 11.4,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 2,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 0,
+          "Milliseconds": 0
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-Areas",
+      "Samples": 3,
+      "CpuPercentMean": 1.850236404552416,
+      "CpuPercentMax": 2.0517884113774927,
+      "WorkingSetMiB": {
+        "First": 184.2421875,
+        "Last": 186.60546875,
+        "Maximum": 186.60546875
+      },
+      "PrivateMiB": {
+        "First": 69.37109375,
+        "Last": 71.73046875,
+        "Maximum": 71.73046875
+      },
+      "ManagedMiB": {
+        "First": 13.757698059082031,
+        "Last": 17.9078369140625,
+        "Maximum": 17.9078369140625
+      },
+      "HeapMiB": {
+        "First": 20.675094604492188,
+        "Last": 20.741050720214844,
+        "Maximum": 20.741050720214844
+      },
+      "Gen0Delta": 53,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 0,
+      "GcPausePercentMax": 1,
+      "ThreadPoolThreadsMax": 5,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 2996,
+      "DatabaseP50WindowMaxMs": 2,
+      "DatabaseP95WindowMaxMs": 3,
+      "DatabaseP99WindowMaxMs": 3,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 0.9452396007479001,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 16.67,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 1,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 0,
+          "Milliseconds": 0
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-ProjectList",
+      "Samples": 3,
+      "CpuPercentMean": 2.110447671755837,
+      "CpuPercentMax": 2.3834792544866503,
+      "WorkingSetMiB": {
+        "First": 186.50390625,
+        "Last": 182.51171875,
+        "Maximum": 186.50390625
+      },
+      "PrivateMiB": {
+        "First": 72.234375,
+        "Last": 68.0546875,
+        "Maximum": 72.234375
+      },
+      "ManagedMiB": {
+        "First": 13.882408142089844,
+        "Last": 15.380668640136719,
+        "Maximum": 16.928955078125
+      },
+      "HeapMiB": {
+        "First": 23.24048614501953,
+        "Last": 20.62958526611328,
+        "Maximum": 24.900978088378906
+      },
+      "Gen0Delta": 68,
+      "Gen1Delta": 1,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 0,
+      "GcPausePercentMax": 0.9,
+      "ThreadPoolThreadsMax": 8,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 2998,
+      "DatabaseP50WindowMaxMs": 4,
+      "DatabaseP95WindowMaxMs": 5,
+      "DatabaseP99WindowMaxMs": 6,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 0.8789470770917308,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 21.36,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 10,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 0,
+          "Milliseconds": 0
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-ProjectDetails",
+      "Samples": 3,
+      "CpuPercentMean": 2.338110532742856,
+      "CpuPercentMax": 2.51931748591132,
+      "WorkingSetMiB": {
+        "First": 183.15234375,
+        "Last": 182.98046875,
+        "Maximum": 183.15234375
+      },
+      "PrivateMiB": {
+        "First": 68.6796875,
+        "Last": 68.4453125,
+        "Maximum": 68.6796875
+      },
+      "ManagedMiB": {
+        "First": 17.517608642578125,
+        "Last": 16.62987518310547,
+        "Maximum": 17.517608642578125
+      },
+      "HeapMiB": {
+        "First": 20.68885040283203,
+        "Last": 23.870407104492188,
+        "Maximum": 23.870407104492188
+      },
+      "Gen0Delta": 87,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 332.04137420654297,
+      "GcPausePercentMax": 0.85,
+      "ThreadPoolThreadsMax": 6,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 4343,
+      "DatabaseP50WindowMaxMs": 2,
+      "DatabaseP95WindowMaxMs": 4,
+      "DatabaseP99WindowMaxMs": 5,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 1.4523236637828003,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 15.54,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 1,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 0,
+          "Milliseconds": 0
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-UnitList",
+      "Samples": 3,
+      "CpuPercentMean": 2.0388978867395777,
+      "CpuPercentMax": 2.3472324949634777,
+      "WorkingSetMiB": {
+        "First": 186.9453125,
+        "Last": 186.9921875,
+        "Maximum": 187.2421875
+      },
+      "PrivateMiB": {
+        "First": 72.4453125,
+        "Last": 72.4609375,
+        "Maximum": 72.77734375
+      },
+      "ManagedMiB": {
+        "First": 12.437446594238281,
+        "Last": 20.663162231445312,
+        "Maximum": 20.663162231445312
+      },
+      "HeapMiB": {
+        "First": 23.50487518310547,
+        "Last": 20.768753051757812,
+        "Maximum": 23.50487518310547
+      },
+      "Gen0Delta": 55,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 372.5174255371094,
+      "GcPausePercentMax": 0.8,
+      "ThreadPoolThreadsMax": 5,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 3150,
+      "DatabaseP50WindowMaxMs": 3,
+      "DatabaseP95WindowMaxMs": 4,
+      "DatabaseP99WindowMaxMs": 4,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 1.2084444176455904,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 110.12,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 4,
+          "Milliseconds": 1
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 0,
+          "Milliseconds": 0
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-UnitDetails",
+      "Samples": 3,
+      "CpuPercentMean": 2.4435074256391682,
+      "CpuPercentMax": 2.700673769540341,
+      "WorkingSetMiB": {
+        "First": 186.3984375,
+        "Last": 190.75390625,
+        "Maximum": 190.75390625
+      },
+      "PrivateMiB": {
+        "First": 71.921875,
+        "Last": 76.13671875,
+        "Maximum": 76.13671875
+      },
+      "ManagedMiB": {
+        "First": 11.651466369628906,
+        "Last": 21.141250610351562,
+        "Maximum": 21.141250610351562
+      },
+      "HeapMiB": {
+        "First": 22.996116638183594,
+        "Last": 20.94525909423828,
+        "Maximum": 22.996116638183594
+      },
+      "Gen0Delta": 54,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 347.9717483520508,
+      "GcPausePercentMax": 0.76,
+      "ThreadPoolThreadsMax": 5,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 4341,
+      "DatabaseP50WindowMaxMs": 2,
+      "DatabaseP95WindowMaxMs": 3,
+      "DatabaseP99WindowMaxMs": 5,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 1.2297142403821,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 14.27,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 6,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 11,
+          "Milliseconds": 37
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-CurrentTerms",
+      "Samples": 3,
+      "CpuPercentMean": 1.4730655384540976,
+      "CpuPercentMax": 1.9766583506293525,
+      "WorkingSetMiB": {
+        "First": 182.046875,
+        "Last": 182.8828125,
+        "Maximum": 182.8828125
+      },
+      "PrivateMiB": {
+        "First": 66.89453125,
+        "Last": 67.81640625,
+        "Maximum": 67.81640625
+      },
+      "ManagedMiB": {
+        "First": 17.320335388183594,
+        "Last": 16.547332763671875,
+        "Maximum": 17.320335388183594
+      },
+      "HeapMiB": {
+        "First": 20.953712463378906,
+        "Last": 20.947677612304688,
+        "Maximum": 20.953712463378906
+      },
+      "Gen0Delta": 60,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 211.99617767333984,
+      "GcPausePercentMax": 0.72,
+      "ThreadPoolThreadsMax": 5,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 1814,
+      "DatabaseP50WindowMaxMs": 3,
+      "DatabaseP95WindowMaxMs": 3,
+      "DatabaseP99WindowMaxMs": 4,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 0.9007244860441126,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 11.76,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 14,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 2,
+          "Milliseconds": 14
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-CustomerReads",
+      "Samples": 3,
+      "CpuPercentMean": 2.4423844656685643,
+      "CpuPercentMax": 2.871897996314888,
+      "WorkingSetMiB": {
+        "First": 191.8984375,
+        "Last": 184.28515625,
+        "Maximum": 191.8984375
+      },
+      "PrivateMiB": {
+        "First": 76.91796875,
+        "Last": 69.15234375,
+        "Maximum": 76.91796875
+      },
+      "ManagedMiB": {
+        "First": 17.41242218017578,
+        "Last": 17.71772003173828,
+        "Maximum": 17.71772003173828
+      },
+      "HeapMiB": {
+        "First": 23.721786499023438,
+        "Last": 20.935745239257812,
+        "Maximum": 23.721786499023438
+      },
+      "Gen0Delta": 117,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 377.3692092895508,
+      "GcPausePercentMax": 0.69,
+      "ThreadPoolThreadsMax": 6,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 4177,
+      "DatabaseP50WindowMaxMs": 2,
+      "DatabaseP95WindowMaxMs": 3,
+      "DatabaseP99WindowMaxMs": 4,
+      "ActiveConnectionsMax": 0,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 2.202571733187049,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 24.17,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 2,
+          "Milliseconds": 14
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 46,
+          "Milliseconds": 7
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 0,
+          "Milliseconds": 0
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-ReservationWrites",
+      "Samples": 3,
+      "CpuPercentMean": 3.902074176662371,
+      "CpuPercentMax": 4.573209170688715,
+      "WorkingSetMiB": {
+        "First": 187.68359375,
+        "Last": 184.87109375,
+        "Maximum": 193.4609375
+      },
+      "PrivateMiB": {
+        "First": 72.63671875,
+        "Last": 69.859375,
+        "Maximum": 78.70703125
+      },
+      "ManagedMiB": {
+        "First": 16.911026000976562,
+        "Last": 16.884414672851562,
+        "Maximum": 18.491256713867188
+      },
+      "HeapMiB": {
+        "First": 20.954010009765625,
+        "Last": 20.835594177246094,
+        "Maximum": 24.407005310058594
+      },
+      "Gen0Delta": 105,
+      "Gen1Delta": 1,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 443.6559295654297,
+      "GcPausePercentMax": 0.69,
+      "ThreadPoolThreadsMax": 6,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 7173,
+      "DatabaseP50WindowMaxMs": 2,
+      "DatabaseP95WindowMaxMs": 2,
+      "DatabaseP99WindowMaxMs": 3,
+      "ActiveConnectionsMax": 1,
+      "PooledConnectionsMax": 27,
+      "FreeConnectionsMax": 27,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 0.858449423353584,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 101.61,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 4,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 9,
+          "Milliseconds": 4
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 1012,
+          "Milliseconds": 704
+        }
+      ]
+    },
+    {
+      "Phase": "Separate-AdminReads",
+      "Samples": 3,
+      "CpuPercentMean": 2.4102969105093948,
+      "CpuPercentMax": 3.085570965025065,
+      "WorkingSetMiB": {
+        "First": 188.78515625,
+        "Last": 188.62890625,
+        "Maximum": 188.78515625
+      },
+      "PrivateMiB": {
+        "First": 73.40234375,
+        "Last": 73.234375,
+        "Maximum": 73.40234375
+      },
+      "ManagedMiB": {
+        "First": 19.432395935058594,
+        "Last": 19.87677001953125,
+        "Maximum": 19.87677001953125
+      },
+      "HeapMiB": {
+        "First": 21.280677795410156,
+        "Last": 23.272186279296875,
+        "Maximum": 23.456756591796875
+      },
+      "Gen0Delta": 69,
+      "Gen1Delta": 0,
+      "Gen2Delta": 0,
+      "AllocatedMiBDelta": 417.22156524658203,
+      "GcPausePercentMax": 0.69,
+      "ThreadPoolThreadsMax": 6,
+      "ThreadPoolQueueMax": 0,
+      "DatabaseCommands": 4817,
+      "DatabaseP50WindowMaxMs": 6,
+      "DatabaseP95WindowMaxMs": 36,
+      "DatabaseP99WindowMaxMs": 46,
+      "ActiveConnectionsMax": 2,
+      "PooledConnectionsMax": 5,
+      "FreeConnectionsMax": 4,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 1.2093659649895903,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 161.11,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 0,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 3,
+          "Milliseconds": 18
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 7398,
+          "Milliseconds": 162
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 16,
+          "Milliseconds": 32
+        }
+      ]
+    },
+    {
+      "Phase": "Load",
+      "Samples": 30,
+      "CpuPercentMean": 18.581875999081465,
+      "CpuPercentMax": 20.48427718070924,
+      "WorkingSetMiB": {
+        "First": 212.62109375,
+        "Last": 234.79296875,
+        "Maximum": 314.2734375
+      },
+      "PrivateMiB": {
+        "First": 96.703125,
+        "Last": 119.9375,
+        "Maximum": 199.60546875
+      },
+      "ManagedMiB": {
+        "First": 37.566680908203125,
+        "Last": 49.05525207519531,
+        "Maximum": 82.9957275390625
+      },
+      "HeapMiB": {
+        "First": 21.541847229003906,
+        "Last": 35.696327209472656,
+        "Maximum": 56.42290496826172
+      },
+      "Gen0Delta": 1512,
+      "Gen1Delta": 891,
+      "Gen2Delta": 14,
+      "AllocatedMiBDelta": 39547.580810546875,
+      "GcPausePercentMax": 1.57,
+      "ThreadPoolThreadsMax": 10,
+      "ThreadPoolQueueMax": 27,
+      "DatabaseCommands": 286817,
+      "DatabaseP50WindowMaxMs": 20,
+      "DatabaseP95WindowMaxMs": 80,
+      "DatabaseP99WindowMaxMs": 307,
+      "ActiveConnectionsMax": 53,
+      "PooledConnectionsMax": 75,
+      "FreeConnectionsMax": 75,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.812642485882071,
+      "GeneratorThreadPoolQueueMax": 2,
+      "DockerCpuPercentMax": 671.36,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 35,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 4,
+          "Milliseconds": 14
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 22,
+          "Milliseconds": 924
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 4,
+          "Milliseconds": 34
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 108915,
+          "Milliseconds": 367468
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 6759,
+          "Milliseconds": 40518
+        }
+      ]
+    },
+    {
+      "Phase": "Stress-500",
+      "Samples": 10,
+      "CpuPercentMean": 24.927864442600452,
+      "CpuPercentMax": 27.15849031497993,
+      "WorkingSetMiB": {
+        "First": 262.26953125,
+        "Last": 322.8046875,
+        "Maximum": 338.3828125
+      },
+      "PrivateMiB": {
+        "First": 147.7265625,
+        "Last": 212.26953125,
+        "Maximum": 229.36328125
+      },
+      "ManagedMiB": {
+        "First": 63.35728454589844,
+        "Last": 103.17033386230469,
+        "Maximum": 109.6609115600586
+      },
+      "HeapMiB": {
+        "First": 35.35894012451172,
+        "Last": 54.68434143066406,
+        "Maximum": 74.14276885986328
+      },
+      "Gen0Delta": 231,
+      "Gen1Delta": 200,
+      "Gen2Delta": 32,
+      "AllocatedMiBDelta": 14827.68782043457,
+      "GcPausePercentMax": 2.88,
+      "ThreadPoolThreadsMax": 11,
+      "ThreadPoolQueueMax": 78,
+      "DatabaseCommands": 116553,
+      "DatabaseP50WindowMaxMs": 52,
+      "DatabaseP95WindowMaxMs": 159,
+      "DatabaseP99WindowMaxMs": 1198,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 70,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.567112510495668,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 558.43,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 68,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 4,
+          "Milliseconds": 22
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 71130,
+          "Milliseconds": 2369239
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 2306,
+          "Milliseconds": 23817
+        }
+      ]
+    },
+    {
+      "Phase": "Stress-1000",
+      "Samples": 10,
+      "CpuPercentMean": 24.030810185133802,
+      "CpuPercentMax": 26.150625127200396,
+      "WorkingSetMiB": {
+        "First": 323.66796875,
+        "Last": 327.1640625,
+        "Maximum": 331.49609375
+      },
+      "PrivateMiB": {
+        "First": 213.09375,
+        "Last": 216.41796875,
+        "Maximum": 220.85546875
+      },
+      "ManagedMiB": {
+        "First": 44.606658935546875,
+        "Last": 55.13939666748047,
+        "Maximum": 118.27476501464844
+      },
+      "HeapMiB": {
+        "First": 55.64378356933594,
+        "Last": 59.820098876953125,
+        "Maximum": 59.820098876953125
+      },
+      "Gen0Delta": 201,
+      "Gen1Delta": 188,
+      "Gen2Delta": 30,
+      "AllocatedMiBDelta": 13602.748291015625,
+      "GcPausePercentMax": 3.87,
+      "ThreadPoolThreadsMax": 11,
+      "ThreadPoolQueueMax": 64,
+      "DatabaseCommands": 108055,
+      "DatabaseP50WindowMaxMs": 52,
+      "DatabaseP95WindowMaxMs": 184,
+      "DatabaseP99WindowMaxMs": 1438,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 1,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.428644611835132,
+      "GeneratorThreadPoolQueueMax": 0,
+      "DockerCpuPercentMax": 579.92,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 50,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 4,
+          "Milliseconds": 11
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 76886,
+          "Milliseconds": 2935718
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 2151,
+          "Milliseconds": 25547
+        }
+      ]
+    },
+    {
+      "Phase": "Stress-2000",
+      "Samples": 10,
+      "CpuPercentMean": 24.475510132322825,
+      "CpuPercentMax": 26.174661837162073,
+      "WorkingSetMiB": {
+        "First": 330.90625,
+        "Last": 327.83984375,
+        "Maximum": 337.41796875
+      },
+      "PrivateMiB": {
+        "First": 219.96875,
+        "Last": 216.8984375,
+        "Maximum": 226.62890625
+      },
+      "ManagedMiB": {
+        "First": 40.616844177246094,
+        "Last": 96.7322769165039,
+        "Maximum": 109.39433288574219
+      },
+      "HeapMiB": {
+        "First": 55.60295867919922,
+        "Last": 60.79156494140625,
+        "Maximum": 71.69940185546875
+      },
+      "Gen0Delta": 198,
+      "Gen1Delta": 190,
+      "Gen2Delta": 27,
+      "AllocatedMiBDelta": 14057.882247924805,
+      "GcPausePercentMax": 4.68,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 46,
+      "DatabaseCommands": 109908,
+      "DatabaseP50WindowMaxMs": 52,
+      "DatabaseP95WindowMaxMs": 167,
+      "DatabaseP99WindowMaxMs": 1430,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 1,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 5.001187352746386,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 565.58,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 46,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 1,
+          "Milliseconds": 68
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 1,
+          "Milliseconds": 49
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 2,
+          "Milliseconds": 6
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 75559,
+          "Milliseconds": 2781183
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 2202,
+          "Milliseconds": 26938
+        }
+      ]
+    },
+    {
+      "Phase": "Stress-4000",
+      "Samples": 10,
+      "CpuPercentMean": 22.539456720082434,
+      "CpuPercentMax": 24.839542595931917,
+      "WorkingSetMiB": {
+        "First": 340.125,
+        "Last": 331.53515625,
+        "Maximum": 340.125
+      },
+      "PrivateMiB": {
+        "First": 229.40625,
+        "Last": 220.4765625,
+        "Maximum": 229.40625
+      },
+      "ManagedMiB": {
+        "First": 53.65962219238281,
+        "Last": 74.97171783447266,
+        "Maximum": 105.33345794677734
+      },
+      "HeapMiB": {
+        "First": 58.35869598388672,
+        "Last": 58.98066711425781,
+        "Maximum": 62.23802947998047
+      },
+      "Gen0Delta": 176,
+      "Gen1Delta": 168,
+      "Gen2Delta": 23,
+      "AllocatedMiBDelta": 12759.382446289062,
+      "GcPausePercentMax": 5.23,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 34,
+      "DatabaseCommands": 100747,
+      "DatabaseP50WindowMaxMs": 55,
+      "DatabaseP95WindowMaxMs": 189,
+      "DatabaseP99WindowMaxMs": 1747,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 84,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.4906579886250615,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 586.9,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 73,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 1,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 81536,
+          "Milliseconds": 3212738
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 2042,
+          "Milliseconds": 22466
+        }
+      ]
+    },
+    {
+      "Phase": "Stress-8000",
+      "Samples": 11,
+      "CpuPercentMean": 21.71366639265742,
+      "CpuPercentMax": 23.320358088844255,
+      "WorkingSetMiB": {
+        "First": 332.88671875,
+        "Last": 333.47265625,
+        "Maximum": 334.3046875
+      },
+      "PrivateMiB": {
+        "First": 221.8046875,
+        "Last": 221.9140625,
+        "Maximum": 222.7578125
+      },
+      "ManagedMiB": {
+        "First": 94.77520751953125,
+        "Last": 53.16686248779297,
+        "Maximum": 111.37016296386719
+      },
+      "HeapMiB": {
+        "First": 64.2155532836914,
+        "Last": 63.06658935546875,
+        "Maximum": 68.30793762207031
+      },
+      "Gen0Delta": 186,
+      "Gen1Delta": 182,
+      "Gen2Delta": 24,
+      "AllocatedMiBDelta": 13546.062889099121,
+      "GcPausePercentMax": 5.68,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 42,
+      "DatabaseCommands": 105603,
+      "DatabaseP50WindowMaxMs": 56,
+      "DatabaseP95WindowMaxMs": 201,
+      "DatabaseP99WindowMaxMs": 1906,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 1,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.713192483724752,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 582.86,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 52,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 3,
+          "Milliseconds": 7
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 81566,
+          "Milliseconds": 3395589
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 1854,
+          "Milliseconds": 22065
+        }
+      ]
+    },
+    {
+      "Phase": "Stress-10000",
+      "Samples": 10,
+      "CpuPercentMean": 21.10725805131362,
+      "CpuPercentMax": 22.89175173202025,
+      "WorkingSetMiB": {
+        "First": 333.55078125,
+        "Last": 340.49609375,
+        "Maximum": 340.49609375
+      },
+      "PrivateMiB": {
+        "First": 222.109375,
+        "Last": 228.26171875,
+        "Maximum": 228.26171875
+      },
+      "ManagedMiB": {
+        "First": 76.21121215820312,
+        "Last": 99.37992858886719,
+        "Maximum": 116.18223571777344
+      },
+      "HeapMiB": {
+        "First": 61.03968811035156,
+        "Last": 63.12134552001953,
+        "Maximum": 67.4850082397461
+      },
+      "Gen0Delta": 156,
+      "Gen1Delta": 148,
+      "Gen2Delta": 18,
+      "AllocatedMiBDelta": 11679.1947555542,
+      "GcPausePercentMax": 6.01,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 71,
+      "DatabaseCommands": 92910,
+      "DatabaseP50WindowMaxMs": 57,
+      "DatabaseP95WindowMaxMs": 213,
+      "DatabaseP99WindowMaxMs": 2105,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 0,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.506383317204567,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 593.19,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 1082,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 94240,
+          "Milliseconds": 3946370
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 1924,
+          "Milliseconds": 21321
+        }
+      ]
+    },
+    {
+      "Phase": "Spike-before",
+      "Samples": 6,
+      "CpuPercentMean": 20.080785072697648,
+      "CpuPercentMax": 21.88913140434333,
+      "WorkingSetMiB": {
+        "First": 308.02734375,
+        "Last": 338.296875,
+        "Maximum": 340.24609375
+      },
+      "PrivateMiB": {
+        "First": 196.0546875,
+        "Last": 226.1875,
+        "Maximum": 228.13671875
+      },
+      "ManagedMiB": {
+        "First": 97.12742614746094,
+        "Last": 95.04999542236328,
+        "Maximum": 97.12742614746094
+      },
+      "HeapMiB": {
+        "First": 55.17797088623047,
+        "Last": 62.40989685058594,
+        "Maximum": 68.88400268554688
+      },
+      "Gen0Delta": 92,
+      "Gen1Delta": 69,
+      "Gen2Delta": 10,
+      "AllocatedMiBDelta": 6504.963348388672,
+      "GcPausePercentMax": 6.17,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 8,
+      "DatabaseCommands": 55433,
+      "DatabaseP50WindowMaxMs": 52,
+      "DatabaseP95WindowMaxMs": 155,
+      "DatabaseP99WindowMaxMs": 2016,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 78,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 3.949171100188959,
+      "GeneratorThreadPoolQueueMax": 199,
+      "DockerCpuPercentMax": 569.47,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 54,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 47494,
+          "Milliseconds": 1812907
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 1058,
+          "Milliseconds": 11439
+        }
+      ]
+    },
+    {
+      "Phase": "Spike-peak",
+      "Samples": 3,
+      "CpuPercentMean": 20.362066885102877,
+      "CpuPercentMax": 21.57036973369364,
+      "WorkingSetMiB": {
+        "First": 338.41796875,
+        "Last": 338.63671875,
+        "Maximum": 338.63671875
+      },
+      "PrivateMiB": {
+        "First": 226.28515625,
+        "Last": 226.5,
+        "Maximum": 226.5
+      },
+      "ManagedMiB": {
+        "First": 51.12329864501953,
+        "Last": 93.24340057373047,
+        "Maximum": 93.24340057373047
+      },
+      "HeapMiB": {
+        "First": 63.755210876464844,
+        "Last": 62.69090270996094,
+        "Maximum": 67.54248809814453
+      },
+      "Gen0Delta": 35,
+      "Gen1Delta": 35,
+      "Gen2Delta": 5,
+      "AllocatedMiBDelta": 2498.8183822631836,
+      "GcPausePercentMax": 6.26,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 4,
+      "DatabaseCommands": 27121,
+      "DatabaseP50WindowMaxMs": 57,
+      "DatabaseP95WindowMaxMs": 179,
+      "DatabaseP99WindowMaxMs": 2119,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 0,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.21469912021359,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 573.51,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 39,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 17982,
+          "Milliseconds": 789506
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 415,
+          "Milliseconds": 5855
+        }
+      ]
+    },
+    {
+      "Phase": "Spike-recovery",
+      "Samples": 9,
+      "CpuPercentMean": 20.882268473794376,
+      "CpuPercentMax": 22.783759554388116,
+      "WorkingSetMiB": {
+        "First": 335.3671875,
+        "Last": 336.31640625,
+        "Maximum": 336.640625
+      },
+      "PrivateMiB": {
+        "First": 223.20703125,
+        "Last": 225.72265625,
+        "Maximum": 226.1015625
+      },
+      "ManagedMiB": {
+        "First": 37.886688232421875,
+        "Last": 108.70169067382812,
+        "Maximum": 115.68558502197266
+      },
+      "HeapMiB": {
+        "First": 57.98381042480469,
+        "Last": 61.732933044433594,
+        "Maximum": 71.7258529663086
+      },
+      "Gen0Delta": 145,
+      "Gen1Delta": 139,
+      "Gen2Delta": 19,
+      "AllocatedMiBDelta": 10215.486877441406,
+      "GcPausePercentMax": 6.49,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 33,
+      "DatabaseCommands": 81800,
+      "DatabaseP50WindowMaxMs": 52,
+      "DatabaseP95WindowMaxMs": 168,
+      "DatabaseP99WindowMaxMs": 2072,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 80,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.306246144069347,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 592.89,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 49,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 78794,
+          "Milliseconds": 3347578
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 1676,
+          "Milliseconds": 23517
+        }
+      ]
+    },
+    {
+      "Phase": "Soak-1",
+      "Samples": 61,
+      "CpuPercentMean": 19.450532749699533,
+      "CpuPercentMax": 22.329410399900667,
+      "WorkingSetMiB": {
+        "First": 329.484375,
+        "Last": 331.47265625,
+        "Maximum": 337.1796875
+      },
+      "PrivateMiB": {
+        "First": 218.84375,
+        "Last": 220.3515625,
+        "Maximum": 225.88671875
+      },
+      "ManagedMiB": {
+        "First": 81.77848815917969,
+        "Last": 29.742523193359375,
+        "Maximum": 113.28245544433594
+      },
+      "HeapMiB": {
+        "First": 55.59716796875,
+        "Last": 45.431541442871094,
+        "Maximum": 57.99030303955078
+      },
+      "Gen0Delta": 997,
+      "Gen1Delta": 968,
+      "Gen2Delta": 134,
+      "AllocatedMiBDelta": 68717.72450256348,
+      "GcPausePercentMax": 7.31,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 55,
+      "DatabaseCommands": 496995,
+      "DatabaseP50WindowMaxMs": 65,
+      "DatabaseP95WindowMaxMs": 202,
+      "DatabaseP99WindowMaxMs": 3214,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 53,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.220327764452671,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 628.12,
+      "SqlBlockedRequestsMax": 1,
+      "SqlWaitMsMax": 3130,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 1,
+          "Milliseconds": 60
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 2,
+          "Milliseconds": 283
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 428,
+          "Milliseconds": 13310
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 589652,
+          "Milliseconds": 26981483
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 1,
+          "Milliseconds": 20
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 10448,
+          "Milliseconds": 116789
+        }
+      ]
+    },
+    {
+      "Phase": "Soak-2",
+      "Samples": 60,
+      "CpuPercentMean": 16.751597910689036,
+      "CpuPercentMax": 18.855369981859578,
+      "WorkingSetMiB": {
+        "First": 331.59765625,
+        "Last": 341.08203125,
+        "Maximum": 341.08203125
+      },
+      "PrivateMiB": {
+        "First": 220.47265625,
+        "Last": 230.546875,
+        "Maximum": 230.546875
+      },
+      "ManagedMiB": {
+        "First": 88.68980407714844,
+        "Last": 94.69076538085938,
+        "Maximum": 107.41133117675781
+      },
+      "HeapMiB": {
+        "First": 51.092010498046875,
+        "Last": 59.76763153076172,
+        "Maximum": 64.28015899658203
+      },
+      "Gen0Delta": 812,
+      "Gen1Delta": 745,
+      "Gen2Delta": 118,
+      "AllocatedMiBDelta": 55204.546783447266,
+      "GcPausePercentMax": 7.3,
+      "ThreadPoolThreadsMax": 11,
+      "ThreadPoolQueueMax": 56,
+      "DatabaseCommands": 397997,
+      "DatabaseP50WindowMaxMs": 71,
+      "DatabaseP95WindowMaxMs": 225,
+      "DatabaseP99WindowMaxMs": 3236,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 4,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 3.613918825335953,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 624.59,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 3246,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 1,
+          "Milliseconds": 1
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 543769,
+          "Milliseconds": 30824060
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 1,
+          "Milliseconds": 31
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 8520,
+          "Milliseconds": 95195
+        }
+      ]
+    },
+    {
+      "Phase": "Soak-3",
+      "Samples": 60,
+      "CpuPercentMean": 16.094508215523614,
+      "CpuPercentMax": 17.79998265516544,
+      "WorkingSetMiB": {
+        "First": 338.234375,
+        "Last": 343.32421875,
+        "Maximum": 343.32421875
+      },
+      "PrivateMiB": {
+        "First": 227.49609375,
+        "Last": 239.2421875,
+        "Maximum": 239.2421875
+      },
+      "ManagedMiB": {
+        "First": 82.86306762695312,
+        "Last": 77.33161163330078,
+        "Maximum": 126.55117797851562
+      },
+      "HeapMiB": {
+        "First": 51.42516326904297,
+        "Last": 64.71839904785156,
+        "Maximum": 64.71839904785156
+      },
+      "Gen0Delta": 775,
+      "Gen1Delta": 610,
+      "Gen2Delta": 115,
+      "AllocatedMiBDelta": 52549.33261871338,
+      "GcPausePercentMax": 7.22,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 50,
+      "DatabaseCommands": 377657,
+      "DatabaseP50WindowMaxMs": 78,
+      "DatabaseP95WindowMaxMs": 348,
+      "DatabaseP99WindowMaxMs": 3263,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 1,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.140790146199929,
+      "GeneratorThreadPoolQueueMax": 2,
+      "DockerCpuPercentMax": 614.31,
+      "SqlBlockedRequestsMax": 23,
+      "SqlWaitMsMax": 4338,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 89,
+          "Milliseconds": 12524
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 548417,
+          "Milliseconds": 32582453
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 8093,
+          "Milliseconds": 93802
+        }
+      ]
+    },
+    {
+      "Phase": "Soak-4",
+      "Samples": 61,
+      "CpuPercentMean": 16.19184881739341,
+      "CpuPercentMax": 18.45652923533751,
+      "WorkingSetMiB": {
+        "First": 335.4609375,
+        "Last": 333.3046875,
+        "Maximum": 348.96484375
+      },
+      "PrivateMiB": {
+        "First": 231.296875,
+        "Last": 228.3203125,
+        "Maximum": 244.046875
+      },
+      "ManagedMiB": {
+        "First": 28.179244995117188,
+        "Last": 42.78401184082031,
+        "Maximum": 116.01229095458984
+      },
+      "HeapMiB": {
+        "First": 47.663421630859375,
+        "Last": 54.599334716796875,
+        "Maximum": 75.3766860961914
+      },
+      "Gen0Delta": 790,
+      "Gen1Delta": 611,
+      "Gen2Delta": 111,
+      "AllocatedMiBDelta": 54019.6315612793,
+      "GcPausePercentMax": 7.16,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 24,
+      "DatabaseCommands": 387036,
+      "DatabaseP50WindowMaxMs": 81,
+      "DatabaseP95WindowMaxMs": 635,
+      "DatabaseP99WindowMaxMs": 3222,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 100,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.561809902559885,
+      "GeneratorThreadPoolQueueMax": 2,
+      "DockerCpuPercentMax": 601.39,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 4213,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 1,
+          "Milliseconds": 1
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 572593,
+          "Milliseconds": 33869126
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 7881,
+          "Milliseconds": 100158
+        }
+      ]
+    },
+    {
+      "Phase": "Soak-5",
+      "Samples": 60,
+      "CpuPercentMean": 15.719110222473638,
+      "CpuPercentMax": 17.705101739669075,
+      "WorkingSetMiB": {
+        "First": 334.671875,
+        "Last": 343.796875,
+        "Maximum": 354.7109375
+      },
+      "PrivateMiB": {
+        "First": 229.6484375,
+        "Last": 239.18359375,
+        "Maximum": 250.13671875
+      },
+      "ManagedMiB": {
+        "First": 57.04548645019531,
+        "Last": 106.39574432373047,
+        "Maximum": 126.96517181396484
+      },
+      "HeapMiB": {
+        "First": 53.44183349609375,
+        "Last": 69.36978912353516,
+        "Maximum": 83.17646026611328
+      },
+      "Gen0Delta": 760,
+      "Gen1Delta": 531,
+      "Gen2Delta": 108,
+      "AllocatedMiBDelta": 51767.918937683105,
+      "GcPausePercentMax": 7.1,
+      "ThreadPoolThreadsMax": 12,
+      "ThreadPoolQueueMax": 46,
+      "DatabaseCommands": 371793,
+      "DatabaseP50WindowMaxMs": 89,
+      "DatabaseP95WindowMaxMs": 946,
+      "DatabaseP99WindowMaxMs": 3189,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 8,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 3.9415736709060694,
+      "GeneratorThreadPoolQueueMax": 1,
+      "DockerCpuPercentMax": 601.49,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 4088,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 40,
+          "Milliseconds": 3119
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 3,
+          "Milliseconds": 9
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 605127,
+          "Milliseconds": 36680286
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 1,
+          "Milliseconds": 8
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 7987,
+          "Milliseconds": 106724
+        }
+      ]
+    },
+    {
+      "Phase": "Soak-6",
+      "Samples": 60,
+      "CpuPercentMean": 15.441768001448912,
+      "CpuPercentMax": 17.15718886732556,
+      "WorkingSetMiB": {
+        "First": 346.70703125,
+        "Last": 332.37890625,
+        "Maximum": 348.25
+      },
+      "PrivateMiB": {
+        "First": 241.5625,
+        "Last": 234.7734375,
+        "Maximum": 248.26171875
+      },
+      "ManagedMiB": {
+        "First": 76.89746856689453,
+        "Last": 52.87086486816406,
+        "Maximum": 118.76648712158203
+      },
+      "HeapMiB": {
+        "First": 66.54998016357422,
+        "Last": 54.26800537109375,
+        "Maximum": 66.69792938232422
+      },
+      "Gen0Delta": 794,
+      "Gen1Delta": 515,
+      "Gen2Delta": 166,
+      "AllocatedMiBDelta": 49672.66561126709,
+      "GcPausePercentMax": 7.04,
+      "ThreadPoolThreadsMax": 13,
+      "ThreadPoolQueueMax": 57,
+      "DatabaseCommands": 355332,
+      "DatabaseP50WindowMaxMs": 82,
+      "DatabaseP95WindowMaxMs": 281,
+      "DatabaseP99WindowMaxMs": 3132,
+      "ActiveConnectionsMax": 100,
+      "PooledConnectionsMax": 100,
+      "FreeConnectionsMax": 1,
+      "ReclaimedConnectionsMax": 0,
+      "GeneratorCpuPercentMax": 4.226808745474514,
+      "GeneratorThreadPoolQueueMax": 3,
+      "DockerCpuPercentMax": 600.17,
+      "SqlBlockedRequestsMax": 0,
+      "SqlWaitMsMax": 3250,
+      "SqlWaitDeltas": [
+        {
+          "Wait": "LCK_M_S",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_U",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "LCK_M_X",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "PAGEIOLATCH_SH",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "THREADPOOL",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "SOS_SCHEDULER_YIELD",
+          "Count": 601198,
+          "Milliseconds": 39167231
+        },
+        {
+          "Wait": "ASYNC_NETWORK_IO",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "RESOURCE_SEMAPHORE",
+          "Count": 0,
+          "Milliseconds": 0
+        },
+        {
+          "Wait": "WRITELOG",
+          "Count": 7641,
+          "Milliseconds": 100540
+        }
+      ]
+    }
+  ],
+  "SoakEvidence": {
+    "DurationSeconds": 3600,
+    "WallSeconds": 3620.428,
+    "Completed": 988035,
+    "Successful": 964059,
+    "Unexpected": 23976,
+    "Rejected": 0,
+    "Dropped": 451965,
+    "AllSegmentsStable": false,
+    "ResourceSamples": 362,
+    "FirstFiveMinuteMedianWorkingSetMiB": 323.58984375,
+    "LastFiveMinuteMedianWorkingSetMiB": 337.33984375,
+    "FirstFiveMinuteMedianManagedMiB": 70.43525695800781,
+    "LastFiveMinuteMedianManagedMiB": 73.97843933105469,
+    "FirstFiveMinuteMinimumHeapMiB": 41.279502868652344,
+    "LastFiveMinuteMinimumHeapMiB": 51.86015319824219,
+    "ManagedMiBSlopePerMinute": 0.10020402447528223,
+    "WorkingSetMiBSlopePerMinute": 0.22120064746500032,
+    "Gen2Collections": 759,
+    "ActiveConnections": {
+      "First": 47,
+      "Last": 100,
+      "Maximum": 100
+    },
+    "PooledConnections": {
+      "First": 100,
+      "Last": 100,
+      "Maximum": 100
+    },
+    "ReclaimedConnections": {
+      "First": 0,
+      "Last": 0,
+      "Maximum": 0
+    },
+    "FinalIdleSample": {
+      "Utc": "2026-10-27T18:18:43.6597396+00:00",
+      "CpuPercent": 0.03906722635304419,
+      "LogicalProcessors": 8,
+      "WorkingSetBytes": 321015808,
+      "PrivateBytes": 208592896,
+      "ManagedBytes": 118951200,
+      "TotalAllocatedBytes": 523374774064,
+      "HeapBytes": 47133944,
+      "FragmentedBytes": 9647928,
+      "GcPausePercent": 7.01,
+      "Gen0": 9726,
+      "Gen1": 6494,
+      "Gen2": 993,
+      "ThreadPoolThreads": 3,
+      "ThreadPoolQueue": 0,
+      "ThreadPoolCompleted": 18766598,
+      "Database": {
+        "Count": 0,
+        "P50Ms": null,
+        "P95Ms": null,
+        "P99Ms": null,
+        "Errors": 0,
+        "OverflowMs": 5001
+      },
+      "Connections": {
+        "number-of-reclaimed-connections": 0,
+        "number-of-pooled-connections": 100,
+        "active-hard-connections": 100,
+        "active-soft-connects": 0,
+        "soft-connects": 0,
+        "hard-connects": 0,
+        "number-of-free-connections": 100,
+        "number-of-active-connections": 0
+      },
+      "CacheHits": 0,
+      "CacheMisses": 0
+    },
+    "DatabaseBefore": {
+      "Utc": "2026-10-27T17:18:02.2597237+00:00",
+      "Rows": [
+        [
+          {
+            "Reservations": 44648
+          }
+        ],
+        [
+          {
+            "ActivityLogs": 0
+          }
+        ],
+        [
+          {
+            "OpenTransactions": 0
+          }
+        ],
+        [
+          {
+            "name": "BroujPart11_c672a84c7aed4127b1df36de49728d0b",
+            "SizeBytes": 142606336,
+            "UsedBytes": 103481344
+          },
+          {
+            "name": "BroujPart11_c672a84c7aed4127b1df36de49728d0b_log",
+            "SizeBytes": 209715200,
+            "UsedBytes": 104259584
+          }
+        ]
+      ]
+    },
+    "DatabaseAfter": {
+      "Utc": "2026-10-27T18:18:52.9332741+00:00",
+      "Rows": [
+        [
+          {
+            "Reservations": 93699
+          }
+        ],
+        [
+          {
+            "ActivityLogs": 0
+          }
+        ],
+        [
+          {
+            "OpenTransactions": 0
+          }
+        ],
+        [
+          {
+            "name": "BroujPart11_c672a84c7aed4127b1df36de49728d0b",
+            "SizeBytes": 209715200,
+            "UsedBytes": 145948672
+          },
+          {
+            "name": "BroujPart11_c672a84c7aed4127b1df36de49728d0b_log",
+            "SizeBytes": 276824064,
+            "UsedBytes": 149528576
+          }
+        ]
+      ]
+    },
+    "SqlWaitDeltas": [
+      {
+        "Wait": "LCK_M_S",
+        "Count": 1,
+        "Milliseconds": 60
+      },
+      {
+        "Wait": "LCK_M_U",
+        "Count": 0,
+        "Milliseconds": 0
+      },
+      {
+        "Wait": "LCK_M_X",
+        "Count": 42,
+        "Milliseconds": 3402
+      },
+      {
+        "Wait": "PAGEIOLATCH_SH",
+        "Count": 89,
+        "Milliseconds": 12524
+      },
+      {
+        "Wait": "THREADPOOL",
+        "Count": 433,
+        "Milliseconds": 13321
+      },
+      {
+        "Wait": "SOS_SCHEDULER_YIELD",
+        "Count": 3505813,
+        "Milliseconds": 202369111
+      },
+      {
+        "Wait": "ASYNC_NETWORK_IO",
+        "Count": 4,
+        "Milliseconds": 93
+      },
+      {
+        "Wait": "RESOURCE_SEMAPHORE",
+        "Count": 0,
+        "Milliseconds": 0
+      },
+      {
+        "Wait": "WRITELOG",
+        "Count": 51192,
+        "Milliseconds": 620479
+      }
+    ]
+  },
+  "PlanReview": [
+    {
+      "Rank": 1,
+      "Executions": 74297,
+      "MeanElapsedMs": 556.2213822496199,
+      "MeanCpuMs": 47.93123454513641,
+      "MeanLogicalReads": 457.7649299433355,
+      "TotalElapsedSeconds": 41325.580037,
+      "ActualPlan": "hot-01.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Stream Aggregate": 1,
+        "Index Scan": 1
+      },
+      "Objects": [
+        "[Reservations]"
+      ],
+      "MaximumOperatorActualRows": 93689,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT COUNT(*)\r\nFROM [Reservations] AS [r]"
+    },
+    {
+      "Rank": 2,
+      "Executions": 163725,
+      "MeanElapsedMs": 41.04454200030539,
+      "MeanCpuMs": 5.728865158039396,
+      "MeanLogicalReads": 206,
+      "TotalElapsedSeconds": 6720.017639,
+      "ActualPlan": "hot-02.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Nested Loops": 1,
+        "Top": 1,
+        "Sort": 1,
+        "Clustered Index Scan": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[BaseProjects]",
+        "[Areas]"
+      ],
+      "MaximumOperatorActualRows": 1000,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [b0].[Id], [b0].[Name], [b0].[AreaId], [a].[Name] AS [AreaName], [a].[CityId], [b0].[ProjectType], [b0].[Price], [b0].[Size]\r\nFROM (\r\n    SELECT [b].[Id], [b].[AreaId], [b].[Name], [b].[Price], [b].[ProjectType], [b].[Size]\r\n    FROM [BaseProjects] AS [b]\r\n    ORDER BY [b].[Name], [b].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY\r\n) AS [b0]\r\nINNER JOIN [Areas] AS [a] ON [b0].[AreaId] = [a].[Id]\r\nORDER BY [b0].[Name], [b0].[Id]"
+    },
+    {
+      "Rank": 3,
+      "Executions": 709,
+      "MeanElapsedMs": 2854.009180535966,
+      "MeanCpuMs": 415.04523836389285,
+      "MeanLogicalReads": 3211.0747531734837,
+      "TotalElapsedSeconds": 2023.492509,
+      "ActualPlan": "hot-03.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Parallelism": 3,
+        "Nested Loops": 3,
+        "Top": 1,
+        "Sort": 1,
+        "Clustered Index Scan": 2,
+        "Clustered Index Seek": 2
+      },
+      "Objects": [
+        "[Reservations]",
+        "[BaseUnits]",
+        "[BaseProjects]",
+        "[Orders]"
+      ],
+      "MaximumOperatorActualRows": 93689,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [r0].[Id], [r0].[UnitId], [b].[Number] AS [UnitNumber], [b0].[Name] AS [ProjectName], [r0].[Number], [r0].[Status], [r0].[ReservationDate], [r0].[CancelledAt], [o].[Id] AS [OrderId]\r\nFROM (\r\n    SELECT [r].[Id], [r].[CancelledAt], [r].[Number], [r].[ReservationDate], [r].[Status], [r].[UnitId]\r\n    FROM [Reservations] AS [r]\r\n    ORDER BY [r].[ReservationDate] DESC, [r].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY\r\n) AS [r0]\r\nINNER JOIN [BaseUnits] AS [b] ON [r0].[UnitId] = [b].[Id]\r\nINNER JOIN [BaseProjects] AS [b0] ON [b].[ProjectId] = [b0].[Id]\r\nLEFT JOIN [Orders] AS [o] ON [r0].[Id] = [o].[ReservationId]\r\nORDER BY [r0].[ReservationDate] DESC, [r0].[Id]"
+    },
+    {
+      "Rank": 4,
+      "Executions": 147017,
+      "MeanElapsedMs": 4.264832801648788,
+      "MeanCpuMs": 0.4762085269050518,
+      "MeanLogicalReads": 8.499187168830815,
+      "TotalElapsedSeconds": 627.002924,
+      "ActualPlan": "hot-04.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Stream Aggregate": 1,
+        "Index Seek": 1
+      },
+      "Objects": [
+        "[Reservations]"
+      ],
+      "MaximumOperatorActualRows": 2,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT COUNT(*)\r\nFROM [Reservations] AS [r]\r\nWHERE [r].[CustomerId] = @_currentUser_CustomerId_Value"
+    },
+    {
+      "Rank": 5,
+      "Executions": 134424,
+      "MeanElapsedMs": 4.574385541272392,
+      "MeanCpuMs": 1.2281924061179552,
+      "MeanLogicalReads": 211.7454546807118,
+      "TotalElapsedSeconds": 614.907202,
+      "ActualPlan": "hot-05.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 2,
+        "Nested Loops": 4,
+        "Top": 1,
+        "Index Seek": 1,
+        "Clustered Index Seek": 2,
+        "Clustered Index Scan": 2
+      },
+      "Objects": [
+        "[BaseUnits]",
+        "[InitiativeUnits]",
+        "[Orders]",
+        "[Reservations]"
+      ],
+      "MaximumOperatorActualRows": 20,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [b0].[Id], [b0].[ProjectId], [b0].[Number], [b0].[MeterPrice], [b0].[FloorNumber], [b0].[Size], CEILING([b0].[Size] * [b0].[MeterPrice] * 100.0) / 100.0 AS [TotalPrice], [i].[NeighborMeterPrice], [i].[Percentage], CASE\r\n    WHEN NOT EXISTS (\r\n        SELECT 1\r\n        FROM [Reservations] AS [r]\r\n        LEFT JOIN [Orders] AS [o] ON [r].[Id] = [o].[ReservationId]\r\n        WHERE [b0].[Id] = [r].[UnitId] AND [o].[Id] IS NOT NULL AND ([o].[Status] <> 'pending' OR [o].[Status] IS NULL)) THEN CAST(1 AS bit)\r\n    ELSE CAST(0 AS bit)\r\nEND AS [IsAvailable]\r\nFROM (\r\n    SELECT [b].[Id], [b].[FloorNumber], [b].[MeterPrice], [b].[Number], [b].[ProjectId], [b].[Size]\r\n    FROM [BaseUnits] AS [b]\r\n    WHERE [b].[ProjectId] = @request_ProjectId\r\n    ORDER BY [b].[Number], [b].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY\r\n) AS [b0]\r\nLEFT JOIN [InitiativeUnits] AS [i] ON [b0].[Id] = [i].[UnitId]\r\nORDER BY [b0].[Number], [b0].[Id]"
+    },
+    {
+      "Rank": 6,
+      "Executions": 168105,
+      "MeanElapsedMs": 3.0115377472413076,
+      "MeanCpuMs": 0.9939509175812736,
+      "MeanLogicalReads": 4,
+      "TotalElapsedSeconds": 506.254553,
+      "ActualPlan": "hot-06.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Sort": 1,
+        "Clustered Index Scan": 1
+      },
+      "Objects": [
+        "[TermsAndConditions]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT TOP(1) [t].[Id], [t].[Title], [t].[Content], [t].[VersionNumber], [t].[EffectiveDate], [t].[IsActive]\r\nFROM [TermsAndConditions] AS [t]\r\nWHERE [t].[IsActive] = CAST(1 AS bit) AND [t].[EffectiveDate] <= @now\r\nORDER BY [t].[EffectiveDate] DESC, [t].[VersionNumber] DESC"
+    },
+    {
+      "Rank": 7,
+      "Executions": 167913,
+      "MeanElapsedMs": 2.297612424291151,
+      "MeanCpuMs": 0.7295436088927004,
+      "MeanLogicalReads": 10,
+      "TotalElapsedSeconds": 385.798995,
+      "ActualPlan": "hot-07.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Stream Aggregate": 1,
+        "Index Scan": 1
+      },
+      "Objects": [
+        "[BaseProjects]"
+      ],
+      "MaximumOperatorActualRows": 1000,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT COUNT(*)\r\nFROM [BaseProjects] AS [b]"
+    },
+    {
+      "Rank": 8,
+      "Executions": 134501,
+      "MeanElapsedMs": 2.3658492204518926,
+      "MeanCpuMs": 0.8061495007472064,
+      "MeanLogicalReads": 43,
+      "TotalElapsedSeconds": 318.209086,
+      "ActualPlan": "hot-08.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Nested Loops": 1,
+        "Top": 1,
+        "Sort": 1,
+        "Index Scan": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[Areas]",
+        "[Cities]"
+      ],
+      "MaximumOperatorActualRows": 100,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [a0].[Id], [a0].[Name], [a0].[CityId], [c].[Name] AS [CityName]\r\nFROM (\r\n    SELECT [a].[Id], [a].[CityId], [a].[Name]\r\n    FROM [Areas] AS [a]\r\n    ORDER BY [a].[Name], [a].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY\r\n) AS [a0]\r\nINNER JOIN [Cities] AS [c] ON [a0].[CityId] = [c].[Id]\r\nORDER BY [a0].[Name], [a0].[Id]"
+    },
+    {
+      "Rank": 9,
+      "Executions": 4188,
+      "MeanElapsedMs": 39.3724047277937,
+      "MeanCpuMs": 5.556082139446036,
+      "MeanLogicalReads": 206,
+      "TotalElapsedSeconds": 164.891631,
+      "ActualPlan": "hot-09.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Nested Loops": 1,
+        "Top": 1,
+        "Sort": 1,
+        "Clustered Index Scan": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[BaseProjects]",
+        "[Areas]"
+      ],
+      "MaximumOperatorActualRows": 1000,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [b0].[Id], [b0].[Name], [b0].[AreaId], [a].[Name] AS [AreaName], [a].[CityId], [b0].[ProjectType], [b0].[Price], [b0].[Size]\r\nFROM (\r\n    SELECT [b].[Id], [b].[AreaId], [b].[Name], [b].[Price], [b].[ProjectType], [b].[Size]\r\n    FROM [BaseProjects] AS [b]\r\n    ORDER BY [b].[Name], [b].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p ROWS ONLY\r\n) AS [b0]\r\nINNER JOIN [Areas] AS [a] ON [b0].[AreaId] = [a].[Id]\r\nORDER BY [b0].[Name], [b0].[Id]"
+    },
+    {
+      "Rank": 10,
+      "Executions": 167880,
+      "MeanElapsedMs": 0.9161618417917561,
+      "MeanCpuMs": 0.33174418632356445,
+      "MeanLogicalReads": 6.012943769359066,
+      "TotalElapsedSeconds": 153.80525,
+      "ActualPlan": "hot-10.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Sort": 1,
+        "Nested Loops": 1,
+        "Index Seek": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[UnitAmenities]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [u].[Name], [u].[Value]\r\nFROM [UnitAmenities] AS [u]\r\nWHERE [u].[UnitId] = @request_Id\r\nORDER BY [u].[Name], [u].[Id]"
+    },
+    {
+      "Rank": 11,
+      "Executions": 168194,
+      "MeanElapsedMs": 0.8968189768957275,
+      "MeanCpuMs": 0.3201020904431787,
+      "MeanLogicalReads": 4.011254860458756,
+      "TotalElapsedSeconds": 150.839571,
+      "ActualPlan": "hot-11.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Sort": 1,
+        "Nested Loops": 1,
+        "Index Seek": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[ProjectAmenities]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [p].[Name], [p].[Value]\r\nFROM [ProjectAmenities] AS [p]\r\nWHERE [p].[ProjectId] = @request_Id\r\nORDER BY [p].[Name], [p].[Id]"
+    },
+    {
+      "Rank": 12,
+      "Executions": 167889,
+      "MeanElapsedMs": 0.763220526657494,
+      "MeanCpuMs": 0.2526033688925421,
+      "MeanLogicalReads": 3,
+      "TotalElapsedSeconds": 128.136331,
+      "ActualPlan": "hot-12.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 2,
+        "Top": 1,
+        "Nested Loops": 3,
+        "Clustered Index Seek": 3,
+        "Clustered Index Scan": 1
+      },
+      "Objects": [
+        "[BaseUnits]",
+        "[InitiativeUnits]",
+        "[Orders]",
+        "[Reservations]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT TOP(2) [b].[Id], [b].[ProjectId], [b].[Number], [b].[MeterPrice], [b].[FloorNumber], [b].[Size], CEILING([b].[Size] * [b].[MeterPrice] * 100.0) / 100.0 AS [TotalPrice], [i].[NeighborMeterPrice], [i].[Percentage], CASE\r\n    WHEN NOT EXISTS (\r\n        SELECT 1\r\n        FROM [Reservations] AS [r]\r\n        LEFT JOIN [Orders] AS [o] ON [r].[Id] = [o].[ReservationId]\r\n        WHERE [b].[Id] = [r].[UnitId] AND [o].[Id] IS NOT NULL AND ([o].[Status] <> 'pending' OR [o].[Status] IS NULL)) THEN CAST(1 AS bit)\r\n    ELSE CAST(0 AS bit)\r\nEND AS [IsAvailable]\r\nFROM [BaseUnits] AS [b]\r\nLEFT JOIN [InitiativeUnits] AS [i] ON [b].[Id] = [i].[UnitId]\r\nWHERE [b].[Id] = @request_Id AND [b].[ProjectId] = @request_ProjectId"
+    },
+    {
+      "Rank": 13,
+      "Executions": 33568,
+      "MeanElapsedMs": 3.438621067683508,
+      "MeanCpuMs": 0.9751822271210677,
+      "MeanLogicalReads": 130.8350512392755,
+      "TotalElapsedSeconds": 115.427632,
+      "ActualPlan": "hot-13.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 2,
+        "Nested Loops": 4,
+        "Top": 1,
+        "Index Seek": 1,
+        "Clustered Index Seek": 2,
+        "Clustered Index Scan": 2
+      },
+      "Objects": [
+        "[BaseUnits]",
+        "[InitiativeUnits]",
+        "[Orders]",
+        "[Reservations]"
+      ],
+      "MaximumOperatorActualRows": 40,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [b0].[Id], [b0].[ProjectId], [b0].[Number], [b0].[MeterPrice], [b0].[FloorNumber], [b0].[Size], CEILING([b0].[Size] * [b0].[MeterPrice] * 100.0) / 100.0 AS [TotalPrice], [i].[NeighborMeterPrice], [i].[Percentage], CASE\r\n    WHEN NOT EXISTS (\r\n        SELECT 1\r\n        FROM [Reservations] AS [r]\r\n        LEFT JOIN [Orders] AS [o] ON [r].[Id] = [o].[ReservationId]\r\n        WHERE [b0].[Id] = [r].[UnitId] AND [o].[Id] IS NOT NULL AND ([o].[Status] <> 'pending' OR [o].[Status] IS NULL)) THEN CAST(1 AS bit)\r\n    ELSE CAST(0 AS bit)\r\nEND AS [IsAvailable]\r\nFROM (\r\n    SELECT [b].[Id], [b].[FloorNumber], [b].[MeterPrice], [b].[Number], [b].[ProjectId], [b].[Size]\r\n    FROM [BaseUnits] AS [b]\r\n    WHERE [b].[ProjectId] = @request_ProjectId\r\n    ORDER BY [b].[Number], [b].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p ROWS ONLY\r\n) AS [b0]\r\nLEFT JOIN [InitiativeUnits] AS [i] ON [b0].[Id] = [i].[UnitId]\r\nORDER BY [b0].[Number], [b0].[Id]"
+    },
+    {
+      "Rank": 14,
+      "Executions": 167995,
+      "MeanElapsedMs": 0.6866375427840115,
+      "MeanCpuMs": 0.24022058394595078,
+      "MeanLogicalReads": 4.861335158784487,
+      "TotalElapsedSeconds": 115.351674,
+      "ActualPlan": "hot-14.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Stream Aggregate": 1,
+        "Index Seek": 1
+      },
+      "Objects": [
+        "[BaseUnits]"
+      ],
+      "MaximumOperatorActualRows": 100,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT COUNT(*)\r\nFROM [BaseUnits] AS [b]\r\nWHERE [b].[ProjectId] = @request_ProjectId"
+    },
+    {
+      "Rank": 15,
+      "Executions": 168062,
+      "MeanElapsedMs": 0.6162425473932239,
+      "MeanCpuMs": 0.2025052956646952,
+      "MeanLogicalReads": 3,
+      "TotalElapsedSeconds": 103.566955,
+      "ActualPlan": "hot-15.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Stream Aggregate": 1,
+        "Index Scan": 1
+      },
+      "Objects": [
+        "[Areas]"
+      ],
+      "MaximumOperatorActualRows": 100,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT COUNT(*)\r\nFROM [Areas] AS [a]"
+    },
+    {
+      "Rank": 16,
+      "Executions": 167881,
+      "MeanElapsedMs": 0.5959850429768705,
+      "MeanCpuMs": 0.21437361583502598,
+      "MeanLogicalReads": 6.012943692258207,
+      "TotalElapsedSeconds": 100.054565,
+      "ActualPlan": "hot-16.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Nested Loops": 1,
+        "Index Seek": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[UnitImages]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [u].[Id], [u].[ImagePath], [u].[AltText]\r\nFROM [UnitImages] AS [u]\r\nWHERE [u].[UnitId] = @request_Id\r\nORDER BY [u].[Id]"
+    },
+    {
+      "Rank": 17,
+      "Executions": 168195,
+      "MeanElapsedMs": 0.5678269924789678,
+      "MeanCpuMs": 0.19347500222955497,
+      "MeanLogicalReads": 2,
+      "TotalElapsedSeconds": 95.505661,
+      "ActualPlan": "hot-17.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Top": 1,
+        "Nested Loops": 1,
+        "Clustered Index Seek": 2
+      },
+      "Objects": [
+        "[BaseProjects]",
+        "[InitiativeProjects]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT TOP(2) [b].[Id], [b].[Name], [b].[AreaId], [b].[Description], [b].[Latitude], [b].[Longitude], [b].[Size], [b].[ProjectType], [b].[Price], [b].[FloorCount], [b].[PlannedUnitCount], [i].[NeighborPrice], [i].[DrawDate]\r\nFROM [BaseProjects] AS [b]\r\nLEFT JOIN [InitiativeProjects] AS [i] ON [b].[Id] = [i].[ProjectId]\r\nWHERE [b].[Id] = @request_Id"
+    },
+    {
+      "Rank": 18,
+      "Executions": 168194,
+      "MeanElapsedMs": 0.5673222588201718,
+      "MeanCpuMs": 0.2001377635349656,
+      "MeanLogicalReads": 4.011254860458756,
+      "TotalElapsedSeconds": 95.4202,
+      "ActualPlan": "hot-18.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Nested Loops": 1,
+        "Index Seek": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[ProjectImages]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [p].[Id], [p].[ImagePath], [p].[AltText]\r\nFROM [ProjectImages] AS [p]\r\nWHERE [p].[ProjectId] = @request_Id\r\nORDER BY [p].[Id]"
+    },
+    {
+      "Rank": 19,
+      "Executions": 220846,
+      "MeanElapsedMs": 0.4088054345562066,
+      "MeanCpuMs": 0.14787620785524755,
+      "MeanLogicalReads": 3,
+      "TotalElapsedSeconds": 90.283045,
+      "ActualPlan": "hot-19.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Nested Loops": 1,
+        "Constant Scan": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[Customers]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT CASE\r\n    WHEN EXISTS (\r\n        SELECT 1\r\n        FROM [Customers] AS [c]\r\n        WHERE [c].[Id] = @CustomerId AND [c].[DeletedAt] IS NULL) THEN CAST(1 AS bit)\r\n    ELSE CAST(0 AS bit)\r\nEND"
+    },
+    {
+      "Rank": 20,
+      "Executions": 33561,
+      "MeanElapsedMs": 2.412274455469146,
+      "MeanCpuMs": 0.8087632668871607,
+      "MeanLogicalReads": 43,
+      "TotalElapsedSeconds": 80.958343,
+      "ActualPlan": "hot-20.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Nested Loops": 1,
+        "Top": 1,
+        "Sort": 1,
+        "Index Scan": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[Areas]",
+        "[Cities]"
+      ],
+      "MaximumOperatorActualRows": 100,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [a0].[Id], [a0].[Name], [a0].[CityId], [c].[Name] AS [CityName]\r\nFROM (\r\n    SELECT [a].[Id], [a].[CityId], [a].[Name]\r\n    FROM [Areas] AS [a]\r\n    ORDER BY [a].[Name], [a].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p ROWS ONLY\r\n) AS [a0]\r\nINNER JOIN [Cities] AS [c] ON [a0].[CityId] = [c].[Id]\r\nORDER BY [a0].[Name], [a0].[Id]"
+    },
+    {
+      "Rank": 21,
+      "Executions": 168379,
+      "MeanElapsedMs": 0.44726891120626683,
+      "MeanCpuMs": 0.156323437008178,
+      "MeanLogicalReads": 2,
+      "TotalElapsedSeconds": 75.310692,
+      "ActualPlan": "hot-21.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Top": 1,
+        "Index Scan": 1
+      },
+      "Objects": [
+        "[Cities]"
+      ],
+      "MaximumOperatorActualRows": 10,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [c].[Id], [c].[Name]\r\nFROM [Cities] AS [c]\r\nORDER BY [c].[Name], [c].[Id]\r\nOFFSET @p ROWS FETCH NEXT @p1 ROWS ONLY"
+    },
+    {
+      "Rank": 22,
+      "Executions": 168379,
+      "MeanElapsedMs": 0.4247988228935913,
+      "MeanCpuMs": 0.1333580909733399,
+      "MeanLogicalReads": 2,
+      "TotalElapsedSeconds": 71.527201,
+      "ActualPlan": "hot-22.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Stream Aggregate": 1,
+        "Index Scan": 1
+      },
+      "Objects": [
+        "[Cities]"
+      ],
+      "MaximumOperatorActualRows": 10,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT COUNT(*)\r\nFROM [Cities] AS [c]"
+    },
+    {
+      "Rank": 23,
+      "Executions": 11333,
+      "MeanElapsedMs": 4.831978734668668,
+      "MeanCpuMs": 1.206379511162093,
+      "MeanLogicalReads": 19.046060178240538,
+      "TotalElapsedSeconds": 54.760815,
+      "ActualPlan": "hot-23.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Nested Loops": 4,
+        "Top": 1,
+        "Sort": 1,
+        "Index Seek": 1,
+        "Clustered Index Seek": 3,
+        "Clustered Index Scan": 1
+      },
+      "Objects": [
+        "[Reservations]",
+        "[BaseUnits]",
+        "[BaseProjects]",
+        "[Orders]"
+      ],
+      "MaximumOperatorActualRows": 2,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [r0].[Id], [r0].[UnitId], [b].[Number] AS [UnitNumber], [b0].[Name] AS [ProjectName], [r0].[Number], [r0].[Status], [r0].[ReservationDate], [r0].[CancelledAt], [o].[Id] AS [OrderId]\r\nFROM (\r\n    SELECT [r].[Id], [r].[CancelledAt], [r].[Number], [r].[ReservationDate], [r].[Status], [r].[UnitId]\r\n    FROM [Reservations] AS [r]\r\n    WHERE [r].[CustomerId] = @_currentUser_CustomerId_Value\r\n    ORDER BY [r].[ReservationDate] DESC, [r].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p2 ROWS ONLY\r\n) AS [r0]\r\nINNER JOIN [BaseUnits] AS [b] ON [r0].[UnitId] = [b].[Id]\r\nINNER JOIN [BaseProjects] AS [b0] ON [b].[ProjectId] = [b0].[Id]\r\nLEFT JOIN [Orders] AS [o] ON [r0].[Id] = [o].[ReservationId]\r\nORDER BY [r0].[ReservationDate] DESC, [r0].[Id]"
+    },
+    {
+      "Rank": 24,
+      "Executions": 73829,
+      "MeanElapsedMs": 0.44249617359032356,
+      "MeanCpuMs": 0.16160397675710086,
+      "MeanLogicalReads": 3,
+      "TotalElapsedSeconds": 32.66905,
+      "ActualPlan": "hot-24.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Top": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[BaseUnits]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT TOP(2) [b].[Id], [b].[CreatedAt], [b].[FloorNumber], [b].[MeterPrice], [b].[Number], [b].[ProjectId], [b].[Size], [b].[UpdatedAt]\r\nFROM [BaseUnits] AS [b]\r\nWHERE [b].[Id] = @request_UnitId"
+    },
+    {
+      "Rank": 25,
+      "Executions": 73697,
+      "MeanElapsedMs": 0.41800162828880416,
+      "MeanCpuMs": 0.14762815311342387,
+      "MeanLogicalReads": 0,
+      "TotalElapsedSeconds": 30.805466,
+      "ActualPlan": "hot-25.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Nested Loops": 2,
+        "Constant Scan": 1,
+        "Clustered Index Scan": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[Orders]",
+        "[Reservations]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT CASE\r\n    WHEN EXISTS (\r\n        SELECT 1\r\n        FROM [Orders] AS [o]\r\n        INNER JOIN [Reservations] AS [r] ON [o].[ReservationId] = [r].[Id]\r\n        WHERE [r].[UnitId] = @unit_Id AND [o].[Status] <> 'pending') THEN CAST(1 AS bit)\r\n    ELSE CAST(0 AS bit)\r\nEND"
+    },
+    {
+      "Rank": 26,
+      "Executions": 74296,
+      "MeanElapsedMs": 0.3877269031980188,
+      "MeanCpuMs": 0.1393575428017659,
+      "MeanLogicalReads": 2,
+      "TotalElapsedSeconds": 28.806558,
+      "ActualPlan": "hot-26.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Top": 1,
+        "Clustered Index Seek": 1
+      },
+      "Objects": [
+        "[Users]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT TOP(2) [u].[Role]\r\nFROM [Users] AS [u]\r\nWHERE [u].[Id] = @UserId AND [u].[DeletedAt] IS NULL"
+    },
+    {
+      "Rank": 27,
+      "Executions": 5815,
+      "MeanElapsedMs": 0.6740208082545143,
+      "MeanCpuMs": 0.19253447979363714,
+      "MeanLogicalReads": 3.9128116938950988,
+      "TotalElapsedSeconds": 3.919431,
+      "ActualPlan": "hot-27.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 1,
+        "Nested Loops": 1,
+        "Constant Scan": 1,
+        "Index Seek": 1
+      },
+      "Objects": [
+        "[Reservations]"
+      ],
+      "MaximumOperatorActualRows": 1,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT CASE\r\n    WHEN EXISTS (\r\n        SELECT 1\r\n        FROM [Reservations] AS [r]\r\n        WHERE [r].[CustomerId] = @_currentUser_CustomerId_Value AND [r].[UnitId] = @unit_Id AND [r].[Status] = 'processing') THEN CAST(1 AS bit)\r\n    ELSE CAST(0 AS bit)\r\nEND"
+    },
+    {
+      "Rank": 28,
+      "Executions": 30,
+      "MeanElapsedMs": 28.048266666666667,
+      "MeanCpuMs": 27.325333333333333,
+      "MeanLogicalReads": 810,
+      "TotalElapsedSeconds": 0.841448,
+      "ActualPlan": "hot-28.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Nested Loops": 3,
+        "Top": 1,
+        "Sort": 1,
+        "Clustered Index Scan": 2,
+        "Clustered Index Seek": 2
+      },
+      "Objects": [
+        "[Reservations]",
+        "[BaseUnits]",
+        "[BaseProjects]",
+        "[Orders]"
+      ],
+      "MaximumOperatorActualRows": 22310,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT [r0].[Id], [r0].[UnitId], [b].[Number] AS [UnitNumber], [b0].[Name] AS [ProjectName], [r0].[Number], [r0].[Status], [r0].[ReservationDate], [r0].[CancelledAt], [o].[Id] AS [OrderId]\r\nFROM (\r\n    SELECT [r].[Id], [r].[CancelledAt], [r].[Number], [r].[ReservationDate], [r].[Status], [r].[UnitId]\r\n    FROM [Reservations] AS [r]\r\n    ORDER BY [r].[ReservationDate] DESC, [r].[Id]\r\n    OFFSET @p ROWS FETCH NEXT @p ROWS ONLY\r\n) AS [r0]\r\nINNER JOIN [BaseUnits] AS [b] ON [r0].[UnitId] = [b].[Id]\r\nINNER JOIN [BaseProjects] AS [b0] ON [b].[ProjectId] = [b0].[Id]\r\nLEFT JOIN [Orders] AS [o] ON [r0].[Id] = [o].[ReservationId]\r\nORDER BY [r0].[ReservationDate] DESC, [r0].[Id]"
+    },
+    {
+      "Rank": 29,
+      "Executions": 1,
+      "MeanElapsedMs": 146.816,
+      "MeanCpuMs": 119.462,
+      "MeanLogicalReads": 6604,
+      "TotalElapsedSeconds": 0.146816,
+      "ActualPlan": "hot-29.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 5,
+        "Stream Aggregate": 1,
+        "Sort": 1,
+        "Hash Match": 3,
+        "Filter": 2,
+        "Clustered Index Scan": 2,
+        "Clustered Index Seek": 2
+      },
+      "Objects": [
+        "[sysschobjs]",
+        "[sysobjvalues]",
+        "[syscolpars]"
+      ],
+      "MaximumOperatorActualRows": 1404,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT\n      db_id() AS database_id,\n      c.system_type_id,\n      c.user_type_id,\n      c.is_sparse,\n      c.is_column_set,\n      c.is_filestream,\n      c.encryption_type,\n      CASE WHEN o.object_id IS NOT NULL THEN 1 ELSE 0 END AS is_user,\n      COUNT_BIG(*) AS [ColCount],\n      CASE WHEN c.collation_name IS NULL THEN CONVERT(VARCHAR(128), SERVERPROPERTY('Collation')) ELSE c.collation_name END AS collation_name,\n      AVG(c.max_length) AS avg_max_length\n      FROM sys.columns c WITH (NOLOCK)\n      LEFT OUTER JOIN sys.objects o WITH (NOLOCK)\n      ON o.object_id = c.object_id\n      AND o.type = 'U'\n      GROUP BY\n      c.system_type_id,\n      c.user_type_id,\n      c.is_sparse,\n      c.is_column_set,\n      c.encryption_type,\n      c.is_filestream,\n      CASE WHEN o.object_id IS NOT NULL THEN 1 ELSE 0 END,\n      CASE WHEN c.collation_name IS NULL THEN CONVERT(VARCHAR(128), SERVERPROPERTY('Collation')) ELSE c.collation_name END"
+    },
+    {
+      "Rank": 30,
+      "Executions": 1,
+      "MeanElapsedMs": 122.538,
+      "MeanCpuMs": 53.338,
+      "MeanLogicalReads": 3176,
+      "TotalElapsedSeconds": 0.122538,
+      "ActualPlan": "hot-30.sqlplan",
+      "HasRuntimeCounters": true,
+      "PhysicalOperators": {
+        "Compute Scalar": 14,
+        "Hash Match": 2,
+        "Stream Aggregate": 5,
+        "Sort": 3,
+        "Table Spool": 3,
+        "Nested Loops": 8,
+        "Concatenation": 2,
+        "Clustered Index Scan": 5,
+        "Table-valued function": 3,
+        "Filter": 3,
+        "Clustered Index Seek": 3
+      },
+      "Objects": [
+        "[sysrowsets]",
+        "[ALUCOUNT]",
+        "[sysidxstats]",
+        "[sysschobjs]"
+      ],
+      "MaximumOperatorActualRows": 259,
+      "HasSpillWarning": false,
+      "HasMissingIndexSuggestion": false,
+      "Statement": "SELECT\n      db_id() AS database_id,\n      o.[type] AS object_type,\n      i.[type] AS index_type,\n      p.[data_compression],\n      COUNT_BIG(DISTINCT p.[object_id]) AS NumTables,\n      COUNT_BIG(DISTINCT CAST(p.[object_id] AS VARCHAR(30)) + '|' + CAST(p.[index_id] AS VARCHAR(10))) AS NumIndexes,\n      ISNULL(px.[IsPartitioned], 0) AS IsPartitioned,\n      IIF(px.[IsPartitioned] = 1, COUNT_BIG(1), 0) NumPartitions,\n      SUM(p.[rows]) NumRows\n      FROM sys.partitions p\n      INNER JOIN sys.objects o\n      ON o.[object_id] = p.[object_id]\n      INNER JOIN sys.indexes i\n      ON i.[object_id] = p.[object_id]\n      AND i.[index_id] = p.[index_id]\n      OUTER APPLY (SELECT\n      x.[object_id], 1 AS [IsPartitioned]\n      FROM sys.partitions x\n      WHERE x.[object_id] = p.[object_id]\n      GROUP by\n      x.[object_id]\n      HAVING MAX(x.partition_number) > 1) px\n      WHERE o.[type] NOT IN ('S', 'IT')\n      GROUP BY\n      o.[type]\n      ,i.[type]\n      ,p.[data_compression]\n      ,px.[IsPartitioned]"
+    }
+  ]
+}
