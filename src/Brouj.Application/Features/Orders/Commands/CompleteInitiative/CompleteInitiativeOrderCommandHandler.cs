@@ -20,6 +20,17 @@ public sealed class CompleteInitiativeOrderCommandHandler : IRequestHandler<Comp
 
     public async Task<Result<Guid>> Handle(CompleteInitiativeOrderCommand request, CancellationToken cancellationToken)
     {
+        var unitId = await _db.Orders.AsNoTracking().Where(order => order.Id == request.Id)
+            .Select(order => (Guid?)order.Reservation.UnitId).SingleOrDefaultAsync(cancellationToken);
+
+        if (unitId is null)
+        {
+            return Result<Guid>.Failure(OrderErrors.NotFound);
+        }
+
+        // Share the creator's lock so winner selection cannot race another selection or a new order.
+        await _db.LockUnitForOrderAsync(unitId.Value, cancellationToken);
+
         var entity = await _db.Orders.SingleOrDefaultAsync(order => order.Id == request.Id, cancellationToken);
 
         if (entity is null)

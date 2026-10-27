@@ -40,7 +40,8 @@ public sealed class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, 
     {
         var email = InputRules.NormalizeEmail(request.Input.Email);
 
-        _logger.LogInformation("Processing login attempt for email: {Email}", email);
+        // A login field is untrusted and can contain private or log-forging content.
+        _logger.LogInformation("Processing staff login attempt.");
 
         var entity = await _db.Users.SingleOrDefaultAsync(account => account.Email == email, cancellationToken);
         var activeHash = entity?.DeletedAt is null ? entity?.HashPassword : null;
@@ -48,7 +49,7 @@ public sealed class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, 
 
         if (!verified || entity is null || !Enum.IsDefined(entity.Role))
         {
-            _logger.LogWarning("Login failed for email: {Email}. Invalid credentials, account deleted, or undefined role.", email);
+            _logger.LogWarning("Staff login rejected because credentials or account state are invalid.");
 
             return Result<AuthSessionDto>.Failure(ApplicationErrors.InvalidCredentials);
         }
@@ -63,8 +64,11 @@ public sealed class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, 
 
         var credentials = await _refresh.CreateUserAsync(entity.Id, cancellationToken);
 
-        _logger.LogInformation("User {UserId} successfully logged in.", entity.Id);
+        var result = _response.Write(credentials);
 
-        return _response.Write(credentials);
+        // Token issuance can fail after password verification. Log the actual final outcome.
+        _logger.LogInformation("Staff login finished; successful: {Succeeded}.", result.IsSuccess);
+
+        return result;
     }
 }

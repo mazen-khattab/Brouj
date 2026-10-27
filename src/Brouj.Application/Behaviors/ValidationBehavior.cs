@@ -4,9 +4,7 @@ using MediatR;
 
 namespace Brouj.Application.Behaviors;
 
-public sealed class ValidationBehavior<TRequest, TResponse>(
-    IEnumerable<IValidator<TRequest>> validators)
-    : IPipelineBehavior<TRequest, TResponse>
+public sealed class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators) : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
 {
     private readonly IReadOnlyCollection<IValidator<TRequest>> _validators = validators.ToArray();

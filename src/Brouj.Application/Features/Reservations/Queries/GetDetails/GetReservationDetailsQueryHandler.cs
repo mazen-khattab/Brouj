@@ -16,9 +16,7 @@ public sealed class GetReservationDetailsQueryHandler : IRequestHandler<GetReser
         _db = db;
     }
 
-    public async Task<Result<ReservationDto>> Handle(
-        GetReservationDetailsQuery request,
-        CancellationToken cancellationToken)
+    public async Task<Result<ReservationDto>> Handle(GetReservationDetailsQuery request, CancellationToken cancellationToken)
     {
         var query = _db.Reservations.AsNoTracking().Where(reservation => reservation.Id == request.Id);
 

@@ -16,9 +16,7 @@ public sealed class GetCitiesQueryHandler : IRequestHandler<GetCitiesQuery, Resu
         _db = db;
     }
 
-    public async Task<Result<PaginationResult<CityDto>>> Handle(
-        GetCitiesQuery request,
-        CancellationToken cancellationToken)
+    public async Task<Result<PaginationResult<CityDto>>> Handle(GetCitiesQuery request, CancellationToken cancellationToken)
     {
         var query = _db.Cities.AsNoTracking();
 

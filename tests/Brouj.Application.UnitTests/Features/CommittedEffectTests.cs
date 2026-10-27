@@ -64,7 +64,9 @@ public sealed class CommittedEffectTests
     [Fact]
     public async Task Provider_errors_are_sanitized_before_reaching_host_logs()
     {
-        var behavior = new Brouj.Application.Behaviors.FeatureFailureBehavior<CreateProjectCommand, Result<Guid>>();
+        var behavior = new Brouj.Application.Behaviors.FeatureFailureBehavior<CreateProjectCommand, Result<Guid>>(
+            Microsoft.Extensions.Logging.Abstractions.NullLogger<
+                Brouj.Application.Behaviors.FeatureFailureBehavior<CreateProjectCommand, Result<Guid>>>.Instance);
         var error = await Assert.ThrowsAsync<FeaturePersistenceException>(() => behavior.Handle(
             new CreateProjectCommand(), cancellationToken => throw new DbUpdateException("private identity value"),
             CancellationToken.None));

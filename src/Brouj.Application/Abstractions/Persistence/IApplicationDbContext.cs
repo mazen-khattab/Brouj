@@ -33,4 +33,8 @@ public interface IApplicationDbContext
     DbSet<UserRefreshToken> UserRefreshTokens { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+
+    /// <summary>Locks one unit until the current transaction ends, before reading order eligibility.</summary>
+    /// <remarks>Call inside a transaction. The lock coordinates independent API instances through SQL Server.</remarks>
+    Task LockUnitForOrderAsync(Guid unitId, CancellationToken cancellationToken);
 }

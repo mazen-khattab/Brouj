@@ -8,6 +8,7 @@ using Brouj.Infrastructure.Caching;
 using Brouj.Infrastructure.Storage;
 using Brouj.Infrastructure.Interceptors;
 using Brouj.Infrastructure.Persistence;
+using Brouj.Infrastructure.Seeder;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,8 @@ public static class DependencyInjection
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
 
+        // Persistence can also be resolved outside an ASP.NET host (workers and integration tests).
+        services.AddLogging();
         services.TryAddSingleton(TimeProvider.System);
         services.AddHttpContextAccessor();
         services.TryAddScoped<ICurrentUser, CurrentUser>();
@@ -62,6 +65,10 @@ public static class DependencyInjection
     /// for development; External preserves a host-registered IDistributedCache such as Redis.</remarks>
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddOptions<InitialAdminOptions>().Bind(configuration.GetSection(InitialAdminOptions.SectionName))
+            .Validate(InitialAdminOptions.IsValid, "Enabled InitialAdmin settings are incomplete or invalid.")
+            .ValidateOnStart();
+        services.AddScoped<UsersSeeding>();
         services.AddOptions<JwtOptions>().Bind(configuration.GetSection("Jwt"))
             .Validate(o => ValidJwt(o), "Invalid JWT signing configuration.").ValidateOnStart();
         services.AddOptions<FileStorageOptions>().Bind(configuration.GetSection("FileStorage"));
@@ -85,9 +92,9 @@ public static class DependencyInjection
         {
             o.HeaderName = "X-CSRF-TOKEN";
             o.Cookie.Name = "__Host-brouj-csrf";
-            o.Cookie.HttpOnly = true; 
+            o.Cookie.HttpOnly = true;
             o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            o.Cookie.SameSite = SameSiteMode.Strict; 
+            o.Cookie.SameSite = SameSiteMode.Strict;
             o.Cookie.Path = "/";
         });
         services.AddOptions<AntiforgeryOptions>().Configure<IOptions<AppCookieOptions>>((csrf, cookies) =>

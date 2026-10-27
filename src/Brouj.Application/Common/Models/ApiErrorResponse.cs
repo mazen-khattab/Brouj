@@ -4,10 +4,7 @@ namespace Brouj.Application.Common.Models;
 
 public sealed class ApiErrorResponse
 {
-    public ApiErrorResponse(
-        FeatureErrorCode code,
-        string message,
-        IReadOnlyDictionary<string, string[]>? errors = null)
+    public ApiErrorResponse(FeatureErrorCode code, string message, IReadOnlyDictionary<string, string[]>? errors = null)
     {
         if (code == FeatureErrorCode.None)
         {

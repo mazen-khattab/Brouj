@@ -1,0 +1,4557 @@
+[
+  {
+    "Name": "Warmup",
+    "StartedUtc": "2026-10-27T16:52:36.217977+00:00",
+    "FinishedUtc": "2026-10-27T16:53:06.2527232+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0179579,
+    "OfferedRps": 25,
+    "Offered": 750,
+    "Dropped": 0,
+    "PeakConcurrency": 62,
+    "MaximumSchedulerDelayMs": 78.8007,
+    "Total": {
+      "Name": "All",
+      "Count": 750,
+      "Successful": 750,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 60,
+      "P95Ms": 1312,
+      "P99Ms": 2502,
+      "MeanPayloadBytes": 2618.6306666666665,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 715,
+        "201": 35
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 88,
+        "Successful": 88,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 58,
+        "P95Ms": 1443,
+        "P99Ms": 2531,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 88
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 87,
+        "Successful": 87,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 58,
+        "P95Ms": 1467,
+        "P99Ms": 2901,
+        "MeanPayloadBytes": 2731.3793103448274,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 87
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 87,
+        "Successful": 87,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 62,
+        "P95Ms": 1528,
+        "P99Ms": 2588,
+        "MeanPayloadBytes": 4870.0344827586205,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 87
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 87,
+        "Successful": 87,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 59,
+        "P95Ms": 1488,
+        "P99Ms": 2580,
+        "MeanPayloadBytes": 899.9080459770115,
+        "MaximumPayloadBytes": 900,
+        "Statuses": {
+          "200": 87
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 87,
+        "Successful": 87,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 60,
+        "P95Ms": 1521,
+        "P99Ms": 2926,
+        "MeanPayloadBytes": 5908.9655172413795,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 87
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 87,
+        "Successful": 87,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 58,
+        "P95Ms": 1410,
+        "P99Ms": 2895,
+        "MeanPayloadBytes": 499.8735632183908,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 87
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 87,
+        "Successful": 87,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 57,
+        "P95Ms": 1432,
+        "P99Ms": 2288,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 87
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 70,
+        "Successful": 70,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 61,
+        "P95Ms": 113,
+        "P99Ms": 230,
+        "MeanPayloadBytes": 688.6142857142858,
+        "MaximumPayloadBytes": 4896,
+        "Statuses": {
+          "200": 70
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 35,
+        "Successful": 35,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 81,
+        "P95Ms": 693,
+        "P99Ms": 733,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 35
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 35,
+        "Successful": 35,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 84,
+        "P95Ms": 194,
+        "P99Ms": 219,
+        "MeanPayloadBytes": 5321.428571428572,
+        "MaximumPayloadBytes": 5326,
+        "Statuses": {
+          "200": 35
+        }
+      }
+    ],
+    "SuccessfulRps": 24.985044035923575,
+    "CompletedRps": 24.985044035923575,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Calibration-25",
+    "StartedUtc": "2026-10-27T16:53:06.3108982+00:00",
+    "FinishedUtc": "2026-10-27T16:53:26.351827+00:00",
+    "ScheduledSeconds": 20,
+    "ActualSeconds": 20.0390564,
+    "OfferedRps": 25,
+    "Offered": 500,
+    "Dropped": 0,
+    "PeakConcurrency": 2,
+    "MaximumSchedulerDelayMs": 62.7195,
+    "Total": {
+      "Name": "All",
+      "Count": 500,
+      "Successful": 500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 59,
+      "P95Ms": 80,
+      "P99Ms": 90,
+      "MeanPayloadBytes": 2619.03,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 475,
+        "201": 25
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 57,
+        "Successful": 57,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 57,
+        "P95Ms": 65,
+        "P99Ms": 70,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 57
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 58,
+        "Successful": 58,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 57,
+        "P95Ms": 65,
+        "P99Ms": 67,
+        "MeanPayloadBytes": 2731.396551724138,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 58
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 58,
+        "Successful": 58,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 59,
+        "P95Ms": 66,
+        "P99Ms": 67,
+        "MeanPayloadBytes": 4869.982758620689,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 58
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 57,
+        "Successful": 57,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 60,
+        "P95Ms": 66,
+        "P99Ms": 70,
+        "MeanPayloadBytes": 899.9122807017544,
+        "MaximumPayloadBytes": 900,
+        "Statuses": {
+          "200": 57
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 57,
+        "Successful": 57,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 58,
+        "P95Ms": 66,
+        "P99Ms": 66,
+        "MeanPayloadBytes": 5908.8421052631575,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 57
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 56,
+        "Successful": 56,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 60,
+        "P95Ms": 68,
+        "P99Ms": 69,
+        "MeanPayloadBytes": 499.8392857142857,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 56
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 57,
+        "Successful": 57,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 56,
+        "P95Ms": 63,
+        "P99Ms": 64,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 57
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 50,
+        "Successful": 50,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 60,
+        "P95Ms": 68,
+        "P99Ms": 73,
+        "MeanPayloadBytes": 731.28,
+        "MaximumPayloadBytes": 5806,
+        "Statuses": {
+          "200": 50
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 25,
+        "Successful": 25,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 77,
+        "P95Ms": 92,
+        "P99Ms": 96,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 25
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 25,
+        "Successful": 25,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 84,
+        "P95Ms": 91,
+        "P99Ms": 95,
+        "MeanPayloadBytes": 5321.84,
+        "MaximumPayloadBytes": 5326,
+        "Statuses": {
+          "200": 25
+        }
+      }
+    ],
+    "SuccessfulRps": 24.951274651834407,
+    "CompletedRps": 24.951274651834407,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Calibration-50",
+    "StartedUtc": "2026-10-27T16:53:26.361317+00:00",
+    "FinishedUtc": "2026-10-27T16:53:46.3940799+00:00",
+    "ScheduledSeconds": 20,
+    "ActualSeconds": 20.0317196,
+    "OfferedRps": 50,
+    "Offered": 1000,
+    "Dropped": 0,
+    "PeakConcurrency": 4,
+    "MaximumSchedulerDelayMs": 51.4616,
+    "Total": {
+      "Name": "All",
+      "Count": 1000,
+      "Successful": 1000,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 39,
+      "P95Ms": 59,
+      "P99Ms": 76,
+      "MeanPayloadBytes": 2610.385,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 950,
+        "201": 50
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 114,
+        "Successful": 114,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 36,
+        "P95Ms": 44,
+        "P99Ms": 46,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 114
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 114,
+        "Successful": 114,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 36,
+        "P95Ms": 45,
+        "P99Ms": 47,
+        "MeanPayloadBytes": 2731.3859649122805,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 114
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 115,
+        "Successful": 115,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 42,
+        "P95Ms": 48,
+        "P99Ms": 50,
+        "MeanPayloadBytes": 4870.017391304348,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 115
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 114,
+        "Successful": 114,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 39,
+        "P95Ms": 46,
+        "P99Ms": 47,
+        "MeanPayloadBytes": 899.8859649122807,
+        "MaximumPayloadBytes": 900,
+        "Statuses": {
+          "200": 114
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 115,
+        "Successful": 115,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 36,
+        "P95Ms": 47,
+        "P99Ms": 52,
+        "MeanPayloadBytes": 5908.947826086956,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 115
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 114,
+        "Successful": 114,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 41,
+        "P95Ms": 48,
+        "P99Ms": 50,
+        "MeanPayloadBytes": 499.86842105263156,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 114
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 114,
+        "Successful": 114,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 37,
+        "P95Ms": 43,
+        "P99Ms": 49,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 114
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 100,
+        "Successful": 100,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 41,
+        "P95Ms": 51,
+        "P99Ms": 54,
+        "MeanPayloadBytes": 679.44,
+        "MaximumPayloadBytes": 5803,
+        "Statuses": {
+          "200": 100
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 50,
+        "Successful": 50,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 56,
+        "P95Ms": 74,
+        "P99Ms": 89,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 50
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 50,
+        "Successful": 50,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 63,
+        "P95Ms": 86,
+        "P99Ms": 96,
+        "MeanPayloadBytes": 5320.8,
+        "MaximumPayloadBytes": 5326,
+        "Statuses": {
+          "200": 50
+        }
+      }
+    ],
+    "SuccessfulRps": 49.92082656748051,
+    "CompletedRps": 49.92082656748051,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Calibration-100",
+    "StartedUtc": "2026-10-27T16:53:46.4024675+00:00",
+    "FinishedUtc": "2026-10-27T16:54:06.444655+00:00",
+    "ScheduledSeconds": 20,
+    "ActualSeconds": 20.0411023,
+    "OfferedRps": 100,
+    "Offered": 2000,
+    "Dropped": 0,
+    "PeakConcurrency": 8,
+    "MaximumSchedulerDelayMs": 44.3091,
+    "Total": {
+      "Name": "All",
+      "Count": 2000,
+      "Successful": 2000,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 29,
+      "P95Ms": 55,
+      "P99Ms": 75,
+      "MeanPayloadBytes": 2606.7905,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 1900,
+        "201": 100
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 228,
+        "Successful": 228,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 28,
+        "P95Ms": 42,
+        "P99Ms": 49,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 228
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 229,
+        "Successful": 229,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 27,
+        "P95Ms": 42,
+        "P99Ms": 46,
+        "MeanPayloadBytes": 2731.406113537118,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 229
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 229,
+        "Successful": 229,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 29,
+        "P95Ms": 45,
+        "P99Ms": 51,
+        "MeanPayloadBytes": 4870.004366812227,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 229
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 229,
+        "Successful": 229,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 31,
+        "P95Ms": 43,
+        "P99Ms": 50,
+        "MeanPayloadBytes": 899.8602620087336,
+        "MaximumPayloadBytes": 900,
+        "Statuses": {
+          "200": 229
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 229,
+        "Successful": 229,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 27,
+        "P95Ms": 40,
+        "P99Ms": 45,
+        "MeanPayloadBytes": 5908.829694323144,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 229
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 228,
+        "Successful": 228,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 27,
+        "P95Ms": 44,
+        "P99Ms": 47,
+        "MeanPayloadBytes": 499.89473684210526,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 228
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 228,
+        "Successful": 228,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 23,
+        "P95Ms": 40,
+        "P99Ms": 46,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 228
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 200,
+        "Successful": 200,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 30,
+        "P95Ms": 45,
+        "P99Ms": 48,
+        "MeanPayloadBytes": 679.475,
+        "MaximumPayloadBytes": 5805,
+        "Statuses": {
+          "200": 200
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 100,
+        "Successful": 100,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 47,
+        "P95Ms": 65,
+        "P99Ms": 75,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 100
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 100,
+        "Successful": 100,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 60,
+        "P95Ms": 91,
+        "P99Ms": 110,
+        "MeanPayloadBytes": 5320.57,
+        "MaximumPayloadBytes": 5327,
+        "Statuses": {
+          "200": 100
+        }
+      }
+    ],
+    "SuccessfulRps": 99.79490998356913,
+    "CompletedRps": 99.79490998356913,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Calibration-200",
+    "StartedUtc": "2026-10-27T16:54:06.453733+00:00",
+    "FinishedUtc": "2026-10-27T16:54:26.5170068+00:00",
+    "ScheduledSeconds": 20,
+    "ActualSeconds": 20.060974,
+    "OfferedRps": 200,
+    "Offered": 4000,
+    "Dropped": 0,
+    "PeakConcurrency": 15,
+    "MaximumSchedulerDelayMs": 37.1535,
+    "Total": {
+      "Name": "All",
+      "Count": 4000,
+      "Successful": 4000,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 25,
+      "P95Ms": 65,
+      "P99Ms": 86,
+      "MeanPayloadBytes": 2606.34475,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 3800,
+        "201": 200
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 457,
+        "Successful": 457,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 23,
+        "P95Ms": 43,
+        "P99Ms": 47,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 457
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 458,
+        "Successful": 458,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 23,
+        "P95Ms": 43,
+        "P99Ms": 47,
+        "MeanPayloadBytes": 2731.3995633187774,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 458
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 458,
+        "Successful": 458,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 26,
+        "P95Ms": 44,
+        "P99Ms": 51,
+        "MeanPayloadBytes": 4870.019650655022,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 458
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 457,
+        "Successful": 457,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 26,
+        "P95Ms": 44,
+        "P99Ms": 47,
+        "MeanPayloadBytes": 899.8796498905908,
+        "MaximumPayloadBytes": 900,
+        "Statuses": {
+          "200": 457
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 457,
+        "Successful": 457,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 24,
+        "P95Ms": 41,
+        "P99Ms": 45,
+        "MeanPayloadBytes": 5908.840262582057,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 457
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 456,
+        "Successful": 456,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 24,
+        "P95Ms": 42,
+        "P99Ms": 48,
+        "MeanPayloadBytes": 499.9035087719298,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 456
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 457,
+        "Successful": 457,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 20,
+        "P95Ms": 41,
+        "P99Ms": 44,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 457
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 400,
+        "Successful": 400,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 25,
+        "P95Ms": 44,
+        "P99Ms": 49,
+        "MeanPayloadBytes": 679.4625,
+        "MaximumPayloadBytes": 5807,
+        "Statuses": {
+          "200": 400
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 200,
+        "Successful": 200,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 60,
+        "P95Ms": 81,
+        "P99Ms": 90,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 200
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 200,
+        "Successful": 200,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 73,
+        "P95Ms": 96,
+        "P99Ms": 105,
+        "MeanPayloadBytes": 5320.965,
+        "MaximumPayloadBytes": 5330,
+        "Statuses": {
+          "200": 200
+        }
+      }
+    ],
+    "SuccessfulRps": 199.39211326429114,
+    "CompletedRps": 199.39211326429114,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Calibration-400",
+    "StartedUtc": "2026-10-27T16:54:26.5275185+00:00",
+    "FinishedUtc": "2026-10-27T16:54:46.6312999+00:00",
+    "ScheduledSeconds": 20,
+    "ActualSeconds": 20.1022502,
+    "OfferedRps": 400,
+    "Offered": 8000,
+    "Dropped": 0,
+    "PeakConcurrency": 36,
+    "MaximumSchedulerDelayMs": 34.6418,
+    "Total": {
+      "Name": "All",
+      "Count": 8000,
+      "Successful": 8000,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 29,
+      "P95Ms": 94,
+      "P99Ms": 134,
+      "MeanPayloadBytes": 2606.01525,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 7600,
+        "201": 400
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 914,
+        "Successful": 914,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 26,
+        "P95Ms": 48,
+        "P99Ms": 67,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 914
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 914,
+        "Successful": 914,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 26,
+        "P95Ms": 49,
+        "P99Ms": 69,
+        "MeanPayloadBytes": 2731.398249452954,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 914
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 915,
+        "Successful": 915,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 30,
+        "P95Ms": 56,
+        "P99Ms": 72,
+        "MeanPayloadBytes": 4870.024043715847,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 915
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 914,
+        "Successful": 914,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 29,
+        "P95Ms": 57,
+        "P99Ms": 81,
+        "MeanPayloadBytes": 899.882932166302,
+        "MaximumPayloadBytes": 900,
+        "Statuses": {
+          "200": 914
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 915,
+        "Successful": 915,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 28,
+        "P95Ms": 51,
+        "P99Ms": 72,
+        "MeanPayloadBytes": 5908.809836065574,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 915
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 914,
+        "Successful": 914,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 30,
+        "P95Ms": 59,
+        "P99Ms": 82,
+        "MeanPayloadBytes": 499.8960612691466,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 914
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 914,
+        "Successful": 914,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 23,
+        "P95Ms": 44,
+        "P99Ms": 54,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 914
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 800,
+        "Successful": 800,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 27,
+        "P95Ms": 55,
+        "P99Ms": 65,
+        "MeanPayloadBytes": 679.495,
+        "MaximumPayloadBytes": 5810,
+        "Statuses": {
+          "200": 800
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 400,
+        "Successful": 400,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 84,
+        "P95Ms": 125,
+        "P99Ms": 162,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 400
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 400,
+        "Successful": 400,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 103,
+        "P95Ms": 157,
+        "P99Ms": 209,
+        "MeanPayloadBytes": 5322.9425,
+        "MaximumPayloadBytes": 5448,
+        "Statuses": {
+          "200": 400
+        }
+      }
+    ],
+    "SuccessfulRps": 397.9653979234623,
+    "CompletedRps": 397.9653979234623,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-Cities",
+    "StartedUtc": "2026-10-27T16:54:46.6462519+00:00",
+    "FinishedUtc": "2026-10-27T16:55:16.6698432+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0226442,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 2,
+    "MaximumSchedulerDelayMs": 51.2014,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 35,
+      "P95Ms": 42,
+      "P99Ms": 46,
+      "MeanPayloadBytes": 731,
+      "MaximumPayloadBytes": 731,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 35,
+        "P95Ms": 42,
+        "P99Ms": 46,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.962288131836175,
+    "CompletedRps": 49.962288131836175,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-Areas",
+    "StartedUtc": "2026-10-27T16:55:16.6808982+00:00",
+    "FinishedUtc": "2026-10-27T16:55:46.695496+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0136732,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 2,
+    "MaximumSchedulerDelayMs": 40.9602,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 36,
+      "P95Ms": 43,
+      "P99Ms": 44,
+      "MeanPayloadBytes": 2731.4,
+      "MaximumPayloadBytes": 2733,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Areas",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 36,
+        "P95Ms": 43,
+        "P99Ms": 44,
+        "MeanPayloadBytes": 2731.4,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.97722171506818,
+    "CompletedRps": 49.97722171506818,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-ProjectList",
+    "StartedUtc": "2026-10-27T16:55:46.709099+00:00",
+    "FinishedUtc": "2026-10-27T16:56:16.7287098+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0187025,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 2,
+    "MaximumSchedulerDelayMs": 52.0047,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 37,
+      "P95Ms": 59,
+      "P99Ms": 61,
+      "MeanPayloadBytes": 4870.08,
+      "MaximumPayloadBytes": 4872,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "ProjectList",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 37,
+        "P95Ms": 59,
+        "P99Ms": 61,
+        "MeanPayloadBytes": 4870.08,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.96884858697673,
+    "CompletedRps": 49.96884858697673,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-ProjectDetails",
+    "StartedUtc": "2026-10-27T16:56:16.7412324+00:00",
+    "FinishedUtc": "2026-10-27T16:56:46.7612545+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0192409,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 2,
+    "MaximumSchedulerDelayMs": 51.5427,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 36,
+      "P95Ms": 44,
+      "P99Ms": 46,
+      "MeanPayloadBytes": 899.8966666666666,
+      "MaximumPayloadBytes": 901,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "ProjectDetails",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 36,
+        "P95Ms": 44,
+        "P99Ms": 46,
+        "MeanPayloadBytes": 899.8966666666666,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.967952387496915,
+    "CompletedRps": 49.967952387496915,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-UnitList",
+    "StartedUtc": "2026-10-27T16:56:46.7718809+00:00",
+    "FinishedUtc": "2026-10-27T16:57:16.7819713+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0091737,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 3,
+    "MaximumSchedulerDelayMs": 56.823,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 35,
+      "P95Ms": 59,
+      "P99Ms": 60,
+      "MeanPayloadBytes": 5908.814,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "UnitList",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 35,
+        "P95Ms": 59,
+        "P99Ms": 60,
+        "MeanPayloadBytes": 5908.814,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.98471517394696,
+    "CompletedRps": 49.98471517394696,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-UnitDetails",
+    "StartedUtc": "2026-10-27T16:57:16.7938753+00:00",
+    "FinishedUtc": "2026-10-27T16:57:46.8122468+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0172865,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 2,
+    "MaximumSchedulerDelayMs": 37.5799,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 38,
+      "P95Ms": 45,
+      "P99Ms": 48,
+      "MeanPayloadBytes": 499.88866666666667,
+      "MaximumPayloadBytes": 500,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "UnitDetails",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 38,
+        "P95Ms": 45,
+        "P99Ms": 48,
+        "MeanPayloadBytes": 499.88866666666667,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.971205758388585,
+    "CompletedRps": 49.971205758388585,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-CurrentTerms",
+    "StartedUtc": "2026-10-27T16:57:46.8222921+00:00",
+    "FinishedUtc": "2026-10-27T16:58:16.8336414+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0099605,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 2,
+    "MaximumSchedulerDelayMs": 51.4626,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 33,
+      "P95Ms": 40,
+      "P99Ms": 41,
+      "MeanPayloadBytes": 4199,
+      "MaximumPayloadBytes": 4199,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "CurrentTerms",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 33,
+        "P95Ms": 40,
+        "P99Ms": 41,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.98340467659063,
+    "CompletedRps": 49.98340467659063,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-CustomerReads",
+    "StartedUtc": "2026-10-27T16:58:16.8440567+00:00",
+    "FinishedUtc": "2026-10-27T16:58:46.8620624+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0171608,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 2,
+    "MaximumSchedulerDelayMs": 51.4199,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 37,
+      "P95Ms": 45,
+      "P99Ms": 51,
+      "MeanPayloadBytes": 669.134,
+      "MaximumPayloadBytes": 5805,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "CustomerReads",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 37,
+        "P95Ms": 45,
+        "P99Ms": 51,
+        "MeanPayloadBytes": 669.134,
+        "MaximumPayloadBytes": 5805,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.97141501803861,
+    "CompletedRps": 49.97141501803861,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-ReservationWrites",
+    "StartedUtc": "2026-10-27T16:58:46.8715249+00:00",
+    "FinishedUtc": "2026-10-27T16:59:16.8992744+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.026983,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 3,
+    "MaximumSchedulerDelayMs": 40.6093,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 52,
+      "P95Ms": 61,
+      "P99Ms": 68,
+      "MeanPayloadBytes": 77,
+      "MaximumPayloadBytes": 77,
+      "Statuses": {
+        "201": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "ReservationWrites",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 52,
+        "P95Ms": 61,
+        "P99Ms": 68,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.95506874600088,
+    "CompletedRps": 49.95506874600088,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Separate-AdminReads",
+    "StartedUtc": "2026-10-27T16:59:16.906563+00:00",
+    "FinishedUtc": "2026-10-27T16:59:46.9486483+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 30.0413234,
+    "OfferedRps": 50,
+    "Offered": 1500,
+    "Dropped": 0,
+    "PeakConcurrency": 5,
+    "MaximumSchedulerDelayMs": 37.5149,
+    "Total": {
+      "Name": "All",
+      "Count": 1500,
+      "Successful": 1500,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 69,
+      "P95Ms": 88,
+      "P99Ms": 97,
+      "MeanPayloadBytes": 5810.98,
+      "MaximumPayloadBytes": 5816,
+      "Statuses": {
+        "200": 1500
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "AdminReads",
+        "Count": 1500,
+        "Successful": 1500,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 69,
+        "P95Ms": 88,
+        "P99Ms": 97,
+        "MeanPayloadBytes": 5810.98,
+        "MaximumPayloadBytes": 5816,
+        "Statuses": {
+          "200": 1500
+        }
+      }
+    ],
+    "SuccessfulRps": 49.93122240413683,
+    "CompletedRps": 49.93122240413683,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Load",
+    "StartedUtc": "2026-10-27T16:59:47.1307068+00:00",
+    "FinishedUtc": "2026-10-27T17:04:47.2414589+00:00",
+    "ScheduledSeconds": 300,
+    "ActualSeconds": 300.1091864,
+    "OfferedRps": 400,
+    "Offered": 120000,
+    "Dropped": 0,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 70.3569,
+    "Total": {
+      "Name": "All",
+      "Count": 120000,
+      "Successful": 120000,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 33,
+      "P95Ms": 136,
+      "P99Ms": 265,
+      "MeanPayloadBytes": 2629.4883083333334,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 114000,
+        "201": 6000
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 13714,
+        "Successful": 13714,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 30,
+        "P95Ms": 65,
+        "P99Ms": 135,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 13714
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 13714,
+        "Successful": 13714,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 30,
+        "P95Ms": 66,
+        "P99Ms": 142,
+        "MeanPayloadBytes": 2731.399883330903,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 13714
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 13715,
+        "Successful": 13715,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 35,
+        "P95Ms": 77,
+        "P99Ms": 160,
+        "MeanPayloadBytes": 4870.024936201239,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 13715
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 13714,
+        "Successful": 13714,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 35,
+        "P95Ms": 82,
+        "P99Ms": 170,
+        "MeanPayloadBytes": 899.884789266443,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 13714
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 13715,
+        "Successful": 13715,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 31,
+        "P95Ms": 68,
+        "P99Ms": 148,
+        "MeanPayloadBytes": 5908.789573459716,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 13715
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 13714,
+        "Successful": 13714,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 35,
+        "P95Ms": 82,
+        "P99Ms": 191,
+        "MeanPayloadBytes": 499.8885810121044,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 13714
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 13714,
+        "Successful": 13714,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 25,
+        "P95Ms": 52,
+        "P99Ms": 106,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 13714
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 12000,
+        "Successful": 12000,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 28,
+        "P95Ms": 72,
+        "P99Ms": 200,
+        "MeanPayloadBytes": 676.48925,
+        "MaximumPayloadBytes": 5813,
+        "Statuses": {
+          "200": 12000
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 6000,
+        "Successful": 6000,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 91,
+        "P95Ms": 202,
+        "P99Ms": 463,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 6000
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 6000,
+        "Successful": 6000,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 151,
+        "P95Ms": 317,
+        "P99Ms": 746,
+        "MeanPayloadBytes": 5810.3925,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "200": 6000
+        }
+      }
+    ],
+    "SuccessfulRps": 399.8544710992559,
+    "CompletedRps": 399.8544710992559,
+    "UnexpectedErrorRate": 0,
+    "Stable": true
+  },
+  {
+    "Name": "Stress-500",
+    "StartedUtc": "2026-10-27T17:04:47.3725459+00:00",
+    "FinishedUtc": "2026-10-27T17:06:28.5079216+00:00",
+    "ScheduledSeconds": 100,
+    "ActualSeconds": 101.1343184,
+    "OfferedRps": 500,
+    "Offered": 50000,
+    "Dropped": 887,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 59.88,
+    "Total": {
+      "Name": "All",
+      "Count": 49113,
+      "Successful": 49113,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 734,
+      "P95Ms": 1430,
+      "P99Ms": 2341,
+      "MeanPayloadBytes": 2628.9317085089488,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 46662,
+        "201": 2451
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 5610,
+        "Successful": 5610,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 652,
+        "P95Ms": 1010,
+        "P99Ms": 1232,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 5610
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 5613,
+        "Successful": 5613,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 657,
+        "P95Ms": 1023,
+        "P99Ms": 1215,
+        "MeanPayloadBytes": 2731.3983609477996,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 5613
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 5613,
+        "Successful": 5613,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 698,
+        "P95Ms": 1069,
+        "P99Ms": 1299,
+        "MeanPayloadBytes": 4870.026011045787,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 5613
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 5610,
+        "Successful": 5610,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 832,
+        "P95Ms": 1224,
+        "P99Ms": 1424,
+        "MeanPayloadBytes": 899.8935828877005,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 5610
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 5614,
+        "Successful": 5614,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 660,
+        "P95Ms": 1025,
+        "P99Ms": 1234,
+        "MeanPayloadBytes": 5908.78927680798,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 5614
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 5613,
+        "Successful": 5613,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 838,
+        "P95Ms": 1228,
+        "P99Ms": 1457,
+        "MeanPayloadBytes": 499.88829502939603,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 5613
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 5615,
+        "Successful": 5615,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 474,
+        "P95Ms": 810,
+        "P99Ms": 1004,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 5615
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 4926,
+        "Successful": 4926,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 843,
+        "P95Ms": 1279,
+        "P99Ms": 1784,
+        "MeanPayloadBytes": 676.0962241169306,
+        "MaximumPayloadBytes": 5813,
+        "Statuses": {
+          "200": 4926
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 2451,
+        "Successful": 2451,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 997,
+        "P95Ms": 1424,
+        "P99Ms": 1656,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 2451
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 2448,
+        "Successful": 2448,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1887,
+        "P95Ms": 2689,
+        "P99Ms": 3038,
+        "MeanPayloadBytes": 5810.55433006536,
+        "MaximumPayloadBytes": 5816,
+        "Statuses": {
+          "200": 2448
+        }
+      }
+    ],
+    "SuccessfulRps": 485.6215059041719,
+    "CompletedRps": 485.6215059041719,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Stress-1000",
+    "StartedUtc": "2026-10-27T17:06:28.5545195+00:00",
+    "FinishedUtc": "2026-10-27T17:08:09.9380864+00:00",
+    "ScheduledSeconds": 100,
+    "ActualSeconds": 101.3826871,
+    "OfferedRps": 1000,
+    "Offered": 100000,
+    "Dropped": 54909,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 74.2046,
+    "Total": {
+      "Name": "All",
+      "Count": 45091,
+      "Successful": 45091,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 1070,
+      "P95Ms": 1940,
+      "P99Ms": 2951,
+      "MeanPayloadBytes": 2651.6050431349936,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 42912,
+        "201": 2179
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 5167,
+        "Successful": 5167,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 984,
+        "P95Ms": 1235,
+        "P99Ms": 1360,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 5167
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 5176,
+        "Successful": 5176,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 989,
+        "P95Ms": 1237,
+        "P99Ms": 1347,
+        "MeanPayloadBytes": 2731.4037867078823,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 5176
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 5170,
+        "Successful": 5170,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1033,
+        "P95Ms": 1294,
+        "P99Ms": 1405,
+        "MeanPayloadBytes": 4870.057059961316,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 5170
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 5158,
+        "Successful": 5158,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1189,
+        "P95Ms": 1487,
+        "P99Ms": 1613,
+        "MeanPayloadBytes": 899.8858084528887,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 5158
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 5161,
+        "Successful": 5161,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 993,
+        "P95Ms": 1252,
+        "P99Ms": 1360,
+        "MeanPayloadBytes": 5908.784925402054,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 5161
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 5194,
+        "Successful": 5194,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1191,
+        "P95Ms": 1484,
+        "P99Ms": 1610,
+        "MeanPayloadBytes": 499.8839045051983,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 5194
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 5158,
+        "Successful": 5158,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 792,
+        "P95Ms": 997,
+        "P99Ms": 1107,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 5158
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 4318,
+        "Successful": 4318,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1183,
+        "P95Ms": 1509,
+        "P99Ms": 1715,
+        "MeanPayloadBytes": 673.3147290412228,
+        "MaximumPayloadBytes": 5815,
+        "Statuses": {
+          "200": 4318
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 2179,
+        "Successful": 2179,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1347,
+        "P95Ms": 1680,
+        "P99Ms": 1807,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 2179
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 2410,
+        "Successful": 2410,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 2547,
+        "P95Ms": 3264,
+        "P99Ms": 3532,
+        "MeanPayloadBytes": 5810.647302904565,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "200": 2410
+        }
+      }
+    ],
+    "SuccessfulRps": 444.76035593260576,
+    "CompletedRps": 444.76035593260576,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Stress-2000",
+    "StartedUtc": "2026-10-27T17:08:09.9827155+00:00",
+    "FinishedUtc": "2026-10-27T17:09:51.809933+00:00",
+    "ScheduledSeconds": 100,
+    "ActualSeconds": 101.8263334,
+    "OfferedRps": 2000,
+    "Offered": 200000,
+    "Dropped": 153511,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 68.2237,
+    "Total": {
+      "Name": "All",
+      "Count": 46489,
+      "Successful": 46489,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 1045,
+      "P95Ms": 1590,
+      "P99Ms": 2951,
+      "MeanPayloadBytes": 2628.1402912516937,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 44319,
+        "201": 2170
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 5355,
+        "Successful": 5355,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 970,
+        "P95Ms": 1168,
+        "P99Ms": 1312,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 5355
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 5352,
+        "Successful": 5352,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 975,
+        "P95Ms": 1179,
+        "P99Ms": 1296,
+        "MeanPayloadBytes": 2731.407698056801,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 5352
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 5370,
+        "Successful": 5370,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1017,
+        "P95Ms": 1227,
+        "P99Ms": 1345,
+        "MeanPayloadBytes": 4870.017690875233,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 5370
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 5381,
+        "Successful": 5381,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1170,
+        "P95Ms": 1402,
+        "P99Ms": 1528,
+        "MeanPayloadBytes": 899.8920275041813,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 5381
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 5380,
+        "Successful": 5380,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 977,
+        "P95Ms": 1183,
+        "P99Ms": 1305,
+        "MeanPayloadBytes": 5908.77936802974,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 5380
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 5347,
+        "Successful": 5347,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1171,
+        "P95Ms": 1401,
+        "P99Ms": 1532,
+        "MeanPayloadBytes": 499.88834860669533,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 5347
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 5333,
+        "Successful": 5333,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 776,
+        "P95Ms": 945,
+        "P99Ms": 1053,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 5333
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 4653,
+        "Successful": 4653,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1178,
+        "P95Ms": 1415,
+        "P99Ms": 1607,
+        "MeanPayloadBytes": 676.6997635933806,
+        "MaximumPayloadBytes": 5813,
+        "Statuses": {
+          "200": 4653
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 2170,
+        "Successful": 2170,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1321,
+        "P95Ms": 1604,
+        "P99Ms": 1760,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 2170
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 2148,
+        "Successful": 2148,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 2591,
+        "P95Ms": 3334,
+        "P99Ms": 3666,
+        "MeanPayloadBytes": 5810.579143389199,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "200": 2148
+        }
+      }
+    ],
+    "SuccessfulRps": 456.5518412352065,
+    "CompletedRps": 456.5518412352065,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Stress-4000",
+    "StartedUtc": "2026-10-27T17:09:51.85592+00:00",
+    "FinishedUtc": "2026-10-27T17:11:33.3630034+00:00",
+    "ScheduledSeconds": 100,
+    "ActualSeconds": 101.5059228,
+    "OfferedRps": 4000,
+    "Offered": 400000,
+    "Dropped": 357935,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 72.552,
+    "Total": {
+      "Name": "All",
+      "Count": 42065,
+      "Successful": 42065,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 1148,
+      "P95Ms": 2259,
+      "P99Ms": 3293,
+      "MeanPayloadBytes": 2620.8005705455844,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 39876,
+        "201": 2189
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 4761,
+        "Successful": 4761,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1056,
+        "P95Ms": 1313,
+        "P99Ms": 1412,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 4761
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 4762,
+        "Successful": 4762,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1057,
+        "P95Ms": 1308,
+        "P99Ms": 1404,
+        "MeanPayloadBytes": 2731.407601847963,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 4762
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 4788,
+        "Successful": 4788,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1101,
+        "P95Ms": 1363,
+        "P99Ms": 1468,
+        "MeanPayloadBytes": 4870.009189640768,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 4788
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 4781,
+        "Successful": 4781,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1273,
+        "P95Ms": 1567,
+        "P99Ms": 1676,
+        "MeanPayloadBytes": 899.898556787283,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 4781
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 4741,
+        "Successful": 4741,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1066,
+        "P95Ms": 1323,
+        "P99Ms": 1418,
+        "MeanPayloadBytes": 5908.785066441679,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 4741
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 4730,
+        "Successful": 4730,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1274,
+        "P95Ms": 1565,
+        "P99Ms": 1673,
+        "MeanPayloadBytes": 499.88668076109934,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 4730
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 4708,
+        "Successful": 4708,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 849,
+        "P95Ms": 1062,
+        "P99Ms": 1141,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 4708
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 4388,
+        "Successful": 4388,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1273,
+        "P95Ms": 1588,
+        "P99Ms": 1755,
+        "MeanPayloadBytes": 670.1880127620784,
+        "MaximumPayloadBytes": 5813,
+        "Statuses": {
+          "200": 4388
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 2189,
+        "Successful": 2189,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1422,
+        "P95Ms": 1730,
+        "P99Ms": 1881,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 2189
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 2217,
+        "Successful": 2217,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 2916,
+        "P95Ms": 3629,
+        "P99Ms": 3927,
+        "MeanPayloadBytes": 5809.859720342805,
+        "MaximumPayloadBytes": 5816,
+        "Statuses": {
+          "200": 2217
+        }
+      }
+    ],
+    "SuccessfulRps": 414.40931563059496,
+    "CompletedRps": 414.40931563059496,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Stress-8000",
+    "StartedUtc": "2026-10-27T17:11:33.407399+00:00",
+    "FinishedUtc": "2026-10-27T17:13:14.9025371+00:00",
+    "ScheduledSeconds": 100,
+    "ActualSeconds": 101.49425,
+    "OfferedRps": 8000,
+    "Offered": 800000,
+    "Dropped": 759741,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 77.465,
+    "Total": {
+      "Name": "All",
+      "Count": 40259,
+      "Successful": 40259,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 1194,
+      "P95Ms": 2218,
+      "P99Ms": 3611,
+      "MeanPayloadBytes": 2626.3301870389228,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 38233,
+        "201": 2026
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 4608,
+        "Successful": 4608,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1102,
+        "P95Ms": 1358,
+        "P99Ms": 1506,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 4608
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 4606,
+        "Successful": 4606,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1106,
+        "P95Ms": 1360,
+        "P99Ms": 1508,
+        "MeanPayloadBytes": 2731.3949196699955,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 4606
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 4601,
+        "Successful": 4601,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1151,
+        "P95Ms": 1423,
+        "P99Ms": 1566,
+        "MeanPayloadBytes": 4870.01695283634,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 4601
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 4639,
+        "Successful": 4639,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1321,
+        "P95Ms": 1626,
+        "P99Ms": 1781,
+        "MeanPayloadBytes": 899.9001940073292,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 4639
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 4600,
+        "Successful": 4600,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1106,
+        "P95Ms": 1367,
+        "P99Ms": 1513,
+        "MeanPayloadBytes": 5908.77,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 4600
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 4547,
+        "Successful": 4547,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1321,
+        "P95Ms": 1630,
+        "P99Ms": 1782,
+        "MeanPayloadBytes": 499.88827798548493,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 4547
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 4535,
+        "Successful": 4535,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 885,
+        "P95Ms": 1102,
+        "P99Ms": 1237,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 4535
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 4072,
+        "Successful": 4072,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1334,
+        "P95Ms": 1661,
+        "P99Ms": 3052,
+        "MeanPayloadBytes": 683.7342829076621,
+        "MaximumPayloadBytes": 5814,
+        "Statuses": {
+          "200": 4072
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 2026,
+        "Successful": 2026,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1462,
+        "P95Ms": 1801,
+        "P99Ms": 1976,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 2026
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 2025,
+        "Successful": 2025,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 3207,
+        "P95Ms": 3939,
+        "P99Ms": 4281,
+        "MeanPayloadBytes": 5810.677530864197,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "200": 2025
+        }
+      }
+    ],
+    "SuccessfulRps": 396.6628651376802,
+    "CompletedRps": 396.6628651376802,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Stress-10000",
+    "StartedUtc": "2026-10-27T17:13:14.9450886+00:00",
+    "FinishedUtc": "2026-10-27T17:14:56.8009551+00:00",
+    "ScheduledSeconds": 100,
+    "ActualSeconds": 101.8548558,
+    "OfferedRps": 10000,
+    "Offered": 1000000,
+    "Dropped": 960810,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 88.6297,
+    "Total": {
+      "Name": "All",
+      "Count": 39190,
+      "Successful": 39187,
+      "UnexpectedErrors": 3,
+      "RateLimitRejects": 0,
+      "P50Ms": 1211,
+      "P95Ms": 2410,
+      "P99Ms": 3857,
+      "MeanPayloadBytes": 2627.3226843582547,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "0": 3,
+        "200": 37307,
+        "201": 1880
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 4440,
+        "Successful": 4440,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1122,
+        "P95Ms": 1484,
+        "P99Ms": 1597,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 4440
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 4436,
+        "Successful": 4436,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1127,
+        "P95Ms": 1486,
+        "P99Ms": 1621,
+        "MeanPayloadBytes": 2731.4150135256987,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 4436
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 4459,
+        "Successful": 4459,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1170,
+        "P95Ms": 1534,
+        "P99Ms": 1664,
+        "MeanPayloadBytes": 4870.015922852657,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 4459
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 4490,
+        "Successful": 4490,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1343,
+        "P95Ms": 1762,
+        "P99Ms": 1908,
+        "MeanPayloadBytes": 899.8924276169265,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 4490
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 4492,
+        "Successful": 4492,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1131,
+        "P95Ms": 1483,
+        "P99Ms": 1597,
+        "MeanPayloadBytes": 5908.791852181656,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 4492
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 4471,
+        "Successful": 4471,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1343,
+        "P95Ms": 1756,
+        "P99Ms": 1884,
+        "MeanPayloadBytes": 499.88123462312683,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 4471
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 4423,
+        "Successful": 4423,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 901,
+        "P95Ms": 1199,
+        "P99Ms": 1289,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 4423
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 4111,
+        "Successful": 4111,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1369,
+        "P95Ms": 1790,
+        "P99Ms": 3219,
+        "MeanPayloadBytes": 685.6886402335198,
+        "MaximumPayloadBytes": 5813,
+        "Statuses": {
+          "200": 4111
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 1882,
+        "Successful": 1880,
+        "UnexpectedErrors": 2,
+        "RateLimitRejects": 0,
+        "P50Ms": 1515,
+        "P95Ms": 1922,
+        "P99Ms": 2080,
+        "MeanPayloadBytes": 76.91817215727949,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "0": 2,
+          "201": 1880
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 1986,
+        "Successful": 1985,
+        "UnexpectedErrors": 1,
+        "RateLimitRejects": 0,
+        "P50Ms": 3417,
+        "P95Ms": 4203,
+        "P99Ms": 4511,
+        "MeanPayloadBytes": 5807.450151057402,
+        "MaximumPayloadBytes": 5816,
+        "Statuses": {
+          "0": 1,
+          "200": 1985
+        }
+      }
+    ],
+    "SuccessfulRps": 384.7337438378662,
+    "CompletedRps": 384.7631975146344,
+    "UnexpectedErrorRate": 7.655014034192396E-05,
+    "Stable": false
+  },
+  {
+    "Name": "Spike-before",
+    "StartedUtc": "2026-10-27T17:14:56.9732164+00:00",
+    "FinishedUtc": "2026-10-27T17:15:58.7161319+00:00",
+    "ScheduledSeconds": 60,
+    "ActualSeconds": 61.7420569,
+    "OfferedRps": 400,
+    "Offered": 24000,
+    "Dropped": 384,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 56.8694,
+    "Total": {
+      "Name": "All",
+      "Count": 23616,
+      "Successful": 23616,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 854,
+      "P95Ms": 1507,
+      "P99Ms": 3615,
+      "MeanPayloadBytes": 2629.6899559620597,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 22427,
+        "201": 1189
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 2702,
+        "Successful": 2702,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 774,
+        "P95Ms": 1185,
+        "P99Ms": 1255,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 2702
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 2700,
+        "Successful": 2700,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 788,
+        "P95Ms": 1191,
+        "P99Ms": 1257,
+        "MeanPayloadBytes": 2731.3977777777777,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 2700
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 2699,
+        "Successful": 2699,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 837,
+        "P95Ms": 1234,
+        "P99Ms": 1324,
+        "MeanPayloadBytes": 4870.026306039274,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 2699
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 2699,
+        "Successful": 2699,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1011,
+        "P95Ms": 1437,
+        "P99Ms": 1502,
+        "MeanPayloadBytes": 899.8873656909967,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 2699
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 2701,
+        "Successful": 2701,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 786,
+        "P95Ms": 1187,
+        "P99Ms": 1267,
+        "MeanPayloadBytes": 5908.781192151055,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 2701
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 2698,
+        "Successful": 2698,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1005,
+        "P95Ms": 1434,
+        "P99Ms": 1509,
+        "MeanPayloadBytes": 499.88547071905117,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 2698
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 2701,
+        "Successful": 2701,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 565,
+        "P95Ms": 949,
+        "P99Ms": 1005,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 2701
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 2349,
+        "Successful": 2349,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1027,
+        "P95Ms": 1446,
+        "P99Ms": 1566,
+        "MeanPayloadBytes": 678.4576415495956,
+        "MaximumPayloadBytes": 5815,
+        "Statuses": {
+          "200": 2349
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 1189,
+        "Successful": 1189,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1154,
+        "P95Ms": 1599,
+        "P99Ms": 1697,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 1189
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 1178,
+        "Successful": 1178,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 2797,
+        "P95Ms": 4023,
+        "P99Ms": 4312,
+        "MeanPayloadBytes": 5810.498302207131,
+        "MaximumPayloadBytes": 5815,
+        "Statuses": {
+          "200": 1178
+        }
+      }
+    ],
+    "SuccessfulRps": 382.49454562632167,
+    "CompletedRps": 382.49454562632167,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Spike-peak",
+    "StartedUtc": "2026-10-27T17:15:58.754927+00:00",
+    "FinishedUtc": "2026-10-27T17:16:30.2814308+00:00",
+    "ScheduledSeconds": 30,
+    "ActualSeconds": 31.5254792,
+    "OfferedRps": 10000,
+    "Offered": 300000,
+    "Dropped": 287756,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 63.9864,
+    "Total": {
+      "Name": "All",
+      "Count": 12244,
+      "Successful": 12244,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 1189,
+      "P95Ms": 1931,
+      "P99Ms": 3976,
+      "MeanPayloadBytes": 2679.729418490689,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 11692,
+        "201": 552
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 1451,
+        "Successful": 1451,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1103,
+        "P95Ms": 1471,
+        "P99Ms": 1675,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 1451
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 1438,
+        "Successful": 1438,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1116,
+        "P95Ms": 1467,
+        "P99Ms": 1671,
+        "MeanPayloadBytes": 2731.3783031988874,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 1438
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 1459,
+        "Successful": 1459,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1168,
+        "P95Ms": 1516,
+        "P99Ms": 1738,
+        "MeanPayloadBytes": 4870.0644276901985,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 1459
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 1459,
+        "Successful": 1459,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1329,
+        "P95Ms": 1762,
+        "P99Ms": 1972,
+        "MeanPayloadBytes": 899.8882796435915,
+        "MaximumPayloadBytes": 900,
+        "Statuses": {
+          "200": 1459
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 1478,
+        "Successful": 1478,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1117,
+        "P95Ms": 1473,
+        "P99Ms": 1639,
+        "MeanPayloadBytes": 5908.800405953992,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 1478
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 1486,
+        "Successful": 1486,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1331,
+        "P95Ms": 1743,
+        "P99Ms": 1962,
+        "MeanPayloadBytes": 499.9091520861373,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 1486
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 1455,
+        "Successful": 1455,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 888,
+        "P95Ms": 1189,
+        "P99Ms": 1329,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 1455
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 923,
+        "Successful": 923,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1314,
+        "P95Ms": 1820,
+        "P99Ms": 2075,
+        "MeanPayloadBytes": 672.6186348862406,
+        "MaximumPayloadBytes": 5813,
+        "Statuses": {
+          "200": 923
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 552,
+        "Successful": 552,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1446,
+        "P95Ms": 1921,
+        "P99Ms": 2198,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 552
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 543,
+        "Successful": 543,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 3465,
+        "P95Ms": 4643,
+        "P99Ms": 5059,
+        "MeanPayloadBytes": 5810.1197053406995,
+        "MaximumPayloadBytes": 5816,
+        "Statuses": {
+          "200": 543
+        }
+      }
+    ],
+    "SuccessfulRps": 388.38426284730355,
+    "CompletedRps": 388.38426284730355,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Spike-recovery",
+    "StartedUtc": "2026-10-27T17:16:30.330892+00:00",
+    "FinishedUtc": "2026-10-27T17:18:02.0799289+00:00",
+    "ScheduledSeconds": 90,
+    "ActualSeconds": 91.7466569,
+    "OfferedRps": 400,
+    "Offered": 36000,
+    "Dropped": 1659,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 45.9414,
+    "Total": {
+      "Name": "All",
+      "Count": 34341,
+      "Successful": 34341,
+      "UnexpectedErrors": 0,
+      "RateLimitRejects": 0,
+      "P50Ms": 1153,
+      "P95Ms": 1772,
+      "P99Ms": 3900,
+      "MeanPayloadBytes": 2628.4414839404794,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "200": 32639,
+        "201": 1702
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 3912,
+        "Successful": 3912,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1091,
+        "P95Ms": 1252,
+        "P99Ms": 1330,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 3912
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 3910,
+        "Successful": 3910,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1096,
+        "P95Ms": 1255,
+        "P99Ms": 1337,
+        "MeanPayloadBytes": 2731.397698209719,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 3910
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 3912,
+        "Successful": 3912,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1133,
+        "P95Ms": 1315,
+        "P99Ms": 1404,
+        "MeanPayloadBytes": 4870.021472392638,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 3912
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 3925,
+        "Successful": 3925,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1327,
+        "P95Ms": 1517,
+        "P99Ms": 1604,
+        "MeanPayloadBytes": 899.8843312101911,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 3925
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 3930,
+        "Successful": 3930,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1099,
+        "P95Ms": 1256,
+        "P99Ms": 1340,
+        "MeanPayloadBytes": 5908.77786259542,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 3930
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 3936,
+        "Successful": 3936,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1325,
+        "P95Ms": 1518,
+        "P99Ms": 1600,
+        "MeanPayloadBytes": 499.8864329268293,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 3936
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 3933,
+        "Successful": 3933,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 865,
+        "P95Ms": 1018,
+        "P99Ms": 1106,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 3933
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 3466,
+        "Successful": 3466,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1337,
+        "P95Ms": 1547,
+        "P99Ms": 1720,
+        "MeanPayloadBytes": 675.5553952683208,
+        "MaximumPayloadBytes": 5815,
+        "Statuses": {
+          "200": 3466
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 1702,
+        "Successful": 1702,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1443,
+        "P95Ms": 1679,
+        "P99Ms": 1778,
+        "MeanPayloadBytes": 77,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "201": 1702
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 1715,
+        "Successful": 1715,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 3503,
+        "P95Ms": 4256,
+        "P99Ms": 4635,
+        "MeanPayloadBytes": 5809.945189504373,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "200": 1715
+        }
+      }
+    ],
+    "SuccessfulRps": 374.30246681827595,
+    "CompletedRps": 374.30246681827595,
+    "UnexpectedErrorRate": 0,
+    "Stable": false
+  },
+  {
+    "Name": "Soak-1",
+    "StartedUtc": "2026-10-27T17:18:02.2929253+00:00",
+    "FinishedUtc": "2026-10-27T17:28:04.9596812+00:00",
+    "ScheduledSeconds": 600,
+    "ActualSeconds": 602.6656896,
+    "OfferedRps": 400,
+    "Offered": 240000,
+    "Dropped": 36737,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 56.4439,
+    "Total": {
+      "Name": "All",
+      "Count": 203263,
+      "Successful": 202901,
+      "UnexpectedErrors": 362,
+      "RateLimitRejects": 0,
+      "P50Ms": 1340,
+      "P95Ms": 2449,
+      "P99Ms": 4940,
+      "MeanPayloadBytes": 2621.797607041124,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "0": 362,
+        "200": 192894,
+        "201": 10007
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 23361,
+        "Successful": 23361,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1233,
+        "P95Ms": 1612,
+        "P99Ms": 1760,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 23361
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 23337,
+        "Successful": 23337,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1237,
+        "P95Ms": 1618,
+        "P99Ms": 1764,
+        "MeanPayloadBytes": 2731.39790890003,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 23337
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 23344,
+        "Successful": 23344,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1280,
+        "P95Ms": 1673,
+        "P99Ms": 1831,
+        "MeanPayloadBytes": 4870.026644962303,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 23344
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 23354,
+        "Successful": 23354,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1485,
+        "P95Ms": 1931,
+        "P99Ms": 2096,
+        "MeanPayloadBytes": 899.889997430847,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 23354
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 23275,
+        "Successful": 23275,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1239,
+        "P95Ms": 1619,
+        "P99Ms": 1762,
+        "MeanPayloadBytes": 5908.790547798067,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 23275
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 23255,
+        "Successful": 23255,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1485,
+        "P95Ms": 1929,
+        "P99Ms": 2094,
+        "MeanPayloadBytes": 499.8889271124489,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 23255
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 23299,
+        "Successful": 23299,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 986,
+        "P95Ms": 1303,
+        "P99Ms": 1441,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 23299
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 20008,
+        "Successful": 19914,
+        "UnexpectedErrors": 94,
+        "RateLimitRejects": 0,
+        "P50Ms": 1486,
+        "P95Ms": 1963,
+        "P99Ms": 2355,
+        "MeanPayloadBytes": 647.5653738504598,
+        "MaximumPayloadBytes": 5815,
+        "Statuses": {
+          "0": 94,
+          "200": 19914
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 10014,
+        "Successful": 10007,
+        "UnexpectedErrors": 7,
+        "RateLimitRejects": 0,
+        "P50Ms": 1611,
+        "P95Ms": 2066,
+        "P99Ms": 2285,
+        "MeanPayloadBytes": 76.9461753545037,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "0": 7,
+          "201": 10007
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 10016,
+        "Successful": 9755,
+        "UnexpectedErrors": 261,
+        "RateLimitRejects": 0,
+        "P50Ms": 4225,
+        "P95Ms": 5640,
+        "P99Ms": 5933,
+        "MeanPayloadBytes": 5659.089956070287,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "0": 261,
+          "200": 9755
+        }
+      }
+    ],
+    "SuccessfulRps": 336.6725591009985,
+    "CompletedRps": 337.27322379163365,
+    "UnexpectedErrorRate": 0.0017809439002671415,
+    "Stable": false
+  },
+  {
+    "Name": "Soak-2",
+    "StartedUtc": "2026-10-27T17:28:05.1255452+00:00",
+    "FinishedUtc": "2026-10-27T17:38:08.3426265+00:00",
+    "ScheduledSeconds": 600,
+    "ActualSeconds": 603.2150139,
+    "OfferedRps": 400,
+    "Offered": 240000,
+    "Dropped": 74456,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 62.6127,
+    "Total": {
+      "Name": "All",
+      "Count": 165544,
+      "Successful": 162899,
+      "UnexpectedErrors": 2645,
+      "RateLimitRejects": 0,
+      "P50Ms": 1680,
+      "P95Ms": 4257,
+      "P99Ms": 5916,
+      "MeanPayloadBytes": 2534.475698303774,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "0": 2645,
+        "200": 154613,
+        "201": 8286
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 18932,
+        "Successful": 18932,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1554,
+        "P95Ms": 1857,
+        "P99Ms": 2078,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 18932
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 18922,
+        "Successful": 18922,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1559,
+        "P95Ms": 1867,
+        "P99Ms": 2090,
+        "MeanPayloadBytes": 2731.404185604059,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 18922
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 18905,
+        "Successful": 18905,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1611,
+        "P95Ms": 1936,
+        "P99Ms": 2168,
+        "MeanPayloadBytes": 4870.0247024596665,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 18905
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 18930,
+        "Successful": 18930,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1869,
+        "P95Ms": 2225,
+        "P99Ms": 2460,
+        "MeanPayloadBytes": 899.8892234548335,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 18930
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 18863,
+        "Successful": 18863,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1562,
+        "P95Ms": 1868,
+        "P99Ms": 2082,
+        "MeanPayloadBytes": 5908.788050681228,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 18863
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 18865,
+        "Successful": 18865,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1869,
+        "P95Ms": 2216,
+        "P99Ms": 2445,
+        "MeanPayloadBytes": 499.8890538033395,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 18865
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 18926,
+        "Successful": 18926,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1249,
+        "P95Ms": 1510,
+        "P99Ms": 1685,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 18926
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 16643,
+        "Successful": 16489,
+        "UnexpectedErrors": 154,
+        "RateLimitRejects": 0,
+        "P50Ms": 1875,
+        "P95Ms": 2257,
+        "P99Ms": 2834,
+        "MeanPayloadBytes": 622.2218350057082,
+        "MaximumPayloadBytes": 5806,
+        "Statuses": {
+          "0": 154,
+          "200": 16489
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 8301,
+        "Successful": 8286,
+        "UnexpectedErrors": 15,
+        "RateLimitRejects": 0,
+        "P50Ms": 2008,
+        "P95Ms": 2398,
+        "P99Ms": 2678,
+        "MeanPayloadBytes": 76.86086013733285,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "0": 15,
+          "201": 8286
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 8257,
+        "Successful": 5781,
+        "UnexpectedErrors": 2476,
+        "RateLimitRejects": 0,
+        "P50Ms": 5471,
+        "P95Ms": 6064,
+        "P99Ms": 6184,
+        "MeanPayloadBytes": 4068.038391667676,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "0": 2476,
+          "200": 5781
+        }
+      }
+    ],
+    "SuccessfulRps": 270.05130218294784,
+    "CompletedRps": 274.43613999210504,
+    "UnexpectedErrorRate": 0.015977625283912434,
+    "Stable": false
+  },
+  {
+    "Name": "Soak-3",
+    "StartedUtc": "2026-10-27T17:38:08.5339073+00:00",
+    "FinishedUtc": "2026-10-27T17:48:11.333656+00:00",
+    "ScheduledSeconds": 600,
+    "ActualSeconds": 602.7964636,
+    "OfferedRps": 400,
+    "Offered": 240000,
+    "Dropped": 82913,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 66.5438,
+    "Total": {
+      "Name": "All",
+      "Count": 157087,
+      "Successful": 152793,
+      "UnexpectedErrors": 4294,
+      "RateLimitRejects": 0,
+      "P50Ms": 1769,
+      "P95Ms": 4671,
+      "P99Ms": 6029,
+      "MeanPayloadBytes": 2467.9482261422013,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "0": 4294,
+        "200": 144890,
+        "201": 7903
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 18001,
+        "Successful": 18001,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1642,
+        "P95Ms": 1974,
+        "P99Ms": 2171,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 18001
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 17927,
+        "Successful": 17927,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1645,
+        "P95Ms": 1981,
+        "P99Ms": 2169,
+        "MeanPayloadBytes": 2731.3959948680763,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 17927
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 17877,
+        "Successful": 17877,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1697,
+        "P95Ms": 2050,
+        "P99Ms": 2245,
+        "MeanPayloadBytes": 4870.028640152151,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 17877
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 17867,
+        "Successful": 17867,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1970,
+        "P95Ms": 2356,
+        "P99Ms": 2569,
+        "MeanPayloadBytes": 899.8882856663122,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 17867
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 17936,
+        "Successful": 17936,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1648,
+        "P95Ms": 1988,
+        "P99Ms": 2178,
+        "MeanPayloadBytes": 5908.793320695807,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 17936
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 17909,
+        "Successful": 17909,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1971,
+        "P95Ms": 2356,
+        "P99Ms": 2563,
+        "MeanPayloadBytes": 499.887654252052,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 17909
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 17981,
+        "Successful": 17981,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1316,
+        "P95Ms": 1603,
+        "P99Ms": 1773,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 17981
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 15838,
+        "Successful": 15688,
+        "UnexpectedErrors": 150,
+        "RateLimitRejects": 0,
+        "P50Ms": 1979,
+        "P95Ms": 2391,
+        "P99Ms": 3014,
+        "MeanPayloadBytes": 622.1145346634676,
+        "MaximumPayloadBytes": 5807,
+        "Statuses": {
+          "0": 150,
+          "200": 15688
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 7908,
+        "Successful": 7903,
+        "UnexpectedErrors": 5,
+        "RateLimitRejects": 0,
+        "P50Ms": 2109,
+        "P95Ms": 2539,
+        "P99Ms": 2852,
+        "MeanPayloadBytes": 76.95131512392514,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "0": 5,
+          "201": 7903
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 7843,
+        "Successful": 3704,
+        "UnexpectedErrors": 4139,
+        "RateLimitRejects": 0,
+        "P50Ms": 5862,
+        "P95Ms": 6148,
+        "P99Ms": 6287,
+        "MeanPayloadBytes": 2744.090909090909,
+        "MaximumPayloadBytes": 5818,
+        "Statuses": {
+          "0": 4139,
+          "200": 3704
+        }
+      }
+    ],
+    "SuccessfulRps": 253.4736170937284,
+    "CompletedRps": 260.59708290564697,
+    "UnexpectedErrorRate": 0.027335170956221712,
+    "Stable": false
+  },
+  {
+    "Name": "Soak-4",
+    "StartedUtc": "2026-10-27T17:48:11.5306086+00:00",
+    "FinishedUtc": "2026-10-27T17:58:14.7394685+00:00",
+    "ScheduledSeconds": 600,
+    "ActualSeconds": 603.2078992,
+    "OfferedRps": 400,
+    "Offered": 240000,
+    "Dropped": 80783,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 63.9003,
+    "Total": {
+      "Name": "All",
+      "Count": 159217,
+      "Successful": 154664,
+      "UnexpectedErrors": 4553,
+      "RateLimitRejects": 0,
+      "P50Ms": 1746,
+      "P95Ms": 4510,
+      "P99Ms": 6026,
+      "MeanPayloadBytes": 2463.807646168437,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "0": 4553,
+        "200": 146976,
+        "201": 7688
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 18315,
+        "Successful": 18315,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1614,
+        "P95Ms": 1957,
+        "P99Ms": 2158,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 18315
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 18259,
+        "Successful": 18259,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1617,
+        "P95Ms": 1961,
+        "P99Ms": 2178,
+        "MeanPayloadBytes": 2731.402541212553,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 18259
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 18218,
+        "Successful": 18218,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1666,
+        "P95Ms": 2020,
+        "P99Ms": 2241,
+        "MeanPayloadBytes": 4870.027610055989,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 18218
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 18283,
+        "Successful": 18283,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1940,
+        "P95Ms": 2326,
+        "P99Ms": 2572,
+        "MeanPayloadBytes": 899.8891866761472,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 18283
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 18198,
+        "Successful": 18198,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1620,
+        "P95Ms": 1959,
+        "P99Ms": 2174,
+        "MeanPayloadBytes": 5908.790141773821,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 18198
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 18238,
+        "Successful": 18238,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1938,
+        "P95Ms": 2324,
+        "P99Ms": 2575,
+        "MeanPayloadBytes": 499.88863910516505,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 18238
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 18210,
+        "Successful": 18210,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1294,
+        "P95Ms": 1592,
+        "P99Ms": 1769,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 18210
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 15927,
+        "Successful": 15773,
+        "UnexpectedErrors": 154,
+        "RateLimitRejects": 0,
+        "P50Ms": 1948,
+        "P95Ms": 2406,
+        "P99Ms": 4351,
+        "MeanPayloadBytes": 622.3044515602436,
+        "MaximumPayloadBytes": 5809,
+        "Statuses": {
+          "0": 154,
+          "200": 15773
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 7760,
+        "Successful": 7688,
+        "UnexpectedErrors": 72,
+        "RateLimitRejects": 0,
+        "P50Ms": 2082,
+        "P95Ms": 2528,
+        "P99Ms": 3108,
+        "MeanPayloadBytes": 76.28556701030928,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "0": 72,
+          "201": 7688
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 7809,
+        "Successful": 3482,
+        "UnexpectedErrors": 4327,
+        "RateLimitRejects": 0,
+        "P50Ms": 5857,
+        "P95Ms": 6172,
+        "P99Ms": 6313,
+        "MeanPayloadBytes": 2590.849020361122,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "0": 4327,
+          "200": 3482
+        }
+      }
+    ],
+    "SuccessfulRps": 256.40247782749856,
+    "CompletedRps": 263.9504559060986,
+    "UnexpectedErrorRate": 0.02859619261762249,
+    "Stable": false
+  },
+  {
+    "Name": "Soak-5",
+    "StartedUtc": "2026-10-27T17:58:14.9439905+00:00",
+    "FinishedUtc": "2026-10-27T18:08:18.7839541+00:00",
+    "ScheduledSeconds": 600,
+    "ActualSeconds": 603.8378003,
+    "OfferedRps": 400,
+    "Offered": 240000,
+    "Dropped": 85237,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 57.9787,
+    "Total": {
+      "Name": "All",
+      "Count": 154763,
+      "Successful": 149326,
+      "UnexpectedErrors": 5437,
+      "RateLimitRejects": 0,
+      "P50Ms": 1790,
+      "P95Ms": 5096,
+      "P99Ms": 6080,
+      "MeanPayloadBytes": 2425.2842733728344,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "0": 5437,
+        "200": 141619,
+        "201": 7707
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 17748,
+        "Successful": 17748,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1665,
+        "P95Ms": 2018,
+        "P99Ms": 2231,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 17748
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 17673,
+        "Successful": 17673,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1668,
+        "P95Ms": 2013,
+        "P99Ms": 2225,
+        "MeanPayloadBytes": 2731.393764499519,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 17673
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 17644,
+        "Successful": 17644,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1719,
+        "P95Ms": 2078,
+        "P99Ms": 2302,
+        "MeanPayloadBytes": 4870.028451598277,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 17644
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 17680,
+        "Successful": 17680,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1999,
+        "P95Ms": 2394,
+        "P99Ms": 2641,
+        "MeanPayloadBytes": 899.8900452488688,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 17680
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 17609,
+        "Successful": 17609,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1672,
+        "P95Ms": 2025,
+        "P99Ms": 2251,
+        "MeanPayloadBytes": 5908.79402578227,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 17609
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 17658,
+        "Successful": 17658,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1999,
+        "P95Ms": 2399,
+        "P99Ms": 2635,
+        "MeanPayloadBytes": 499.88973836221544,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 17658
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 17694,
+        "Successful": 17694,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1336,
+        "P95Ms": 1641,
+        "P99Ms": 1810,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 17694
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 15499,
+        "Successful": 15358,
+        "UnexpectedErrors": 141,
+        "RateLimitRejects": 0,
+        "P50Ms": 2010,
+        "P95Ms": 2429,
+        "P99Ms": 4102,
+        "MeanPayloadBytes": 622.6819794825473,
+        "MaximumPayloadBytes": 5809,
+        "Statuses": {
+          "0": 141,
+          "200": 15358
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 7732,
+        "Successful": 7707,
+        "UnexpectedErrors": 25,
+        "RateLimitRejects": 0,
+        "P50Ms": 2132,
+        "P95Ms": 2564,
+        "P99Ms": 2933,
+        "MeanPayloadBytes": 76.75103466114848,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "0": 25,
+          "201": 7707
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 7826,
+        "Successful": 2555,
+        "UnexpectedErrors": 5271,
+        "RateLimitRejects": 0,
+        "P50Ms": 5942,
+        "P95Ms": 6220,
+        "P99Ms": 6362,
+        "MeanPayloadBytes": 1896.9105545617174,
+        "MaximumPayloadBytes": 5818,
+        "Statuses": {
+          "0": 5271,
+          "200": 2555
+        }
+      }
+    ],
+    "SuccessfulRps": 247.29488602040402,
+    "CompletedRps": 256.29895962642667,
+    "UnexpectedErrorRate": 0.035131135995037574,
+    "Stable": false
+  },
+  {
+    "Name": "Soak-6",
+    "StartedUtc": "2026-10-27T18:08:18.9462363+00:00",
+    "FinishedUtc": "2026-10-27T18:18:22.7200038+00:00",
+    "ScheduledSeconds": 600,
+    "ActualSeconds": 603.7698829,
+    "OfferedRps": 400,
+    "Offered": 240000,
+    "Dropped": 91839,
+    "PeakConcurrency": 256,
+    "MaximumSchedulerDelayMs": 59.6973,
+    "Total": {
+      "Name": "All",
+      "Count": 148161,
+      "Successful": 141476,
+      "UnexpectedErrors": 6685,
+      "RateLimitRejects": 0,
+      "P50Ms": 1880,
+      "P95Ms": 5595,
+      "P99Ms": 6149,
+      "MeanPayloadBytes": 2371.2895026356464,
+      "MaximumPayloadBytes": 5910,
+      "Statuses": {
+        "0": 6685,
+        "200": 134018,
+        "201": 7458
+      }
+    },
+    "Scenarios": [
+      {
+        "Name": "Cities",
+        "Count": 16944,
+        "Successful": 16944,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1749,
+        "P95Ms": 2090,
+        "P99Ms": 2311,
+        "MeanPayloadBytes": 731,
+        "MaximumPayloadBytes": 731,
+        "Statuses": {
+          "200": 16944
+        }
+      },
+      {
+        "Name": "Areas",
+        "Count": 16877,
+        "Successful": 16877,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1753,
+        "P95Ms": 2098,
+        "P99Ms": 2319,
+        "MeanPayloadBytes": 2731.399952598211,
+        "MaximumPayloadBytes": 2733,
+        "Statuses": {
+          "200": 16877
+        }
+      },
+      {
+        "Name": "ProjectList",
+        "Count": 16779,
+        "Successful": 16779,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1803,
+        "P95Ms": 2158,
+        "P99Ms": 2387,
+        "MeanPayloadBytes": 4870.024077716193,
+        "MaximumPayloadBytes": 4872,
+        "Statuses": {
+          "200": 16779
+        }
+      },
+      {
+        "Name": "ProjectDetails",
+        "Count": 16867,
+        "Successful": 16867,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 2099,
+        "P95Ms": 2477,
+        "P99Ms": 2710,
+        "MeanPayloadBytes": 899.8896069247643,
+        "MaximumPayloadBytes": 901,
+        "Statuses": {
+          "200": 16867
+        }
+      },
+      {
+        "Name": "UnitList",
+        "Count": 16949,
+        "Successful": 16949,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1755,
+        "P95Ms": 2098,
+        "P99Ms": 2321,
+        "MeanPayloadBytes": 5908.793144138297,
+        "MaximumPayloadBytes": 5910,
+        "Statuses": {
+          "200": 16949
+        }
+      },
+      {
+        "Name": "UnitDetails",
+        "Count": 16874,
+        "Successful": 16874,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 2097,
+        "P95Ms": 2481,
+        "P99Ms": 2713,
+        "MeanPayloadBytes": 499.88585990280905,
+        "MaximumPayloadBytes": 500,
+        "Statuses": {
+          "200": 16874
+        }
+      },
+      {
+        "Name": "CurrentTerms",
+        "Count": 17063,
+        "Successful": 17063,
+        "UnexpectedErrors": 0,
+        "RateLimitRejects": 0,
+        "P50Ms": 1402,
+        "P95Ms": 1707,
+        "P99Ms": 1889,
+        "MeanPayloadBytes": 4199,
+        "MaximumPayloadBytes": 4199,
+        "Statuses": {
+          "200": 17063
+        }
+      },
+      {
+        "Name": "CustomerReads",
+        "Count": 14776,
+        "Successful": 14639,
+        "UnexpectedErrors": 137,
+        "RateLimitRejects": 0,
+        "P50Ms": 2114,
+        "P95Ms": 2526,
+        "P99Ms": 3057,
+        "MeanPayloadBytes": 621.8978749323227,
+        "MaximumPayloadBytes": 629,
+        "Statuses": {
+          "0": 137,
+          "200": 14639
+        }
+      },
+      {
+        "Name": "ReservationWrites",
+        "Count": 7466,
+        "Successful": 7458,
+        "UnexpectedErrors": 8,
+        "RateLimitRejects": 0,
+        "P50Ms": 2250,
+        "P95Ms": 2677,
+        "P99Ms": 2941,
+        "MeanPayloadBytes": 76.91749263327083,
+        "MaximumPayloadBytes": 77,
+        "Statuses": {
+          "0": 8,
+          "201": 7458
+        }
+      },
+      {
+        "Name": "AdminReads",
+        "Count": 7566,
+        "Successful": 1026,
+        "UnexpectedErrors": 6540,
+        "RateLimitRejects": 0,
+        "P50Ms": 6022,
+        "P95Ms": 6296,
+        "P99Ms": 6427,
+        "MeanPayloadBytes": 787.9957705524715,
+        "MaximumPayloadBytes": 5817,
+        "Statuses": {
+          "0": 6540,
+          "200": 1026
+        }
+      }
+    ],
+    "SuccessfulRps": 234.32106172714168,
+    "CompletedRps": 245.39316086512935,
+    "UnexpectedErrorRate": 0.04511983585423964,
+    "Stable": false
+  }
+]

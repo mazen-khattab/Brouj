@@ -4,8 +4,6 @@ using Brouj.API.Configuration;
 using Brouj.API.Extensions;
 using Brouj.API.Middleware;
 using Microsoft.Extensions.Options;
-using Brouj.Application.Abstractions.Persistence;
-using Brouj.Application.Abstractions.Authentication;
 using Brouj.Infrastructure.Seeder;
 
 namespace Brouj.API
@@ -26,26 +24,21 @@ namespace Brouj.API
             builder.Services.AddBroujCookieAuthentication();
             builder.Services.AddApiServices(builder.Configuration);
 
+            // Disabled by default. The benchmark runner opts in to sanitized resource measurements.
+            if (builder.Configuration.GetValue<bool>("PerformanceDiagnostics:Enabled"))
+            {
+                builder.Services.AddHostedService<Diagnostics.PerformanceDiagnosticsService>();
+            }
+
             var app = builder.Build();
 
-            #region DataSeeding
-            try
+            // Provisioning is opt-in through private configuration and finishes before accepting traffic.
+            // A failure is sanitized by the seeder and deliberately stops startup.
+            await using (var scope = app.Services.CreateAsyncScope())
             {
-                using (var scope = app.Services.CreateScope())
-                {
-                    var DbContext = scope.ServiceProvider.GetRequiredService<IApplicationDbContext>();
-                    var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
-                    var httpContextAccessor = scope.ServiceProvider.GetRequiredService<IHttpContextAccessor>();
-
-                    await UsersSeeding.SeedingAsync(DbContext, passwordHasher, httpContextAccessor);
-                }
+                await scope.ServiceProvider.GetRequiredService<UsersSeeding>()
+                    .SeedAsync(app.Lifetime.ApplicationStopping);
             }
-            catch (Exception ex)
-            {
-                var logger = app.Services.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "An Error Occurs When Applying The Migrations");
-            }
-            #endregion
 
             // Forward only scheme/client IP from explicitly configured proxies, before HTTPS or rate limiting.
             app.UseForwardedHeaders();

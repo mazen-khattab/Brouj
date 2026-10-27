@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Data.Common;
 using System.Security.Claims;
 using Brouj.Domain.Enums;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Brouj.Infrastructure.IntegrationTests.SqlServer;
 
@@ -156,7 +157,7 @@ public sealed class RefreshTokenPersistenceTests(SqlServerFixture fixture)
     {
         await using var db = await fixture.CreateDatabaseAsync();
         await using var context = db.CreateContext(enableRetry: true);
-        var manager = new ApplicationTransactionManager(context);
+        var manager = new ApplicationTransactionManager(context, NullLogger<ApplicationTransactionManager>.Instance);
         await Assert.ThrowsAsync<InvalidOperationException>(() => manager.ExecuteAsync<int>(async ct =>
         {
             context.Cities.Add(new Brouj.Domain.Entities.City { Name = "rollback-test" });
