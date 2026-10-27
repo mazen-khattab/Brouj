@@ -48,7 +48,7 @@ public sealed class SqlServerFixture : IAsyncLifetime
         }
     }
 
-    internal async Task<TestDatabase> CreateDatabaseAsync()
+    internal async Task<TestDatabase> CreateDatabaseAsync(bool applyMigrations = false)
     {
         var connection = new SqlConnectionStringBuilder(_connectionString
             ?? throw new InvalidOperationException(SqlServerTestEnvironment.PendingReason))
@@ -59,7 +59,17 @@ public sealed class SqlServerFixture : IAsyncLifetime
         };
         var database = new TestDatabase(connection.ConnectionString);
         await using var context = database.CreateContext();
-        await context.Database.EnsureCreatedAsync();
+
+        // Keep existing model-creation tests unchanged. Final verification must exercise migrations separately.
+        if (applyMigrations)
+        {
+            await context.Database.MigrateAsync();
+        }
+        else
+        {
+            await context.Database.EnsureCreatedAsync();
+        }
+
         return database;
     }
 }

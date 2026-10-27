@@ -45,7 +45,8 @@ internal sealed class BaselineEnvironment(ILogger<BaselineEnvironment> logger) :
     public BaselineSession Staff { get; private set; } = null!;
     public string ContainerId => _container.Id;
 
-    public async Task StartAsync(string root, string output, CancellationToken cancellationToken)
+    public async Task StartAsync(string root, string output, CancellationToken cancellationToken,
+        bool applyMigrations = false)
     {
         _directory = Path.Combine(output, "private");
         Directory.CreateDirectory(_directory);
@@ -62,7 +63,18 @@ internal sealed class BaselineEnvironment(ILogger<BaselineEnvironment> logger) :
         await using var context = new ApplicationDbContext(options,
             new AuditableEntityInterceptor(TimeProvider.System),
             new ActivityLogInterceptor(new TestActor(), TimeProvider.System));
-        await context.Database.EnsureCreatedAsync(cancellationToken);
+
+        // Final release HTTP checks also reuse this isolated real-process fixture on a migrated database.
+        // Preserve the original performance baseline's schema-creation path unless explicitly requested.
+        if (applyMigrations)
+        {
+            await context.Database.MigrateAsync(cancellationToken);
+        }
+        else
+        {
+            await context.Database.EnsureCreatedAsync(cancellationToken);
+        }
+
         await SeedAsync(cancellationToken);
 
         // The listener binds only loopback. Pin the generated certificate instead of accepting arbitrary TLS peers.
