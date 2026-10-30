@@ -1,12 +1,12 @@
 # Part 8 endpoint contracts
 
-The complete machine-readable contract is [Part8.EndpointContracts.json](Part8.EndpointContracts.json). The API tests compare it with all 101 approved Application requests, reflect controller metadata, and exercise each HTTP route. Request DTO definitions are in `src/Brouj.API/Requests` or the existing Application feature/shared DTO folders.
+The complete machine-readable contract is [Part8.EndpointContracts.json](Part8.EndpointContracts.json). The API tests compare it with all 104 approved Application requests, including the city/area/project lookups, reflect controller metadata, and exercise each HTTP route. Request DTO definitions are in `src/Brouj.API/Requests` or the existing Application feature/shared DTO folders.
 
 Every success response uses `ApiResponse<T>` (`success`, `data`, `message`). The response column below names `T`. JSON bodies containing unknown members are rejected. PATCH operations accept the full approved update DTO; they are not JSON Patch operations.
 
 Application failures use `ApiErrorResponse` with the existing feature code/message: validation 400, unauthenticated 401, forbidden 403, missing resource 404 and business conflict 409. Unexpected failures and transport/model-binding failures use sanitized Problem Details. Existing optimistic concurrency exceptions become 409. Request/file limits return 413, unsupported content types 415, and endpoint throttling 429 with Retry-After. These mappings are transport guarantees; a particular handler only emits the errors defined by its approved use case. Tests inject each Result error category across every action to verify the common mapper, and separately exercise real handlers for authorization, ownership, validation, missing resources and conflicts.
 
-All protected use cases still run `AuthorizationBehavior` / `FeatureAccess` to verify the current database account and role. Customer-specific handlers scope by trusted `ICurrentUser.CustomerId`; another customer's reservation is 404 for both GET and cancellation. Self profile/password commands never accept a customer/user ID. MemberOnly allows active customers and staff to read project time plans, as approved in Part 7. AdminOnly and StaffOnly allow Admin and SuperAdmin; staff management additionally requires SuperAdminOnly. The existing Infrastructure `CurrentUser` is reused rather than duplicating claim parsing.
+All protected use cases still run `AuthorizationBehavior` / `FeatureAccess` to verify the current database account and role. Customer-specific handlers scope by trusted `ICurrentUser.CustomerId`; another customer's reservation is 404 for both GET and cancellation. Self profile/password commands never accept a customer/user ID. Project time-plan reads are public, as approved for the project-details redesign; all plan edits remain AdminOnly. AdminOnly and StaffOnly allow Admin and SuperAdmin; staff management additionally requires SuperAdminOnly. The existing Infrastructure `CurrentUser` is reused rather than duplicating claim parsing.
 
 All responses use `Cache-Control: no-store`, including public reads. This Part does not populate a feature/output cache. All safe reads use the PublicReads rate category, including protected reads; identity/session mutations use Authentication, customer reservation writes ReservationWrites, administrative mutations AdminWrites, and image uploads FileUploads. Limits are per category/client IP on each API instance.
 
@@ -41,9 +41,11 @@ JSON endpoints consume `application/json`; image creation consumes `multipart/fo
 | DELETE `/api/v1/admin/customers/{id}` | `SoftDeleteCustomerCommand` | —; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | POST `/api/v1/admin/customers/{id}/restore` | `RestoreCustomerCommand` | —; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | GET `/api/v1/cities` | `GetCitiesQuery` | —; `GetCitiesParameters` | `PaginationResult<CityDto>` | Anonymous | 200 | PublicReads |
+| GET `/api/v1/cities/lookup` | `GetCitiesLookupQuery` | —; `GetCitiesLookupParameters` | `IEnumerable<LookupDto>` | Anonymous | 200 | PublicReads |
 | GET `/api/v1/cities/{id}` | `GetCityByIdQuery` | —; — | `CityDto` | Anonymous | 200 | PublicReads |
 | GET `/api/v1/cities/{cityId}/areas` | `GetAreasByCityQuery` | —; `GetAreasByCityParameters` | `PaginationResult<AreaListDto>` | Anonymous | 200 | PublicReads |
 | GET `/api/v1/areas` | `GetAreasQuery` | —; `GetAreasParameters` | `PaginationResult<AreaListDto>` | Anonymous | 200 | PublicReads |
+| GET `/api/v1/areas/lookup` | `GetAreasLookupQuery` | —; `GetAreasLookupParameters` | `IEnumerable<LookupDto>` | Anonymous | 200 | PublicReads |
 | GET `/api/v1/areas/{id}` | `GetAreaByIdQuery` | —; — | `AreaDto` | Anonymous | 200 | PublicReads |
 | POST `/api/v1/admin/cities` | `CreateCityCommand` | `CityInput`; — | `Guid` | AdminOnly | 201 | AdminWrites |
 | PATCH `/api/v1/admin/cities/{id}` | `UpdateCityCommand` | `CityInput`; — | `Guid` | AdminOnly | 200 | AdminWrites |
@@ -53,9 +55,10 @@ JSON endpoints consume `application/json`; image creation consumes `multipart/fo
 | DELETE `/api/v1/admin/areas/{id}` | `DeleteAreaCommand` | —; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | PUT `/api/v1/admin/areas/{id}/amenities` | `ReplaceAreaAmenitiesCommand` | `ReplaceAreaAmenitiesRequest`; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | GET `/api/v1/projects` | `GetProjectsQuery` | —; `GetProjectsParameters` | `PaginationResult<ProjectListDto>` | Anonymous | 200 | PublicReads |
+| GET `/api/v1/projects/lookup` | `GetProjectsLookupQuery` | —; `GetProjectsLookupParameters` | `IEnumerable<LookupDto>` | Anonymous | 200 | PublicReads |
 | GET `/api/v1/projects/{id}` | `GetProjectByIdQuery` | —; — | `ProjectDto` | Anonymous | 200 | PublicReads |
 | GET `/api/v1/projects/{projectId}/units` | `GetUnitsByProjectQuery` | —; `GetUnitsByProjectParameters` | `PaginationResult<UnitListDto>` | Anonymous | 200 | PublicReads |
-| GET `/api/v1/projects/{projectId}/time-plan` | `GetProjectTimePlanQuery` | —; — | `TimePlanDto` | MemberOnly | 200 | PublicReads |
+| GET `/api/v1/projects/{projectId}/time-plan` | `GetProjectTimePlanQuery` | —; — | `TimePlanDto` | Anonymous | 200 | PublicReads |
 | POST `/api/v1/admin/projects` | `CreateProjectCommand` | `ProjectInput`; — | `Guid` | AdminOnly | 201 | AdminWrites |
 | PATCH `/api/v1/admin/projects/{id}` | `UpdateProjectCommand` | `ProjectInput`; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | DELETE `/api/v1/admin/projects/{id}` | `DeleteProjectCommand` | —; — | `Guid` | AdminOnly | 200 | AdminWrites |

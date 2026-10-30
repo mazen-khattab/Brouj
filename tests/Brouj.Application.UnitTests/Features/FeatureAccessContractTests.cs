@@ -20,7 +20,6 @@ public sealed class FeatureAccessContractTests
         ["GetReservationByIdQuery"] = AccessLevel.Customer,
         ["GetMyOrdersQuery"] = AccessLevel.Customer,
         ["GetOrderByIdQuery"] = AccessLevel.Member,
-        ["GetProjectTimePlanQuery"] = AccessLevel.Member,
         ["CreateUserCommand"] = AccessLevel.SuperAdmin,
         ["UpdateUserCommand"] = AccessLevel.SuperAdmin,
         ["SoftDeleteUserCommand"] = AccessLevel.SuperAdmin,

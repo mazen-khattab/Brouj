@@ -25,8 +25,10 @@ public sealed class AddTimePlanStageCommandHandler : IRequestHandler<AddTimePlan
             return Result<Guid>.Failure(TimePlanErrors.NotFound);
         }
 
-        var last = await _db.TimePlanStages.Where(stage => stage.TimePlanId == request.TimePlanId)
+        var last = await _db.TimePlanStages
+            .Where(stage => stage.TimePlanId == request.TimePlanId)
             .Select(stage => (int?)stage.SortOrder).MaxAsync(cancellationToken) ?? 0;
+
         var result = await _builder.BuildAsync(request.TimePlanId, request.Input, last + 1, cancellationToken);
 
         if (result.IsFailure)

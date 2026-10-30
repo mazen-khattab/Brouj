@@ -40,6 +40,14 @@ public class RecordingSender : DispatchProxy
             return Activator.CreateInstance(type, items, 1, 20, 0, 100);
         }
 
+        if (type.IsInterface && type.IsGenericType &&
+            (type.GetGenericTypeDefinition() == typeof(IEnumerable<>) ||
+             type.GetGenericTypeDefinition() == typeof(IReadOnlyList<>) ||
+             type.GetGenericTypeDefinition() == typeof(IReadOnlyCollection<>)))
+        {
+            return Array.CreateInstance(type.GenericTypeArguments[0], 0);
+        }
+
         return Activator.CreateInstance(type);
     }
 }

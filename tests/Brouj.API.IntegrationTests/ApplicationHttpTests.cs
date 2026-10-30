@@ -14,6 +14,41 @@ namespace Brouj.API.IntegrationTests;
 /// <summary>Real HTTP and MediatR behaviors/handlers, with query and transaction doubles rather than SQL Server.</summary>
 public sealed class ApplicationHttpTests
 {
+    [Theory]
+    [InlineData("Anonymous")]
+    [InlineData("CustomerOnly")]
+    [InlineData("AdminOnly")]
+    public async Task Public_time_plan_reads_preserve_nested_order_and_not_found(string actor)
+    {
+        using var factory = new Part8ApiFactory(false);
+        using var client = factory.CreateHttpsClient();
+        if (actor != "Anonymous")
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", factory.Credential(actor));
+        var plan = new TimePlan { Id = Guid.NewGuid(), ProjectId = Guid.NewGuid(), Name = "Public schedule" };
+        var stage = new TimePlanStage { Id = Guid.NewGuid(), Name = "First stage", SortOrder = 1 };
+        var item = new PlanStageItem { Id = Guid.NewGuid(), Name = "First item", SortOrder = 1 };
+        item.StageItemImages.Add(new StageItemImage { Id = Guid.NewGuid(), ImagePath = "second", SortOrder = 2 });
+        item.StageItemImages.Add(new StageItemImage { Id = Guid.NewGuid(), ImagePath = "first", SortOrder = 1 });
+        stage.PlanStageItems.Add(new PlanStageItem { Id = Guid.NewGuid(), Name = "Second item", SortOrder = 2 });
+        stage.PlanStageItems.Add(item);
+        plan.TimePlanStages.Add(new TimePlanStage { Id = Guid.NewGuid(), Name = "Second stage", SortOrder = 2 });
+        plan.TimePlanStages.Add(stage);
+        factory.Database.TimePlans.Add(plan);
+
+        using var response = await client.GetAsync($"/api/v1/projects/{plan.ProjectId}/time-plan");
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        using var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        var stages = json.RootElement.GetProperty("data").GetProperty("stages");
+        Assert.Equal("First stage", stages[0].GetProperty("name").GetString());
+        Assert.Equal("Second stage", stages[1].GetProperty("name").GetString());
+        var items = stages[0].GetProperty("items");
+        Assert.Equal("First item", items[0].GetProperty("name").GetString());
+        Assert.Equal("Second item", items[1].GetProperty("name").GetString());
+        Assert.Equal("first", items[0].GetProperty("images")[0].GetProperty("imagePath").GetString());
+        using var missing = await client.GetAsync($"/api/v1/projects/{Guid.NewGuid()}/time-plan");
+        Assert.Equal(HttpStatusCode.NotFound, missing.StatusCode);
+    }
+
     [Fact]
     public async Task Ownership_filters_reject_read_and_cancel_IDOR_and_scope_customer_lists()
     {

@@ -8,6 +8,7 @@ using Brouj.Application.Features.Areas.Queries.GetByCity;
 using Brouj.Application.Features.Cities.DTOs;
 using Brouj.Application.Features.Cities.Queries.GetAll;
 using Brouj.Application.Features.Cities.Queries.GetById;
+using Brouj.Application.Features.Cities.Queries.GetLookup;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,27 @@ public sealed class CitiesController : ApiControllerBase
             PageSize = query.PageSize,
             Search = query.Search
         };
+        var result = await _sender.Send(request, cancellationToken);
+
+        return Respond(result);
+    }
+
+    /// <summary>
+    /// Retrieves a lightweight, read-only lookup list of cities with direct database projection.
+    /// </summary>
+    /// <param name="query">Optional filtering parameters including search term.</param>
+    /// <param name="cancellationToken">Cancellation token to cancel the operation.</param>
+    /// <returns>A collection of city lookup items containing identifier and name.</returns>
+    [HttpGet("lookup")]
+    [AllowAnonymous]
+    [EnableRateLimiting(RateLimitCategories.PublicReads)]
+    [EndpointContract(typeof(GetCitiesLookupQuery))] 
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<LookupDto>>), 200)]
+    public async Task<IActionResult> GetCitiesLookup(
+        [FromQuery] GetCitiesLookupParameters query,
+        CancellationToken cancellationToken)
+    {
+        var request = new GetCitiesLookupQuery(query.Search);
         var result = await _sender.Send(request, cancellationToken);
 
         return Respond(result);

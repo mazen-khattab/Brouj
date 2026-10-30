@@ -21,9 +21,9 @@ public sealed class FeatureArchitectureTests
     private static readonly HashSet<string> PublicRequests =
     [
         "RegisterCustomerCommand", "LoginCustomerCommand", "RefreshCustomerSessionCommand", "LogoutCustomerCommand",
-        "LoginUserCommand", "RefreshUserSessionCommand", "LogoutUserCommand", "GetCitiesQuery", "GetCityByIdQuery",
-        "GetAreasQuery", "GetAreasByCityQuery", "GetAreaByIdQuery", "GetProjectsQuery", "GetProjectByIdQuery",
-        "GetUnitsByProjectQuery", "GetUnitByIdQuery", "GetActiveTermsAndConditionsQuery"
+        "LoginUserCommand", "RefreshUserSessionCommand", "LogoutUserCommand", "GetCitiesQuery", "GetCitiesLookupQuery", "GetCityByIdQuery",
+        "GetAreasQuery", "GetAreasLookupQuery", "GetAreasByCityQuery", "GetAreaByIdQuery", "GetProjectsQuery", "GetProjectsLookupQuery", "GetProjectByIdQuery",
+        "GetUnitsByProjectQuery", "GetUnitByIdQuery", "GetProjectTimePlanQuery", "GetActiveTermsAndConditionsQuery"
     ];
 
     [Fact]
@@ -57,7 +57,7 @@ public sealed class FeatureArchitectureTests
             .Select(match => match.Value).Distinct().Order().ToArray();
         var actual = Requests.Select(row => ((Type)row[0]).Name).Order().ToArray();
 
-        Assert.Equal(101, actual.Length);
+        Assert.Equal(104, actual.Length);
         Assert.Equal(expected, actual);
     }
 

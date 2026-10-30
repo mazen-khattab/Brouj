@@ -145,6 +145,5 @@ public sealed class DistributedCacheService(IDistributedCache cache, ICurrentUse
                 EnsureNonSensitive(child);
             }
         }
-
     }
 }

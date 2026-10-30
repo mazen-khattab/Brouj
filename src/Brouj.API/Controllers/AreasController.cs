@@ -6,6 +6,7 @@ using Brouj.Application.Common.Models;
 using Brouj.Application.Features.Areas.DTOs;
 using Brouj.Application.Features.Areas.Queries.GetAll;
 using Brouj.Application.Features.Areas.Queries.GetById;
+using Brouj.Application.Features.Areas.Queries.GetLookup;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,27 @@ public sealed class AreasController : ApiControllerBase
             PageSize = query.PageSize,
             Search = query.Search
         };
+        var result = await _sender.Send(request, cancellationToken);
+
+        return Respond(result);
+    }
+
+    /// <summary>
+    /// Retrieves a lightweight, read-only lookup list of areas with direct database projection.
+    /// </summary>
+    /// <param name="query">Optional filtering parameters including search term.</param>
+    /// <param name="cancellationToken">Cancellation token to cancel the operation.</param>
+    /// <returns>A collection of area lookup items containing identifier and name.</returns>
+    [HttpGet("lookup")]
+    [AllowAnonymous]
+    [EnableRateLimiting(RateLimitCategories.PublicReads)]
+    [EndpointContract(typeof(GetAreasLookupQuery))] 
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<LookupDto>>), 200)]
+    public async Task<IActionResult> GetAreasLookup(
+        [FromQuery] GetAreasLookupParameters query,
+        CancellationToken cancellationToken)
+    {
+        var request = new GetAreasLookupQuery(query.Search);
         var result = await _sender.Send(request, cancellationToken);
 
         return Respond(result);
