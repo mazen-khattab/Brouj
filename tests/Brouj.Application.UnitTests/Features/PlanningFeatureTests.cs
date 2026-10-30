@@ -222,11 +222,13 @@ public sealed class PlanningFeatureTests
         Assert.Equal("generated.png", Assert.Single(fixture.Files.Deleted));
     }
 
-    [Fact]
-    public async Task Time_plan_read_is_available_to_an_active_customer_without_a_reservation()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Time_plan_read_is_public_without_a_reservation(bool customer)
     {
         using var fixture = new FeatureHarness();
-        fixture.Customer();
+        if (customer) fixture.Customer();
         var plan = new TimePlan { Id = Guid.NewGuid(), ProjectId = Guid.NewGuid(), Name = "Customer plan" };
         fixture.Db.TimePlans.Add(plan);
 

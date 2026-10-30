@@ -6,6 +6,7 @@ using Brouj.Application.Common.Models;
 using Brouj.Application.Features.Projects.DTOs;
 using Brouj.Application.Features.Projects.Queries.GetAll;
 using Brouj.Application.Features.Projects.Queries.GetById;
+using Brouj.Application.Features.Projects.Queries.GetLookup;
 using Brouj.Application.Features.TimePlans.DTOs;
 using Brouj.Application.Features.TimePlans.Queries.GetByProject;
 using Brouj.Application.Features.Units.DTOs;
@@ -32,9 +33,7 @@ public sealed class ProjectsController : ApiControllerBase
     [EnableRateLimiting(RateLimitCategories.PublicReads)]
     [EndpointContract(typeof(GetProjectsQuery))]
     [ProducesResponseType(typeof(ApiResponse<PaginationResult<ProjectListDto>>), 200)]
-    public async Task<IActionResult> GetProjects(
-        [FromQuery] GetProjectsParameters query,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> GetProjects([FromQuery] GetProjectsParameters query, CancellationToken cancellationToken)
     {
         var request = new GetProjectsQuery
         {
@@ -45,6 +44,25 @@ public sealed class ProjectsController : ApiControllerBase
             AreaId = query.AreaId,
             ProjectType = query.ProjectType
         };
+        var result = await _sender.Send(request, cancellationToken);
+
+        return Respond(result);
+    }
+
+    /// <summary>
+    /// Retrieves a lightweight, read-only lookup list of projects with direct database projection, optionally filtered by name and project type.
+    /// </summary>
+    /// <param name="query">Optional filtering parameters including search term and project type.</param>
+    /// <param name="cancellationToken">Cancellation token to cancel the operation.</param>
+    /// <returns>A collection of project lookup items containing identifier and name.</returns>
+    [HttpGet("lookup")]
+    [AllowAnonymous]
+    [EnableRateLimiting(RateLimitCategories.PublicReads)]
+    [EndpointContract(typeof(GetProjectsLookupQuery))]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<LookupDto>>), 200)]
+    public async Task<IActionResult> GetProjectsLookup([FromQuery] GetProjectsLookupParameters query, CancellationToken cancellationToken)
+    {
+        var request = new GetProjectsLookupQuery(query.Search, query.Type);
         var result = await _sender.Send(request, cancellationToken);
 
         return Respond(result);
@@ -71,10 +89,7 @@ public sealed class ProjectsController : ApiControllerBase
     [EnableRateLimiting(RateLimitCategories.PublicReads)]
     [EndpointContract(typeof(GetUnitsByProjectQuery))]
     [ProducesResponseType(typeof(ApiResponse<PaginationResult<UnitListDto>>), 200)]
-    public async Task<IActionResult> GetUnitsByProject(
-        [FromRoute] Guid projectId,
-        [FromQuery] GetUnitsByProjectParameters query,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> GetUnitsByProject([FromRoute] Guid projectId, [FromQuery] GetUnitsByProjectParameters query, CancellationToken cancellationToken)
     {
         var request = new GetUnitsByProjectQuery
         {
@@ -89,7 +104,7 @@ public sealed class ProjectsController : ApiControllerBase
     }
 
     [HttpGet("{projectId}/time-plan")]
-    [Authorize(Policy = PolicyNames.MemberOnly)]
+    [AllowAnonymous]
     [EnableRateLimiting(RateLimitCategories.PublicReads)]
     [EndpointContract(typeof(GetProjectTimePlanQuery))]
     [ProducesResponseType(typeof(ApiResponse<TimePlanDto>), 200)]

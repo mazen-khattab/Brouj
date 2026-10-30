@@ -27,9 +27,7 @@ public sealed class OrdersController : ApiControllerBase
     [EnableRateLimiting(RateLimitCategories.PublicReads)]
     [EndpointContract(typeof(GetMyOrdersQuery))]
     [ProducesResponseType(typeof(ApiResponse<PaginationResult<OrderDto>>), 200)]
-    public async Task<IActionResult> GetMyOrders(
-        [FromQuery] GetMyOrdersParameters query,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> GetMyOrders([FromQuery] GetMyOrdersParameters query, CancellationToken cancellationToken)
     {
         var request = new GetMyOrdersQuery
         {

@@ -36,7 +36,7 @@ public sealed class EndpointContractTests : IClassFixture<Part8ApiFactory>
         var actions = typeof(ApiControllerBase).Assembly.GetTypes().SelectMany(type => type.GetMethods())
             .Select(method => method.GetCustomAttribute<EndpointContractAttribute>()).OfType<EndpointContractAttribute>();
 
-        Assert.Equal(101, requests.Length);
+        Assert.Equal(104, requests.Length);
         Assert.Equal(requests.Select(type => type.Name).Order(), actions.Select(action => action.RequestType.Name).Order());
         Assert.Equal(requests.Select(type => type.Name).Order(), HttpTestRequests.Contracts.Select(item => item.Request).Order());
     }
