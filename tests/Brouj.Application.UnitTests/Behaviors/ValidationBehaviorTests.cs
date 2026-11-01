@@ -1,6 +1,7 @@
 using Brouj.Application.Behaviors;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Brouj.Application.UnitTests.Behaviors;
 
@@ -209,5 +210,98 @@ public sealed class ValidationBehaviorTests
         Assert.False(nextCalled);
     }
 
+    [Fact]
+    public async Task Handle_WhenValidationFails_LogsWarningWithFailureDetailsWithoutSensitiveData()
+    {
+        const string secretValue = "super-secret-password-123";
+        var logger = new RecordingLogger<ValidationBehavior<TestRequest, string>>();
+        var validator = new InlineValidator<TestRequest>();
+        validator.RuleFor(request => request.Name)
+            .Equal("expected-value")
+            .WithErrorCode("InvalidName");
+
+        var behavior = new ValidationBehavior<TestRequest, string>([validator], logger);
+
+        await Assert.ThrowsAsync<ValidationException>(() => behavior.Handle(
+            new TestRequest(secretValue),
+            _ => Task.FromResult("handled"),
+            CancellationToken.None));
+
+        var warning = Assert.Single(logger.Entries, entry => entry.Level == LogLevel.Warning);
+        Assert.Contains(nameof(TestRequest), warning.Message);
+        Assert.Contains("1 error(s)", warning.Message);
+        Assert.Contains("Name (InvalidName)", warning.Message);
+        Assert.DoesNotContain(secretValue, warning.Message, StringComparison.Ordinal);
+        Assert.All(logger.Values, val => Assert.DoesNotContain(secretValue, val, StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public async Task Handle_WhenValidationSucceeds_LogsDebug()
+    {
+        var logger = new RecordingLogger<ValidationBehavior<TestRequest, string>>();
+        var validator = new InlineValidator<TestRequest>();
+        validator.RuleFor(request => request.Name).NotEmpty();
+
+        var behavior = new ValidationBehavior<TestRequest, string>([validator], logger);
+
+        var result = await behavior.Handle(
+            new TestRequest("valid"),
+            _ => Task.FromResult("handled"),
+            CancellationToken.None);
+
+        Assert.Equal("handled", result);
+        Assert.Contains(logger.Entries, entry => entry.Level == LogLevel.Debug && entry.Message.Contains("Validating TestRequest with 1 validator(s)"));
+        Assert.Contains(logger.Entries, entry => entry.Level == LogLevel.Debug && entry.Message.Contains("Validation succeeded for TestRequest"));
+        Assert.DoesNotContain(logger.Entries, entry => entry.Level == LogLevel.Warning);
+    }
+
+    [Fact]
+    public async Task Handle_WhenNoValidators_LogsDebugAndSkips()
+    {
+        var logger = new RecordingLogger<ValidationBehavior<TestRequest, string>>();
+        var behavior = new ValidationBehavior<TestRequest, string>([], logger);
+
+        var result = await behavior.Handle(
+            new TestRequest("any"),
+            _ => Task.FromResult("handled"),
+            CancellationToken.None);
+
+        Assert.Equal("handled", result);
+        var entry = Assert.Single(logger.Entries);
+        Assert.Equal(LogLevel.Debug, entry.Level);
+        Assert.Contains("No validators registered for TestRequest; skipping validation.", entry.Message);
+    }
+
     private sealed record TestRequest(string Name);
+
+    private sealed class RecordingLogger<T> : ILogger<T>
+    {
+        public List<(LogLevel Level, string Message)> Entries { get; } = [];
+        public List<string> Messages { get; } = [];
+        public List<Exception?> Exceptions { get; } = [];
+        public List<string> Values { get; } = [];
+
+        public IDisposable? BeginScope<TState>(TState state)
+            where TState : notnull => null;
+
+        public bool IsEnabled(LogLevel logLevel) => true;
+
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter)
+        {
+            var message = formatter(state, exception);
+            Entries.Add((logLevel, message));
+            Messages.Add(message);
+            Exceptions.Add(exception);
+
+            if (state is IEnumerable<KeyValuePair<string, object?>> values)
+            {
+                Values.AddRange(values.Select(value => value.Value?.ToString() ?? string.Empty));
+            }
+        }
+    }
 }

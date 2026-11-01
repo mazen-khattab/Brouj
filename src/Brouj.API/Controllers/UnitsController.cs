@@ -27,10 +27,7 @@ public sealed class UnitsController : ApiControllerBase
     [EnableRateLimiting(RateLimitCategories.PublicReads)]
     [EndpointContract(typeof(GetUnitByIdQuery))]
     [ProducesResponseType(typeof(ApiResponse<UnitDto>), 200)]
-    public async Task<IActionResult> GetUnitById(
-        [FromRoute] Guid id,
-        [FromQuery] GetUnitByIdParameters query,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> GetUnitById([FromRoute] Guid id, [FromQuery] GetUnitByIdParameters query, CancellationToken cancellationToken)
     {
         var request = new GetUnitByIdQuery
         {

@@ -60,6 +60,13 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
             CustomerId = _currentUser.CustomerId!.Value,
             UnitId = unit.Id,
             Number = "R-" + Guid.NewGuid().ToString("N"),
+            FullName = request.FullName,
+            IdentityNumber = request.IdentityNumber,
+            AgeGroup = request.AgeGroup,
+            FinancialBracket = request.PreferredFinancialBracket,
+            Phone = request.Phone,
+            PlaceOfResidence = request.PlaceOfResidence,
+            RepaymentPeriod = request.PreferredRepaymentPeriod,
             ReservationDate = _clock.GetUtcNow(),
             Status = ReservationStatus.Processing
         };

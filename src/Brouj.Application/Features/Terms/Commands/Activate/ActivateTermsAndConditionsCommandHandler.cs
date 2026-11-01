@@ -17,9 +17,7 @@ public sealed class ActivateTermsAndConditionsCommandHandler : IRequestHandler<A
         _clock = clock;
     }
 
-    public async Task<Result<Guid>> Handle(
-        ActivateTermsAndConditionsCommand request,
-        CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(ActivateTermsAndConditionsCommand request, CancellationToken cancellationToken)
     {
         var entity = await _db.TermsAndConditions.SingleOrDefaultAsync(terms => terms.Id == request.Id, cancellationToken);
 

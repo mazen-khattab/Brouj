@@ -37,7 +37,14 @@ public sealed class ReservationsController : ApiControllerBase
     {
         var request = new CreateReservationCommand
         {
-            UnitId = body.UnitId
+            UnitId = body.UnitId,
+            FullName = body.FullName,
+            AgeGroup = body.AgeGroup,
+            IdentityNumber = body.IdentityNumber,
+            Phone = body.Phone,
+            PlaceOfResidence = body.PlaceOfResidence,
+            PreferredFinancialBracket = body.PreferredFinancialBracket,
+            PreferredRepaymentPeriod = body.PreferredRepaymentPeriod,
         };
         var result = await _sender.Send(request, cancellationToken);
 

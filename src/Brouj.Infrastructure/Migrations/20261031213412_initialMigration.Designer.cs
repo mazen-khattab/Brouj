@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Brouj.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261026163251_initialMigration")]
+    [Migration("20261031213412_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
@@ -679,6 +679,12 @@ namespace Brouj.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("AgeGroup")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(16)");
+
                     b.Property<DateTimeOffset?>("CancelledAt")
                         .HasPrecision(3)
                         .HasColumnType("datetimeoffset(3)");
@@ -690,11 +696,41 @@ namespace Brouj.Infrastructure.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("FinancialBracket")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(32)");
+
+                    b.Property<string>("PlaceOfResidence")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(64)");
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("RepaymentPeriod")
+                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("ReservationDate")
                         .HasPrecision(3)

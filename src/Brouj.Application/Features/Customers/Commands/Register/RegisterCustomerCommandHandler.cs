@@ -30,9 +30,7 @@ public sealed class RegisterCustomerCommandHandler : IRequestHandler<RegisterCus
         _response = response;
     }
 
-    public async Task<Result<AuthSessionDto>> Handle(
-        RegisterCustomerCommand request,
-        CancellationToken cancellationToken)
+    public async Task<Result<AuthSessionDto>> Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)
     {
         var id = Guid.NewGuid();
         var email = InputRules.NormalizeEmail(request.Input.Email);

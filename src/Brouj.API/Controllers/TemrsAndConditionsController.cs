@@ -3,6 +3,7 @@ using Brouj.API.Extensions;
 using Brouj.API.Requests;
 using Brouj.Application.Common.Models;
 using Brouj.Application.Features.Terms.DTOs;
+using Brouj.Application.Features.Terms.Queries.GetActive;
 using Brouj.Application.Features.Terms.Queries.GetById;
 using Brouj.Application.Features.Terms.Queries.GetVersions;
 using MediatR;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.RateLimiting;
 
 namespace Brouj.API.Controllers;
 
-[Route("api/v1/admin/terms-and-conditions")]
+[Route("api/v1/terms-and-conditions")]
 public sealed class TemrsAndConditionsController : ApiControllerBase
 {
     private readonly ISender _sender;
@@ -36,6 +37,19 @@ public sealed class TemrsAndConditionsController : ApiControllerBase
             PageNumber = query.PageNumber,
             PageSize = query.PageSize
         };
+        var result = await _sender.Send(request, cancellationToken);
+
+        return Respond(result);
+    }
+
+    [HttpGet("current")]
+    [AllowAnonymous]
+    [EnableRateLimiting(RateLimitCategories.PublicReads)]
+    [EndpointContract(typeof(GetActiveTermsAndConditionsQuery))]
+    [ProducesResponseType(typeof(ApiResponse<TermsDto>), 200)]
+    public async Task<IActionResult> GetActiveTermsAndConditions(CancellationToken cancellationToken)
+    {
+        var request = new GetActiveTermsAndConditionsQuery();
         var result = await _sender.Send(request, cancellationToken);
 
         return Respond(result);

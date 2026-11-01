@@ -15,8 +15,15 @@ public sealed class ReservationConfiguration : IEntityTypeConfiguration<Reservat
         builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
         builder.Property(entity => entity.UnitId).HasColumnType("uniqueidentifier").IsRequired(true);
         builder.Property(entity => entity.CustomerId).HasColumnType("uniqueidentifier").IsRequired(true);
+        builder.Property(entity => entity.IdentityNumber).HasColumnType("varchar(64)").HasMaxLength(64).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.AgeGroup).HasColumnType("varchar(16)").HasMaxLength(16).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.FullName).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Phone).HasColumnType("varchar(32)").HasMaxLength(32).IsUnicode(false).IsRequired(true);
+        builder.Property(entity => entity.PlaceOfResidence).HasColumnType("nvarchar(100)").HasMaxLength(100).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.FinancialBracket).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.RepaymentPeriod).HasColumnType("int").IsRequired(true);
         builder.Property(entity => entity.ReservationDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
-        builder.Property(entity => entity.Number).HasColumnType("nvarchar(64)").HasMaxLength(64).IsUnicode(true).IsRequired(true);
+        builder.Property(entity => entity.Number).HasColumnType("varchar(64)").HasMaxLength(64).IsUnicode(false).IsRequired(true);
         builder.Property(entity => entity.Status).HasConversion(new ReservationStatusConverter()).HasColumnType("varchar(16)").HasMaxLength(16).IsUnicode(false).IsRequired(true);
         builder.Property(entity => entity.CancelledAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
         builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);

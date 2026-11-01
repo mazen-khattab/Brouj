@@ -34,7 +34,7 @@ public sealed class GetUnitByIdQueryHandler : IRequestHandler<GetUnitByIdQuery, 
                 NeighborMeterPrice = unit.InitiativeUnit == null ? null : unit.InitiativeUnit.NeighborMeterPrice,
                 Percentage = unit.InitiativeUnit == null ? null : unit.InitiativeUnit.Percentage,
                 IsAvailable = !unit.Reservations.Any(reservation => reservation.Order != null &&
-                    reservation.Order.Status != OrderStatus.Pending)
+                    reservation.Order.Status != OrderStatus.Pending && reservation.Order.Status != OrderStatus.Cancelled)
             }).SingleOrDefaultAsync(cancellationToken);
 
         if (dto is null)

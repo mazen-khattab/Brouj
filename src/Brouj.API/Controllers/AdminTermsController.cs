@@ -27,9 +27,7 @@ public sealed class AdminTermsController : ApiControllerBase
     [EndpointContract(typeof(CreateTermsAndConditionsVersionCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 201)]
     [Consumes("application/json")]
-    public async Task<IActionResult> CreateTermsAndConditionsVersion(
-        [FromBody] CreateTermsVersionInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateTermsAndConditionsVersion([FromBody] CreateTermsVersionInput body, CancellationToken cancellationToken)
     {
         var request = new CreateTermsAndConditionsVersionCommand
         {
@@ -45,9 +43,7 @@ public sealed class AdminTermsController : ApiControllerBase
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(ActivateTermsAndConditionsCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
-    public async Task<IActionResult> ActivateTermsAndConditions(
-        [FromRoute] Guid id,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ActivateTermsAndConditions([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new ActivateTermsAndConditionsCommand
         {

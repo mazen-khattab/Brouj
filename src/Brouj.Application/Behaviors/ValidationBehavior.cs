@@ -1,22 +1,32 @@
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Brouj.Application.Behaviors;
 
-public sealed class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators) : IPipelineBehavior<TRequest, TResponse>
+public sealed class ValidationBehavior<TRequest, TResponse>(
+    IEnumerable<IValidator<TRequest>> validators,
+    ILogger<ValidationBehavior<TRequest, TResponse>>? logger = null) : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
 {
     private readonly IReadOnlyCollection<IValidator<TRequest>> _validators = validators.ToArray();
+    private readonly ILogger<ValidationBehavior<TRequest, TResponse>> _logger = logger ?? NullLogger<ValidationBehavior<TRequest, TResponse>>.Instance;
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
+        var requestType = typeof(TRequest).Name;
+
         if (_validators.Count == 0)
         {
+            _logger.LogDebug("No validators registered for {RequestType}; skipping validation.", requestType);
             return await next(cancellationToken);
         }
+
+        _logger.LogDebug("Validating {RequestType} with {ValidatorCount} validator(s).", requestType, _validators.Count);
 
         var failures = new List<ValidationFailure>();
 
@@ -37,8 +47,25 @@ public sealed class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidat
 
         if (failures.Count > 0)
         {
+            var failureSummaries = failures
+                .Select(failure =>
+                {
+                    var property = string.IsNullOrWhiteSpace(failure.PropertyName) ? "Request" : failure.PropertyName;
+                    return string.IsNullOrWhiteSpace(failure.ErrorCode)
+                        ? property
+                        : $"{property} ({failure.ErrorCode})";
+                });
+
+            _logger.LogWarning(
+                "Validation failed for {RequestType} with {FailureCount} error(s): {ValidationErrors}",
+                requestType,
+                failures.Count,
+                string.Join(", ", failureSummaries));
+
             throw new ValidationException(failures);
         }
+
+        _logger.LogDebug("Validation succeeded for {RequestType}.", requestType);
 
         return await next(cancellationToken);
     }
