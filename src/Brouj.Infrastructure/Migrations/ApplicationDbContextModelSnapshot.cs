@@ -909,8 +909,11 @@ namespace Brouj.Infrastructure.Migrations
                         .HasPrecision(3)
                         .HasColumnType("datetimeoffset(3)");
 
-                    b.Property<int>("VersionNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("VersionNumber")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(32)");
 
                     b.HasKey("Id");
 

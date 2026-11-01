@@ -268,7 +268,7 @@ internal sealed class BaselineEnvironment(ILogger<BaselineEnvironment> logger) :
             INSERT Users (Id, Name, Email, Phone, HashPassword, Role, CreatedAt)
             VALUES (NEWID(), N'Baseline admin', 'admin@example.test', '01100000000', @hash, 'admin', SYSDATETIMEOFFSET());
             INSERT TermsAndConditions (Id, Title, Content, VersionNumber, IsActive, EffectiveDate, CreatedAt)
-            VALUES (NEWID(), N'Baseline terms', REPLICATE(N'Synthetic terms. ', 256), 1, 1,
+            VALUES (NEWID(), N'Baseline terms', REPLICATE(N'Synthetic terms. ', 256), '0.0.1', 1,
                 DATEADD(day, -1, SYSDATETIMEOFFSET()), SYSDATETIMEOFFSET());
             SELECT Id, ROW_NUMBER() OVER (ORDER BY Id) AS n INTO #units FROM BaseUnits;
             SELECT Id, ROW_NUMBER() OVER (ORDER BY Id) AS n INTO #customers FROM Customers;

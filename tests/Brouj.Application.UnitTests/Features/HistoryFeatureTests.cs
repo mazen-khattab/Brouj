@@ -31,7 +31,7 @@ public sealed class HistoryFeatureTests
             Id = Guid.NewGuid(),
             Title = "First",
             Content = "Original",
-            VersionNumber = 1,
+            VersionNumber = "0.0.1",
             IsActive = true,
             EffectiveDate = fixture.Clock.GetUtcNow().AddDays(-1)
         };
@@ -42,7 +42,7 @@ public sealed class HistoryFeatureTests
             {
                 Title = "Second",
                 Content = "New",
-                VersionNumber = 2,
+                VersionNumber = "0.0.2",
                 EffectiveDate = fixture.Clock.GetUtcNow()
             }
         }, CancellationToken.None);
@@ -52,7 +52,7 @@ public sealed class HistoryFeatureTests
             {
                 Title = "Duplicate inactive",
                 Content = "other",
-                VersionNumber = 2,
+                VersionNumber = "0.0.2",
                 EffectiveDate = fixture.Clock.GetUtcNow()
             }
         }, CancellationToken.None);
@@ -61,7 +61,7 @@ public sealed class HistoryFeatureTests
         var history = await fixture.SendAsync(new GetTermsAndConditionsVersionsQuery { PageSize = 1 }, CancellationToken.None);
 
         Assert.True(created.IsSuccess && activated.IsSuccess && duplicate.IsFailure);
-        Assert.Equal(2, current.Value.VersionNumber);
+        Assert.Equal("0.0.2", current.Value.VersionNumber);
         Assert.False(first.IsActive);
         Assert.Equal("Original", first.Content);
         Assert.Equal(2, history.Value.TotalCount);
@@ -76,7 +76,7 @@ public sealed class HistoryFeatureTests
         var future = new TermsAndConditions
         {
             Id = Guid.NewGuid(),
-            VersionNumber = 5,
+            VersionNumber = "0.0.5",
             EffectiveDate = fixture.Clock.GetUtcNow().AddMinutes(1)
         };
         fixture.Db.TermsAndConditions.Add(future);

@@ -20,7 +20,7 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
         var migrations = context.Database.GetMigrations().ToArray();
         var migrator = context.GetService<IMigrator>();
 
-        Assert.Equal("20261026163251_initialMigration", Assert.Single(migrations));
+        Assert.Equal(["20261031213412_initialMigration", "20261101230158_ChangeVersionNumberDataType"], migrations);
         Assert.False(context.Database.HasPendingModelChanges());
 
         var sql = migrator.GenerateScript();

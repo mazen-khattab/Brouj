@@ -11,7 +11,7 @@ public sealed class CreateTermsVersionInputValidator : AbstractValidator<CreateT
 
         RuleFor(input => input.Title).NotEmpty().MaximumLength(300);
         RuleFor(input => input.Content).NotEmpty().MaximumLength(100000);
-        RuleFor(input => input.VersionNumber).GreaterThan(0);
+        RuleFor(input => input.VersionNumber).NotEmpty().MaximumLength(32);
         RuleFor(input => input.EffectiveDate).NotEmpty();
     }
 }

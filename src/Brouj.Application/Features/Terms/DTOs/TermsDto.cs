@@ -10,7 +10,7 @@ public sealed class TermsDto
 
     public string Content { get; init; } = string.Empty;
 
-    public int VersionNumber { get; init; }
+    public string VersionNumber { get; init; } = string.Empty;
 
     public DateTimeOffset EffectiveDate { get; init; }
 

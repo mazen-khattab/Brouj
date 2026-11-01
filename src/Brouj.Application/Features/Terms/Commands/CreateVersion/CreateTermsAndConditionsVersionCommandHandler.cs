@@ -20,7 +20,9 @@ public sealed class CreateTermsAndConditionsVersionCommandHandler : IRequestHand
         CreateTermsAndConditionsVersionCommand request,
         CancellationToken cancellationToken)
     {
-        if (await _db.TermsAndConditions.AsNoTracking().AnyAsync(terms => terms.VersionNumber == request.Input.VersionNumber, cancellationToken))
+        var versionNumber = request.Input.VersionNumber.Trim();
+
+        if (await _db.TermsAndConditions.AsNoTracking().AnyAsync(terms => terms.VersionNumber == versionNumber, cancellationToken))
         {
             return Result<Guid>.Failure(TermsErrors.Conflict("The version number is already used."));
         }
@@ -30,7 +32,7 @@ public sealed class CreateTermsAndConditionsVersionCommandHandler : IRequestHand
             Id = Guid.NewGuid(),
             Title = request.Input.Title.Trim(),
             Content = request.Input.Content,
-            VersionNumber = request.Input.VersionNumber,
+            VersionNumber = versionNumber,
             EffectiveDate = request.Input.EffectiveDate,
             IsActive = false
         };
