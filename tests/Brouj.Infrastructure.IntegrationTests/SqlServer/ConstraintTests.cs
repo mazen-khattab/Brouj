@@ -122,7 +122,7 @@ public sealed class ConstraintTests(SqlServerFixture fixture)
         await TestGraph.SeedAsync(context, reservations: false);
         var duplicate = new TermsAndConditions
         {
-            Title = "duplicate", Content = "terms", VersionNumber = 1,
+            Title = "duplicate", Content = "terms", VersionNumber = "0.0.1",
             EffectiveDate = DateTimeOffset.UtcNow, IsActive = active
         };
 

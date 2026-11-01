@@ -14,7 +14,7 @@ public sealed class TermsAndConditionsConfiguration : IEntityTypeConfiguration<T
         builder.Property(entity => entity.Id).HasColumnType("uniqueidentifier").IsRequired(true);
         builder.Property(entity => entity.Title).HasColumnType("nvarchar(300)").HasMaxLength(300).IsUnicode(true).IsRequired(true);
         builder.Property(entity => entity.Content).HasColumnType("nvarchar(max)").IsRequired(true);
-        builder.Property(entity => entity.VersionNumber).HasColumnType("int").IsRequired(true);
+        builder.Property(entity => entity.VersionNumber).HasColumnType("varchar(32)").HasMaxLength(32).IsUnicode(false).IsRequired(true);
         builder.Property(entity => entity.IsActive).HasColumnType("bit").IsRequired(true);
         builder.Property(entity => entity.EffectiveDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
         builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);

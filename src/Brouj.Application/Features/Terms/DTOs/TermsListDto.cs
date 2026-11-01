@@ -8,7 +8,7 @@ public sealed class TermsListDto
 
     public string Title { get; init; } = string.Empty;
 
-    public int VersionNumber { get; init; }
+    public string VersionNumber { get; init; } = string.Empty;
 
     public DateTimeOffset EffectiveDate { get; init; }
 

@@ -51,7 +51,7 @@ internal sealed record TestGraph(
             new StageTemplateItem { StageTemplate = stageTemplate, ItemTemplate = itemTemplate, SortOrder = 1 },
             new CustomerRefreshToken { Customer = customer, Token = "synthetic-customer-token", IsActive = true, ExpDate = now.AddDays(1) },
             new UserRefreshToken { User = user, Token = "synthetic-user-token", IsActive = true, ExpDate = now.AddDays(1) },
-            new TermsAndConditions { Title = "terms", Content = "test terms", VersionNumber = 1, IsActive = true, EffectiveDate = now });
+            new TermsAndConditions { Title = "terms", Content = "test terms", VersionNumber = "0.0.1", IsActive = true, EffectiveDate = now });
 
         if (reservations)
         {

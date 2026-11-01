@@ -135,7 +135,7 @@ StageTemplateItem	SortOrder	int	int	false
 TermsAndConditions	Id	Guid	uniqueidentifier	false
 TermsAndConditions	Title	string	nvarchar(300)	false
 TermsAndConditions	Content	string	nvarchar(max)	false
-TermsAndConditions	VersionNumber	int	int	false
+TermsAndConditions	VersionNumber	string	varchar(32)	false
 TermsAndConditions	IsActive	bool	bit	false
 TermsAndConditions	EffectiveDate	DateTimeOffset	datetimeoffset(3)	false
 TermsAndConditions	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
