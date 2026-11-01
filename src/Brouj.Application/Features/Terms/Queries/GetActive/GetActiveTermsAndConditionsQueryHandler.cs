@@ -18,14 +18,14 @@ public sealed class GetActiveTermsAndConditionsQueryHandler : IRequestHandler<Ge
         _clock = clock;
     }
 
-    public async Task<Result<TermsDto>> Handle(
-        GetActiveTermsAndConditionsQuery request,
-        CancellationToken cancellationToken)
+    public async Task<Result<TermsDto>> Handle(GetActiveTermsAndConditionsQuery request, CancellationToken cancellationToken)
     {
         var query = _db.TermsAndConditions.AsNoTracking();
 
         var now = _clock.GetUtcNow();
+
         query = query.Where(terms => terms.IsActive && terms.EffectiveDate <= now);
+
         var dto = await query.OrderByDescending(terms => terms.EffectiveDate).ThenByDescending(terms => terms.VersionNumber)
             .Select(terms => new TermsDto
             {
@@ -37,10 +37,10 @@ public sealed class GetActiveTermsAndConditionsQueryHandler : IRequestHandler<Ge
                 IsActive = terms.IsActive
             }).FirstOrDefaultAsync(cancellationToken);
 
-        if (dto is null)
-        {
-            return Result<TermsDto>.Failure(TermsErrors.NotFound);
-        }
+        //if (dto is null)
+        //{
+        //    return Result<TermsDto>.Failure(TermsErrors.NotFound);
+        //}
 
         return Result<TermsDto>.Success(dto);
     }

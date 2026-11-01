@@ -16,11 +16,11 @@ public sealed class GetTermsAndConditionsVersionsQueryHandler : IRequestHandler<
         _db = db;
     }
 
-    public async Task<Result<PaginationResult<TermsListDto>>> Handle(
-        GetTermsAndConditionsVersionsQuery request,
-        CancellationToken cancellationToken)
+    public async Task<Result<PaginationResult<TermsListDto>>> Handle(GetTermsAndConditionsVersionsQuery request, CancellationToken cancellationToken)
     {
-        var page = await Paging.ToPageAsync(_db.TermsAndConditions.AsNoTracking().OrderByDescending(terms => terms.VersionNumber)
+        var page = await Paging.ToPageAsync(_db.TermsAndConditions
+            .AsNoTracking()
+            .OrderByDescending(terms => terms.VersionNumber)
             .Select(terms => new TermsListDto
             {
                 Id = terms.Id,

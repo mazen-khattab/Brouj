@@ -4,12 +4,13 @@ using Brouj.Application.Common.Models;
 using Brouj.Application.UnitTests.Features.Support;
 using FluentValidation;
 using MediatR;
+using System.Reflection;
 
 namespace Brouj.Application.UnitTests.Features;
 
 public sealed class FeatureArchitectureTests
 {
-    private static readonly System.Reflection.Assembly ApplicationAssembly = typeof(Result).Assembly;
+    private static readonly Assembly ApplicationAssembly = typeof(Result).Assembly;
 
     public static IEnumerable<object[]> Requests => ApplicationAssembly.GetTypes()
         .Where(type => type.IsClass && !type.IsAbstract && type.GetInterfaces()
