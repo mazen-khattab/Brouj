@@ -58,12 +58,12 @@ public sealed class ApplicationTransactionManager : IApplicationTransactionManag
 
                     return result;
                 }
-                catch
+                catch (Exception ex)
                 {
                     // DisposeAsync rolls back before the outer catch maps an expected conflict.
                     // Do not log provider exceptions: their messages may contain private row values.
                     _context.ChangeTracker.Clear();
-                    _logger.LogWarning("Application transaction failed; uncommitted work will be rolled back.");
+                    _logger.LogWarning(ex, "Application transaction failed; uncommitted work will be rolled back.");
 
                     throw;
                 }

@@ -7,6 +7,7 @@ using Brouj.Domain.Entities;
 using Brouj.Domain.Enums;
 using Brouj.Infrastructure.IntegrationTests.Fixtures;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Brouj.Infrastructure.IntegrationTests.SqlServer;
 
@@ -72,7 +73,7 @@ public sealed class Part9ConcurrencyTests(SqlServerFixture fixture)
             await using var writer = database.CreateContext(actor, enableRetry: true, interceptors: [rendezvous]);
 
             return await ApplicationFeaturePipeline.SendWithConflictMappingAsync(
-                new CreateReservationCommandHandler(writer, actor, TimeProvider.System),
+                new CreateReservationCommandHandler(writer, actor, TimeProvider.System, NullLogger<CreateReservationCommandHandler>.Instance),
                 new CreateReservationCommand { UnitId = graph.Unit.Id }, writer, actor);
         }
 
@@ -107,7 +108,7 @@ public sealed class Part9ConcurrencyTests(SqlServerFixture fixture)
         var actor = new TestActor(true, null, graph.Customer.Id);
         await using var writer = database.CreateContext(actor, enableRetry: true);
         var result = await ApplicationFeaturePipeline.SendWithConflictMappingAsync(
-            new CreateReservationCommandHandler(writer, actor, TimeProvider.System),
+            new CreateReservationCommandHandler(writer, actor, TimeProvider.System, NullLogger<CreateReservationCommandHandler>.Instance),
             new CreateReservationCommand { UnitId = graph.Unit.Id }, writer, actor);
 
         Assert.True(result.IsSuccess);
@@ -226,7 +227,7 @@ public sealed class Part9ConcurrencyTests(SqlServerFixture fixture)
             }
 
             return await ApplicationFeaturePipeline.SendWithConflictMappingAsync(
-                new CreateReservationCommandHandler(writer, actor, TimeProvider.System),
+                new CreateReservationCommandHandler(writer, actor, TimeProvider.System, NullLogger<CreateReservationCommandHandler>.Instance),
                 new CreateReservationCommand { UnitId = graph.Unit.Id }, writer, actor);
         }
 

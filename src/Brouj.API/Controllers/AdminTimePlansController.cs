@@ -34,10 +34,7 @@ public sealed class AdminTimePlansController : ApiControllerBase
     [EndpointContract(typeof(UpdateTimePlanCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> UpdateTimePlan(
-        [FromRoute] Guid id,
-        [FromBody] TimePlanInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateTimePlan([FromRoute] Guid id, [FromBody] TimePlanInput body, CancellationToken cancellationToken)
     {
         var request = new UpdateTimePlanCommand
         {
@@ -48,6 +45,7 @@ public sealed class AdminTimePlansController : ApiControllerBase
 
         return Respond(result);
     }
+
 
     [HttpDelete("{id}")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
@@ -65,16 +63,14 @@ public sealed class AdminTimePlansController : ApiControllerBase
         return Respond(result);
     }
 
+
     [HttpPost("{timePlanId}/stages")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(AddTimePlanStageCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 201)]
     [Consumes("application/json")]
-    public async Task<IActionResult> AddTimePlanStage(
-        [FromRoute] Guid timePlanId,
-        [FromBody] StageDraftInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> AddTimePlanStage([FromRoute] Guid timePlanId, [FromBody] StageDraftInput body, CancellationToken cancellationToken)
     {
         var request = new AddTimePlanStageCommand
         {
@@ -86,16 +82,14 @@ public sealed class AdminTimePlansController : ApiControllerBase
         return Respond(result, 201);
     }
 
+
     [HttpPost("{timePlanId}/stages/from-template")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(AddStageFromTemplateCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 201)]
     [Consumes("application/json")]
-    public async Task<IActionResult> AddStageFromTemplate(
-        [FromRoute] Guid timePlanId,
-        [FromBody] StageDraftInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> AddStageFromTemplate([FromRoute] Guid timePlanId, [FromBody] StageDraftInput body, CancellationToken cancellationToken)
     {
         var request = new AddStageFromTemplateCommand
         {
@@ -107,17 +101,14 @@ public sealed class AdminTimePlansController : ApiControllerBase
         return Respond(result, 201);
     }
 
+
     [HttpPatch("{timePlanId}/stages/{id}")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(UpdateTimePlanStageCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> UpdateTimePlanStage(
-        [FromRoute] Guid timePlanId,
-        [FromRoute] Guid id,
-        [FromBody] TimePlanInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateTimePlanStage([FromRoute] Guid timePlanId, [FromRoute] Guid id, [FromBody] TimePlanInput body, CancellationToken cancellationToken)
     {
         var request = new UpdateTimePlanStageCommand
         {
@@ -130,15 +121,13 @@ public sealed class AdminTimePlansController : ApiControllerBase
         return Respond(result);
     }
 
+
     [HttpDelete("{timePlanId}/stages/{id}")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(DeleteTimePlanStageCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
-    public async Task<IActionResult> DeleteTimePlanStage(
-        [FromRoute] Guid timePlanId,
-        [FromRoute] Guid id,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteTimePlanStage([FromRoute] Guid timePlanId, [FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new DeleteTimePlanStageCommand
         {
@@ -150,16 +139,14 @@ public sealed class AdminTimePlansController : ApiControllerBase
         return Respond(result);
     }
 
+
     [HttpPut("{timePlanId}/stages/order")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(ReorderTimePlanStagesCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> ReorderTimePlanStages(
-        [FromRoute] Guid timePlanId,
-        [FromBody] ReorderTimePlanStagesRequest body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ReorderTimePlanStages([FromRoute] Guid timePlanId, [FromBody] ReorderTimePlanStagesRequest body, CancellationToken cancellationToken)
     {
         var request = new ReorderTimePlanStagesCommand
         {

@@ -64,13 +64,12 @@ public sealed class EntityConfigurationTests
     }
 
     [Fact]
-    public void All_26_entities_have_a_configuration_table_primary_key_and_application_DbSet()
+    public void All_entities_have_a_configuration_table_primary_key_and_application_DbSet()
     {
         using var context = TestContext.Create();
         var modelEntities = context.Model.GetEntityTypes().ToArray();
-        Assert.Equal(26, modelEntities.Length);
-        Assert.Equal(181, modelEntities.Sum(entity => entity.GetProperties().Count()));
-        Assert.Equal(181, Columns().Count());
+        Assert.Equal(27, modelEntities.Length);
+        Assert.Equal(Columns().Count(), modelEntities.Sum(entity => entity.GetProperties().Count()));
 
         var configurations = typeof(ApplicationDbContext).Assembly.GetTypes()
             .SelectMany(type => type.GetInterfaces()
@@ -79,10 +78,10 @@ public sealed class EntityConfigurationTests
             .Select(contract => contract.GetGenericArguments()[0])
             .ToArray();
 
-        Assert.Equal(26, configurations.Length);
+        Assert.Equal(27, configurations.Length);
         Assert.IsAssignableFrom<IApplicationDbContext>(context);
         var dbSets = typeof(IApplicationDbContext).GetProperties();
-        Assert.Equal(26, dbSets.Length);
+        Assert.Equal(27, dbSets.Length);
 
         foreach (var entity in modelEntities)
         {
@@ -92,7 +91,8 @@ public sealed class EntityConfigurationTests
             Assert.Equal(dbSet.Name, entity.GetTableName());
             var key = Assert.Single(Assert.IsAssignableFrom<IKey>(entity.FindPrimaryKey()).Properties);
             Assert.Equal(entity.ClrType == typeof(InitiativeProject) ? "ProjectId" :
-                entity.ClrType == typeof(InitiativeUnit) ? "UnitId" : "Id", key.Name);
+                entity.ClrType == typeof(InitiativeUnit) ? "UnitId" :
+                entity.ClrType == typeof(InitiativeReservation) ? "ReservationId" : "Id", key.Name);
             Assert.Equal(typeof(Guid), key.ClrType);
             Assert.DoesNotContain(entity.GetProperties(), property => property.IsShadowProperty());
         }

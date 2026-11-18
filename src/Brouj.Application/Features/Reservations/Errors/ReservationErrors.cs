@@ -23,4 +23,9 @@ public static class ReservationErrors
         Error.Conflict(
             FeatureErrorCode.ReservationAlreadyCancelled,
             "Reservation is already cancelled.");
+
+    public static readonly Error InitiativeProfileRequired =
+        Error.Validation(
+            FeatureErrorCode.ReservationInvalidInput,
+            "Initiative demographic and financial profile is required when reserving an initiative unit.");
 }

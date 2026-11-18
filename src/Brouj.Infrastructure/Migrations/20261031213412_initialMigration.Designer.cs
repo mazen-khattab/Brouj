@@ -443,7 +443,7 @@ namespace Brouj.Infrastructure.Migrations
                         .HasPrecision(19, 4)
                         .HasColumnType("decimal(19,4)");
 
-                    b.Property<decimal>("Percentage")
+                    b.Property<decimal>("Price")
                         .HasPrecision(9, 6)
                         .HasColumnType("decimal(9,6)");
 

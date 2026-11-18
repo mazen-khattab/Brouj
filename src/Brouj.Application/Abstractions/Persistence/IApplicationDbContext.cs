@@ -14,6 +14,7 @@ public interface IApplicationDbContext
     DbSet<Customer> Customers { get; }
     DbSet<CustomerRefreshToken> CustomerRefreshTokens { get; }
     DbSet<InitiativeProject> InitiativeProjects { get; }
+    DbSet<InitiativeReservation> InitiativeReservations { get; }
     DbSet<InitiativeUnit> InitiativeUnits { get; }
     DbSet<ItemTemplate> ItemTemplates { get; }
     DbSet<Order> Orders { get; }

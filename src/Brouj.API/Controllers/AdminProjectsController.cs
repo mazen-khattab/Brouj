@@ -55,10 +55,7 @@ public sealed class AdminProjectsController : ApiControllerBase
     [EndpointContract(typeof(UpdateProjectCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> UpdateProject(
-        [FromRoute] Guid id,
-        [FromBody] ProjectInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateProject([FromRoute] Guid id, [FromBody] ProjectInput body, CancellationToken cancellationToken)
     {
         var request = new UpdateProjectCommand
         {
@@ -92,10 +89,7 @@ public sealed class AdminProjectsController : ApiControllerBase
     [EndpointContract(typeof(ReplaceProjectAmenitiesCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> ReplaceProjectAmenities(
-        [FromRoute] Guid id,
-        [FromBody] ReplaceProjectAmenitiesRequest body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ReplaceProjectAmenities([FromRoute] Guid id, [FromBody] ReplaceProjectAmenitiesRequest body, CancellationToken cancellationToken)
     {
         var request = new ReplaceProjectAmenitiesCommand
         {
@@ -113,10 +107,7 @@ public sealed class AdminProjectsController : ApiControllerBase
     [EndpointContract(typeof(AddProjectImageCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 201)]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> AddProjectImage(
-        [FromRoute] Guid id,
-        [FromForm] AddProjectImageRequest body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> AddProjectImage([FromRoute] Guid id, [FromForm] AddProjectImageRequest body, CancellationToken cancellationToken)
     {
         // The transport owns the stream; the storage service validates names, signatures and actual byte counts.
         await using var stream = body.File.OpenReadStream();
@@ -144,11 +135,7 @@ public sealed class AdminProjectsController : ApiControllerBase
     [EndpointContract(typeof(UpdateProjectImageCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> UpdateProjectImage(
-        [FromRoute] Guid id,
-        [FromRoute] Guid imageId,
-        [FromBody] UpdateProjectImageRequest body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateProjectImage([FromRoute] Guid id, [FromRoute] Guid imageId, [FromBody] UpdateProjectImageRequest body, CancellationToken cancellationToken)
     {
         var request = new UpdateProjectImageCommand
         {
@@ -166,10 +153,7 @@ public sealed class AdminProjectsController : ApiControllerBase
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(DeleteProjectImageCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
-    public async Task<IActionResult> DeleteProjectImage(
-        [FromRoute] Guid id,
-        [FromRoute] Guid imageId,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteProjectImage([FromRoute] Guid id, [FromRoute] Guid imageId, CancellationToken cancellationToken)
     {
         var request = new DeleteProjectImageCommand
         {
@@ -187,10 +171,7 @@ public sealed class AdminProjectsController : ApiControllerBase
     [EndpointContract(typeof(CreateUnitCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 201)]
     [Consumes("application/json")]
-    public async Task<IActionResult> CreateUnit(
-        [FromRoute] Guid projectId,
-        [FromBody] UnitInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateUnit([FromRoute] Guid projectId, [FromBody] UnitInput body, CancellationToken cancellationToken)
     {
         var request = new CreateUnitCommand
         {
@@ -208,10 +189,7 @@ public sealed class AdminProjectsController : ApiControllerBase
     [EndpointContract(typeof(CreateTimePlanCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 201)]
     [Consumes("application/json")]
-    public async Task<IActionResult> CreateTimePlan(
-        [FromRoute] Guid projectId,
-        [FromBody] CreateTimePlanRequest body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateTimePlan([FromRoute] Guid projectId, [FromBody] CreateTimePlanRequest body, CancellationToken cancellationToken)
     {
         var request = new CreateTimePlanCommand
         {

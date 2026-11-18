@@ -6,6 +6,7 @@ using Brouj.Domain.Entities;
 using Brouj.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Brouj.Application.Features.Reservations.Commands.Create;
 
@@ -14,24 +15,32 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
     private readonly IApplicationDbContext _db;
     private readonly ICurrentUser _currentUser;
     private readonly TimeProvider _clock;
+    private readonly ILogger<CreateReservationCommandHandler> _logger;
 
-    public CreateReservationCommandHandler(IApplicationDbContext db, ICurrentUser currentUser, TimeProvider clock)
+    public CreateReservationCommandHandler(IApplicationDbContext db, ICurrentUser currentUser, TimeProvider clock, ILogger<CreateReservationCommandHandler> logger)
     {
         _db = db;
         _currentUser = currentUser;
         _clock = clock;
+        _logger = logger;
     }
 
     public async Task<Result<Guid>> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Creating a new reservation for unit {UnitId} by customer {CustomerId}.", request.UnitId, _currentUser.CustomerId);
+
+        _logger.LogDebug("Checking if the unit exists in the database.");
         var unit = await _db.BaseUnits.AsNoTracking()
+            .Include(u => u.InitiativeUnit)
             .SingleOrDefaultAsync(unit => unit.Id == request.UnitId, cancellationToken);
 
         if (unit is null)
         {
+            _logger.LogWarning("The selected unit {UnitId} does not exist.", request.UnitId);
             return Result<Guid>.Failure(ReservationErrors.Conflict("The selected unit does not exist."));
         }
 
+        _logger.LogDebug("Checking for existing processing reservations for customer {CustomerId} and unit {UnitId}.", _currentUser.CustomerId, unit.Id);
         var hasProcessingReservation = await _db.Reservations
             .AsNoTracking()
             .AnyAsync(reservation => 
@@ -41,9 +50,11 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
 
         if (hasProcessingReservation)
         {
+            _logger.LogWarning("Customer {CustomerId} already has a processing reservation for unit {UnitId}.", _currentUser.CustomerId, unit.Id);
             return Result<Guid>.Failure(ReservationErrors.AlreadyActive);
         }
 
+        _logger.LogDebug("Checking if the unit {UnitId} is sold out based on existing orders.", unit.Id);
         // The approved availability rule applies to all units: every non-Pending order blocks a new reservation.
         var isUnitSoldOut = await _db.Orders
             .AsNoTracking()
@@ -51,9 +62,35 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
 
         if (isUnitSoldOut)
         {
+            _logger.LogWarning("The unit {UnitId} is sold out and cannot be reserved.", unit.Id);
             return Result<Guid>.Failure(ReservationErrors.Conflict("The unit is unavailable."));
         }
 
+        InitiativeReservation? initiativeReservation = null;
+        if (unit.InitiativeUnit is not null)
+        {
+            if (string.IsNullOrWhiteSpace(request.IdentityNumber) ||
+                string.IsNullOrWhiteSpace(request.AgeGroup) ||
+                string.IsNullOrWhiteSpace(request.PlaceOfResidence) ||
+                !request.PreferredFinancialBracket.HasValue ||
+                !request.PreferredRepaymentPeriod.HasValue)
+            {
+                _logger.LogWarning("Initiative profile is required for initiative unit {UnitId}.", unit.Id);
+                return Result<Guid>.Failure(ReservationErrors.InitiativeProfileRequired);
+            }
+
+            initiativeReservation = new InitiativeReservation
+            {
+                IdentityNumber = request.IdentityNumber.Trim(),
+                AgeGroup = request.AgeGroup.Trim(),
+                PlaceOfResidence = request.PlaceOfResidence.Trim(),
+                FinancialBracket = request.PreferredFinancialBracket.Value,
+                RepaymentPeriod = request.PreferredRepaymentPeriod.Value,
+                CreatedAt = _clock.GetUtcNow()
+            };
+        }
+
+        _logger.LogInformation("Creating a new reservation entity for unit {UnitId} and customer {CustomerId}.", unit.Id, _currentUser.CustomerId);
         var entity = new Reservation
         {
             Id = Guid.NewGuid(),
@@ -61,20 +98,18 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
             UnitId = unit.Id,
             Number = "R-" + Guid.NewGuid().ToString("N"),
             FullName = request.FullName,
-            IdentityNumber = request.IdentityNumber,
-            AgeGroup = request.AgeGroup,
-            FinancialBracket = request.PreferredFinancialBracket,
             Phone = request.Phone,
-            PlaceOfResidence = request.PlaceOfResidence,
-            RepaymentPeriod = request.PreferredRepaymentPeriod,
             ReservationDate = _clock.GetUtcNow(),
-            Status = ReservationStatus.Processing
+            Status = ReservationStatus.Processing,
+            InitiativeReservation = initiativeReservation
         };
 
+        _logger.LogInformation("Adding the new reservation entity to the database context.");
         _db.Reservations.Add(entity);
 
         await _db.SaveChangesAsync(cancellationToken);
 
+        _logger.LogInformation("Successfully created a new reservation with ID {ReservationId} for unit {UnitId}.", entity.Id, unit.Id);
         return Result<Guid>.Success(entity.Id);
     }
 }

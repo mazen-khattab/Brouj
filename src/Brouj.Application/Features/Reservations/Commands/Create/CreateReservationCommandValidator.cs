@@ -16,24 +16,38 @@ public sealed class CreateReservationCommandValidator : AbstractValidator<Create
             .NotEmpty()
             .MaximumLength(100);
 
-        RuleFor(request => request.IdentityNumber)
-            .NationalId();
-
         RuleFor(request => request.Phone)
+            .NotEmpty()
             .EgyptianPhone();
 
-        RuleFor(request => request.AgeGroup)
-            .NotEmpty()
-            .MaximumLength(16);
+        When(request => !string.IsNullOrEmpty(request.IdentityNumber), () =>
+        {
+            RuleFor(request => request.IdentityNumber!)
+                .NationalId();
+        });
 
-        RuleFor(request => request.PlaceOfResidence)
-            .NotEmpty()
-            .MaximumLength(100);
+        When(request => !string.IsNullOrEmpty(request.AgeGroup), () =>
+        {
+            RuleFor(request => request.AgeGroup!)
+                .MaximumLength(16);
+        });
 
-        RuleFor(request => request.PreferredFinancialBracket)
-            .GreaterThan(0);
+        When(request => !string.IsNullOrEmpty(request.PlaceOfResidence), () =>
+        {
+            RuleFor(request => request.PlaceOfResidence!)
+                .MaximumLength(100);
+        });
 
-        RuleFor(request => request.PreferredRepaymentPeriod)
-            .GreaterThan(0);
+        When(request => request.PreferredFinancialBracket.HasValue, () =>
+        {
+            RuleFor(request => request.PreferredFinancialBracket!.Value)
+                .GreaterThan(0);
+        });
+
+        When(request => request.PreferredRepaymentPeriod.HasValue, () =>
+        {
+            RuleFor(request => request.PreferredRepaymentPeriod!.Value)
+                .GreaterThan(0);
+        });
     }
 }

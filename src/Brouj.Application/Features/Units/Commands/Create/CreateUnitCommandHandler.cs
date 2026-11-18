@@ -20,7 +20,8 @@ public sealed class CreateUnitCommandHandler : IRequestHandler<CreateUnitCommand
 
     public async Task<Result<Guid>> Handle(CreateUnitCommand request, CancellationToken cancellationToken)
     {
-        var project = await _db.BaseProjects.AsNoTracking()
+        var project = await _db.BaseProjects
+            .AsNoTracking()
             .SingleOrDefaultAsync(project => project.Id == request.ProjectId, cancellationToken);
 
         if (project is null)
@@ -34,7 +35,7 @@ public sealed class CreateUnitCommandHandler : IRequestHandler<CreateUnitCommand
 
         if (isInitiative && (project.Price <= 0 || total > project.Price || request.Input.NeighborMeterPrice is null))
         {
-            return Result<Guid>.Failure(UnitErrors.Validation("Initiative units require a display neighbor price and a percentage between 0 and 100."));
+            return Result<Guid>.Failure(UnitErrors.Validation("Initiative units require a display neighbor price"));
         }
 
         if (!isInitiative && request.Input.NeighborMeterPrice is not null)
@@ -42,7 +43,11 @@ public sealed class CreateUnitCommandHandler : IRequestHandler<CreateUnitCommand
             return Result<Guid>.Failure(UnitErrors.Validation("Neighbor meter price applies only to initiative units."));
         }
 
-        if (await _db.BaseUnits.AsNoTracking().AnyAsync(unit => unit.ProjectId == project.Id && unit.Id != entity.Id && unit.Number == request.Input.Number.Trim(), cancellationToken))
+        var isUnitNumberExist = await _db.BaseUnits
+            .AsNoTracking()
+            .AnyAsync(unit => unit.ProjectId == project.Id && unit.Id != entity.Id && unit.Number == request.Input.Number.Trim(), cancellationToken);
+
+        if (isUnitNumberExist)
         {
             return Result<Guid>.Failure(UnitErrors.Conflict("The unit number is already used in this project."));
         }

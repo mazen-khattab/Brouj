@@ -32,10 +32,7 @@ public sealed class AdminTimePlanStagesController : ApiControllerBase
     [EndpointContract(typeof(AddPlanStageItemCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 201)]
     [Consumes("application/json")]
-    public async Task<IActionResult> AddPlanStageItem(
-        [FromRoute] Guid stageId,
-        [FromBody] PlanStageItemInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> AddPlanStageItem([FromRoute] Guid stageId, [FromBody] PlanStageItemInput body, CancellationToken cancellationToken)
     {
         var request = new AddPlanStageItemCommand
         {
@@ -47,17 +44,14 @@ public sealed class AdminTimePlanStagesController : ApiControllerBase
         return Respond(result, 201);
     }
 
+
     [HttpPatch("{stageId}/items/{id}")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(UpdatePlanStageItemCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> UpdatePlanStageItem(
-        [FromRoute] Guid stageId,
-        [FromRoute] Guid id,
-        [FromBody] PlanStageItemInput body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdatePlanStageItem([FromRoute] Guid stageId, [FromRoute] Guid id, [FromBody] PlanStageItemInput body, CancellationToken cancellationToken)
     {
         var request = new UpdatePlanStageItemCommand
         {
@@ -70,15 +64,13 @@ public sealed class AdminTimePlanStagesController : ApiControllerBase
         return Respond(result);
     }
 
+
     [HttpDelete("{stageId}/items/{id}")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(DeletePlanStageItemCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
-    public async Task<IActionResult> DeletePlanStageItem(
-        [FromRoute] Guid stageId,
-        [FromRoute] Guid id,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> DeletePlanStageItem([FromRoute] Guid stageId, [FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var request = new DeletePlanStageItemCommand
         {
@@ -90,17 +82,14 @@ public sealed class AdminTimePlanStagesController : ApiControllerBase
         return Respond(result);
     }
 
+
     [HttpPost("{stageId}/items/{id}/status")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(ChangePlanStageItemStatusCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> ChangePlanStageItemStatus(
-        [FromRoute] Guid stageId,
-        [FromRoute] Guid id,
-        [FromBody] ChangePlanStageItemStatusRequest body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ChangePlanStageItemStatus([FromRoute] Guid stageId, [FromRoute] Guid id, [FromBody] ChangePlanStageItemStatusRequest body, CancellationToken cancellationToken)
     {
         var request = new ChangePlanStageItemStatusCommand
         {
@@ -114,16 +103,14 @@ public sealed class AdminTimePlanStagesController : ApiControllerBase
         return Respond(result);
     }
 
+
     [HttpPut("{stageId}/items/order")]
     [Authorize(Policy = PolicyNames.AdminOnly)]
     [EnableRateLimiting(RateLimitCategories.AdminWrites)]
     [EndpointContract(typeof(ReorderPlanStageItemsCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
     [Consumes("application/json")]
-    public async Task<IActionResult> ReorderPlanStageItems(
-        [FromRoute] Guid stageId,
-        [FromBody] ReorderPlanStageItemsRequest body,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ReorderPlanStageItems([FromRoute] Guid stageId, [FromBody] ReorderPlanStageItemsRequest body, CancellationToken cancellationToken)
     {
         var request = new ReorderPlanStageItemsCommand
         {
