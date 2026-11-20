@@ -11,6 +11,7 @@ public interface IApplicationDbContext
     DbSet<BaseProject> BaseProjects { get; }
     DbSet<BaseUnit> BaseUnits { get; }
     DbSet<City> Cities { get; }
+    DbSet<ContactSubmission> ContactSubmissions { get; }
     DbSet<Customer> Customers { get; }
     DbSet<CustomerRefreshToken> CustomerRefreshTokens { get; }
     DbSet<InitiativeProject> InitiativeProjects { get; }

@@ -31,10 +31,11 @@ Every category requires both a positive integer `PermitLimit` and a positive int
 | `RateLimits:PublicReads` | Catalogue, other safe reads, health and Development OpenAPI. |
 | `RateLimits:Authentication` | CSRF bootstrap, registration, login, refresh, logout, password changes and customer profile changes. |
 | `RateLimits:ReservationWrites` | Customer reservation creation and cancellation. |
+| `RateLimits:ContactSubmissions` | Public Contact Us submissions. Defaults to five requests per client IP per 60 seconds. |
 | `RateLimits:AdminWrites` | Administrative mutations except uploads. |
 | `RateLimits:FileUploads` | Project, unit and stage-item image creation. |
 
-For example, the environment key for the authentication permit budget is `RateLimits__Authentication__PermitLimit`. This document supplies no guessed production numbers. Synthetic budgets exist only in automated test configuration. Choose deployment values from measured traffic and load testing.
+For example, the environment key for the authentication permit budget is `RateLimits__Authentication__PermitLimit`. Set production budgets for the required categories from measured traffic and load testing.
 
 Fixed windows reject immediately without queueing. Buckets use the server-observed client IP after trusted forwarding, independently for each category. Header values from untrusted proxies cannot choose a bucket. Rejections return 429, a safe Problem Details body and Retry-After. These are per-instance controls; a deployment serving multiple instances needs matching gateway/WAF controls and must account for shared client addresses and instance count when measuring budgets. This Part does not claim a distributed quota or a throughput benchmark.
 

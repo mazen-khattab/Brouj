@@ -18,6 +18,7 @@ internal sealed class ApiTestDb : IApplicationDbContext
     public DbSet<BaseUnit> BaseUnits { get; } = new ListDbSet<BaseUnit>();
 
     public DbSet<City> Cities { get; } = new ListDbSet<City>();
+    public DbSet<ContactSubmission> ContactSubmissions { get; } = new ListDbSet<ContactSubmission>();
 
     public DbSet<Customer> Customers { get; }
 

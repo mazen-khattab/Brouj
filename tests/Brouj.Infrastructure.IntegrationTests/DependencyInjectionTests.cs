@@ -51,7 +51,7 @@ public sealed class DependencyInjectionTests
         Assert.Same(context, scope.ServiceProvider.GetRequiredService<IApplicationDbContext>());
         Assert.Same(clock, scope.ServiceProvider.GetRequiredService<TimeProvider>());
         Assert.Equal("Microsoft.EntityFrameworkCore.SqlServer", context.Database.ProviderName);
-        Assert.Equal(27, context.Model.GetEntityTypes().Count());
+        Assert.Equal(28, context.Model.GetEntityTypes().Count());
         using var otherScope = provider.CreateScope();
         Assert.NotSame(context, otherScope.ServiceProvider.GetRequiredService<ApplicationDbContext>());
     }

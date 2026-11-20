@@ -27,6 +27,7 @@ public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<BaseProject> BaseProjects => Set<BaseProject>();
     public DbSet<BaseUnit> BaseUnits => Set<BaseUnit>();
     public DbSet<City> Cities => Set<City>();
+    public DbSet<ContactSubmission> ContactSubmissions => Set<ContactSubmission>();
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<CustomerRefreshToken> CustomerRefreshTokens => Set<CustomerRefreshToken>();
     public DbSet<InitiativeProject> InitiativeProjects => Set<InitiativeProject>();

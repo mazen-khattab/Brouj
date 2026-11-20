@@ -30,7 +30,7 @@ public sealed class Part8ApiFactory : WebApplicationFactory<Program>
     public Guid AdminId { get; } = Guid.NewGuid();
     public Guid SuperAdminId { get; } = Guid.NewGuid();
 
-    public Part8ApiFactory() : this(true)
+    public Part8ApiFactory() : this(true, new() { ["RateLimits:ContactSubmissions:PermitLimit"] = "10000" })
     {
     }
 

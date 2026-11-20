@@ -1,4 +1,5 @@
-Entity	Name	Columns	Unique	Filter
+Entity	Name	Columns	Unique	Filter	DescendingColumns
+ContactSubmission	IX_ContactSubmissions_CreatedAt_Id	CreatedAt,Id	false		CreatedAt
 ActivityLog	IX_ActivityLogs_CreatedAt	CreatedAt	false	
 ActivityLog	IX_ActivityLogs_UserId_CreatedAt	UserId,CreatedAt	false	
 ActivityLog	IX_ActivityLogs_EntityType_EntityId_CreatedAt	EntityType,EntityId,CreatedAt	false	

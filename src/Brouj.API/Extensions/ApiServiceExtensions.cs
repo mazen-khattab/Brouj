@@ -84,6 +84,7 @@ public static class ApiServiceExtensions
             AddRatePolicy(options, RateLimitCategories.PublicReads, rates.PublicReads);
             AddRatePolicy(options, RateLimitCategories.Authentication, rates.Authentication);
             AddRatePolicy(options, RateLimitCategories.ReservationWrites, rates.ReservationWrites);
+            AddRatePolicy(options, RateLimitCategories.ContactSubmissions, rates.ContactSubmissions);
             AddRatePolicy(options, RateLimitCategories.AdminWrites, rates.AdminWrites);
             AddRatePolicy(options, RateLimitCategories.FileUploads, rates.FileUploads);
             options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -133,7 +134,8 @@ public static class ApiServiceExtensions
 
         var policies = new[]
         {
-            rates.PublicReads, rates.Authentication, rates.ReservationWrites, rates.AdminWrites, rates.FileUploads
+            rates.PublicReads, rates.Authentication, rates.ReservationWrites, rates.ContactSubmissions,
+            rates.AdminWrites, rates.FileUploads
         };
 
         if (policies.Any(policy => policy.PermitLimit <= 0 || policy.WindowSeconds <= 0))
