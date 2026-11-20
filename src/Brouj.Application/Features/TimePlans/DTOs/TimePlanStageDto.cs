@@ -12,5 +12,7 @@ public sealed class TimePlanStageDto
 
     public DateTimeOffset DeliveryDate { get; init; }
 
+    public decimal Percentage { get; init; }
+
     public IReadOnlyList<PlanStageItemDto> Items { get; init; } = [];
 }

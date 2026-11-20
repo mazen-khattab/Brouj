@@ -5,6 +5,7 @@ using Brouj.Application.Features.Orders.Queries.GetById;
 using Brouj.Application.Features.Orders.Queries.GetMine;
 using Brouj.Application.Features.Reservations.Commands.Cancel;
 using Brouj.Application.Features.Reservations.Commands.Create;
+using Brouj.Application.Features.Reservations.Errors;
 using Brouj.Application.Features.Reservations.Queries.GetById;
 using Brouj.Application.Features.Reservations.Queries.GetMine;
 using Brouj.Application.UnitTests.Features.Support;
@@ -32,10 +33,10 @@ public sealed class CommerceFeatureTests
         using var fixture = new FeatureHarness();
         var customer = fixture.Customer();
         var unit = fixture.Unit();
-        var first = await fixture.SendAsync(new CreateReservationCommand { UnitId = unit.Id }, CancellationToken.None);
-        var duplicate = await fixture.SendAsync(new CreateReservationCommand { UnitId = unit.Id }, CancellationToken.None);
+        var first = await fixture.SendAsync(new CreateReservationCommand { UnitId = unit.Id, FullName = "Customer One", Phone = "01012345678" }, CancellationToken.None);
+        var duplicate = await fixture.SendAsync(new CreateReservationCommand { UnitId = unit.Id, FullName = "Customer One", Phone = "01012345678" }, CancellationToken.None);
         var cancellation = await fixture.SendAsync(new CancelReservationCommand { Id = first.Value }, CancellationToken.None);
-        var later = await fixture.SendAsync(new CreateReservationCommand { UnitId = unit.Id }, CancellationToken.None);
+        var later = await fixture.SendAsync(new CreateReservationCommand { UnitId = unit.Id, FullName = "Customer One", Phone = "01012345678" }, CancellationToken.None);
         var original = fixture.Db.Reservations.Single(reservation => reservation.Id == first.Value);
 
         Assert.True(first.IsSuccess && cancellation.IsSuccess && later.IsSuccess);
@@ -67,7 +68,17 @@ public sealed class CommerceFeatureTests
         });
         fixture.Customer();
 
-        var result = await fixture.SendAsync(new CreateReservationCommand { UnitId = unit.Id }, CancellationToken.None);
+        var result = await fixture.SendAsync(new CreateReservationCommand
+        {
+            UnitId = unit.Id,
+            FullName = "Customer Two",
+            Phone = "01012345678",
+            IdentityNumber = "29001011234567",
+            AgeGroup = "25-35",
+            PlaceOfResidence = "Cairo",
+            PreferredFinancialBracket = 1,
+            PreferredRepaymentPeriod = 12
+        }, CancellationToken.None);
 
         Assert.Equal(available, result.IsSuccess);
     }
@@ -183,5 +194,90 @@ public sealed class CommerceFeatureTests
         Assert.Equal(OrderStatus.Cancelled, loser.Status);
         Assert.Null(loser.CompletedAt);
         Assert.Single(fixture.Db.Orders, order => order.Status == OrderStatus.Completed);
+    }
+
+    [Fact]
+    public async Task Standard_unit_reservation_succeeds_with_only_name_and_phone()
+    {
+        using var fixture = new FeatureHarness();
+        fixture.Customer();
+        var unit = fixture.Unit();
+
+        var result = await fixture.SendAsync(new CreateReservationCommand
+        {
+            UnitId = unit.Id,
+            FullName = "Standard Customer",
+            Phone = "01012345678"
+        }, CancellationToken.None);
+
+        Assert.True(result.IsSuccess);
+        var reservation = fixture.Db.Reservations.Single(r => r.Id == result.Value);
+        Assert.Equal("Standard Customer", reservation.FullName);
+        Assert.Null(reservation.InitiativeReservation);
+    }
+
+    [Fact]
+    public async Task Initiative_unit_reservation_fails_when_profile_is_missing()
+    {
+        using var fixture = new FeatureHarness();
+        fixture.Customer();
+        var unit = fixture.Unit(ProjectType.Initiative);
+        var initiativeUnit = new InitiativeUnit
+        {
+            UnitId = unit.Id,
+            NeighborMeterPrice = 100,
+            Percentage = 10,
+            CreatedAt = fixture.Clock.GetUtcNow()
+        };
+        unit.InitiativeUnit = initiativeUnit;
+        fixture.Db.InitiativeUnits.Add(initiativeUnit);
+
+        var result = await fixture.SendAsync(new CreateReservationCommand
+        {
+            UnitId = unit.Id,
+            FullName = "Initiative Customer",
+            Phone = "01012345678"
+        }, CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(ReservationErrors.InitiativeProfileRequired.Code, result.Error.Code);
+    }
+
+    [Fact]
+    public async Task Initiative_unit_reservation_succeeds_and_creates_initiative_reservation_when_profile_is_supplied()
+    {
+        using var fixture = new FeatureHarness();
+        fixture.Customer();
+        var unit = fixture.Unit(ProjectType.Initiative);
+        var initiativeUnit = new InitiativeUnit
+        {
+            UnitId = unit.Id,
+            NeighborMeterPrice = 100,
+            Percentage = 10,
+            CreatedAt = fixture.Clock.GetUtcNow()
+        };
+        unit.InitiativeUnit = initiativeUnit;
+        fixture.Db.InitiativeUnits.Add(initiativeUnit);
+
+        var result = await fixture.SendAsync(new CreateReservationCommand
+        {
+            UnitId = unit.Id,
+            FullName = "Initiative Customer",
+            Phone = "01012345678",
+            IdentityNumber = "29001011234567",
+            AgeGroup = "25-35",
+            PlaceOfResidence = "Cairo",
+            PreferredFinancialBracket = 1,
+            PreferredRepaymentPeriod = 12
+        }, CancellationToken.None);
+
+        Assert.True(result.IsSuccess);
+        var reservation = fixture.Db.Reservations.Single(r => r.Id == result.Value);
+        Assert.NotNull(reservation.InitiativeReservation);
+        Assert.Equal("29001011234567", reservation.InitiativeReservation.IdentityNumber);
+        Assert.Equal("25-35", reservation.InitiativeReservation.AgeGroup);
+        Assert.Equal("Cairo", reservation.InitiativeReservation.PlaceOfResidence);
+        Assert.Equal(1, reservation.InitiativeReservation.FinancialBracket);
+        Assert.Equal(12, reservation.InitiativeReservation.RepaymentPeriod);
     }
 }

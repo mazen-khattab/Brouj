@@ -5,39 +5,44 @@ using Brouj.Application.Features.TimePlans.Errors;
 using Brouj.Domain.Entities;
 using Brouj.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Brouj.Application.Features.TimePlans.Services;
 
 public sealed class TimePlanDraftBuilder
 {
     private readonly IApplicationDbContext _db;
+    private readonly ILogger<TimePlanDraftBuilder> _logger;
 
-    public TimePlanDraftBuilder(IApplicationDbContext db)
+    public TimePlanDraftBuilder(IApplicationDbContext db, ILogger<TimePlanDraftBuilder> logger)
     {
         _db = db;
+        _logger = logger;
     }
 
-    public async Task<Result<TimePlanStage>> BuildAsync(
-        Guid timePlanId,
-        StageDraftInput input,
-        int sortOrder,
-        CancellationToken cancellationToken)
+    public async Task<Result<TimePlanStage>> BuildAsync(Guid timePlanId, StageDraftInput input, int sortOrder, CancellationToken cancellationToken)
     {
+        _logger.LogDebug("Building a new time plan stage draft for time plan {TimePlanId} with sort order {SortOrder}.", timePlanId, sortOrder);
+
+        _logger.LogDebug("Validating input for time plan stage draft: {@Input}.", input);
         if (input.DeliveryDate is null || input.Items.Any(item => item.DueDate is null))
         {
             return Result<TimePlanStage>.Failure(TimePlanErrors.Validation("Pls insert the dates first"));
         }
 
+        // Time plan name.
         var name = input.Name.Trim();
         var items = new List<(string Name, StageItemDraftInput Input)>();
 
         if (input.StageTemplateId is Guid templateId)
         {
+            _logger.LogDebug("Fetch the stage template with ID: {ID}", templateId);
             var template = await _db.StageTemplates.AsNoTracking()
                 .SingleOrDefaultAsync(template => template.Id == templateId, cancellationToken);
 
             if (template is null || !template.IsActive)
             {
+                _logger.LogDebug("Stage template with ID: {ID} is not found", templateId);
                 return Result<TimePlanStage>.Failure(TimePlanErrors.Conflict("An active stage template is required."));
             }
 
@@ -53,12 +58,13 @@ public sealed class TimePlanDraftBuilder
 
             var suppliedIds = input.Items.Select(item => item.ItemTemplateId).ToArray();
 
-            if (mappings.Any(mapping => !mapping.IsActive) || suppliedIds.Any(id => id is null) ||
-                suppliedIds.Distinct().Count() != mappings.Count || suppliedIds.Length != mappings.Count ||
+            if (mappings.Any(mapping => !mapping.IsActive) || 
+                suppliedIds.Any(id => id is null) ||
+                suppliedIds.Distinct().Count() != mappings.Count || 
+                suppliedIds.Length != mappings.Count ||
                 mappings.Any(mapping => !suppliedIds.Contains(mapping.ItemTemplateId)))
             {
-                return Result<TimePlanStage>.Failure(
-                    TimePlanErrors.Conflict("Supply dates for every active item in the selected template."));
+                return Result<TimePlanStage>.Failure(TimePlanErrors.Conflict("Supply dates for every active item in the selected template."));
             }
 
             name = template.Name;
@@ -72,8 +78,7 @@ public sealed class TimePlanDraftBuilder
         {
             if (input.Items.Any(item => item.ItemTemplateId is not null))
             {
-                return Result<TimePlanStage>.Failure(
-                    TimePlanErrors.Validation("Item template references require a stage template."));
+                return Result<TimePlanStage>.Failure(TimePlanErrors.Validation("Item template references require a stage template."));
             }
 
             items.AddRange(input.Items.Select(item => (item.Name.Trim(), item)));
@@ -85,6 +90,7 @@ public sealed class TimePlanDraftBuilder
             Id = Guid.NewGuid(),
             TimePlanId = timePlanId,
             Name = name,
+            Price = input.Percentage,
             DeliveryDate = input.DeliveryDate.Value,
             SortOrder = sortOrder
         };

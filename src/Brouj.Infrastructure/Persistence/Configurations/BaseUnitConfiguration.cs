@@ -17,6 +17,8 @@ public sealed class BaseUnitConfiguration : IEntityTypeConfiguration<BaseUnit>
         builder.Property(entity => entity.MeterPrice).HasColumnType("decimal(19,4)").HasPrecision(19, 4).IsRequired(true);
         builder.Property(entity => entity.FloorNumber).HasColumnType("int").IsRequired(true);
         builder.Property(entity => entity.Size).HasColumnType("decimal(18,4)").HasPrecision(18, 4).IsRequired(true);
+        builder.Property(entity => entity.ExcellencePercentage).HasColumnType("decimal(5,2)").HasPrecision(5, 2).IsRequired(true);
+        builder.Property(entity => entity.Trend).HasColumnType("nvarchar(64)").HasMaxLength(64).IsUnicode(true).IsRequired(true);
         builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
         builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
 

@@ -8,6 +8,8 @@ public sealed class BaseUnit
     public decimal MeterPrice { get; set; }
     public int FloorNumber { get; set; }
     public decimal Size { get; set; }
+    public double ExcellencePercentage { get; set; }
+    public string Trend { get; set; } = string.Empty;
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset? UpdatedAt { get; set; }
 

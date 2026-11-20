@@ -28,9 +28,7 @@ public sealed class TemrsAndConditionsController : ApiControllerBase
     [EnableRateLimiting(RateLimitCategories.PublicReads)]
     [EndpointContract(typeof(GetTermsAndConditionsVersionsQuery))]
     [ProducesResponseType(typeof(ApiResponse<PaginationResult<TermsListDto>>), 200)]
-    public async Task<IActionResult> GetTermsAndConditionsVersions(
-        [FromQuery] GetTermsAndConditionsVersionsParameters query,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> GetTermsAndConditionsVersions([FromQuery] GetTermsAndConditionsVersionsParameters query, CancellationToken cancellationToken)
     {
         var request = new GetTermsAndConditionsVersionsQuery
         {

@@ -116,8 +116,8 @@ JSON endpoints consume `application/json`; image creation consumes `multipart/fo
 | PUT `/api/v1/admin/item-templates/{id}/active` | `SetItemTemplateActiveCommand` | `SetItemTemplateActiveRequest`; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | DELETE `/api/v1/admin/item-templates/{id}` | `DeleteItemTemplateCommand` | —; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | GET `/api/v1/terms-and-conditions/current` | `GetActiveTermsAndConditionsQuery` | —; — | `TermsDto` | Anonymous | 200 | PublicReads |
-| GET `/api/v1/admin/terms-and-conditions` | `GetTermsAndConditionsVersionsQuery` | —; `GetTermsAndConditionsVersionsParameters` | `PaginationResult<TermsListDto>` | AdminOnly | 200 | PublicReads |
-| GET `/api/v1/admin/terms-and-conditions/{id}` | `GetTermsAndConditionsByIdQuery` | —; — | `TermsDto` | AdminOnly | 200 | PublicReads |
+| GET `/api/v1/terms-and-conditions` | `GetTermsAndConditionsVersionsQuery` | —; `GetTermsAndConditionsVersionsParameters` | `PaginationResult<TermsListDto>` | AdminOnly | 200 | PublicReads |
+| GET `/api/v1/terms-and-conditions/{id}` | `GetTermsAndConditionsByIdQuery` | —; — | `TermsDto` | AdminOnly | 200 | PublicReads |
 | POST `/api/v1/admin/terms-and-conditions` | `CreateTermsAndConditionsVersionCommand` | `CreateTermsVersionInput`; — | `Guid` | AdminOnly | 201 | AdminWrites |
 | POST `/api/v1/admin/terms-and-conditions/{id}/activate` | `ActivateTermsAndConditionsCommand` | —; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | GET `/api/v1/admin/activity-logs` | `GetActivityLogsQuery` | —; `GetActivityLogsParameters` | `PaginationResult<ActivityLogDto>` | AdminOnly | 200 | PublicReads |

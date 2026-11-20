@@ -31,6 +31,7 @@ public sealed class GetProjectTimePlanQueryHandler : IRequestHandler<GetProjectT
                     Name = stage.Name,
                     SortOrder = stage.SortOrder,
                     DeliveryDate = stage.DeliveryDate,
+                    Percentage = stage.Price,
                     Items = stage.PlanStageItems.OrderBy(item => item.SortOrder).Select(item => new PlanStageItemDto
                     {
                         Id = item.Id,

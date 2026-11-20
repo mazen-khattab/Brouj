@@ -1,3 +1,5 @@
+using Brouj.Domain.Enums;
+
 namespace Brouj.Domain.Entities;
 
 public sealed class TimePlanStage
@@ -6,6 +8,9 @@ public sealed class TimePlanStage
     public Guid TimePlanId { get; set; }
     public string Name { get; set; } = string.Empty;
     public int SortOrder { get; set; }
+    public TimePlanStageStatus Status { get; set; }
+    public decimal Price { get; set; }
+    public DateTimeOffset PricingDate { get;set; }
     public DateTimeOffset DeliveryDate { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset? UpdatedAt { get; set; }

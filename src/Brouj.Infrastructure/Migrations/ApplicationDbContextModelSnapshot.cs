@@ -222,6 +222,10 @@ namespace Brouj.Infrastructure.Migrations
                         .HasPrecision(3)
                         .HasColumnType("datetimeoffset(3)");
 
+                    b.Property<decimal>("ExcellencePercentage")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
                     b.Property<int>("FloorNumber")
                         .HasColumnType("int");
 
@@ -241,6 +245,12 @@ namespace Brouj.Infrastructure.Migrations
                     b.Property<decimal>("Size")
                         .HasPrecision(18, 4)
                         .HasColumnType("decimal(18,4)");
+
+                    b.Property<string>("Trend")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasPrecision(3)
@@ -427,6 +437,48 @@ namespace Brouj.Infrastructure.Migrations
                     b.ToTable("InitiativeProjects", (string)null);
                 });
 
+            modelBuilder.Entity("Brouj.Domain.Entities.InitiativeReservation", b =>
+                {
+                    b.Property<Guid>("ReservationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AgeGroup")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(16)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasPrecision(3)
+                        .HasColumnType("datetimeoffset(3)");
+
+                    b.Property<int>("FinancialBracket")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<string>("PlaceOfResidence")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("RepaymentPeriod")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasPrecision(3)
+                        .HasColumnType("datetimeoffset(3)");
+
+                    b.HasKey("ReservationId");
+
+                    b.ToTable("InitiativeReservations", (string)null);
+                });
+
             modelBuilder.Entity("Brouj.Domain.Entities.InitiativeUnit", b =>
                 {
                     b.Property<Guid>("UnitId")
@@ -443,6 +495,10 @@ namespace Brouj.Infrastructure.Migrations
                     b.Property<decimal>("Percentage")
                         .HasPrecision(9, 6)
                         .HasColumnType("decimal(9,6)");
+
+                    b.Property<DateTimeOffset>("PricingDate")
+                        .HasPrecision(3)
+                        .HasColumnType("datetimeoffset(3)");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasPrecision(3)
@@ -676,12 +732,6 @@ namespace Brouj.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AgeGroup")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(16)");
-
                     b.Property<DateTimeOffset?>("CancelledAt")
                         .HasPrecision(3)
                         .HasColumnType("datetimeoffset(3)");
@@ -693,41 +743,23 @@ namespace Brouj.Infrastructure.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("FinancialBracket")
-                        .HasColumnType("int");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("IdentityNumber")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(64)");
-
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(64)");
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(32)
                         .IsUnicode(false)
                         .HasColumnType("varchar(32)");
-
-                    b.Property<string>("PlaceOfResidence")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("RepaymentPeriod")
-                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("ReservationDate")
                         .HasPrecision(3)
@@ -983,8 +1015,22 @@ namespace Brouj.Infrastructure.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<decimal>("Price")
+                        .HasPrecision(19, 4)
+                        .HasColumnType("decimal(19,4)");
+
+                    b.Property<DateTimeOffset>("PricingDate")
+                        .HasPrecision(3)
+                        .HasColumnType("datetimeoffset(3)");
+
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(16)");
 
                     b.Property<Guid>("TimePlanId")
                         .HasColumnType("uniqueidentifier");
@@ -994,6 +1040,9 @@ namespace Brouj.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset(3)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Status")
+                        .HasDatabaseName("IX_TimePlanStages_Status");
 
                     b.HasIndex("TimePlanId", "SortOrder")
                         .IsUnique()
@@ -1256,6 +1305,17 @@ namespace Brouj.Infrastructure.Migrations
                     b.Navigation("Project");
                 });
 
+            modelBuilder.Entity("Brouj.Domain.Entities.InitiativeReservation", b =>
+                {
+                    b.HasOne("Brouj.Domain.Entities.Reservation", "Reservation")
+                        .WithOne("InitiativeReservation")
+                        .HasForeignKey("Brouj.Domain.Entities.InitiativeReservation", "ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservation");
+                });
+
             modelBuilder.Entity("Brouj.Domain.Entities.InitiativeUnit", b =>
                 {
                     b.HasOne("Brouj.Domain.Entities.BaseUnit", "Unit")
@@ -1470,6 +1530,8 @@ namespace Brouj.Infrastructure.Migrations
 
             modelBuilder.Entity("Brouj.Domain.Entities.Reservation", b =>
                 {
+                    b.Navigation("InitiativeReservation");
+
                     b.Navigation("Order");
                 });
 

@@ -30,6 +30,7 @@ public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<CustomerRefreshToken> CustomerRefreshTokens => Set<CustomerRefreshToken>();
     public DbSet<InitiativeProject> InitiativeProjects => Set<InitiativeProject>();
+    public DbSet<InitiativeReservation> InitiativeReservations => Set<InitiativeReservation>();
     public DbSet<InitiativeUnit> InitiativeUnits => Set<InitiativeUnit>();
     public DbSet<ItemTemplate> ItemTemplates => Set<ItemTemplate>();
     public DbSet<Order> Orders => Set<Order>();

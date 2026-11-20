@@ -1,6 +1,8 @@
 using System.Reflection;
 using Brouj.Application.Behaviors;
 using Brouj.Application.Common.Services;
+using Brouj.Application.Features.Reservations.Strategies;
+using Brouj.Application.Features.TimePlans.Services;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,8 +19,10 @@ public static class DependencyInjection
         services.AddSingleton<LoginPasswordVerifier>();
         services.AddScoped<PendingFileCleanup>();
         services.AddScoped<FileUpload>();
-        services.AddScoped<Features.TimePlans.Services.TimePlanDraftBuilder>();
-        services.AddScoped<Features.TimePlans.Services.TimePlanOrdering>();
+        services.AddScoped<IReservationPreparationStrategy, RegularReservationPreparationStrategy>();
+        services.AddScoped<IReservationPreparationStrategy, InitiativeReservationPreparationStrategy>();
+        services.AddScoped<TimePlanDraftBuilder>();
+        services.AddScoped<TimePlanOrdering>();
 
         services.AddValidatorsFromAssembly(applicationAssembly, includeInternalTypes: true);
         services.AddMediatR(configuration =>

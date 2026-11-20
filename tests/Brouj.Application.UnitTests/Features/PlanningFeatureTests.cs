@@ -238,6 +238,59 @@ public sealed class PlanningFeatureTests
         Assert.Equal(plan.Id, result.Value.Id);
     }
 
+    [Fact]
+    public async Task Time_plan_read_projects_stage_percentage()
+    {
+        using var fixture = new FeatureHarness();
+        var plan = new TimePlan
+        {
+            Id = Guid.NewGuid(),
+            ProjectId = Guid.NewGuid(),
+            Name = "Plan With Price",
+            DeliveryDate = fixture.Clock.GetUtcNow().AddMonths(6)
+        };
+        var stage = new TimePlanStage
+        {
+            Id = Guid.NewGuid(),
+            TimePlanId = plan.Id,
+            Name = "Foundation",
+            Price = 35.5m,
+            SortOrder = 1,
+            DeliveryDate = fixture.Clock.GetUtcNow().AddMonths(2)
+        };
+        plan.TimePlanStages.Add(stage);
+        fixture.Db.TimePlans.Add(plan);
+        fixture.Db.TimePlanStages.Add(stage);
+
+        var result = await fixture.SendAsync(new GetProjectTimePlanQuery { ProjectId = plan.ProjectId }, CancellationToken.None);
+
+        Assert.True(result.IsSuccess);
+        var dtoStage = Assert.Single(result.Value.Stages);
+        Assert.Equal(35.5m, dtoStage.Percentage);
+    }
+
+    [Theory]
+    [InlineData(-0.1, false)]
+    [InlineData(100.1, false)]
+    [InlineData(0, true)]
+    [InlineData(50, true)]
+    [InlineData(100, true)]
+    public void Stage_draft_input_validator_enforces_percentage_range(decimal percentage, bool expectedValid)
+    {
+        var validator = new StageDraftInputValidator();
+        var input = new StageDraftInput
+        {
+            Name = "Stage",
+            DeliveryDate = DateTimeOffset.UtcNow,
+            Percentage = percentage,
+            Items = []
+        };
+
+        var result = validator.Validate(input);
+
+        Assert.Equal(expectedValid, result.IsValid);
+    }
+
     private static StageTemplate SeedTemplate(FeatureHarness fixture)
     {
         var template = new StageTemplate { Id = Guid.NewGuid(), Name = "Snapshot stage", Code = "stage", IsActive = true };

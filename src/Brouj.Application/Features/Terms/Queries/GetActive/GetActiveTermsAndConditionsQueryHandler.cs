@@ -37,10 +37,10 @@ public sealed class GetActiveTermsAndConditionsQueryHandler : IRequestHandler<Ge
                 IsActive = terms.IsActive
             }).FirstOrDefaultAsync(cancellationToken);
 
-        //if (dto is null)
-        //{
-        //    return Result<TermsDto>.Failure(TermsErrors.NotFound);
-        //}
+        if (dto is null)
+        {
+            return Result<TermsDto>.Failure(TermsErrors.NotFound);
+        }
 
         return Result<TermsDto>.Success(dto);
     }

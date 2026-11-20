@@ -39,6 +39,8 @@ BaseUnit	Number	string	nvarchar(64)	false
 BaseUnit	MeterPrice	decimal	decimal(19,4)	false
 BaseUnit	FloorNumber	int	int	false
 BaseUnit	Size	decimal	decimal(18,4)	false
+BaseUnit	ExcellencePercentage	Double	decimal(5,2)	false
+BaseUnit	Trend	string	nvarchar(64)	false
 BaseUnit	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
 BaseUnit	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true
 City	Id	Guid	uniqueidentifier	false
@@ -66,9 +68,18 @@ InitiativeProject	NeighborPrice	decimal	decimal(19,4)	false
 InitiativeProject	DrawDate	DateTimeOffset	datetimeoffset(3)	false
 InitiativeProject	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
 InitiativeProject	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true
+InitiativeReservation	ReservationId	Guid	uniqueidentifier	false
+InitiativeReservation	IdentityNumber	string	varchar(64)	false
+InitiativeReservation	AgeGroup	string	varchar(16)	false
+InitiativeReservation	PlaceOfResidence	string	nvarchar(100)	false
+InitiativeReservation	FinancialBracket	int	int	false
+InitiativeReservation	RepaymentPeriod	int	int	false
+InitiativeReservation	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
+InitiativeReservation	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true
 InitiativeUnit	UnitId	Guid	uniqueidentifier	false
 InitiativeUnit	NeighborMeterPrice	decimal	decimal(19,4)	false
 InitiativeUnit	Percentage	decimal	decimal(9,6)	false
+InitiativeUnit	PricingDate	DateTimeOffset	datetimeoffset(3)	false
 InitiativeUnit	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
 InitiativeUnit	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true
 ItemTemplate	Id	Guid	uniqueidentifier	false
@@ -109,6 +120,8 @@ ProjectImage	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true
 Reservation	Id	Guid	uniqueidentifier	false
 Reservation	UnitId	Guid	uniqueidentifier	false
 Reservation	CustomerId	Guid	uniqueidentifier	false
+Reservation	FullName	string	nvarchar(100)	false
+Reservation	Phone	string	varchar(32)	false
 Reservation	ReservationDate	DateTimeOffset	datetimeoffset(3)	false
 Reservation	Number	string	nvarchar(64)	false
 Reservation	Status	ReservationStatus	varchar(16)	false
@@ -150,6 +163,9 @@ TimePlanStage	Id	Guid	uniqueidentifier	false
 TimePlanStage	TimePlanId	Guid	uniqueidentifier	false
 TimePlanStage	Name	string	nvarchar(100)	false
 TimePlanStage	SortOrder	int	int	false
+TimePlanStage	Status	TimePlanStageStatus	varchar(16)	false
+TimePlanStage	Price	decimal	decimal(19,4)	false
+TimePlanStage	PricingDate	DateTimeOffset	datetimeoffset(3)	false
 TimePlanStage	DeliveryDate	DateTimeOffset	datetimeoffset(3)	false
 TimePlanStage	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
 TimePlanStage	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true

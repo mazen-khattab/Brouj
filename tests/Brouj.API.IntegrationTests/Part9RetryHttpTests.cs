@@ -47,7 +47,7 @@ public sealed class Part9RetryHttpTests
 
             if (!createOrder)
             {
-                request.Content = JsonContent.Create(new { UnitId = unit.Id });
+                request.Content = JsonContent.Create(new { UnitId = unit.Id, FullName = "Retry Tester", Phone = "01012345678" });
             }
 
             await HttpTestRequests.AddProofAsync(client, request, credential);
@@ -99,7 +99,7 @@ public sealed class Part9RetryHttpTests
 
         if (!createOrder)
         {
-            request.Content = JsonContent.Create(new { UnitId = unit.Id });
+            request.Content = JsonContent.Create(new { UnitId = unit.Id, FullName = "Retry Tester", Phone = "01012345678" });
         }
 
         await HttpTestRequests.AddProofAsync(client, request,

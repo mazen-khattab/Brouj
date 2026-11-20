@@ -14,6 +14,7 @@ public sealed class InitiativeUnitConfiguration : IEntityTypeConfiguration<Initi
         builder.Property(entity => entity.UnitId).HasColumnType("uniqueidentifier").IsRequired(true).ValueGeneratedNever();
         builder.Property(entity => entity.NeighborMeterPrice).HasColumnType("decimal(19,4)").HasPrecision(19, 4).IsRequired(true);
         builder.Property(entity => entity.Percentage).HasColumnType("decimal(9,6)").HasPrecision(9, 6).IsRequired(true);
+        builder.Property(entity => entity.PricingDate).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
         builder.Property(entity => entity.CreatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(true);
         builder.Property(entity => entity.UpdatedAt).HasColumnType("datetimeoffset(3)").HasPrecision(3).IsRequired(false);
 

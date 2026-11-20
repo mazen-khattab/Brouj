@@ -34,7 +34,7 @@ public sealed class EnumExtensionsTests
     public void OrderStatusMapping_RoundTrips(OrderStatus value, string databaseValue)
     {
         Assert.Equal(databaseValue, value.ToDatabaseString());
-        Assert.Equal(value, databaseValue.ToOrderStatus());
+        Assert.Equal(value, OrderStatusExtensions.ToOrderStatus(databaseValue));
     }
 
     [Theory]
@@ -83,7 +83,7 @@ public sealed class EnumExtensionsTests
     [Fact]
     public void OrderStatusMapping_RejectsUnknownDatabaseValue()
     {
-        Assert.Throws<ArgumentException>(() => "unknown".ToOrderStatus());
+        Assert.Throws<ArgumentException>(() => OrderStatusExtensions.ToOrderStatus("unknown"));
     }
 
     [Fact]

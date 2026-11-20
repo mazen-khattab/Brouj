@@ -139,10 +139,12 @@ public sealed class FeatureValidationTests
     [Fact]
     public void Explicit_inputs_exclude_credentials_ownership_totals_and_generated_storage_paths()
     {
-        Assert.Equal(new[] { "UnitId" }, typeof(CreateReservationCommand).GetProperties().Select(property => property.Name));
+        Assert.Equal(
+            new[] { "UnitId", "FullName", "Phone", "AgeGroup", "IdentityNumber", "PlaceOfResidence", "PreferredFinancialBracket", "PreferredRepaymentPeriod" },
+            typeof(CreateReservationCommand).GetProperties().Select(property => property.Name));
         Assert.Equal(new[] { "ReservationId" }, typeof(CreateOrderFromReservationCommand).GetProperties().Select(property => property.Name));
         Assert.DoesNotContain(typeof(UnitInput).GetProperties(), property =>
-            property.Name is "Percentage" or "TotalPrice" or "CustomerId");
+            property.Name is "Price" or "TotalPrice" or "CustomerId");
         Assert.DoesNotContain(typeof(ProjectInput).GetProperties(), property =>
             property.Name is "IsGarage" or "GaragePrice" or "CreatedAt");
         Assert.DoesNotContain(typeof(AddUnitImageCommand).GetProperties(), property => property.Name == "ImagePath");

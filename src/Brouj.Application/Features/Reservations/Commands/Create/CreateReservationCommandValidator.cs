@@ -16,24 +16,9 @@ public sealed class CreateReservationCommandValidator : AbstractValidator<Create
             .NotEmpty()
             .MaximumLength(100);
 
-        RuleFor(request => request.IdentityNumber)
-            .NationalId();
-
         RuleFor(request => request.Phone)
+            .NotEmpty()
             .EgyptianPhone();
 
-        RuleFor(request => request.AgeGroup)
-            .NotEmpty()
-            .MaximumLength(16);
-
-        RuleFor(request => request.PlaceOfResidence)
-            .NotEmpty()
-            .MaximumLength(100);
-
-        RuleFor(request => request.PreferredFinancialBracket)
-            .GreaterThan(0);
-
-        RuleFor(request => request.PreferredRepaymentPeriod)
-            .GreaterThan(0);
     }
 }

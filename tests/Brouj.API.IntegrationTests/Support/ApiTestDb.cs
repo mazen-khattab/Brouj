@@ -25,6 +25,8 @@ internal sealed class ApiTestDb : IApplicationDbContext
 
     public DbSet<InitiativeProject> InitiativeProjects { get; } = new ListDbSet<InitiativeProject>();
 
+    public DbSet<InitiativeReservation> InitiativeReservations { get; } = new ListDbSet<InitiativeReservation>();
+
     public DbSet<InitiativeUnit> InitiativeUnits { get; } = new ListDbSet<InitiativeUnit>();
 
     public DbSet<ItemTemplate> ItemTemplates { get; } = new ListDbSet<ItemTemplate>();

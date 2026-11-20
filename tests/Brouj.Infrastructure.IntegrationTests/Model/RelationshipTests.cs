@@ -11,6 +11,7 @@ public sealed class RelationshipTests
     {
         yield return [typeof(CustomerRefreshToken), typeof(Customer), "CustomerId", DeleteBehavior.Cascade, false];
         yield return [typeof(Reservation), typeof(Customer), "CustomerId", DeleteBehavior.Restrict, false];
+        yield return [typeof(InitiativeReservation), typeof(Reservation), "ReservationId", DeleteBehavior.Cascade, true];
         yield return [typeof(UserRefreshToken), typeof(User), "UserId", DeleteBehavior.Cascade, false];
         yield return [typeof(ActivityLog), typeof(User), "UserId", DeleteBehavior.Restrict, false];
         yield return [typeof(Area), typeof(City), "CityId", DeleteBehavior.Restrict, false];
@@ -52,7 +53,7 @@ public sealed class RelationshipTests
     public void Every_FK_is_covered_without_redundant_standalone_indexes()
     {
         using var context = TestContext.Create();
-        Assert.Equal(22, context.Model.GetEntityTypes().Sum(entity => entity.GetForeignKeys().Count()));
+        Assert.Equal(23, context.Model.GetEntityTypes().Sum(entity => entity.GetForeignKeys().Count()));
 
         foreach (var entity in context.Model.GetEntityTypes())
         {
