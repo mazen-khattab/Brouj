@@ -39,6 +39,7 @@ TermsAndConditions	IX_TermsAndConditions_IsActive_EffectiveDate	IsActive,Effecti
 TermsAndConditions	UQ_TermsAndConditions_VersionNumber	VersionNumber	true
 TimePlan	UQ_TimePlans_ProjectId	ProjectId	true	
 TimePlanStage	UQ_TimePlanStages_TimePlanId_SortOrder	TimePlanId,SortOrder	true	
+TimePlanStage	IX_TimePlanStages_Status	Status	false
 UnitAmenity	IX_UnitAmenities_UnitId	UnitId	false	
 UnitImage	IX_UnitImages_UnitId	UnitId	false	
 User	IX_Users_Name	Name	false	

@@ -3,9 +3,11 @@ using Brouj.Application.Common.Models;
 using Brouj.Application.Features.Orders.Commands.CompleteInitiative;
 using Brouj.Application.Features.Orders.Commands.CreateFromReservation;
 using Brouj.Application.Features.Reservations.Commands.Create;
+using Brouj.Application.Features.Reservations.Strategies;
 using Brouj.Domain.Entities;
 using Brouj.Domain.Enums;
 using Brouj.Infrastructure.IntegrationTests.Fixtures;
+using Brouj.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -73,8 +75,13 @@ public sealed class Part9ConcurrencyTests(SqlServerFixture fixture)
             await using var writer = database.CreateContext(actor, enableRetry: true, interceptors: [rendezvous]);
 
             return await ApplicationFeaturePipeline.SendWithConflictMappingAsync(
-                new CreateReservationCommandHandler(writer, actor, TimeProvider.System, NullLogger<CreateReservationCommandHandler>.Instance),
-                new CreateReservationCommand { UnitId = graph.Unit.Id }, writer, actor);
+                CreateReservationHandler(writer, actor),
+                new CreateReservationCommand
+                {
+                    UnitId = graph.Unit.Id, FullName = "Customer", Phone = "01012345678",
+                    IdentityNumber = "29001011234567", AgeGroup = "25-35", PlaceOfResidence = "Cairo",
+                    PreferredFinancialBracket = 1, PreferredRepaymentPeriod = 12
+                }, writer, actor);
         }
 
         var attempts = await Task.WhenAll(CreateAsync(), CreateAsync());
@@ -108,8 +115,13 @@ public sealed class Part9ConcurrencyTests(SqlServerFixture fixture)
         var actor = new TestActor(true, null, graph.Customer.Id);
         await using var writer = database.CreateContext(actor, enableRetry: true);
         var result = await ApplicationFeaturePipeline.SendWithConflictMappingAsync(
-            new CreateReservationCommandHandler(writer, actor, TimeProvider.System, NullLogger<CreateReservationCommandHandler>.Instance),
-            new CreateReservationCommand { UnitId = graph.Unit.Id }, writer, actor);
+            CreateReservationHandler(writer, actor),
+            new CreateReservationCommand
+            {
+                UnitId = graph.Unit.Id, FullName = "Customer", Phone = "01012345678",
+                IdentityNumber = "29001011234567", AgeGroup = "25-35", PlaceOfResidence = "Cairo",
+                PreferredFinancialBracket = 1, PreferredRepaymentPeriod = 12
+            }, writer, actor);
 
         Assert.True(result.IsSuccess);
 
@@ -227,8 +239,13 @@ public sealed class Part9ConcurrencyTests(SqlServerFixture fixture)
             }
 
             return await ApplicationFeaturePipeline.SendWithConflictMappingAsync(
-                new CreateReservationCommandHandler(writer, actor, TimeProvider.System, NullLogger<CreateReservationCommandHandler>.Instance),
-                new CreateReservationCommand { UnitId = graph.Unit.Id }, writer, actor);
+                CreateReservationHandler(writer, actor),
+                new CreateReservationCommand
+                {
+                    UnitId = graph.Unit.Id, FullName = "Customer", Phone = "01012345678",
+                    IdentityNumber = "29001011234567", AgeGroup = "25-35", PlaceOfResidence = "Cairo",
+                    PreferredFinancialBracket = 1, PreferredRepaymentPeriod = 12
+                }, writer, actor);
         }
 
         var first = await CreateAsync();
@@ -280,4 +297,11 @@ public sealed class Part9ConcurrencyTests(SqlServerFixture fixture)
 
         return (graph, reservation, admin);
     }
+
+    private static CreateReservationCommandHandler CreateReservationHandler(ApplicationDbContext db, TestActor actor) =>
+        new(db, actor, TimeProvider.System, NullLogger<CreateReservationCommandHandler>.Instance,
+            [
+                new RegularReservationPreparationStrategy(),
+                new InitiativeReservationPreparationStrategy(new InitiativeReservationProfileValidator(), TimeProvider.System)
+            ]);
 }

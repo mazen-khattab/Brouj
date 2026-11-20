@@ -68,7 +68,17 @@ public sealed class CommerceFeatureTests
         });
         fixture.Customer();
 
-        var result = await fixture.SendAsync(new CreateReservationCommand { UnitId = unit.Id, FullName = "Customer Two", Phone = "01012345678" }, CancellationToken.None);
+        var result = await fixture.SendAsync(new CreateReservationCommand
+        {
+            UnitId = unit.Id,
+            FullName = "Customer Two",
+            Phone = "01012345678",
+            IdentityNumber = "29001011234567",
+            AgeGroup = "25-35",
+            PlaceOfResidence = "Cairo",
+            PreferredFinancialBracket = 1,
+            PreferredRepaymentPeriod = 12
+        }, CancellationToken.None);
 
         Assert.Equal(available, result.IsSuccess);
     }
@@ -211,7 +221,7 @@ public sealed class CommerceFeatureTests
     {
         using var fixture = new FeatureHarness();
         fixture.Customer();
-        var unit = fixture.Unit();
+        var unit = fixture.Unit(ProjectType.Initiative);
         var initiativeUnit = new InitiativeUnit
         {
             UnitId = unit.Id,
@@ -238,7 +248,7 @@ public sealed class CommerceFeatureTests
     {
         using var fixture = new FeatureHarness();
         fixture.Customer();
-        var unit = fixture.Unit();
+        var unit = fixture.Unit(ProjectType.Initiative);
         var initiativeUnit = new InitiativeUnit
         {
             UnitId = unit.Id,

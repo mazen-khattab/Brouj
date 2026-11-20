@@ -150,7 +150,12 @@ public sealed class Part9AtomicityTests(SqlServerFixture fixture)
                 ProjectId = graph.Project.Id,
                 Input = new UnitInput { Number = "Atomic unit", Size = 1, MeterPrice = 10, NeighborMeterPrice = 20 }
             },
-            "Reservation" => new CreateReservationCommand { UnitId = graph.Unit.Id },
+            "Reservation" => new CreateReservationCommand
+                {
+                    UnitId = graph.Unit.Id, FullName = "Customer", Phone = "01012345678",
+                    IdentityNumber = "29001011234567", AgeGroup = "25-35", PlaceOfResidence = "Cairo",
+                    PreferredFinancialBracket = 1, PreferredRepaymentPeriod = 12
+                },
             "Order" => new CreateOrderFromReservationCommand { ReservationId = graph.Reservation.Id },
             "CompleteInitiative" => new CompleteInitiativeOrderCommand { Id = graph.Order.Id },
             "TimePlan" => new CreateTimePlanCommand
@@ -181,6 +186,8 @@ public sealed class Part9AtomicityTests(SqlServerFixture fixture)
             .Select(id => "initiative-unit:" + id));
         rows.AddRange((await context.Reservations.AsNoTracking().Select(row => new { row.Id, row.Status }).ToListAsync())
             .Select(row => $"reservation:{row.Id}:{row.Status}"));
+        rows.AddRange((await context.InitiativeReservations.AsNoTracking().Select(row => row.ReservationId).ToListAsync())
+            .Select(id => "initiative-reservation:" + id));
         rows.AddRange((await context.Orders.AsNoTracking()
             .Select(row => new { row.Id, row.Status, row.CompletedAt }).ToListAsync())
             .Select(row => $"order:{row.Id}:{row.Status}:{row.CompletedAt:O}"));

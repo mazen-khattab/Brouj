@@ -10,6 +10,25 @@ namespace Brouj.Infrastructure.IntegrationTests.Model;
 
 public sealed class EntityConfigurationTests
 {
+    [Fact]
+    public void Initiative_profile_uses_shared_primary_key_and_optional_parent_navigation()
+    {
+        using var context = TestContext.Create();
+        var profile = context.Model.FindEntityType(typeof(InitiativeReservation))!;
+        var relationship = Assert.Single(profile.GetForeignKeys());
+        Assert.Equal("ReservationId", Assert.Single(profile.FindPrimaryKey()!.Properties).Name);
+        Assert.True(relationship.IsUnique);
+        Assert.True(relationship.IsRequired);
+        Assert.False(relationship.IsRequiredDependent);
+        Assert.Equal(DeleteBehavior.Cascade, relationship.DeleteBehavior);
+        var reservation = context.Model.FindEntityType(typeof(Reservation))!;
+        foreach (var field in new[] { "IdentityNumber", "AgeGroup", "PlaceOfResidence", "FinancialBracket", "RepaymentPeriod" })
+        {
+            Assert.Null(reservation.FindProperty(field));
+            Assert.False(profile.FindProperty(field)!.IsNullable);
+        }
+    }
+
     public static IEnumerable<object[]> Columns()
     {
         foreach (var line in File.ReadLines(Path.Combine(AppContext.BaseDirectory, "Fixtures", "ApprovedColumns.tsv")).Skip(1))

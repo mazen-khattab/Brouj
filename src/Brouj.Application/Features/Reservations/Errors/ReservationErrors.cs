@@ -4,6 +4,9 @@ namespace Brouj.Application.Features.Reservations.Errors;
 
 public static class ReservationErrors
 {
+    public static Error Validation(string message) =>
+        Error.Validation(FeatureErrorCode.ReservationInvalidInput, message);
+
     public static Error Conflict(string message) 
         => Error.Conflict(
             FeatureErrorCode.ReservationConflict, 

@@ -84,7 +84,7 @@ namespace Brouj.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VersionNumber = table.Column<int>(type: "int", nullable: false),
+                    VersionNumber = table.Column<string>(type: "varchar(32)", unicode: false, maxLength: 32, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     EffectiveDate = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
@@ -292,6 +292,8 @@ namespace Brouj.Infrastructure.Migrations
                     MeterPrice = table.Column<decimal>(type: "decimal(19,4)", precision: 19, scale: 4, nullable: false),
                     FloorNumber = table.Column<int>(type: "int", nullable: false),
                     Size = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
+                    ExcellencePercentage = table.Column<decimal>(type: "decimal(5,2)", precision: 5, scale: 2, nullable: false),
+                    Trend = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: true)
                 },
@@ -400,6 +402,7 @@ namespace Brouj.Infrastructure.Migrations
                     UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NeighborMeterPrice = table.Column<decimal>(type: "decimal(19,4)", precision: 19, scale: 4, nullable: false),
                     Percentage = table.Column<decimal>(type: "decimal(9,6)", precision: 9, scale: 6, nullable: false),
+                    PricingDate = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: true)
                 },
@@ -421,16 +424,11 @@ namespace Brouj.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Phone = table.Column<string>(type: "varchar(32)", unicode: false, maxLength: 32, nullable: false),
-                    IdentityNumber = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: false),
-                    AgeGroup = table.Column<string>(type: "varchar(16)", unicode: false, maxLength: 16, nullable: false),
-                    PlaceOfResidence = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    FinancialBracket = table.Column<int>(type: "int", nullable: false),
-                    RepaymentPeriod = table.Column<int>(type: "int", nullable: false),
-                    ReservationDate = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
-                    Number = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: false),
                     Status = table.Column<string>(type: "varchar(16)", unicode: false, maxLength: 16, nullable: false),
+                    ReservationDate = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     CancelledAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: true)
@@ -504,6 +502,9 @@ namespace Brouj.Infrastructure.Migrations
                     TimePlanId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "varchar(16)", unicode: false, maxLength: 16, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(19,4)", precision: 19, scale: 4, nullable: false),
+                    PricingDate = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     DeliveryDate = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: true)
@@ -515,6 +516,30 @@ namespace Brouj.Infrastructure.Migrations
                         name: "FK_TimePlanStages_TimePlans_TimePlanId",
                         column: x => x.TimePlanId,
                         principalTable: "TimePlans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InitiativeReservations",
+                columns: table => new
+                {
+                    ReservationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdentityNumber = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: false),
+                    AgeGroup = table.Column<string>(type: "varchar(16)", unicode: false, maxLength: 16, nullable: false),
+                    PlaceOfResidence = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FinancialBracket = table.Column<int>(type: "int", nullable: false),
+                    RepaymentPeriod = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(3)", precision: 3, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InitiativeReservations", x => x.ReservationId);
+                    table.ForeignKey(
+                        name: "FK_InitiativeReservations_Reservations_ReservationId",
+                        column: x => x.ReservationId,
+                        principalTable: "Reservations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -812,6 +837,11 @@ namespace Brouj.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_TimePlanStages_Status",
+                table: "TimePlanStages",
+                column: "Status");
+
+            migrationBuilder.CreateIndex(
                 name: "UQ_TimePlanStages_TimePlanId_SortOrder",
                 table: "TimePlanStages",
                 columns: new[] { "TimePlanId", "SortOrder" },
@@ -874,6 +904,9 @@ namespace Brouj.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "InitiativeProjects");
+
+            migrationBuilder.DropTable(
+                name: "InitiativeReservations");
 
             migrationBuilder.DropTable(
                 name: "InitiativeUnits");

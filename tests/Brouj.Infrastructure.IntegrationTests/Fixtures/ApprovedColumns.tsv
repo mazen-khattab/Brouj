@@ -79,6 +79,7 @@ InitiativeReservation	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true
 InitiativeUnit	UnitId	Guid	uniqueidentifier	false
 InitiativeUnit	NeighborMeterPrice	decimal	decimal(19,4)	false
 InitiativeUnit	Percentage	decimal	decimal(9,6)	false
+InitiativeUnit	PricingDate	DateTimeOffset	datetimeoffset(3)	false
 InitiativeUnit	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
 InitiativeUnit	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true
 ItemTemplate	Id	Guid	uniqueidentifier	false

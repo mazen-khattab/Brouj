@@ -20,7 +20,8 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
         var migrations = context.Database.GetMigrations().ToArray();
         var migrator = context.GetService<IMigrator>();
 
-        Assert.Equal(["20261031213412_initialMigration", "20261101230158_ChangeVersionNumberDataType"], migrations);
+        Assert.Equal(["20261031213412_initialMigration", "20261101230158_ChangeVersionNumberDataType",
+            "20261118143206_AlignExistingUnitAndTimePlanSchema", "20261118143207_ExtractInitiativeReservationProfiles"], migrations);
         Assert.False(context.Database.HasPendingModelChanges());
 
         var sql = migrator.GenerateScript();
@@ -60,7 +61,7 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
 
         // Compare physical columns, keys, ordered/filtered indexes, FKs, checks and defaults, not just EF metadata.
         Assert.Equal(expectedSchema, migratedSchema);
-        Assert.Equal(26, migratedSchema.Count(row => row.StartsWith("TABLE|", StringComparison.Ordinal)));
+        Assert.Equal(27, migratedSchema.Count(row => row.StartsWith("TABLE|", StringComparison.Ordinal)));
         Assert.Empty(await migrated.Database.GetPendingMigrationsAsync(cancellationToken));
         Assert.Equal(migrated.Database.GetMigrations(),
             await migrated.Database.GetAppliedMigrationsAsync(cancellationToken));

@@ -8,7 +8,7 @@ namespace Brouj.Infrastructure.IntegrationTests.SqlServer;
 public sealed class SchemaPersistenceTests(SqlServerFixture fixture)
 {
     [SqlServerFact]
-    public async Task All_181_columns_have_the_approved_SQL_Server_types_and_nullability()
+    public async Task All_columns_have_the_approved_SQL_Server_types_and_nullability()
     {
         await using var database = await fixture.CreateDatabaseAsync();
         await using var context = database.CreateContext();
@@ -42,7 +42,7 @@ public sealed class SchemaPersistenceTests(SqlServerFixture fixture)
             }
         }
 
-        Assert.Equal(181, columns.Count);
+        Assert.Equal(EntityConfigurationTests.Columns().Count(), columns.Count);
         foreach (var expected in EntityConfigurationTests.Columns())
         {
             var entity = Assert.Single(context.Model.GetEntityTypes(), entity => entity.ClrType.Name == (string)expected[0]);
@@ -53,7 +53,7 @@ public sealed class SchemaPersistenceTests(SqlServerFixture fixture)
     }
 
     [SqlServerFact]
-    public async Task All_22_FKs_use_the_approved_database_delete_action()
+    public async Task All_FKs_use_the_approved_database_delete_action()
     {
         await using var database = await fixture.CreateDatabaseAsync();
         await using var context = database.CreateContext();
@@ -76,7 +76,7 @@ public sealed class SchemaPersistenceTests(SqlServerFixture fixture)
             }
         }
 
-        Assert.Equal(22, fks.Count);
+        Assert.Equal(RelationshipTests.Relationships().Count(), fks.Count);
         foreach (var expected in RelationshipTests.Relationships())
         {
             var dependent = context.Model.FindEntityType((Type)expected[0])!.GetTableName()!;

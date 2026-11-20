@@ -2,6 +2,7 @@ using Brouj.Application.Abstractions.Authentication;
 using Brouj.Application.Abstractions.Persistence;
 using Brouj.Application.Common.Models;
 using Brouj.Application.Features.Reservations.Errors;
+using Brouj.Application.Features.Reservations.Strategies;
 using Brouj.Domain.Entities;
 using Brouj.Domain.Enums;
 using MediatR;
@@ -15,13 +16,20 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
     private readonly IApplicationDbContext _db;
     private readonly ICurrentUser _currentUser;
     private readonly TimeProvider _clock;
+    private readonly IEnumerable<IReservationPreparationStrategy> _strategies;
     private readonly ILogger<CreateReservationCommandHandler> _logger;
 
-    public CreateReservationCommandHandler(IApplicationDbContext db, ICurrentUser currentUser, TimeProvider clock, ILogger<CreateReservationCommandHandler> logger)
+    public CreateReservationCommandHandler(
+        IApplicationDbContext db,
+        ICurrentUser currentUser,
+        TimeProvider clock,
+        ILogger<CreateReservationCommandHandler> logger,
+        IEnumerable<IReservationPreparationStrategy> strategies)
     {
         _db = db;
         _currentUser = currentUser;
         _clock = clock;
+        _strategies = strategies;
         _logger = logger;
     }
 
@@ -31,8 +39,9 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
 
         _logger.LogDebug("Checking if the unit exists in the database.");
         var unit = await _db.BaseUnits.AsNoTracking()
-            .Include(u => u.InitiativeUnit)
-            .SingleOrDefaultAsync(unit => unit.Id == request.UnitId, cancellationToken);
+            .Where(unit => unit.Id == request.UnitId)
+            .Select(unit => new { unit.Id, unit.Project.ProjectType })
+            .SingleOrDefaultAsync(cancellationToken);
 
         if (unit is null)
         {
@@ -66,30 +75,6 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
             return Result<Guid>.Failure(ReservationErrors.Conflict("The unit is unavailable."));
         }
 
-        InitiativeReservation? initiativeReservation = null;
-        if (unit.InitiativeUnit is not null)
-        {
-            if (string.IsNullOrWhiteSpace(request.IdentityNumber) ||
-                string.IsNullOrWhiteSpace(request.AgeGroup) ||
-                string.IsNullOrWhiteSpace(request.PlaceOfResidence) ||
-                !request.PreferredFinancialBracket.HasValue ||
-                !request.PreferredRepaymentPeriod.HasValue)
-            {
-                _logger.LogWarning("Initiative profile is required for initiative unit {UnitId}.", unit.Id);
-                return Result<Guid>.Failure(ReservationErrors.InitiativeProfileRequired);
-            }
-
-            initiativeReservation = new InitiativeReservation
-            {
-                IdentityNumber = request.IdentityNumber.Trim(),
-                AgeGroup = request.AgeGroup.Trim(),
-                PlaceOfResidence = request.PlaceOfResidence.Trim(),
-                FinancialBracket = request.PreferredFinancialBracket.Value,
-                RepaymentPeriod = request.PreferredRepaymentPeriod.Value,
-                CreatedAt = _clock.GetUtcNow()
-            };
-        }
-
         _logger.LogInformation("Creating a new reservation entity for unit {UnitId} and customer {CustomerId}.", unit.Id, _currentUser.CustomerId);
         var entity = new Reservation
         {
@@ -100,9 +85,15 @@ public sealed class CreateReservationCommandHandler : IRequestHandler<CreateRese
             FullName = request.FullName,
             Phone = request.Phone,
             ReservationDate = _clock.GetUtcNow(),
-            Status = ReservationStatus.Processing,
-            InitiativeReservation = initiativeReservation
+            Status = ReservationStatus.Processing
         };
+
+        var strategy = _strategies.Single(strategy => strategy.Type == unit.ProjectType);
+        var preparation = await strategy.PrepareAsync(entity, request, cancellationToken);
+        if (preparation.IsFailure)
+        {
+            return Result<Guid>.Failure(preparation.Error);
+        }
 
         _logger.LogInformation("Adding the new reservation entity to the database context.");
         _db.Reservations.Add(entity);

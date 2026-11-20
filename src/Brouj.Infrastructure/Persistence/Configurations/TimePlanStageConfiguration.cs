@@ -26,7 +26,7 @@ public sealed class TimePlanStageConfiguration : IEntityTypeConfiguration<TimePl
 
         builder.HasOne(entity => entity.TimePlan)
             .WithMany(entity => entity.TimePlanStages)
-            .HasForeignKey(entity => entity.TimePlanId)
+            .HasForeignKey(entity => entity.TimePlanId) 
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(entity => new { entity.TimePlanId, entity.SortOrder })
