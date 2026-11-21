@@ -43,6 +43,7 @@ TimePlanStage	UQ_TimePlanStages_TimePlanId_SortOrder	TimePlanId,SortOrder	true
 TimePlanStage	IX_TimePlanStages_Status	Status	false
 UnitAmenity	IX_UnitAmenities_UnitId	UnitId	false	
 UnitImage	IX_UnitImages_UnitId	UnitId	false	
+UnitPaymentInstallment	UQ_UnitPaymentInstallments_UnitId_InstallmentNumber	UnitId,InstallmentNumber	true
 User	IX_Users_Name	Name	false	
 User	UQ_Users_Email	Email	true	[DeletedAt] IS NULL
 User	UQ_Users_Phone	Phone	true	[DeletedAt] IS NULL

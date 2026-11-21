@@ -57,11 +57,11 @@ public sealed class FeatureArchitectureTests
             RepositoryFiles.Root, "brouj_backend_plan_v2", "07_PART_7_APPLICATION_FEATURES.md"));
         var expected = Regex.Matches(plan, @"\b[A-Z][A-Za-z]+(?:Command|Query)\b")
             .Select(match => match.Value)
-            .Concat(["SubmitContactSubmissionCommand", "GetContactSubmissionsQuery"])
+            .Concat(["SubmitContactSubmissionCommand", "GetContactSubmissionsQuery", "ReplaceUnitPaymentPlanCommand"])
             .Distinct().Order().ToArray();
         var actual = Requests.Select(row => ((Type)row[0]).Name).Order().ToArray();
 
-        Assert.Equal(106, actual.Length);
+        Assert.Equal(107, actual.Length);
         Assert.Equal(expected, actual);
     }
 

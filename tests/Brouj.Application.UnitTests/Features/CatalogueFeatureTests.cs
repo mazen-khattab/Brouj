@@ -89,12 +89,12 @@ public sealed class CatalogueFeatureTests
         var valid = await fixture.SendAsync(new CreateUnitCommand
         {
             ProjectId = seed.ProjectId,
-            Input = new UnitInput { Number = "U2", Size = 10, MeterPrice = 10, NeighborMeterPrice = 50 }
+            Input = new CreateUnitInput { Number = "U2", Size = 10, MeterPrice = 10, NeighborMeterPrice = 50 }
         }, CancellationToken.None);
         var invalid = await fixture.SendAsync(new CreateUnitCommand
         {
             ProjectId = seed.ProjectId,
-            Input = new UnitInput { Number = "U3", Size = 100, MeterPrice = 100, NeighborMeterPrice = 50 }
+            Input = new CreateUnitInput { Number = "U3", Size = 100, MeterPrice = 100, NeighborMeterPrice = 50 }
         }, CancellationToken.None);
 
         Assert.True(valid.IsSuccess);

@@ -171,7 +171,7 @@ public sealed class AdminProjectsController : ApiControllerBase
     [EndpointContract(typeof(CreateUnitCommand))]
     [ProducesResponseType(typeof(ApiResponse<Guid>), 201)]
     [Consumes("application/json")]
-    public async Task<IActionResult> CreateUnit([FromRoute] Guid projectId, [FromBody] UnitInput body, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateUnit([FromRoute] Guid projectId, [FromBody] CreateUnitInput body, CancellationToken cancellationToken)
     {
         var request = new CreateUnitCommand
         {

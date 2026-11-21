@@ -1,6 +1,7 @@
 using Brouj.Application.Abstractions.Persistence;
 using Brouj.Application.Common.Models;
 using Brouj.Application.Common.Utils;
+using Brouj.Application.Features.Units.DTOs;
 using Brouj.Application.Features.Units.Errors;
 using Brouj.Domain.Entities;
 using Brouj.Domain.Enums;
@@ -20,6 +21,7 @@ public sealed class CreateUnitCommandHandler : IRequestHandler<CreateUnitCommand
 
     public async Task<Result<Guid>> Handle(CreateUnitCommand request, CancellationToken cancellationToken)
     {
+        await _db.LockProjectAsync(request.ProjectId, cancellationToken);
         var project = await _db.BaseProjects
             .AsNoTracking()
             .SingleOrDefaultAsync(project => project.Id == request.ProjectId, cancellationToken);
@@ -32,6 +34,19 @@ public sealed class CreateUnitCommandHandler : IRequestHandler<CreateUnitCommand
         var entity = new BaseUnit { Id = Guid.NewGuid(), ProjectId = project.Id };
         var total = Pricing.Total(request.Input.Size, request.Input.MeterPrice);
         var isInitiative = project.ProjectType == ProjectType.Initiative;
+        var paymentPlan = request.Input.PaymentPlan;
+
+        if (isInitiative && paymentPlan is { Count: > 0 })
+        {
+            return Result<Guid>.Failure(UnitErrors.Validation("Payment plans apply only to regular units."));
+        }
+
+        // Project-dependent rules return a feature error so the HTTP response includes the validation message.
+        if (!isInitiative &&
+            UnitPaymentPlanInputValidator.GetError(new UnitPaymentPlanInput { PaymentPlan = paymentPlan }) is { } error)
+        {
+            return Result<Guid>.Failure(error);
+        }
 
         if (isInitiative && (project.Price <= 0 || total > project.Price || request.Input.NeighborMeterPrice is null))
         {
@@ -71,6 +86,19 @@ public sealed class CreateUnitCommandHandler : IRequestHandler<CreateUnitCommand
         }
 
         _db.BaseUnits.Add(entity);
+
+        if (!isInitiative)
+        {
+            _db.UnitPaymentInstallments.AddRange(paymentPlan!.Select(input => new UnitPaymentInstallment
+            {
+                Id = Guid.NewGuid(),
+                UnitId = entity.Id,
+                InstallmentName = input.InstallmentName.Trim(),
+                InstallmentNumber = input.InstallmentNumber,
+                InstallmentPercentage = input.InstallmentPercentage,
+                InstallmentPeriodMonths = input.InstallmentPeriodMonths!.Value
+            }));
+        }
 
         await _db.SaveChangesAsync(cancellationToken);
 

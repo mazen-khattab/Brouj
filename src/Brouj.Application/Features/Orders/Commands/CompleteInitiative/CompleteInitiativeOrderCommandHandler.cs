@@ -20,8 +20,11 @@ public sealed class CompleteInitiativeOrderCommandHandler : IRequestHandler<Comp
 
     public async Task<Result<Guid>> Handle(CompleteInitiativeOrderCommand request, CancellationToken cancellationToken)
     {
-        var unitId = await _db.Orders.AsNoTracking().Where(order => order.Id == request.Id)
-            .Select(order => (Guid?)order.Reservation.UnitId).SingleOrDefaultAsync(cancellationToken);
+        var unitId = await _db.Orders
+            .AsNoTracking()
+            .Where(order => order.Id == request.Id)
+            .Select(order => (Guid?)order.Reservation.UnitId)
+            .SingleOrDefaultAsync(cancellationToken);
 
         if (unitId is null)
         {
@@ -29,7 +32,7 @@ public sealed class CompleteInitiativeOrderCommandHandler : IRequestHandler<Comp
         }
 
         // Share the creator's lock so winner selection cannot race another selection or a new order.
-        await _db.LockUnitForOrderAsync(unitId.Value, cancellationToken);
+        await _db.LockUnitAsync(unitId.Value, cancellationToken);
 
         var entity = await _db.Orders.SingleOrDefaultAsync(order => order.Id == request.Id, cancellationToken);
 
@@ -38,7 +41,9 @@ public sealed class CompleteInitiativeOrderCommandHandler : IRequestHandler<Comp
             return Result<Guid>.Failure(OrderErrors.NotFound);
         }
 
-        var context = await _db.Reservations.AsNoTracking().Where(reservation => reservation.Id == entity.ReservationId)
+        var context = await _db.Reservations
+            .AsNoTracking()
+            .Where(reservation => reservation.Id == entity.ReservationId)
             .Select(reservation => new { reservation.UnitId, reservation.Unit.Project.ProjectType })
             .SingleAsync(cancellationToken);
 

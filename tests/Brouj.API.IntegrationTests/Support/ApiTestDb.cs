@@ -57,6 +57,7 @@ internal sealed class ApiTestDb : IApplicationDbContext
     public DbSet<UnitAmenity> UnitAmenities { get; } = new ListDbSet<UnitAmenity>();
 
     public DbSet<UnitImage> UnitImages { get; } = new ListDbSet<UnitImage>();
+    public DbSet<UnitPaymentInstallment> UnitPaymentInstallments { get; } = new ListDbSet<UnitPaymentInstallment>();
 
     public DbSet<User> Users { get; }
 
@@ -79,7 +80,13 @@ internal sealed class ApiTestDb : IApplicationDbContext
     public CancellationToken LastCancellationToken { get; private set; }
 
     // HTTP contract tests use a query double. SQL Server tests establish actual lock correctness.
-    public Task LockUnitForOrderAsync(Guid unitId, CancellationToken cancellationToken)
+    public Task LockProjectAsync(Guid projectId, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.CompletedTask;
+    }
+
+    public Task LockUnitAsync(Guid unitId, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 

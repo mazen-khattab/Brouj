@@ -26,6 +26,7 @@ public sealed class Part9AtomicityTests(SqlServerFixture fixture)
     [SqlServerTheory]
     [InlineData("InitiativeProject")]
     [InlineData("InitiativeUnit")]
+    [InlineData("RegularUnit")]
     [InlineData("Reservation")]
     [InlineData("Order")]
     [InlineData("CompleteInitiative")]
@@ -40,7 +41,7 @@ public sealed class Part9AtomicityTests(SqlServerFixture fixture)
         await using (var seed = database.CreateContext())
         {
             graph = await TestGraph.SeedAsync(seed, reservations: operation != "Reservation", order: false);
-            graph.Project.ProjectType = ProjectType.Initiative;
+            graph.Project.ProjectType = operation == "RegularUnit" ? ProjectType.Regular : ProjectType.Initiative;
 
             if (operation == "CompleteInitiative")
             {
@@ -148,7 +149,22 @@ public sealed class Part9AtomicityTests(SqlServerFixture fixture)
             "InitiativeUnit" => new CreateUnitCommand
             {
                 ProjectId = graph.Project.Id,
-                Input = new UnitInput { Number = "Atomic unit", Size = 1, MeterPrice = 10, NeighborMeterPrice = 20 }
+                Input = new CreateUnitInput { Number = "Atomic unit", Size = 1, MeterPrice = 10, NeighborMeterPrice = 20 }
+            },
+            "RegularUnit" => new CreateUnitCommand
+            {
+                ProjectId = graph.Project.Id,
+                Input = new CreateUnitInput
+                {
+                    Number = "Atomic regular unit",
+                    Size = 1,
+                    MeterPrice = 10,
+                    PaymentPlan =
+                    [
+                        new() { InstallmentName = "Down payment", InstallmentNumber = 1, InstallmentPercentage = 100,
+                            InstallmentPeriodMonths = 0 }
+                    ]
+                }
             },
             "Reservation" => new CreateReservationCommand
                 {
@@ -184,6 +200,8 @@ public sealed class Part9AtomicityTests(SqlServerFixture fixture)
             .Select(id => "unit:" + id));
         rows.AddRange((await context.InitiativeUnits.AsNoTracking().Select(row => row.UnitId).ToListAsync())
             .Select(id => "initiative-unit:" + id));
+        rows.AddRange((await context.UnitPaymentInstallments.AsNoTracking().Select(row => row.Id).ToListAsync())
+            .Select(id => "unit-payment-installment:" + id));
         rows.AddRange((await context.Reservations.AsNoTracking().Select(row => new { row.Id, row.Status }).ToListAsync())
             .Select(row => $"reservation:{row.Id}:{row.Status}"));
         rows.AddRange((await context.InitiativeReservations.AsNoTracking().Select(row => row.ReservationId).ToListAsync())

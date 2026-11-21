@@ -25,6 +25,7 @@ public sealed class RelationshipTests
         yield return [typeof(InitiativeUnit), typeof(BaseUnit), "UnitId", DeleteBehavior.Cascade, true];
         yield return [typeof(UnitAmenity), typeof(BaseUnit), "UnitId", DeleteBehavior.Cascade, false];
         yield return [typeof(UnitImage), typeof(BaseUnit), "UnitId", DeleteBehavior.Cascade, false];
+        yield return [typeof(UnitPaymentInstallment), typeof(BaseUnit), "UnitId", DeleteBehavior.Cascade, false];
         yield return [typeof(Reservation), typeof(BaseUnit), "UnitId", DeleteBehavior.Restrict, false];
         yield return [typeof(Order), typeof(Reservation), "ReservationId", DeleteBehavior.Restrict, true];
         yield return [typeof(TimePlanStage), typeof(TimePlan), "TimePlanId", DeleteBehavior.Cascade, false];
@@ -53,7 +54,7 @@ public sealed class RelationshipTests
     public void Every_FK_is_covered_without_redundant_standalone_indexes()
     {
         using var context = TestContext.Create();
-        Assert.Equal(23, context.Model.GetEntityTypes().Sum(entity => entity.GetForeignKeys().Count()));
+        Assert.Equal(24, context.Model.GetEntityTypes().Sum(entity => entity.GetForeignKeys().Count()));
 
         foreach (var entity in context.Model.GetEntityTypes())
         {

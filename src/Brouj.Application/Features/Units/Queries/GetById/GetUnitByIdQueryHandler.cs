@@ -52,6 +52,18 @@ public sealed class GetUnitByIdQueryHandler : IRequestHandler<GetUnitByIdQuery, 
             .Where(image => image.UnitId == request.Id).OrderBy(image => image.Id)
             .Select(image => new ImageMetadataDto { Id = image.Id, ImagePath = image.ImagePath, AltText = image.AltText })
             .ToArrayAsync(cancellationToken);
+        dto.PaymentPlan = await _db.UnitPaymentInstallments.AsNoTracking()
+            .Where(installment => installment.UnitId == request.Id && _db.BaseProjects.Any(project =>
+                project.Id == request.ProjectId && project.ProjectType == ProjectType.Regular))
+            .OrderBy(installment => installment.InstallmentNumber)
+            .Select(installment => new UnitPaymentInstallmentDto
+            {
+                InstallmentName = installment.InstallmentName,
+                InstallmentNumber = installment.InstallmentNumber,
+                InstallmentPercentage = installment.InstallmentPercentage,
+                InstallmentPeriodMonths = installment.InstallmentPeriodMonths
+            })
+            .ToArrayAsync(cancellationToken);
 
         return Result<UnitDto>.Success(dto);
     }

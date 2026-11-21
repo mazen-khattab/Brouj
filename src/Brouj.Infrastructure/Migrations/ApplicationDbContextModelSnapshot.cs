@@ -1159,6 +1159,40 @@ namespace Brouj.Infrastructure.Migrations
                     b.ToTable("UnitImages", (string)null);
                 });
 
+            modelBuilder.Entity("Brouj.Domain.Entities.UnitPaymentInstallment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InstallmentName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("InstallmentNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("InstallmentPercentage")
+                        .HasPrecision(7, 4)
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<int>("InstallmentPeriodMonths")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnitId", "InstallmentNumber")
+                        .IsUnique()
+                        .HasDatabaseName("UQ_UnitPaymentInstallments_UnitId_InstallmentNumber");
+
+                    b.ToTable("UnitPaymentInstallments", (string)null);
+                });
+
             modelBuilder.Entity("Brouj.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1494,6 +1528,17 @@ namespace Brouj.Infrastructure.Migrations
                 {
                     b.HasOne("Brouj.Domain.Entities.BaseUnit", "Unit")
                         .WithMany("UnitImages")
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("Brouj.Domain.Entities.UnitPaymentInstallment", b =>
+                {
+                    b.HasOne("Brouj.Domain.Entities.BaseUnit", "Unit")
+                        .WithMany()
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

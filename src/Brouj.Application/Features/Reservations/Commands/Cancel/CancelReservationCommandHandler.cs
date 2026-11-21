@@ -35,7 +35,7 @@ public sealed class CancelReservationCommandHandler : IRequestHandler<CancelRese
 
         // Cancellation must share the order creator's unit lock. Otherwise a customer could cancel
         // a stale Processing reservation while an administrator is confirming it into an order.
-        await _db.LockUnitForOrderAsync(unitId.Value, cancellationToken);
+        await _db.LockUnitAsync(unitId.Value, cancellationToken);
 
         var entity = await _db.Reservations.SingleOrDefaultAsync(
             reservation => reservation.Id == request.Id && reservation.CustomerId == _currentUser.CustomerId!.Value, cancellationToken);

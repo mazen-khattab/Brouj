@@ -24,7 +24,8 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
 
         Assert.Collection(migrations,
             migration => Assert.Equal(Baseline, migration),
-            migration => Assert.EndsWith("_AddContactSubmissions", migration, StringComparison.Ordinal));
+            migration => Assert.EndsWith("_AddContactSubmissions", migration, StringComparison.Ordinal),
+            migration => Assert.EndsWith("_AddUnitPaymentInstallments", migration, StringComparison.Ordinal));
         Assert.False(context.Database.HasPendingModelChanges());
 
         var sql = migrator.GenerateScript();
@@ -43,6 +44,10 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
         Assert.Contains("CREATE TABLE [ContactSubmissions]", contactSql);
         Assert.Contains("([CreatedAt] DESC, [Id])", contactSql);
         Assert.DoesNotContain("ALTER TABLE", contactSql, StringComparison.OrdinalIgnoreCase);
+        var paymentSql = migrator.GenerateScript(migrations[1], migrations[2]);
+        Assert.Contains("CREATE TABLE [UnitPaymentInstallments]", paymentSql);
+        Assert.Contains("CREATE UNIQUE INDEX [UQ_UnitPaymentInstallments_UnitId_InstallmentNumber]", paymentSql);
+        Assert.DoesNotContain("ALTER TABLE", paymentSql, StringComparison.OrdinalIgnoreCase);
 
         // Generate review artifacts without starting the API or reading its developer secret configuration.
         var directory = Path.Combine(AppContext.BaseDirectory, "TestResults", "Part12");
@@ -98,7 +103,7 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
 
         // Compare physical columns, keys, ordered/filtered indexes, FKs, checks and defaults, not just EF metadata.
         Assert.Equal(expectedSchema, migratedSchema);
-        Assert.Equal(28, migratedSchema.Count(row => row.StartsWith("TABLE|", StringComparison.Ordinal)));
+        Assert.Equal(29, migratedSchema.Count(row => row.StartsWith("TABLE|", StringComparison.Ordinal)));
         Assert.Empty(await migrated.Database.GetPendingMigrationsAsync(cancellationToken));
         Assert.Equal(migrated.Database.GetMigrations(),
             await migrated.Database.GetAppliedMigrationsAsync(cancellationToken));
