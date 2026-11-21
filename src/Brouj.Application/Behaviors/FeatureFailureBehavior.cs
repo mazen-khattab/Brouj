@@ -5,6 +5,7 @@ using Brouj.Application.Features.Orders.Commands.CompleteInitiative;
 using Brouj.Application.Features.Orders.Commands.CreateFromReservation;
 using Brouj.Application.Features.Orders.Errors;
 using Brouj.Application.Features.Projects.Commands.Create;
+using Brouj.Application.Features.Projects.Commands.Update;
 using Brouj.Application.Features.Projects.Errors;
 using Brouj.Application.Features.Reservations.Commands.Create;
 using Brouj.Application.Features.Reservations.Commands.Cancel;
@@ -14,6 +15,7 @@ using Brouj.Application.Features.TimePlans.Commands.Create;
 using Brouj.Application.Features.TimePlans.Commands.Delete;
 using Brouj.Application.Features.TimePlans.Errors;
 using Brouj.Application.Features.Units.Commands.Create;
+using Brouj.Application.Features.Units.Commands.ReplacePaymentPlan;
 using Brouj.Application.Features.Units.Errors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -56,10 +58,10 @@ public sealed class FeatureFailureBehavior<TRequest, TResponse> : IPipelineBehav
                     when exception.Conflict == PersistenceConflict.ConcurrentWrite =>
                     OrderErrors.Conflict("Order eligibility changed concurrently. Please try again."),
 
-                CreateProjectCommand when exception.Conflict == PersistenceConflict.ConcurrentWrite =>
+                CreateProjectCommand or UpdateProjectCommand when exception.Conflict == PersistenceConflict.ConcurrentWrite =>
                     ProjectErrors.Conflict("The project changed concurrently. Please try again."),
 
-                CreateUnitCommand when exception.Conflict == PersistenceConflict.ConcurrentWrite =>
+                CreateUnitCommand or ReplaceUnitPaymentPlanCommand when exception.Conflict == PersistenceConflict.ConcurrentWrite =>
                     UnitErrors.Conflict("The unit changed concurrently. Please try again."),
 
                 CreateTimePlanCommand or DeleteTimePlanCommand or AddStageFromTemplateCommand

@@ -27,6 +27,7 @@ public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<BaseProject> BaseProjects => Set<BaseProject>();
     public DbSet<BaseUnit> BaseUnits => Set<BaseUnit>();
     public DbSet<City> Cities => Set<City>();
+    public DbSet<ContactSubmission> ContactSubmissions => Set<ContactSubmission>();
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<CustomerRefreshToken> CustomerRefreshTokens => Set<CustomerRefreshToken>();
     public DbSet<InitiativeProject> InitiativeProjects => Set<InitiativeProject>();
@@ -46,23 +47,33 @@ public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<TimePlanStage> TimePlanStages => Set<TimePlanStage>();
     public DbSet<UnitAmenity> UnitAmenities => Set<UnitAmenity>();
     public DbSet<UnitImage> UnitImages => Set<UnitImage>();
+    public DbSet<UnitPaymentInstallment> UnitPaymentInstallments => Set<UnitPaymentInstallment>();
     public DbSet<User> Users => Set<User>();
     public DbSet<UserRefreshToken> UserRefreshTokens => Set<UserRefreshToken>();
 
-    public async Task LockUnitForOrderAsync(Guid unitId, CancellationToken cancellationToken)
+    public async Task LockUnitAsync(Guid unitId, CancellationToken cancellationToken)
     {
-
         if (Database.CurrentTransaction is null)
         {
-            throw new InvalidOperationException("Order eligibility requires an active database transaction.");
+            throw new InvalidOperationException("Locking a unit requires an active database transaction.");
         }
 
-        // Every order creator and initiative completion locks the same stable parent row first.
         // UPDLOCK serializes contenders; HOLDLOCK retains protection until commit or rollback.
-        // Project only the key, and parameterize the value rather than interpolating SQL text.
         await BaseUnits.FromSqlInterpolated(
                 $"SELECT * FROM [BaseUnits] WITH (UPDLOCK, HOLDLOCK) WHERE [Id] = {unitId}")
             .AsNoTracking().Select(unit => unit.Id).SingleOrDefaultAsync(cancellationToken);
+    }
+
+    public async Task LockProjectAsync(Guid projectId, CancellationToken cancellationToken)
+    {
+        if (Database.CurrentTransaction is null)
+        {
+            throw new InvalidOperationException("Locking a project requires an active database transaction.");
+        }
+
+        await BaseProjects.FromSqlInterpolated(
+                $"SELECT * FROM [BaseProjects] WITH (UPDLOCK, HOLDLOCK) WHERE [Id] = {projectId}")
+            .AsNoTracking().Select(project => project.Id).SingleOrDefaultAsync(cancellationToken);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

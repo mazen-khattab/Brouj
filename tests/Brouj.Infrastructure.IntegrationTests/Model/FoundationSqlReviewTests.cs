@@ -38,7 +38,9 @@ public sealed class FoundationSqlReviewTests(ITestOutputHelper output)
         {
             var entity = Assert.Single(context.Model.GetEntityTypes(), entity => entity.ClrType.Name == row[0]);
             var unique = bool.Parse(row[3]) ? "UNIQUE " : string.Empty;
-            var columns = string.Join(", ", row[2].Split(',').Select(column => $"[{column}]"));
+            var descending = row.ElementAtOrDefault(5)?.Split(',') ?? [];
+            var columns = string.Join(", ", row[2].Split(',').Select(column =>
+                descending.Contains(column, StringComparer.Ordinal) ? $"[{column}] DESC" : $"[{column}]"));
             var filter = string.IsNullOrEmpty(row.ElementAtOrDefault(4)) ? string.Empty : " WHERE " + row[4];
             var statement = $"CREATE {unique}INDEX [{row[1]}] ON [{entity.GetTableName()}] ({columns}){filter};";
 

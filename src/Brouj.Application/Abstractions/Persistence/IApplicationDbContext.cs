@@ -11,6 +11,7 @@ public interface IApplicationDbContext
     DbSet<BaseProject> BaseProjects { get; }
     DbSet<BaseUnit> BaseUnits { get; }
     DbSet<City> Cities { get; }
+    DbSet<ContactSubmission> ContactSubmissions { get; }
     DbSet<Customer> Customers { get; }
     DbSet<CustomerRefreshToken> CustomerRefreshTokens { get; }
     DbSet<InitiativeProject> InitiativeProjects { get; }
@@ -30,12 +31,16 @@ public interface IApplicationDbContext
     DbSet<TimePlanStage> TimePlanStages { get; }
     DbSet<UnitAmenity> UnitAmenities { get; }
     DbSet<UnitImage> UnitImages { get; }
+    DbSet<UnitPaymentInstallment> UnitPaymentInstallments { get; }
     DbSet<User> Users { get; }
     DbSet<UserRefreshToken> UserRefreshTokens { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
-    /// <summary>Locks one unit until the current transaction ends, before reading order eligibility.</summary>
+    /// <summary>Locks one unit until the current transaction ends, before reading or writing dependent rows.</summary>
     /// <remarks>Call inside a transaction. The lock coordinates independent API instances through SQL Server.</remarks>
-    Task LockUnitForOrderAsync(Guid unitId, CancellationToken cancellationToken);
+    Task LockUnitAsync(Guid unitId, CancellationToken cancellationToken);
+
+    /// <summary>Serializes unit creation and project type changes for one project.</summary>
+    Task LockProjectAsync(Guid projectId, CancellationToken cancellationToken);
 }

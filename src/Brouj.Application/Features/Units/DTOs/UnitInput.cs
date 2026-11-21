@@ -2,7 +2,7 @@
 namespace Brouj.Application.Features.Units.DTOs;
 
 /// <summary>Explicit Unit Input contract; excludes persistence and credential secrets.</summary>
-public sealed class UnitInput
+public class UnitInput
 {
     public string Number { get; init; } = string.Empty;
 

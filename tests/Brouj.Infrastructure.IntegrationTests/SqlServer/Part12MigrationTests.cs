@@ -13,6 +13,8 @@ namespace Brouj.Infrastructure.IntegrationTests.SqlServer;
 [Trait("Category", "SqlServer")]
 public sealed class Part12MigrationTests(SqlServerFixture fixture)
 {
+    private const string Baseline = "20261120191350_initialMigration";
+
     [Fact]
     public async Task Migration_snapshot_matches_the_model_and_release_SQL_is_generated_for_review()
     {
@@ -20,8 +22,10 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
         var migrations = context.Database.GetMigrations().ToArray();
         var migrator = context.GetService<IMigrator>();
 
-        Assert.Equal(["20261031213412_initialMigration", "20261101230158_ChangeVersionNumberDataType",
-            "20261118143206_AlignExistingUnitAndTimePlanSchema", "20261118143207_ExtractInitiativeReservationProfiles"], migrations);
+        Assert.Collection(migrations,
+            migration => Assert.Equal(Baseline, migration),
+            migration => Assert.EndsWith("_AddContactSubmissions", migration, StringComparison.Ordinal),
+            migration => Assert.EndsWith("_AddUnitPaymentInstallments", migration, StringComparison.Ordinal));
         Assert.False(context.Database.HasPendingModelChanges());
 
         var sql = migrator.GenerateScript();
@@ -36,11 +40,49 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
         Assert.Contains("IF NOT EXISTS", idempotentSql);
         Assert.DoesNotContain("DROP TABLE", sql, StringComparison.OrdinalIgnoreCase);
 
+        var contactSql = migrator.GenerateScript(migrations[0], migrations[1]);
+        Assert.Contains("CREATE TABLE [ContactSubmissions]", contactSql);
+        Assert.Contains("([CreatedAt] DESC, [Id])", contactSql);
+        Assert.DoesNotContain("ALTER TABLE", contactSql, StringComparison.OrdinalIgnoreCase);
+        var paymentSql = migrator.GenerateScript(migrations[1], migrations[2]);
+        Assert.Contains("CREATE TABLE [UnitPaymentInstallments]", paymentSql);
+        Assert.Contains("CREATE UNIQUE INDEX [UQ_UnitPaymentInstallments_UnitId_InstallmentNumber]", paymentSql);
+        Assert.DoesNotContain("ALTER TABLE", paymentSql, StringComparison.OrdinalIgnoreCase);
+
         // Generate review artifacts without starting the API or reading its developer secret configuration.
         var directory = Path.Combine(AppContext.BaseDirectory, "TestResults", "Part12");
         Directory.CreateDirectory(directory);
         await File.WriteAllTextAsync(Path.Combine(directory, "initialMigration.sql"), sql);
         await File.WriteAllTextAsync(Path.Combine(directory, "initialMigration.idempotent.sql"), idempotentSql);
+    }
+
+    [SqlServerFact]
+    public async Task Contact_migration_upgrades_the_baseline_without_losing_existing_data()
+    {
+        await using var database = await fixture.CreateDatabaseAsync(applyMigrations: true);
+        await using var context = database.CreateContext();
+        await context.GetService<IMigrator>().MigrateAsync(Baseline);
+        var graph = await TestGraph.SeedAsync(context, order: false);
+        var existing = new InitiativeReservation
+        {
+            ReservationId = graph.Reservation.Id,
+            IdentityNumber = "29001011234567",
+            AgeGroup = "25-35",
+            PlaceOfResidence = "Cairo",
+            FinancialBracket = 2,
+            RepaymentPeriod = 24
+        };
+        context.InitiativeReservations.Add(existing);
+        await context.SaveChangesAsync();
+
+        await context.Database.MigrateAsync();
+        context.ChangeTracker.Clear();
+
+        var profile = Assert.Single(await context.InitiativeReservations.AsNoTracking().ToListAsync());
+        Assert.Equal(graph.Reservation.Id, profile.ReservationId);
+        Assert.Equal(existing.IdentityNumber, profile.IdentityNumber);
+        Assert.Equal(existing.CreatedAt, profile.CreatedAt);
+        Assert.Empty(await context.ContactSubmissions.AsNoTracking().ToListAsync());
     }
 
     [SqlServerFact]
@@ -61,18 +103,33 @@ public sealed class Part12MigrationTests(SqlServerFixture fixture)
 
         // Compare physical columns, keys, ordered/filtered indexes, FKs, checks and defaults, not just EF metadata.
         Assert.Equal(expectedSchema, migratedSchema);
-        Assert.Equal(27, migratedSchema.Count(row => row.StartsWith("TABLE|", StringComparison.Ordinal)));
+        Assert.Equal(29, migratedSchema.Count(row => row.StartsWith("TABLE|", StringComparison.Ordinal)));
         Assert.Empty(await migrated.Database.GetPendingMigrationsAsync(cancellationToken));
         Assert.Equal(migrated.Database.GetMigrations(),
             await migrated.Database.GetAppliedMigrationsAsync(cancellationToken));
 
         var city = new City { Id = Guid.NewGuid(), Name = "Migration preservation check" };
+        var submission = new ContactSubmission
+        {
+            Id = Guid.NewGuid(),
+            Name = "أحمد",
+            Phone = "01012345678",
+            Inquiry = "السطر الأول\nالسطر الثاني"
+        };
         migrated.Cities.Add(city);
+        migrated.ContactSubmissions.Add(submission);
         await migrated.SaveChangesAsync(cancellationToken);
         await migrated.Database.MigrateAsync(cancellationToken);
 
         Assert.True(await migrated.Cities.AsNoTracking().AnyAsync(item => item.Id == city.Id, cancellationToken));
-        Assert.Single(await migrated.Database.GetAppliedMigrationsAsync(cancellationToken));
+        var stored = await migrated.ContactSubmissions.AsNoTracking().SingleAsync(item => item.Id == submission.Id, cancellationToken);
+        Assert.Equal(submission.Name, stored.Name);
+        Assert.Equal(submission.Phone, stored.Phone);
+        Assert.Equal(submission.Inquiry, stored.Inquiry);
+        Assert.NotEqual(default, stored.CreatedAt);
+        Assert.Equal(TimeSpan.Zero, stored.CreatedAt.Offset);
+        Assert.Equal(migrated.Database.GetMigrations(),
+            await migrated.Database.GetAppliedMigrationsAsync(cancellationToken));
         logger.LogInformation("Clean migration, physical schema comparison and repeat-application checks passed");
     }
 

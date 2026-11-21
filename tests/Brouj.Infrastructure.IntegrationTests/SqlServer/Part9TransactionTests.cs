@@ -188,7 +188,7 @@ public sealed class Part9TransactionTests(SqlServerFixture fixture)
         await using var context = TestContext.Create();
 
         await Assert.ThrowsAsync<InvalidOperationException>(() =>
-            context.LockUnitForOrderAsync(Guid.NewGuid(), CancellationToken.None));
+            context.LockUnitAsync(Guid.NewGuid(), CancellationToken.None));
     }
 
     [SqlServerFact]

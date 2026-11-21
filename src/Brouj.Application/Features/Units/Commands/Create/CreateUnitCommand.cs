@@ -15,5 +15,5 @@ public sealed class CreateUnitCommand : IRequest<Result<Guid>>, IRequireAccess, 
 
     public Guid ProjectId { get; init; }
 
-    public UnitInput Input { get; init; } = new();
+    public CreateUnitInput Input { get; init; } = new();
 }

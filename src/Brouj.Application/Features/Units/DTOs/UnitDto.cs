@@ -32,4 +32,6 @@ public sealed class UnitDto
     public IReadOnlyList<AmenityDto> Amenities { get; set; } = [];
 
     public IReadOnlyList<ImageMetadataDto> Images { get; set; } = [];
+
+    public IReadOnlyList<UnitPaymentInstallmentDto> PaymentPlan { get; set; } = [];
 }

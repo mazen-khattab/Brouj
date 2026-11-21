@@ -24,7 +24,8 @@ public sealed class FeatureArchitectureTests
         "RegisterCustomerCommand", "LoginCustomerCommand", "RefreshCustomerSessionCommand", "LogoutCustomerCommand",
         "LoginUserCommand", "RefreshUserSessionCommand", "LogoutUserCommand", "GetCitiesQuery", "GetCitiesLookupQuery", "GetCityByIdQuery",
         "GetAreasQuery", "GetAreasLookupQuery", "GetAreasByCityQuery", "GetAreaByIdQuery", "GetProjectsQuery", "GetProjectsLookupQuery", "GetProjectByIdQuery",
-        "GetUnitsByProjectQuery", "GetUnitByIdQuery", "GetProjectTimePlanQuery", "GetActiveTermsAndConditionsQuery"
+        "GetUnitsByProjectQuery", "GetUnitByIdQuery", "GetProjectTimePlanQuery", "GetActiveTermsAndConditionsQuery",
+        "SubmitContactSubmissionCommand"
     ];
 
     [Fact]
@@ -55,10 +56,12 @@ public sealed class FeatureArchitectureTests
         var plan = await File.ReadAllTextAsync(Path.Combine(
             RepositoryFiles.Root, "brouj_backend_plan_v2", "07_PART_7_APPLICATION_FEATURES.md"));
         var expected = Regex.Matches(plan, @"\b[A-Z][A-Za-z]+(?:Command|Query)\b")
-            .Select(match => match.Value).Distinct().Order().ToArray();
+            .Select(match => match.Value)
+            .Concat(["SubmitContactSubmissionCommand", "GetContactSubmissionsQuery", "ReplaceUnitPaymentPlanCommand"])
+            .Distinct().Order().ToArray();
         var actual = Requests.Select(row => ((Type)row[0]).Name).Order().ToArray();
 
-        Assert.Equal(104, actual.Length);
+        Assert.Equal(107, actual.Length);
         Assert.Equal(expected, actual);
     }
 

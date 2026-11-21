@@ -87,7 +87,7 @@ public sealed class EntityConfigurationTests
     {
         using var context = TestContext.Create();
         var modelEntities = context.Model.GetEntityTypes().ToArray();
-        Assert.Equal(27, modelEntities.Length);
+        Assert.Equal(29, modelEntities.Length);
         Assert.Equal(Columns().Count(), modelEntities.Sum(entity => entity.GetProperties().Count()));
 
         var configurations = typeof(ApplicationDbContext).Assembly.GetTypes()
@@ -97,10 +97,10 @@ public sealed class EntityConfigurationTests
             .Select(contract => contract.GetGenericArguments()[0])
             .ToArray();
 
-        Assert.Equal(27, configurations.Length);
+        Assert.Equal(29, configurations.Length);
         Assert.IsAssignableFrom<IApplicationDbContext>(context);
         var dbSets = typeof(IApplicationDbContext).GetProperties();
-        Assert.Equal(27, dbSets.Length);
+        Assert.Equal(29, dbSets.Length);
 
         foreach (var entity in modelEntities)
         {

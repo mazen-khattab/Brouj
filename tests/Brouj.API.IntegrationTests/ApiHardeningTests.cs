@@ -56,6 +56,7 @@ public sealed class ApiHardeningTests
     [InlineData("PublicReads", "GetCitiesQuery")]
     [InlineData("Authentication", null)]
     [InlineData("ReservationWrites", "CreateReservationCommand")]
+    [InlineData("ContactSubmissions", "SubmitContactSubmissionCommand")]
     [InlineData("AdminWrites", "CreateCityCommand")]
     [InlineData("FileUploads", "AddProjectImageCommand")]
     public async Task Each_rate_category_rejects_excess_requests_with_429(string category, string? requestName)
@@ -96,6 +97,7 @@ public sealed class ApiHardeningTests
     [InlineData("RateLimits:PublicReads:PermitLimit", "0")]
     [InlineData("RateLimits:Authentication:WindowSeconds", "0")]
     [InlineData("RateLimits:ReservationWrites:PermitLimit", "0")]
+    [InlineData("RateLimits:ContactSubmissions:PermitLimit", "0")]
     [InlineData("RateLimits:AdminWrites:PermitLimit", "0")]
     [InlineData("RateLimits:FileUploads:PermitLimit", "0")]
     public void Invalid_or_missing_required_configuration_fails_before_startup(string key, string value)

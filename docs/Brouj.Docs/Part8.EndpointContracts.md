@@ -1,6 +1,6 @@
 # Part 8 endpoint contracts
 
-The complete machine-readable contract is [Part8.EndpointContracts.json](Part8.EndpointContracts.json). The API tests compare it with all 104 approved Application requests, including the city/area/project lookups, reflect controller metadata, and exercise each HTTP route. Request DTO definitions are in `src/Brouj.API/Requests` or the existing Application feature/shared DTO folders.
+The complete machine-readable contract is [Part8.EndpointContracts.json](Part8.EndpointContracts.json). The API tests compare it with all 107 approved Application requests, reflect controller metadata, and exercise each HTTP route. Request DTO definitions are in `src/Brouj.API/Requests` or the existing Application feature/shared DTO folders.
 
 Every success response uses `ApiResponse<T>` (`success`, `data`, `message`). The response column below names `T`. JSON bodies containing unknown members are rejected. PATCH operations accept the full approved update DTO; they are not JSON Patch operations.
 
@@ -8,7 +8,7 @@ Application failures use `ApiErrorResponse` with the existing feature code/messa
 
 All protected use cases still run `AuthorizationBehavior` / `FeatureAccess` to verify the current database account and role. Customer-specific handlers scope by trusted `ICurrentUser.CustomerId`; another customer's reservation is 404 for both GET and cancellation. Self profile/password commands never accept a customer/user ID. Project time-plan reads are public, as approved for the project-details redesign; all plan edits remain AdminOnly. AdminOnly and StaffOnly allow Admin and SuperAdmin; staff management additionally requires SuperAdminOnly. The existing Infrastructure `CurrentUser` is reused rather than duplicating claim parsing.
 
-All responses use `Cache-Control: no-store`, including public reads. This Part does not populate a feature/output cache. All safe reads use the PublicReads rate category, including protected reads; identity/session mutations use Authentication, customer reservation writes ReservationWrites, administrative mutations AdminWrites, and image uploads FileUploads. Limits are per category/client IP on each API instance.
+All responses use `Cache-Control: no-store`, including public reads. This Part does not populate a feature/output cache. All safe reads use the PublicReads rate category, including protected reads. Identity/session mutations use Authentication, customer reservation writes use ReservationWrites, public contact submissions use ContactSubmissions, administrative mutations use AdminWrites, and image uploads use FileUploads. Limits are per category/client IP on each API instance.
 
 Unsafe browser requests require a valid framework CSRF proof before authorization; missing/invalid proof is 400 even if the request would otherwise be 401/403. Protected request tests supply valid CSRF proof to isolate authorization outcomes. Public authentication routes remain anonymous at the route layer; refresh/logout handlers read only the appropriate secure refresh cookie.
 
@@ -16,8 +16,14 @@ Unsafe browser requests require a valid framework CSRF proof before authorizatio
 
 JSON endpoints consume `application/json`; image creation consumes `multipart/form-data` with exactly one `File` and optional `AltText` (project/unit) or `Description` (stage item). The transport disposes its input stream; the existing storage adapter validates metadata, signatures, actual byte counts and generated paths. Individual files remain capped at 5 MiB; the separately configured multipart limit covers the entire envelope. List query DTOs retain the Application's defaults and maximum page size of 100.
 
+The public contact endpoint accepts `name` (1–150 characters), `phone` (an 11-digit Egyptian mobile number starting with 010, 011, 012, or 015), and `inquiry` (1–2,000 characters). It trims outer whitespace and uses the anonymous CSRF flow. The admin list includes the full inquiry and returns newest submissions first.
+
+Regular unit creation requires a nonempty `paymentPlan` array. The payment-plan PUT accepts an object containing the same array and replaces the full plan. Each row contains `installmentName`, `installmentNumber`, `installmentPercentage`, and `installmentPeriodMonths`. Use JSON numbers for percentages, with up to four decimal places and an exact total of 100. A month offset of 0 is valid. Unit details return `paymentPlan` sorted by number, or an empty array for initiative units and legacy regular units without a plan.
+
 | Method / route | MediatR request | JSON/form body; query DTO | Response data | Policy | Success | Rate category |
 |---|---|---|---|---|---:|---|
+| POST `/api/v1/contact-submissions` | `SubmitContactSubmissionCommand` | `ContactSubmissionInput`; — | `Guid` | Anonymous | 201 | ContactSubmissions |
+| GET `/api/v1/admin/contact-submissions` | `GetContactSubmissionsQuery` | —; `PaginationParameters` | `PaginationResult<ContactSubmissionDto>` | AdminOnly | 200 | PublicReads |
 | POST `/api/v1/auth/customers/register` | `RegisterCustomerCommand` | `RegisterCustomerInput`; — | `AuthSessionDto` | Anonymous | 201 | Authentication |
 | POST `/api/v1/auth/customers/login` | `LoginCustomerCommand` | `LoginInput`; — | `AuthSessionDto` | Anonymous | 200 | Authentication |
 | POST `/api/v1/auth/customers/refresh` | `RefreshCustomerSessionCommand` | —; — | `AuthSessionDto` | Anonymous | 200 | Authentication |
@@ -66,9 +72,10 @@ JSON endpoints consume `application/json`; image creation consumes `multipart/fo
 | POST `/api/v1/admin/projects/{id}/images` | `AddProjectImageCommand` | `AddProjectImageRequest`; — | `Guid` | AdminOnly | 201 | FileUploads |
 | PATCH `/api/v1/admin/projects/{id}/images/{imageId}` | `UpdateProjectImageCommand` | `UpdateProjectImageRequest`; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | DELETE `/api/v1/admin/projects/{id}/images/{imageId}` | `DeleteProjectImageCommand` | —; — | `Guid` | AdminOnly | 200 | AdminWrites |
-| POST `/api/v1/admin/projects/{projectId}/units` | `CreateUnitCommand` | `UnitInput`; — | `Guid` | AdminOnly | 201 | AdminWrites |
+| POST `/api/v1/admin/projects/{projectId}/units` | `CreateUnitCommand` | `CreateUnitInput`; — | `Guid` | AdminOnly | 201 | AdminWrites |
 | POST `/api/v1/admin/projects/{projectId}/time-plan` | `CreateTimePlanCommand` | `CreateTimePlanRequest`; — | `Guid` | AdminOnly | 201 | AdminWrites |
 | GET `/api/v1/units/{id}` | `GetUnitByIdQuery` | —; `GetUnitByIdParameters` | `UnitDto` | Anonymous | 200 | PublicReads |
+| PUT `/api/v1/admin/units/{id}/payment-plan` | `ReplaceUnitPaymentPlanCommand` | `UnitPaymentPlanInput`; — | `Guid` | AdminOnly | 200 | AdminWrites |
 | PATCH `/api/v1/admin/units/{id}` | `UpdateUnitCommand` | `UnitInput`; `UpdateUnitParameters` | `Guid` | AdminOnly | 200 | AdminWrites |
 | DELETE `/api/v1/admin/units/{id}` | `DeleteUnitCommand` | —; `DeleteUnitParameters` | `Guid` | AdminOnly | 200 | AdminWrites |
 | PUT `/api/v1/admin/units/{id}/amenities` | `ReplaceUnitAmenitiesCommand` | `ReplaceUnitAmenitiesRequest`; — | `Guid` | AdminOnly | 200 | AdminWrites |

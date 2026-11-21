@@ -5,6 +5,7 @@ public sealed class RateLimitOptions
     public RateLimitPolicyOptions PublicReads { get; init; } = new();
     public RateLimitPolicyOptions Authentication { get; init; } = new();
     public RateLimitPolicyOptions ReservationWrites { get; init; } = new();
+    public RateLimitPolicyOptions ContactSubmissions { get; init; } = new();
     public RateLimitPolicyOptions AdminWrites { get; init; } = new();
     public RateLimitPolicyOptions FileUploads { get; init; } = new();
 }

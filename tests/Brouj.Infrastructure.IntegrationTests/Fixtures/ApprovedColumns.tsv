@@ -7,6 +7,11 @@ ActivityLog	Action	ActivityAction	varchar(16)	false
 ActivityLog	NewData	string?	nvarchar(max)	true
 ActivityLog	OldData	string?	nvarchar(max)	true
 ActivityLog	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
+ContactSubmission	Id	Guid	uniqueidentifier	false
+ContactSubmission	Name	string	nvarchar(150)	false
+ContactSubmission	Phone	string	varchar(11)	false
+ContactSubmission	Inquiry	string	nvarchar(2000)	false
+ContactSubmission	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
 Area	Id	Guid	uniqueidentifier	false
 Area	Name	string	nvarchar(100)	false
 Area	CityId	Guid	uniqueidentifier	false
@@ -181,6 +186,12 @@ UnitImage	ImagePath	string	nvarchar(2048)	false
 UnitImage	AltText	string?	nvarchar(100)	true
 UnitImage	CreatedAt	DateTimeOffset	datetimeoffset(3)	false
 UnitImage	UpdatedAt	DateTimeOffset?	datetimeoffset(3)	true
+UnitPaymentInstallment	Id	Guid	uniqueidentifier	false
+UnitPaymentInstallment	UnitId	Guid	uniqueidentifier	false
+UnitPaymentInstallment	InstallmentName	string	nvarchar(100)	false
+UnitPaymentInstallment	InstallmentNumber	int	int	false
+UnitPaymentInstallment	InstallmentPercentage	decimal	decimal(7,4)	false
+UnitPaymentInstallment	InstallmentPeriodMonths	int	int	false
 User	Id	Guid	uniqueidentifier	false
 User	Name	string	nvarchar(100)	false
 User	Email	string	varchar(254)	false

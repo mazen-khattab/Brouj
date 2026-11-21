@@ -7,6 +7,7 @@ using Brouj.Application.Features.Units.Commands.AddImage;
 using Brouj.Application.Features.Units.Commands.Delete;
 using Brouj.Application.Features.Units.Commands.DeleteImage;
 using Brouj.Application.Features.Units.Commands.ReplaceAmenities;
+using Brouj.Application.Features.Units.Commands.ReplacePaymentPlan;
 using Brouj.Application.Features.Units.Commands.Update;
 using Brouj.Application.Features.Units.Commands.UpdateImage;
 using Brouj.Application.Features.Units.DTOs;
@@ -88,6 +89,21 @@ public sealed class AdminUnitsController : ApiControllerBase
         };
         var result = await _sender.Send(request, cancellationToken);
 
+        return Respond(result);
+    }
+
+    [HttpPut("{id}/payment-plan")]
+    [Authorize(Policy = PolicyNames.AdminOnly)]
+    [EnableRateLimiting(RateLimitCategories.AdminWrites)]
+    [EndpointContract(typeof(ReplaceUnitPaymentPlanCommand))]
+    [ProducesResponseType(typeof(ApiResponse<Guid>), 200)]
+    [Consumes("application/json")]
+    public async Task<IActionResult> ReplacePaymentPlan(
+        [FromRoute] Guid id,
+        [FromBody] UnitPaymentPlanInput body,
+        CancellationToken cancellationToken)
+    {
+        var result = await _sender.Send(new ReplaceUnitPaymentPlanCommand { UnitId = id, Input = body }, cancellationToken);
         return Respond(result);
     }
 

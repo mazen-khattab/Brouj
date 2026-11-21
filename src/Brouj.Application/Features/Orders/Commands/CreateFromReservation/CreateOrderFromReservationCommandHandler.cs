@@ -30,7 +30,7 @@ public sealed class CreateOrderFromReservationCommandHandler : IRequestHandler<C
         }
 
         // Read mutable reservation/order state only after obtaining the cross-instance unit lock.
-        await _db.LockUnitForOrderAsync(unitId.Value, cancellationToken);
+        await _db.LockUnitAsync(unitId.Value, cancellationToken);
 
         var reservation = await _db.Reservations.SingleOrDefaultAsync(
             reservation => reservation.Id == request.ReservationId, cancellationToken);

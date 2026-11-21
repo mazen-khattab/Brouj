@@ -294,6 +294,43 @@ namespace Brouj.Infrastructure.Migrations
                     b.ToTable("Cities", (string)null);
                 });
 
+            modelBuilder.Entity("Brouj.Domain.Entities.ContactSubmission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasPrecision(3)
+                        .HasColumnType("datetimeoffset(3)");
+
+                    b.Property<string>("Inquiry")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(11)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt", "Id")
+                        .IsDescending(true, false)
+                        .HasDatabaseName("IX_ContactSubmissions_CreatedAt_Id");
+
+                    b.ToTable("ContactSubmissions", (string)null);
+                });
+
             modelBuilder.Entity("Brouj.Domain.Entities.Customer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1122,6 +1159,40 @@ namespace Brouj.Infrastructure.Migrations
                     b.ToTable("UnitImages", (string)null);
                 });
 
+            modelBuilder.Entity("Brouj.Domain.Entities.UnitPaymentInstallment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InstallmentName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("InstallmentNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("InstallmentPercentage")
+                        .HasPrecision(7, 4)
+                        .HasColumnType("decimal(7,4)");
+
+                    b.Property<int>("InstallmentPeriodMonths")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnitId", "InstallmentNumber")
+                        .IsUnique()
+                        .HasDatabaseName("UQ_UnitPaymentInstallments_UnitId_InstallmentNumber");
+
+                    b.ToTable("UnitPaymentInstallments", (string)null);
+                });
+
             modelBuilder.Entity("Brouj.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1457,6 +1528,17 @@ namespace Brouj.Infrastructure.Migrations
                 {
                     b.HasOne("Brouj.Domain.Entities.BaseUnit", "Unit")
                         .WithMany("UnitImages")
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("Brouj.Domain.Entities.UnitPaymentInstallment", b =>
+                {
+                    b.HasOne("Brouj.Domain.Entities.BaseUnit", "Unit")
+                        .WithMany()
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
